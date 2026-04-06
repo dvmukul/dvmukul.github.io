@@ -1,0 +1,284 @@
+/* =====================================================
+   CASE STUDY PAGE STYLES
+   Used by: case-study-01.html through case-study-04.html
+   Requires: shared.css loaded first
+   ===================================================== */
+
+/* ===== PAGE BASE ===== */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ===== HERO ===== */
+.cs-hero {
+    padding: 10rem 3rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: end;
+    border-bottom: 1px solid var(--border);
+}
+.cs-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+.cs-number {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 10vw, 9rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.85;
+    color: rgba(13,12,9,0.08);
+    margin-bottom: 2rem;
+}
+.cs-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+.cs-title em { font-style: italic; }
+.cs-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+.cs-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
+}
+.cs-summary {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 44ch;
+}
+
+/* ===== METRICS BAR ===== */
+.metrics-bar {
+    background: var(--bg-dark);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.metric {
+    padding: 3rem;
+    border-right: 1px solid rgba(243,237,226,0.08);
+}
+.metric:last-child { border-right: none; }
+.metric-number {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+    color: #F3EDE2;
+    margin-bottom: 0.5rem;
+}
+.metric-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(243,237,226,0.50);
+}
+
+/* ===== BODY CONTENT ===== */
+.cs-body {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+}
+.cs-section { margin-bottom: 5rem; }
+.cs-section .section-label { margin-bottom: 1.5rem; }
+
+.cs-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+}
+.cs-section h2 em { font-style: italic; }
+.cs-section p {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+.cs-section p:last-child { margin-bottom: 0; }
+
+/* Pull quote */
+.pull-quote {
+    border-left: 3px solid var(--teal);
+    padding: 1.5rem 2rem;
+    margin: 3rem 0;
+    background: var(--surface);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.pull-quote p {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* Numbered approach steps */
+.approach-steps { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+.step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; align-items: start; }
+.step-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(13,12,9,0.15);
+    line-height: 1;
+    padding-top: 0.1rem;
+}
+.step-content h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text); }
+.step-content p { font-size: 0.9rem; line-height: 1.75; color: var(--text-muted); margin: 0; }
+
+/* Divider */
+.divider { width: 40px; height: 1px; background: var(--teal); margin: 3rem 0; }
+
+/* ===== NEXT CASE STUDY STRIP ===== */
+.cs-next {
+    background: var(--surface);
+    padding: 4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: inherit;
+    border-top: 1px solid var(--border);
+    transition: background 0.25s;
+}
+.cs-next:hover { background: var(--bg-alt); }
+.cs-next-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+.cs-next-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    font-weight: 300;
+    max-width: 40ch;
+}
+.cs-next-title em { font-style: italic; }
+.cs-next-arrow {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+}
+.cs-next:hover .cs-next-arrow { transform: translateX(6px); }
+
+/* ===== FOOTER ===== */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+footer a { color: inherit; text-decoration: none; }
+
+/* ===== CASE STUDY 03 EXTRAS (arch diagram, code, github link) ===== */
+.arch-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 2.5rem;
+    margin: 2.5rem 0;
+}
+.arch-title {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+.arch-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+.arch-node {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--r-sm);
+    font-size: 0.78rem;
+    font-weight: 400;
+    white-space: nowrap;
+}
+.arch-arrow { color: var(--teal); padding: 0 0.5rem; font-size: 1rem; }
+
+/* ===== CASE STUDY 04 EXTRAS (eval table) ===== */
+.eval-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    font-size: 0.88rem;
+}
+.eval-table th {
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-bottom: 2px solid var(--border);
+}
+.eval-table td {
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+    vertical-align: top;
+    line-height: 1.55;
+}
+.eval-table td:first-child { color: var(--text); font-weight: 400; }
+.eval-table tr:last-child td { border-bottom: none; }
+
+/* Shared GitHub CTA link */
+.github-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--text);
+    color: var(--bg);
+    padding: 0.9rem 1.75rem;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    border-radius: var(--r-sm);
+    transition: background 0.2s;
+    margin-top: 1rem;
+}
+.github-link:hover { background: var(--teal); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .cs-hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; gap: 3rem; }
+    .metrics-bar { grid-template-columns: 1fr 1fr; }
+    .metric { padding: 2rem 1.5rem; }
+    .metrics-bar .metric:nth-child(2) { border-right: none; }
+    .metrics-bar .metric:nth-child(3) { border-top: 1px solid rgba(243,237,226,0.08); }
+    .cs-body { padding: 4rem 1.5rem; }
+    .arch-flow { gap: 0.5rem; }
+    .arch-arrow { padding: 0 0.25rem; }
+    .eval-table { display: block; overflow-x: auto; }
+    .cs-next { padding: 2.5rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+}

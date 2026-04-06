@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Case Study 02: Shipping a conversational AI assistant inside a B2B platform with 10M+ users — enterprise AI product strategy by Mukul Dewangan.">
+    <title>Case Study 02 — Conversational AI — Mukul Dewangan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+
+<nav class="nav-light">
+    <a href="index.html" class="nav-back"><span class="arrow">←</span> All Work</a>
+    <span class="nav-meta">Case Study 02 of 04</span>
+</nav>
+
+<main>
+<div class="cs-hero">
+    <div>
+        <p class="cs-eyebrow">Case Study — 02</p>
+        <div class="cs-number">02</div>
+        <h1 class="cs-title">Shipping a conversational AI assistant inside a B2B platform <em>with 10M+ users</em></h1>
+    </div>
+    <div>
+        <div class="cs-tags">
+            <span class="cs-tag">Generative AI</span>
+            <span class="cs-tag">Enterprise SaaS</span>
+            <span class="cs-tag">Workflow Automation</span>
+            <span class="cs-tag">Vendasta</span>
+        </div>
+        <p class="cs-summary">
+            Building AI features inside an enterprise B2B platform is a fundamentally different problem than building a greenfield AI product. The constraints are real: legacy data models, enterprise security requirements, a diverse user base with varying technical literacy, and a sales team that needs to explain it on calls. This is how we navigated that.
+        </p>
+    </div>
+</div>
+
+<div class="metrics-bar">
+    <div class="metric">
+        <div class="metric-number">10M+</div>
+        <div class="metric-label">Active Platform Users</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">500</div>
+        <div class="metric-label">Beta Accounts at Launch</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">3</div>
+        <div class="metric-label">Iteration Cycles Pre-Launch</div>
+    </div>
+</div>
+
+<div class="cs-body">
+    <div class="cs-section">
+        <p class="section-label">Context</p>
+        <h2>A platform with $93M in revenue and a user base that spans from solo agencies to enterprise teams</h2>
+        <p>
+            Vendasta's platform serves a wide range of users — from individual digital agency owners managing 20 clients to enterprise operations teams running thousands of accounts. That user diversity is a strength commercially and a significant challenge for AI product design.
+        </p>
+        <p>
+            When we began exploring where generative AI could add meaningful value, the options were numerous. The question was how to ship something that would work across that range of users, integrate safely with existing data models, and not create new support burden. We needed to be deliberate.
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Problem</p>
+        <h2>Workflow complexity was the core friction. <em>AI was the right lever — if applied correctly.</em></h2>
+        <p>
+            Through user research and support ticket analysis, a consistent pattern emerged: users were spending disproportionate time on repetitive, context-intensive tasks — drafting client reports, creating campaign briefs, generating performance summaries. The platform had the data; users were doing the synthesis manually.
+        </p>
+        <div class="pull-quote">
+            <p>"The platform had the data. Users were doing the synthesis manually. That gap is where AI belongs."</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Approach</p>
+        <h2>Custom data grounding, security first, then user experience</h2>
+        <p>
+            The AI assistant couldn't just be a generic LLM wrapper. For it to be useful on a B2B platform, responses needed to be grounded in platform-specific data: account performance metrics, campaign history, client context, product usage signals. We built the data grounding layer before we designed the interface.
+        </p>
+
+        <div class="approach-steps">
+            <div class="step">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                    <h3>Data inventory and access scoping</h3>
+                    <p>Mapped which platform data was safe to surface to which user types. Multi-tenant architecture means one agency's data cannot leak into another's AI context — this had to be structural, not just a policy. Worked with security and engineering to define the access model before writing any prompts.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                    <h3>Use case prioritization by automation ROI</h3>
+                    <p>Ranked potential AI use cases by: time currently spent by users, feasibility of grounding responses in platform data, and risk of incorrect output. Performance report drafting scored highest on all three. Started there.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                    <h3>Built and launched the conversational assistant</h3>
+                    <p>Used generative AI with custom-grounded platform data to power the assistant. Rolled out to a beta cohort of 500 accounts, monitored output quality, gathered structured feedback, iterated on prompt architecture and response formatting before broader release.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Outcome</p>
+        <h2>Improved engagement, faster workflows, <em>and measurable adoption across the platform</em></h2>
+        <p>
+            The conversational AI assistant improved workflow efficiency and engagement metrics across the platform. Users who adopted the assistant generated reports and briefs faster, with higher satisfaction scores in post-task surveys. Automation of repetitive synthesis tasks reduced support tickets related to reporting complexity.
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">What I Learned</p>
+        <h2>Enterprise AI is 40% capability, <em>60% trust architecture.</em></h2>
+        <p>
+            The hardest part of shipping AI inside an enterprise platform isn't building the AI — it's building the infrastructure that makes the AI safe to deploy. Multi-tenant data isolation, access controls, output quality thresholds, and escalation paths for uncertain responses all have to be designed before the user experience.
+        </p>
+        <p>
+            The second lesson: shipping AI on a mature platform means inheriting its complexity. The data access model, the tenant isolation architecture, the existing user mental models — all of it constrains what you can build and how fast you can move. Understanding those constraints early is what lets you move confidently later.
+        </p>
+    </div>
+</div>
+
+<a href="case-study-03.html" class="cs-next">
+    <div>
+        <p class="cs-next-label">Next Case Study — 03</p>
+        <p class="cs-next-title">Building the AI agent that turns 4 hours of competitive research <em>into 2 minutes</em></p>
+    </div>
+    <span class="cs-next-arrow">→</span>
+</a>
+
+</main>
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;">← Back to Portfolio</a></span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

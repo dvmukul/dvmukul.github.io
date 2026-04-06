@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mukul Dewangan — Senior Product Manager specialising in AI systems, data infrastructure, and enterprise SaaS. 8+ years building B2B products. View case studies and product teardowns.">
+    <title>Mukul Dewangan — Product & AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        /* Page-specific — shared tokens/reset/nav/animations are in shared.css */
+        body { background: var(--bg); color: var(--text); }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100dvh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-left {
+            padding: 9rem 3rem 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid var(--border);
+        }
+        .hero-left-top { display: flex; flex-direction: column; }
+        .hero-eyebrow {
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 500;
+            margin-bottom: 2.5rem;
+        }
+        .hero-name {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .hero-name em { font-style: italic; }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+            font-weight: 300;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+        }
+        .hero-statement {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            max-width: 38ch;
+            line-height: 1.75;
+            border-left: 2px solid var(--teal);
+            padding-left: 1.5rem;
+        }
+        .hero-left-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--text);
+            color: var(--bg);
+            padding: 0.9rem 2rem;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 400;
+            letter-spacing: 0.06em;
+            border-radius: var(--r-sm);
+            transition: background 0.2s;
+            width: fit-content;
+        }
+        .hero-cta:hover { background: var(--teal); }
+        .hero-cta .arrow { transition: transform 0.2s; }
+        .hero-cta:hover .arrow { transform: translateX(5px); }
+        .scroll-hint {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .scroll-hint span {
+            font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            writing-mode: vertical-rl;
+        }
+        .scroll-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, var(--teal), transparent);
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .scroll-line { animation: pulse-line 2s ease-in-out infinite; }
+        }
+        @keyframes pulse-line {
+            0%,100% { opacity: 1; transform: scaleY(1); }
+            50%      { opacity: 0.35; transform: scaleY(0.5); }
+        }
+
+        /* Hero right — stats column */
+        .hero-right {
+            padding: 9rem 3rem 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-word {
+            font-family: var(--font-display);
+            font-size: clamp(10rem, 18vw, 17rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 0.9;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(13,12,9,0.06);
+            user-select: none;
+            position: absolute;
+            bottom: 2rem;
+            right: -1rem;
+            white-space: nowrap;
+            letter-spacing: -0.04em;
+            pointer-events: none;
+        }
+        .hero-stats-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+        .hero-stats {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            justify-content: center;
+            gap: 0;
+        }
+        .hero-stat {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: baseline;
+            gap: 0.35rem;
+            padding: 1.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero-stat:first-child { border-top: 1px solid var(--border); }
+        .hero-stat-number {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1;
+        }
+        .hero-stat-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* ===== WORK ===== */
+        #work { padding: 6rem 3rem; background: var(--bg); }
+
+        .work-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: end;
+            margin-bottom: 5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .work-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+        .work-title em { font-style: italic; }
+        .work-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 40ch;
+            line-height: 1.75;
+        }
+
+        /* Featured */
+        .cs-featured {
+            display: grid;
+            grid-template-columns: 5fr 3fr;
+            min-height: 460px;
+            border-radius: var(--r-md);
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 3px;
+        }
+        .cs-featured-image {
+            background: linear-gradient(140deg, #152828 0%, #0A1818 65%, #1A3030 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.7s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        .cs-featured:hover .cs-featured-image { transform: scale(1.03); }
+        .cs-featured-image svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+        .cs-featured-body {
+            background: var(--bg-dark);
+            color: #F3EDE2;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .cs-num {
+            font-family: var(--font-display);
+            font-size: 6rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1;
+            color: rgba(243,237,226,0.1);
+        }
+        .cs-tags { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-bottom: 1.5rem; }
+        .cs-tag {
+            font-size: 0.62rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            border: 1px solid rgba(243,237,226,0.18);
+            border-radius: 100px;
+            color: rgba(243,237,226,0.55);
+        }
+        .cs-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.2vw, 2rem);
+            font-weight: 300;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+        .cs-excerpt {
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: rgba(243,237,226,0.55);
+            flex: 1;
+        }
+        .cs-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.77rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #F3EDE2;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: gap 0.2s;
+        }
+        .cs-featured:hover .cs-read { gap: 1.1rem; }
+
+        /* Grid */
+        .cs-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3px;
+        }
+        .cs-card {
+            background: var(--surface);
+            padding: 2.5rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            min-height: 300px;
+            transition: background 0.25s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+        }
+        .cs-card:hover { background: var(--bg-alt); }
+        .cs-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--teal);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .cs-card:hover::after { transform: scaleX(1); }
+        .card-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(13,12,9,0.08);
+            line-height: 1;
+            margin-bottom: auto;
+        }
+        .card-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+        .card-tag {
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 500;
+        }
+        .card-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 0.65rem;
+        }
+        .card-excerpt { font-size: 0.83rem; color: var(--text-muted); line-height: 1.65; }
+
+        /* ===== ABOUT ===== */
+        #about {
+            background: var(--bg-dark);
+            color: #F3EDE2;
+            padding: 8rem 3rem;
+        }
+        #about .section-label { color: rgba(243,237,226,0.38); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 8rem;
+            align-items: start;
+        }
+        .about-name {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.1;
+            margin-bottom: 2.5rem;
+        }
+        .about-photo {
+            width: 100%;
+            max-width: 220px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            margin-bottom: 2.5rem;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+        .credentials { list-style: none; display: flex; flex-direction: column; gap: 0; }
+        .credential {
+            font-size: 0.8rem;
+            color: rgba(243,237,226,0.48);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(243,237,226,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            line-height: 1.6;
+        }
+        .credential strong { color: rgba(243,237,226,0.82); font-weight: 400; font-size: 0.82rem; }
+
+        .about-headline {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+            font-weight: 300;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin-bottom: 2.5rem;
+        }
+        .about-headline em { font-style: italic; color: rgba(243,237,226,0.45); }
+        .about-divider { width: 40px; height: 1px; background: var(--teal-light); margin-bottom: 2.5rem; }
+        .about-body { font-size: 0.98rem; line-height: 1.9; color: rgba(243,237,226,0.6); max-width: 56ch; margin-bottom: 3rem; }
+        .about-body p + p { margin-top: 1.5rem; }
+
+        .skills-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: rgba(243,237,226,0.28);
+            margin-bottom: 1.25rem;
+        }
+        .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+        .skill-item {
+            font-size: 0.82rem;
+            color: rgba(243,237,226,0.5);
+            padding: 0.65rem 0;
+            border-top: 1px solid rgba(243,237,226,0.07);
+        }
+
+        /* ===== RESUME ===== */
+        #resume { background: var(--bg-alt); padding: 8rem 3rem; }
+        .resume-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 6rem;
+            align-items: start;
+        }
+        .resume-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+        .resume-title em { font-style: italic; }
+        .resume-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.9rem 1.75rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            border-radius: var(--r-sm);
+            transition: background 0.2s;
+        }
+        .resume-download:hover { background: var(--accent-hover); }
+
+        .exp-list { display: flex; flex-direction: column; }
+        .exp-item {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .exp-item:first-child { padding-top: 0; }
+        .exp-period { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 0.2rem; }
+        .exp-company { font-size: 0.82rem; color: var(--text-muted); }
+        .exp-role {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .exp-desc { font-size: 0.86rem; color: var(--text-muted); line-height: 1.7; }
+
+        /* ===== CONTACT ===== */
+        #contact { background: var(--teal); color: #F3EDE2; padding: 8rem 3rem; }
+        #contact .section-label { color: rgba(243,237,226,0.45); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        .contact-headline {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+        }
+        .contact-headline em { font-style: italic; }
+        .contact-sub { font-size: 0.95rem; color: rgba(243,237,226,0.62); line-height: 1.75; max-width: 38ch; }
+        .contact-items { display: flex; flex-direction: column; gap: 0; }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(243,237,226,0.14);
+        }
+        .contact-item-label {
+            font-size: 0.67rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(243,237,226,0.38);
+        }
+        .contact-item a { font-size: 1.05rem; color: #F3EDE2; text-decoration: none; transition: opacity 0.2s; }
+        .contact-item a:hover { opacity: 0.65; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(243,237,226,0.28);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            #hero { grid-template-columns: 1fr; }
+            .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 7rem 2rem 3rem; }
+            .hero-right { padding: 3rem 2rem; }
+            .hero-bg-word { display: none; }
+            .hero-stats { flex-direction: row; flex-wrap: wrap; gap: 0; }
+            .hero-stat { grid-template-columns: 1fr; gap: 0.25rem; padding: 1.25rem 2rem 1.25rem 0; border-bottom: none; border-right: 1px solid var(--border); margin-right: 2rem; }
+            .hero-stat:first-child { border-top: none; }
+            .hero-stat:last-child { border-right: none; }
+            #work, #about, #resume, #contact { padding: 5rem 2rem; }
+            .work-header { grid-template-columns: 1fr; gap: 1.5rem; }
+            .cs-featured { grid-template-columns: 1fr; }
+            .cs-featured-image { min-height: 280px; }
+            .cs-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .resume-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .skills-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        @media (max-width: 640px) {
+            #hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+            #work, #about, #resume, #contact { padding: 4rem 1.5rem; }
+            .cs-grid { grid-template-columns: 1fr; }
+            .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="#hero" class="nav-logo">Mukul Dewangan</a>
+    <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-left">
+        <div class="hero-left-top">
+            <p class="hero-eyebrow">Product & AI Leadership</p>
+            <h1 class="hero-name">Mukul<br><em>Dewangan.</em></h1>
+            <p class="hero-title">Senior PM — AI Systems & Enterprise SaaS</p>
+            <p class="hero-statement">
+                The gap between what AI can do and what enterprises will actually ship is a product problem. 8+ years in B2B taught me that problem. The last few years taught me the AI side.
+            </p>
+        </div>
+        <div class="hero-left-bottom">
+            <a href="#work" class="hero-cta">
+                View Work <span class="arrow">→</span>
+            </a>
+            <div class="scroll-hint" aria-hidden="true">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-right" role="region" aria-label="Career highlights">
+        <div class="hero-bg-word" aria-hidden="true">AI</div>
+        <p class="hero-stats-label">At a glance</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="hero-stat-number">8+</span>
+                <span class="hero-stat-label">Years in Product</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-number">$10M+</span>
+                <span class="hero-stat-label">Annual Savings Driven</span>
+            </div>
+            <div class="hero-stat">
+                <span class="hero-stat-number">10M+</span>
+                <span class="hero-stat-label">Users Impacted</span>
+            </div>
+        </div>
+        <div></div><!-- spacer for space-between -->
+    </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+    <div class="work-header reveal">
+        <div>
+            <p class="section-label">Selected Work</p>
+            <h2 class="work-title">Case <em>Studies</em></h2>
+        </div>
+        <p class="work-desc">
+            Four projects at the intersection of AI, enterprise SaaS, and the hard question of what actually ships vs. what just demos well.
+        </p>
+    </div>
+
+    <!-- Featured -->
+    <a href="case-study-01.html" class="cs-featured reveal">
+        <div class="cs-featured-image">
+            <svg viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Subtle grid -->
+                <line x1="0" y1="100" x2="800" y2="100" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="0" y1="200" x2="800" y2="200" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="0" y1="400" x2="800" y2="400" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="200" y1="0" x2="200" y2="500" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="400" y1="0" x2="400" y2="500" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+                <line x1="600" y1="0" x2="600" y2="500" stroke="rgba(243,237,226,0.04)" stroke-width="1"/>
+
+                <!-- Section divider -->
+                <line x1="380" y1="60" x2="380" y2="440" stroke="rgba(243,237,226,0.08)" stroke-width="1" stroke-dasharray="4 6"/>
+
+                <!-- LEFT: Fragmented data nodes -->
+                <!-- Broken connection lines (dashed, faint) -->
+                <line x1="80" y1="130" x2="155" y2="175" stroke="rgba(243,237,226,0.14)" stroke-width="1" stroke-dasharray="5 5"/>
+                <line x1="155" y1="175" x2="210" y2="240" stroke="rgba(243,237,226,0.10)" stroke-width="1" stroke-dasharray="3 7"/>
+                <line x1="105" y1="280" x2="185" y2="310" stroke="rgba(243,237,226,0.14)" stroke-width="1" stroke-dasharray="5 5"/>
+                <line x1="185" y1="310" x2="240" y2="370" stroke="rgba(243,237,226,0.08)" stroke-width="1" stroke-dasharray="3 8"/>
+                <line x1="60" y1="390" x2="130" y2="340" stroke="rgba(243,237,226,0.10)" stroke-width="1" stroke-dasharray="4 6"/>
+                <line x1="210" y1="140" x2="250" y2="210" stroke="rgba(243,237,226,0.08)" stroke-width="1" stroke-dasharray="3 7"/>
+                <!-- Break marks on lines -->
+                <line x1="115" y1="149" x2="122" y2="143" stroke="rgba(192,90,26,0.50)" stroke-width="1.5"/>
+                <line x1="122" y1="149" x2="115" y2="143" stroke="rgba(192,90,26,0.50)" stroke-width="1.5"/>
+                <line x1="193" y1="316" x2="200" y2="310" stroke="rgba(192,90,26,0.50)" stroke-width="1.5"/>
+                <line x1="200" y1="316" x2="193" y2="310" stroke="rgba(192,90,26,0.50)" stroke-width="1.5"/>
+
+                <!-- Fragmented nodes (scattered, varying opacity) -->
+                <circle cx="80" cy="130" r="10" fill="rgba(243,237,226,0.08)" stroke="rgba(243,237,226,0.35)" stroke-width="1.5"/>
+                <circle cx="155" cy="175" r="14" fill="rgba(243,237,226,0.06)" stroke="rgba(243,237,226,0.25)" stroke-width="1.5"/>
+                <circle cx="210" cy="240" r="9" fill="rgba(243,237,226,0.08)" stroke="rgba(243,237,226,0.30)" stroke-width="1.5"/>
+                <circle cx="105" cy="280" r="12" fill="rgba(243,237,226,0.05)" stroke="rgba(243,237,226,0.20)" stroke-width="1.5"/>
+                <circle cx="60" cy="390" r="10" fill="rgba(243,237,226,0.07)" stroke="rgba(243,237,226,0.28)" stroke-width="1.5"/>
+                <circle cx="185" cy="310" r="8"  fill="rgba(243,237,226,0.08)" stroke="rgba(243,237,226,0.22)" stroke-width="1.5"/>
+                <circle cx="240" cy="370" r="13" fill="rgba(243,237,226,0.05)" stroke="rgba(243,237,226,0.18)" stroke-width="1.5"/>
+                <circle cx="210" cy="140" r="7"  fill="rgba(243,237,226,0.06)" stroke="rgba(243,237,226,0.22)" stroke-width="1.5"/>
+                <circle cx="130" cy="340" r="11" fill="rgba(243,237,226,0.07)" stroke="rgba(243,237,226,0.25)" stroke-width="1.5"/>
+                <circle cx="270" cy="190" r="9"  fill="rgba(243,237,226,0.05)" stroke="rgba(243,237,226,0.18)" stroke-width="1.5"/>
+
+                <!-- "Before" label -->
+                <text x="50" y="78" font-family="'DM Sans', sans-serif" font-size="10" letter-spacing="3" text-transform="uppercase" fill="rgba(243,237,226,0.22)">FRAGMENTED</text>
+
+                <!-- CENTER: Converging arrows -->
+                <path d="M330 200 L370 250" stroke="rgba(44,122,122,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M330 250 L370 250" stroke="rgba(44,122,122,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M330 300 L370 250" stroke="rgba(44,122,122,0.55)" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- Arrow heads -->
+                <path d="M363 244 L370 250 L363 256" stroke="rgba(44,122,122,0.65)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+                <!-- RIGHT: Unified analytics dashboard -->
+                <!-- Dashboard frame -->
+                <rect x="420" y="110" width="330" height="280" rx="4" fill="rgba(243,237,226,0.04)" stroke="rgba(243,237,226,0.12)" stroke-width="1"/>
+                <!-- Header strip -->
+                <rect x="420" y="110" width="330" height="32" rx="4" fill="rgba(243,237,226,0.07)"/>
+                <circle cx="440" cy="126" r="4" fill="rgba(192,90,26,0.5)"/>
+                <circle cx="456" cy="126" r="4" fill="rgba(243,237,226,0.18)"/>
+                <circle cx="472" cy="126" r="4" fill="rgba(243,237,226,0.18)"/>
+                <text x="500" y="131" font-family="'DM Sans', sans-serif" font-size="9" letter-spacing="2" fill="rgba(243,237,226,0.35)">CUSTOMER ANALYTICS</text>
+
+                <!-- Chart baseline -->
+                <line x1="445" y1="340" x2="725" y2="340" stroke="rgba(243,237,226,0.15)" stroke-width="1"/>
+
+                <!-- Bar chart (5 bars, growing) -->
+                <rect x="460" y="295" width="34" height="45" rx="2" fill="rgba(28,94,94,0.45)" stroke="rgba(44,122,122,0.4)" stroke-width="1"/>
+                <rect x="506" y="270" width="34" height="70" rx="2" fill="rgba(28,94,94,0.50)" stroke="rgba(44,122,122,0.45)" stroke-width="1"/>
+                <rect x="552" y="245" width="34" height="95" rx="2" fill="rgba(28,94,94,0.60)" stroke="rgba(44,122,122,0.55)" stroke-width="1"/>
+                <rect x="598" y="210" width="34" height="130" rx="2" fill="rgba(28,94,94,0.70)" stroke="rgba(44,122,122,0.65)" stroke-width="1"/>
+                <rect x="644" y="175" width="34" height="165" rx="2" fill="rgba(44,122,122,0.80)" stroke="rgba(44,122,122,0.9)" stroke-width="1"/>
+
+                <!-- Trend line over bars -->
+                <path d="M477 290 L523 265 L569 240 L615 205 L661 170" stroke="rgba(243,237,226,0.70)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Dot at peak -->
+                <circle cx="661" cy="170" r="4" fill="#F3EDE2" opacity="0.9"/>
+
+                <!-- X-axis labels -->
+                <text x="463" y="356" font-family="'DM Sans', sans-serif" font-size="8" fill="rgba(243,237,226,0.22)">Q1</text>
+                <text x="509" y="356" font-family="'DM Sans', sans-serif" font-size="8" fill="rgba(243,237,226,0.22)">Q2</text>
+                <text x="555" y="356" font-family="'DM Sans', sans-serif" font-size="8" fill="rgba(243,237,226,0.22)">Q3</text>
+                <text x="601" y="356" font-family="'DM Sans', sans-serif" font-size="8" fill="rgba(243,237,226,0.22)">Q4</text>
+                <text x="647" y="356" font-family="'DM Sans', sans-serif" font-size="8" fill="rgba(243,237,226,0.35)">Q5</text>
+
+                <!-- Connected data nodes inside dashboard -->
+                <circle cx="480" cy="170" r="5" fill="rgba(44,122,122,0.6)" stroke="rgba(44,122,122,0.9)" stroke-width="1"/>
+                <circle cx="540" cy="155" r="5" fill="rgba(44,122,122,0.6)" stroke="rgba(44,122,122,0.9)" stroke-width="1"/>
+                <circle cx="600" cy="160" r="5" fill="rgba(44,122,122,0.6)" stroke="rgba(44,122,122,0.9)" stroke-width="1"/>
+                <line x1="480" y1="170" x2="540" y2="155" stroke="rgba(44,122,122,0.35)" stroke-width="1"/>
+                <line x1="540" y1="155" x2="600" y2="160" stroke="rgba(44,122,122,0.35)" stroke-width="1"/>
+
+                <!-- "After" label -->
+                <text x="420" y="78" font-family="'DM Sans', sans-serif" font-size="10" letter-spacing="3" fill="rgba(243,237,226,0.22)">UNIFIED</text>
+
+            </svg>
+        </div>
+        <div class="cs-featured-body">
+            <div class="cs-num">01</div>
+            <div>
+                <div class="cs-tags">
+                    <span class="cs-tag">Data Infrastructure</span>
+                    <span class="cs-tag">B2B SaaS</span>
+                    <span class="cs-tag">Analytics</span>
+                </div>
+                <h3 class="cs-title">Fixing fragmented customer data and saving $9M in ARR — by convincing leadership to rebuild the infrastructure</h3>
+                <p class="cs-excerpt">
+                    At Vendasta, high churn was the symptom. The actual problem was that customer data lived in 6 different systems and no one had a coherent view of it. I found the gap, built the business case, and launched the reporting and analytics platform that reduced churn by 89%.
+                </p>
+                <span class="cs-read">Read case study <span>→</span></span>
+            </div>
+        </div>
+    </a>
+
+    <!-- Secondary grid -->
+    <div class="cs-grid">
+        <a href="case-study-02.html" class="cs-card reveal">
+            <span class="card-num">02</span>
+            <div class="card-tags"><span class="card-tag">Generative AI</span><span class="card-tag">Enterprise</span></div>
+            <h3 class="card-title">Shipping a conversational AI assistant inside a B2B platform with 10M+ users</h3>
+            <p class="card-excerpt">Building AI features in enterprise is a different problem than building AI features in a startup. Here's what that difference actually looks like.</p>
+        </a>
+        <a href="case-study-03.html" class="cs-card reveal reveal-d1">
+            <span class="card-num">03</span>
+            <div class="card-tags"><span class="card-tag">Agentic AI</span><span class="card-tag">PM Tooling</span></div>
+            <h3 class="card-title">Building the AI agent that turns 4 hours of competitive research into 2 minutes</h3>
+            <p class="card-excerpt">A personal project that became a working product. Multi-step autonomous research with adaptive loops and structured scoring.</p>
+        </a>
+        <a href="case-study-04.html" class="cs-card reveal reveal-d2">
+            <span class="card-num">04</span>
+            <div class="card-tags"><span class="card-tag">AI Evaluation</span><span class="card-tag">Governance</span></div>
+            <h3 class="card-title">A structured framework for evaluating LLM outputs before they reach users</h3>
+            <p class="card-excerpt">"It seemed good in testing" is not an enterprise-grade evaluation strategy. This is what a real one looks like.</p>
+        </a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="about-grid">
+        <div class="about-left reveal">
+            <p class="section-label">About</p>
+            <h2 class="about-name">The<br>longer<br>version.</h2>
+            <img src="Mukul Dewangan.JPG" alt="Mukul Dewangan" class="about-photo">
+            <ul class="credentials">
+                <li class="credential"><strong>Currently</strong>Product Consultant — Creo Softech</li>
+                <li class="credential"><strong>Previously</strong>Senior PM — Vendasta Technologies<br>PM — Userful Corporation</li>
+                <li class="credential"><strong>Education</strong>MBA — Rice University<br>B.Tech — NIT</li>
+                <li class="credential"><strong>Certifications</strong>AI PM — Duke University<br>CSPO — Scrum Alliance</li>
+                <li class="credential"><strong>GitHub</strong><a href="https://github.com/dvmukul" target="_blank" rel="noopener" style="color:rgba(243,237,226,0.6);text-decoration:none;">github.com/dvmukul</a></li>
+                <li class="credential"><strong>LinkedIn</strong><a href="https://linkedin.com/in/mukuldewangan" target="_blank" rel="noopener" style="color:rgba(243,237,226,0.6);text-decoration:none;">in/mukuldewangan</a></li>
+            </ul>
+        </div>
+
+        <div class="about-right reveal reveal-d1">
+            <h2 class="about-headline">
+                I've spent 8 years getting good at one thing: <em>closing the gap between what users need and what can actually be built.</em>
+            </h2>
+            <div class="about-divider"></div>
+            <div class="about-body">
+                <p>
+                    My background is B2B SaaS — data infrastructure, enterprise IAM, platform architecture. I've worked at companies where the sales cycle is long, the compliance requirements are real, and "move fast" is not a strategy. That context shapes how I think about AI: not as a feature to ship, but as a system to govern.
+                </p>
+                <p>
+                    My move into AI was deliberate. I spent months studying the actual capability curve before I led my first AI product. I've built agentic workflows, evaluation frameworks, and governance layers for enterprise deployment. I've seen what happens when teams skip the hard parts — trust architecture, data quality, edge-case behavior — and I know how to not do that.
+                </p>
+                <p>
+                    Outside of product work, I'm working toward my private pilot license. It turns out that pre-flight checklists and pre-launch checklists have more in common than most people think.
+                </p>
+            </div>
+            <div>
+                <p class="skills-label">Areas of Depth</p>
+                <div class="skills-grid">
+                    <span class="skill-item">Agentic Systems</span>
+                    <span class="skill-item">Data Infrastructure</span>
+                    <span class="skill-item">Enterprise IAM</span>
+                    <span class="skill-item">LLM Evaluation</span>
+                    <span class="skill-item">Platform & API</span>
+                    <span class="skill-item">AI Governance</span>
+                    <span class="skill-item">Competitive Strategy</span>
+                    <span class="skill-item">0 → 1 Products</span>
+                    <span class="skill-item">Roadmap Strategy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+    <div class="resume-grid">
+        <div class="reveal">
+            <p class="section-label">Resume</p>
+            <h2 class="resume-title">The<br><em>full</em><br>history.</h2>
+            <br>
+            <a href="Resume_Mukul_Dewangan.pdf" download class="resume-download">Download PDF ↓</a>
+        </div>
+
+        <div class="exp-list reveal reveal-d1">
+            <div class="exp-item">
+                <div>
+                    <p class="exp-period">Oct 2024 — Present</p>
+                    <p class="exp-company">Creo Softech</p>
+                </div>
+                <div>
+                    <h3 class="exp-role">Product Consultant</h3>
+                    <p class="exp-desc">Advising a startup building a small-business marketplace with localized discounts and promotions. Leading customer discovery, MVP scoping, and go-to-market for the pilot launch.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div>
+                    <p class="exp-period">May 2021 — Sep 2024</p>
+                    <p class="exp-company">Vendasta Technologies</p>
+                </div>
+                <div>
+                    <h3 class="exp-role">Senior Product Manager</h3>
+                    <p class="exp-desc">Owned platform and infrastructure for a B2B SaaS company with $93M revenue and 10M+ active users. Shipped a reporting and analytics platform that reduced churn by 89% and saved $9M in ARR. Built and launched a conversational AI assistant using generative AI and custom data. Led data governance and RBAC initiatives reducing security incidents by 70%. Managed a team of 7 PMs.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div>
+                    <p class="exp-period">Mar 2020 — Feb 2021</p>
+                    <p class="exp-company">Userful Corporation</p>
+                </div>
+                <div>
+                    <h3 class="exp-role">Product Manager</h3>
+                    <p class="exp-desc">Led strategy and execution for the digital signage segment of a B2B SaaS AV company. Spearheaded end-to-end development of a new digital signage solution, growing segment revenue by 17%.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div>
+                    <p class="exp-period">Jun 2017 — May 2019</p>
+                    <p class="exp-company">Greenview Capital Group</p>
+                </div>
+                <div>
+                    <h3 class="exp-role">Product Manager</h3>
+                    <p class="exp-desc">Led automation and digital transformation at an asset management firm with $250M AUM. Transformed the reporting and analytics system, saving $1.5M — 28% of operational costs.</p>
+                </div>
+            </div>
+            <div class="exp-item">
+                <div>
+                    <p class="exp-period">Sep 2014 — Jul 2016</p>
+                    <p class="exp-company">ZeroMiles</p>
+                </div>
+                <div>
+                    <h3 class="exp-role">Head of Product & Co-Founder</h3>
+                    <p class="exp-desc">Co-founded a social impact startup focused on healthcare cost reduction and clean water access. Scaled to 6,000+ users, secured institutional and government funding.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="contact-grid">
+        <div class="reveal">
+            <p class="section-label">Contact</p>
+            <h2 class="contact-headline">Let's<br><em>talk.</em></h2>
+            <p class="contact-sub">
+                Got a product problem, a half-formed idea, or just want to think through something out loud? I'm always up for a good conversation.
+            </p>
+        </div>
+        <div class="contact-items reveal reveal-d1">
+            <div class="contact-item">
+                <span class="contact-item-label">Email</span>
+                <a href="mailto:hello@mukuldewangan.com">hello@mukuldewangan.com</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-item-label">LinkedIn</span>
+                <a href="https://linkedin.com/in/mukuldewangan" target="_blank" rel="noopener">linkedin.com/in/mukuldewangan</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-item-label">GitHub</span>
+                <a href="https://github.com/dvmukul" target="_blank" rel="noopener">github.com/dvmukul</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product & AI Leadership</span>
+</footer>
+
+<script src="main.js"></script>
+
+</body>
+</html>

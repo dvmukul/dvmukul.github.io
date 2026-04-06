@@ -1,0 +1,166 @@
+/* =====================================================
+   SHARED STYLES — Mukul Dewangan Portfolio
+   Used by: index.html, case-study-*.html, teardowns.html
+   ===================================================== */
+
+/* ===== TOKENS ===== */
+:root {
+    --bg:          #F3EDE2;
+    --bg-alt:      #EDE6D8;
+    --bg-dark:     #0F0F0D;
+    --surface:     #E8E1D5;
+    --text:        #0D0C09;
+    --text-muted:  #6B655C;
+    --text-light:  #9B9489;
+    --teal:        #1C5E5E;
+    --teal-light:  #2A7A7A;
+    --accent:      #C05A1A;
+    --accent-hover:#A34A12;
+    --border:      rgba(13,12,9,0.11);
+    --border-dark: rgba(243,237,226,0.10);
+
+    --font-display: 'Cormorant', serif;
+    --font-body:    'DM Sans', sans-serif;
+
+    --r-sm: 3px;
+    --r-md: 8px;
+    --r-lg: 16px;
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== GRAIN TEXTURE ===== */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* ===== NAV — Light variant (index + case studies) ===== */
+nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid var(--border);
+}
+nav.nav-light {
+    background: rgba(243,237,226,0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+/* Dark variant for dark-bg pages (teardowns) */
+nav.nav-dark {
+    background: rgba(15,15,13,0.90);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom-color: var(--border-dark);
+}
+
+/* Nav logo */
+.nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* Nav back link (sub-pages) */
+.nav-back {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.nav-dark .nav-back { color: rgba(243,237,226,0.50); }
+.nav-back:hover { color: var(--text); }
+.nav-dark .nav-back:hover { color: #F3EDE2; }
+.nav-back .arrow { transition: transform 0.2s; }
+.nav-back:hover .arrow { transform: translateX(-4px); }
+
+/* Nav links */
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+.nav-links a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--text); }
+.nav-dark .nav-links a { color: rgba(243,237,226,0.40); }
+.nav-dark .nav-links a:hover,
+.nav-dark .nav-links a.active { color: #F3EDE2; }
+.nav-meta {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-muted);
+}
+.nav-dark .nav-meta { color: rgba(243,237,226,0.45); }
+
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+@media (prefers-reduced-motion: no-preference) {
+    .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.22s; }
+    .reveal-d3 { transition-delay: 0.34s; }
+}
+
+/* ===== SHARED UTILITY ===== */
+.section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+/* ===== RESPONSIVE NAV ===== */
+@media (max-width: 1024px) {
+    nav { padding: 1.25rem 2rem; }
+}
+@media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+}

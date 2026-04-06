@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Case Study 03: Building the pm-research-agent — an autonomous competitive research AI agent that turns 4 hours of work into 2 minutes.">
+    <title>Case Study 03 — PM Research Agent — Mukul Dewangan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+
+<nav class="nav-light">
+    <a href="index.html" class="nav-back"><span class="arrow">←</span> All Work</a>
+    <span class="nav-meta">Case Study 03 of 04</span>
+</nav>
+
+<main>
+<div class="cs-hero">
+    <div>
+        <p class="cs-eyebrow">Case Study — 03</p>
+        <div class="cs-number">03</div>
+        <h1 class="cs-title">Building the AI agent that turns <em>4 hours of competitive research into 2 minutes</em></h1>
+    </div>
+    <div>
+        <div class="cs-tags">
+            <span class="cs-tag">Agentic AI</span>
+            <span class="cs-tag">Python</span>
+            <span class="cs-tag">Claude API</span>
+            <span class="cs-tag">PM Tooling</span>
+            <span class="cs-tag">Open Source</span>
+        </div>
+        <p class="cs-summary">
+            A personal project that started with a frustrating afternoon of manual competitor research and ended as a production-grade agentic workflow. The pm-research-agent performs autonomous multi-step research, scores competitors across five dimensions, and delivers structured briefs directly to Slack and Notion.
+        </p>
+    </div>
+</div>
+
+<div class="metrics-bar">
+    <div class="metric">
+        <div class="metric-number">&lt; 2min</div>
+        <div class="metric-label">From prompt to brief</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">5</div>
+        <div class="metric-label">Scoring Dimensions</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">10×</div>
+        <div class="metric-label">Search Iterations Max</div>
+    </div>
+</div>
+
+<div class="cs-body">
+    <div class="cs-section">
+        <p class="section-label">Background</p>
+        <h2>The problem every PM has and nobody has solved well</h2>
+        <p>
+            Competitive research is one of those tasks that every PM does and everyone does slightly differently. The core loop is always the same: search for recent news, check pricing pages, read release notes, scan G2 and Trustpilot reviews, synthesize into a brief. When done properly it takes 3–4 hours per competitor.
+        </p>
+        <p>
+            Most PMs either skip it (bad), do it inconsistently (also bad), or delegate it to someone junior who doesn't know what to look for (arguably worse). I wanted a solution that did the work at the level I'd do it myself — with the same information-gathering instincts, the same synthesis quality, at a fraction of the time.
+        </p>
+        <div class="pull-quote">
+            <p>"The goal wasn't to generate text about competitors. It was to produce a brief I'd actually trust enough to bring into a strategy meeting."</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Design Decisions</p>
+        <h2>Why a fixed pipeline wouldn't work — and what <em>adaptive loops</em> solve</h2>
+        <p>
+            The first version I built was a fixed pipeline: a sequence of predetermined search queries, scraped results, summarization prompt, output. It produced briefs quickly, but the quality was shallow. Fixed pipelines don't know when they've found something interesting and should go deeper — they just move on to the next step.
+        </p>
+        <p>
+            The redesign used an adaptive research loop. The agent evaluates what it finds at each step and decides whether to continue searching in the same direction, pivot to a different angle, or move to synthesis. It can run up to 10 search iterations but often needs fewer. This is closer to how a skilled researcher actually works.
+        </p>
+
+        <div class="arch-diagram">
+            <p class="arch-title">Agent Architecture — Research Loop</p>
+            <div class="arch-flow">
+                <div class="arch-node">Query input</div>
+                <span class="arch-arrow">→</span>
+                <div class="arch-node">Web search</div>
+                <span class="arch-arrow">→</span>
+                <div class="arch-node">Evaluate signal</div>
+                <span class="arch-arrow">→</span>
+                <div class="arch-node">Adapt or continue</div>
+                <span class="arch-arrow">→</span>
+                <div class="arch-node">Scorer</div>
+                <span class="arch-arrow">→</span>
+                <div class="arch-node">Slack / Notion</div>
+            </div>
+        </div>
+
+        <p>
+            The scorer module evaluates each competitor across five dimensions: Market Overlap, AI Maturity, Execution Velocity, Distribution Strength, and Resource Depth. Each dimension has a weighted score and a reasoning trace — the output isn't just a number, it's an explanation.
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Technical Approach</p>
+        <h2>Claude API, adaptive search, and structured output — the three components that matter</h2>
+
+        <div class="approach-steps">
+            <div class="step">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                    <h3>agent.py — the research loop</h3>
+                    <p>The core loop runs iteratively: search, read, evaluate, decide. At each step the agent considers what it's learned and whether the current search direction is productive. The adaptive logic is what separates this from a script — it can abandon a low-signal thread and reorient toward a more promising one.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                    <h3>scorer.py — structured competitor scoring</h3>
+                    <p>After research, each competitor is scored across five dimensions with reasoning traces. The scores are opinionated by design — a competitor with high AI Maturity but low Distribution Strength is a different type of threat than the inverse. The model captures that distinction.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                    <h3>batch.py — landscape summaries</h3>
+                    <p>For tracking multiple competitors simultaneously, batch mode processes all of them and produces a ranked landscape summary — which competitors are accelerating, which are stagnating, and where the emerging threats are coming from.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                    <h3>diff.py — threat trajectory over time</h3>
+                    <p>Perhaps the most useful module for ongoing strategy work: diff compares briefs generated at different points in time, surfacing what has changed about a competitor's position. It turns competitive intelligence from a point-in-time snapshot into a continuous signal.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">5</span>
+                <div class="step-content">
+                    <h3>Output to Slack and Notion</h3>
+                    <p>Briefs are delivered where PMs actually work. Slack for immediate sharing and discussion; Notion for structured storage and linking to strategy documents. The output format is standardized to enable comparison across competitors and time periods.</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://github.com/dvmukul/pm-research-agent" target="_blank" rel="noopener" class="github-link">
+            View source on GitHub →
+        </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">What I Learned</p>
+        <h2>Building tools for yourself is the fastest way to develop <em>genuine AI product instincts</em></h2>
+        <p>
+            The most useful thing about this project wasn't the output — it was what I learned about designing agentic systems by being the end user. I felt the difference between adaptive loops and fixed pipelines in my own workflow before I could articulate it in a product spec.
+        </p>
+        <p>
+            Two specific insights I've carried into professional AI product work: first, output format matters as much as output quality — a technically correct brief that nobody reads is worthless. Second, trust degrades fast when an agent fails in unexpected ways. The diff module exists because I wanted to be able to verify the agent's claims over time, not just accept them.
+        </p>
+    </div>
+</div>
+
+<a href="case-study-04.html" class="cs-next">
+    <div>
+        <p class="cs-next-label">Next Case Study — 04</p>
+        <p class="cs-next-title">A structured framework for evaluating LLM outputs <em>before they reach users</em></p>
+    </div>
+    <span class="cs-next-arrow">→</span>
+</a>
+
+</main>
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;">← Back to Portfolio</a></span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

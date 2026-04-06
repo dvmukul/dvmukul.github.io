@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Case Study 04: A structured LLM evaluation framework for assessing AI outputs before production deployment — by Mukul Dewangan.">
+    <title>Case Study 04 — LLM Evaluation — Mukul Dewangan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+
+<nav class="nav-light">
+    <a href="index.html" class="nav-back"><span class="arrow">←</span> All Work</a>
+    <span class="nav-meta">Case Study 04 of 04</span>
+</nav>
+
+<main>
+<div class="cs-hero">
+    <div>
+        <p class="cs-eyebrow">Case Study — 04</p>
+        <div class="cs-number">04</div>
+        <h1 class="cs-title">A structured framework for evaluating LLM outputs <em>before they reach users</em></h1>
+    </div>
+    <div>
+        <div class="cs-tags">
+            <span class="cs-tag">LLM Evaluation</span>
+            <span class="cs-tag">AI Governance</span>
+            <span class="cs-tag">Python</span>
+            <span class="cs-tag">Enterprise AI</span>
+            <span class="cs-tag">Open Source</span>
+        </div>
+        <p class="cs-summary">
+            Most teams evaluating LLM outputs rely on a combination of vibes and manual spot-checks. This framework replaces that with structured, repeatable evaluation across dimensions that actually matter in production: accuracy, consistency, tone, refusal behavior, and edge-case handling.
+        </p>
+    </div>
+</div>
+
+<div class="metrics-bar">
+    <div class="metric">
+        <div class="metric-number">5+</div>
+        <div class="metric-label">Eval Dimensions</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">100%</div>
+        <div class="metric-label">Repeatable</div>
+    </div>
+    <div class="metric">
+        <div class="metric-number">0</div>
+        <div class="metric-label">Surprises in Prod</div>
+    </div>
+</div>
+
+<div class="cs-body">
+    <div class="cs-section">
+        <p class="section-label">Background</p>
+        <h2>Why "it looked good in testing" keeps failing teams shipping AI</h2>
+        <p>
+            Every AI product failure I've seen or read about follows the same pattern: outputs that performed fine in manual testing, or in limited beta, behave differently at scale or in edge cases. The evaluation process that preceded launch was informal — typically some combination of internal demos, a handful of user test sessions, and individual developer judgment.
+        </p>
+        <p>
+            This isn't an AI problem specifically. It's an evaluation problem. The difference from traditional software is that LLM outputs are probabilistic — the same input can produce different outputs, outputs can be correct on average but wrong in specific important cases, and model behavior can shift between versions without obvious signals.
+        </p>
+
+        <div class="pull-quote">
+            <p>"A model that's right 95% of the time is either a strong product or a liability, depending entirely on what the 5% looks like."</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Framework Design</p>
+        <h2>What structured LLM evaluation actually requires</h2>
+        <p>
+            The LLM-Eval framework was designed around a core insight: evaluation needs to be multi-dimensional and task-specific. A single quality score is misleading — an output can be factually accurate but tonally wrong for enterprise use, or appropriately cautious but frustratingly unhelpful. You need to see all of these separately.
+        </p>
+
+        <table class="eval-table">
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>What it measures</th>
+                    <th>Why it matters</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Accuracy</td>
+                    <td>Factual correctness of claims against ground truth</td>
+                    <td>The baseline. Incorrect outputs erode trust permanently.</td>
+                </tr>
+                <tr>
+                    <td>Consistency</td>
+                    <td>Output stability across repeated identical prompts</td>
+                    <td>High variance is a sign the model is guessing, not reasoning.</td>
+                </tr>
+                <tr>
+                    <td>Tone alignment</td>
+                    <td>Appropriateness for the deployment context (enterprise vs. consumer)</td>
+                    <td>Tone mismatches create compliance and trust issues in enterprise deployments.</td>
+                </tr>
+                <tr>
+                    <td>Refusal behavior</td>
+                    <td>Whether the model declines appropriately on out-of-scope or harmful inputs</td>
+                    <td>Over-refusal kills utility; under-refusal creates liability.</td>
+                </tr>
+                <tr>
+                    <td>Edge-case handling</td>
+                    <td>Output quality on inputs outside the training distribution</td>
+                    <td>Edge cases are where models fail. Testing only typical inputs misses this entirely.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">How It Works</p>
+        <h2>Evaluation as a repeatable process, not a one-time check</h2>
+
+        <div class="approach-steps">
+            <div class="step">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                    <h3>Define an eval suite for your specific task</h3>
+                    <p>The framework is task-agnostic. You define a set of test cases — inputs, expected outputs or output properties, and the dimensions to evaluate against. The suite is stored as structured data so it can be versioned and rerun across model versions.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                    <h3>Run automated scoring across dimensions</h3>
+                    <p>For each test case, the framework generates outputs and scores them across the defined dimensions. Some dimensions (accuracy against ground truth) use direct comparison; others (tone, edge-case quality) use a secondary LLM as evaluator — a well-established technique for outputs where there's no single correct answer.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                    <h3>Generate a structured report with failure modes</h3>
+                    <p>The output is a structured report showing per-dimension scores, failure cases, and the specific inputs that produced poor outputs. This is designed to be actionable — you can take the failure cases directly into prompt refinement or fine-tuning.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                    <h3>Rerun on model updates to catch regressions</h3>
+                    <p>The most valuable use of the framework is regression testing — running the same eval suite after any prompt change or model update. This is how you catch capability regressions that are invisible in casual testing but show up at scale.</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://github.com/dvmukul/LLM-Eval" target="_blank" rel="noopener" class="github-link">
+            View source on GitHub →
+        </a>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Connection to Enterprise Work</p>
+        <h2>Why evaluation frameworks matter more in enterprise than anywhere else</h2>
+        <p>
+            In consumer AI products, a bad output is annoying. In enterprise AI products, a bad output can trigger a compliance review, undermine a sales relationship, or create security exposure. The tolerance for failure is much lower — which means the evaluation bar needs to be much higher.
+        </p>
+        <p>
+            My work on the conversational AI assistant at Vendasta (10M+ users, enterprise compliance requirements) made this concrete. We couldn't ship without a structured evaluation process — not because we were being conservative, but because informal evaluation genuinely couldn't surface the failure modes that mattered at enterprise scale.
+        </p>
+        <p>
+            The LLM-Eval framework is a public version of the thinking behind that internal process — structured, repeatable, and designed for the cases where "it seems fine" isn't good enough.
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">What I Learned</p>
+        <h2>The best time to build an eval framework is <em>before you need it.</em></h2>
+        <p>
+            Teams that build evaluation infrastructure after a production incident are playing catch-up. The failure modes they're trying to prevent have already happened once. Teams that build it before launch are making a claim: "we know what good looks like, and we can measure whether we're there."
+        </p>
+        <p>
+            That posture — defining quality criteria before deployment rather than inferring them from user complaints — is one of the clearest distinguishing factors between AI teams that ship durable products and teams that are perpetually firefighting.
+        </p>
+    </div>
+</div>
+
+<a href="case-study-01.html" class="cs-next">
+    <div>
+        <p class="cs-next-label">Back to the start — Case Study 01</p>
+        <p class="cs-next-title">Fixing fragmented data and saving <em>$9M in ARR</em></p>
+    </div>
+    <span class="cs-next-arrow">→</span>
+</a>
+
+</main>
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span><a href="index.html" style="color:inherit;text-decoration:none;">← Back to Portfolio</a></span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
