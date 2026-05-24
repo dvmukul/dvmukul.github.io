@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Weekly — a weekly briefing on what matters in AI, by Mukul Dewangan. Browse and download all past issues.">
+    <title>AI Weekly Reports — Mukul Dewangan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        body { background: var(--bg); color: var(--text); }
+
+        /* HERO */
+        .hero {
+            min-height: 52dvh;
+            padding: 10rem 3rem 5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: end;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-word {
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-size: clamp(10rem, 18vw, 18rem);
+            font-weight: 300;
+            font-style: italic;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(13,12,9,0.05);
+            user-select: none;
+            line-height: 1;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+        }
+        .hero-title em { font-style: italic; color: var(--text-muted); }
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            max-width: 40ch;
+            border-left: 2px solid var(--teal);
+            padding-left: 1.5rem;
+        }
+        .hero-stat-block {
+            margin-top: 3rem;
+        }
+        .hero-issue-count {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 7vw, 6rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1;
+            color: var(--text);
+        }
+        .hero-issue-label {
+            font-size: 0.70rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 0.35rem;
+        }
+
+        /* REPORTS SECTION */
+        .reports-section {
+            padding: 5rem 3rem 8rem;
+        }
+        .reports-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+        }
+        .reports-section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 300;
+        }
+        .reports-header-hint {
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            color: var(--text-light);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(243,237,226,0.28);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                min-height: auto;
+                padding: 7rem 2rem 4rem;
+            }
+            .hero-bg-word { display: none; }
+            .reports-section { padding: 4rem 2rem 6rem; }
+        }
+        @media (max-width: 640px) {
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .reports-section { padding: 3rem 1.5rem 5rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="nav-light">
+    <a href="index.html" class="nav-back"><span class="arrow">←</span> Portfolio</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html" class="active">AI Reports</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="reveal">
+        <p class="hero-eyebrow">Weekly Briefing</p>
+        <h1 class="hero-title">AI<br><em>Weekly.</em></h1>
+    </div>
+    <div class="reveal reveal-d1">
+        <div class="hero-bg-word" aria-hidden="true">Signal</div>
+        <p class="hero-desc">
+            A weekly briefing on what matters in AI — no hype, just signal. Each issue cuts through the noise to what practitioners and product people actually need to know.
+        </p>
+        <div class="hero-stat-block">
+            <div class="hero-issue-count" id="issue-count">—</div>
+            <p class="hero-issue-label">Issues Published</p>
+        </div>
+    </div>
+</div>
+
+<!-- REPORTS -->
+<section class="reports-section">
+    <div class="reports-header reveal">
+        <h2 class="reports-section-title">All Issues</h2>
+        <span class="reports-header-hint">Newest first</span>
+    </div>
+    <div class="reports-list" id="reports-list"></div>
+</section>
+
+</main>
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>AI Weekly Reports</span>
+</footer>
+
+<script src="main.js"></script>
+<script>
+(function () {
+    const listEl = document.getElementById('reports-list');
+    const countEl = document.getElementById('issue-count');
+
+    function formatDate(iso) {
+        const d = new Date(iso + 'T00:00:00');
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function renderEmpty(msg) {
+        listEl.innerHTML =
+            '<div class="reports-empty">' +
+                '<p class="section-label">No Issues Yet</p>' +
+                '<p>' + msg + '</p>' +
+            '</div>';
+    }
+
+    fetch('reports.json')
+        .then(function (r) {
+            if (!r.ok) throw new Error('fetch failed');
+            return r.json();
+        })
+        .then(function (reports) {
+            if (!Array.isArray(reports) || reports.length === 0) {
+                countEl.textContent = '0';
+                renderEmpty('The first issue is coming soon.');
+                return;
+            }
+            countEl.textContent = reports.length;
+            reports.forEach(function (report) {
+                var card = document.createElement('div');
+                card.className = 'report-card';
+                card.innerHTML =
+                    '<h3 class="report-title">' + report.title + '</h3>' +
+                    '<span class="report-date">' + formatDate(report.date) + '</span>' +
+                    '<p class="report-summary">' + report.summary + '</p>' +
+                    '<a href="reports/' + report.filename + '" download class="download-btn">Download PDF ↓</a>';
+                listEl.appendChild(card);
+            });
+        })
+        .catch(function () {
+            countEl.textContent = '—';
+            renderEmpty('Reports could not be loaded. Please try again later.');
+        });
+})();
+</script>
+
+</body>
+</html>
