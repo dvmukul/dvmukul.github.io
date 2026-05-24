@@ -261,3 +261,6 @@ nav.nav-dark {
         margin-top: 0.5rem;
     }
 }
+@media (prefers-reduced-motion: reduce) {
+    .download-btn { transition: none; }
+}
