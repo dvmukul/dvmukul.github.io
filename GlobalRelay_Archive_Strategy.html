@@ -455,7 +455,107 @@ footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
   </table>
 </div>
 
-<!-- SECTIONS 3–8 AND APPENDICES GO HERE (Tasks 3–6) -->
+<!-- SECTION 3: PRODUCT OFFERINGS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Offerings</div>
+  <h2>What Global Relay Archive Sells — And Who It Serves</h2>
+
+  <p>Archive's product surface is best understood as two interlocking layers: the compliance infrastructure (WORM storage, connectors, reconciliation) that underpins regulator trust, and the user-facing surface (search, supervision, eDiscovery) where competitive differentiation is won or lost on a daily basis.</p>
+
+  <h3>Customer Segments</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Segment</th><th>Description</th><th>Current Position</th><th>2028 Ambition</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Tier 1 Global Banks (G-SIBs)</strong></td><td>22 of top 25; petabytes; multi-decade relationships</td><td>Defended core</td><td>Expand share-of-wallet; lead with AI</td></tr>
+      <tr><td><strong>Mid-market regulated firms</strong></td><td>500–10,000 users; broker-dealers, asset managers, hedge funds</td><td>Strong but contested</td><td>Win net new vs. Smarsh</td></tr>
+      <tr><td><strong>RIAs and SMB broker-dealers</strong></td><td>&lt;500 users; volume layer</td><td>Under attack from Purview and Smarsh Professional</td><td>Defend with self-serve Essentials tier</td></tr>
+      <tr><td><strong>EU, UK, APAC regulated firms</strong></td><td>Net new TAM not currently reachable</td><td>Out of reach due to residency</td><td>Open via public-cloud regions</td></tr>
+      <tr><td><strong>Adjacent regulated verticals</strong></td><td>Energy, telco, government, healthcare</td><td>Opportunistic</td><td>Selective expansion via partner channel</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <strong>Where Archive Does Not Play</strong>
+    General-purpose enterprise archive for unregulated SMBs (Mimecast/Barracuda territory). Pure email archive in M365-only shops where Purview is adequate. General-purpose eDiscovery for non-regulated industries (Relativity territory).
+  </div>
+
+  <h3>The Three Proposed Tiers</h3>
+  <div class="card-grid three">
+    <div class="card"><h4>Archive Essentials</h4><p><strong>Target:</strong> RIAs and SMB broker-dealers (&lt;500 users). Email + Microsoft Teams + 10 core connectors. Standard retention and basic supervision. Transparent per-user pricing. 30-day free trial. Explicit anti-Purview positioning.</p></div>
+    <div class="card"><h4>Archive Professional</h4><p><strong>Target:</strong> Mid-market regulated firms. Full 60+ connectors. Archive Intelligence included (AI Search, Summarize, Classify, Explain). Multi-jurisdictional retention. Standard eDiscovery workspace. Dedicated customer success.</p></div>
+    <div class="card"><h4>Archive Enterprise</h4><p><strong>Target:</strong> Tier 1 and large regulated. Everything in Professional plus BYOK, dedicated private cloud or single-tenant public cloud, full Data-in-Place, FedRAMP-ready, BYOM, dedicated infrastructure SLA, AI Explain evidence packs, premium 24/7 support, named technical account team.</p></div>
+  </div>
+  <p class="footnote">A Discovery-as-a-Service layer is available across all tiers: a specialist eDiscovery team that handles complex searches and legal productions on request.</p>
+</div>
+
+<!-- SECTION 4: TECHNOLOGY DEEP DIVE -->
+<div class="section">
+  <div class="section-label">§ 04 — Technology Deep Dive</div>
+  <h2>Core Architecture: Archive Intelligence &amp; Hybrid Cloud</h2>
+
+  <p>Archive's technology is a two-layer story. The foundation layer — WORM-compliant storage, reconciliation completeness, cryptographic integrity validation, and connector capture infrastructure — is mature, defensible, and the reason Tier 1 banks trust it. The innovation layer — AI capabilities, hybrid cloud infrastructure, and user-facing search — is where the next decade of competitive position will be won or lost.</p>
+
+  <h3>Archive Intelligence — Four Capabilities</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Archive AI Search</h4><p>Natural-language search over the full archive. "Show me all communications between Custodian X and Y where they discussed Project Atlas during March 2025." Built on My Archive's LLM foundation. Boolean and advanced operators remain available as expert mode.</p></div>
+    <div class="card"><h4>Archive AI Summarize</h4><p>Conversation and thread summarization, custodian-level activity summaries, and timeline reconstruction. Removes the reviewer's need to read every message in a large thread. Critical for reducing reviewer hours per alert.</p></div>
+    <div class="card"><h4>Archive AI Classify</h4><p>Automated content classification, retention policy assignment, and risk tagging at ingestion time. Reduces noise in downstream Surveillance. Earlier classification means fewer false-positive alerts reaching reviewers.</p></div>
+    <div class="card"><h4>Archive AI Explain</h4><p>Every AI decision (search rank, summary, classification, alert routing) ships with an evidence pack: model version, inputs, reasoning trace, and citations to source records. The SR 11-7 / Model Risk Management story productized. This is the audit-grade output regulators require.</p></div>
+  </div>
+
+  <h3>Architecture Commitments</h3>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Model Flexibility</div>
+    <div class="tech-layer-content">
+      <strong>Private-cloud-hosted LLMs for sovereign customers; frontier models for non-sovereign</strong>
+      <p>Sovereign customers (Tier 1 banks on private cloud) run open-source LLMs (Llama-class, fine-tuned) entirely within their data plane. Non-sovereign customers on public cloud regions use frontier models (Claude, GPT-class). Customer chooses at contract time.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">BYOM</div>
+    <div class="tech-layer-content">
+      <strong>Bring Your Own Model — Tier 1 bank self-service</strong>
+      <p>Tier 1 banks can plug in their own internally-approved models for AI Search and Summarize on their archive. This satisfies Model Risk Management (SR 11-7) requirements and enables banks to use models they have already validated internally.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Protection</div>
+    <div class="tech-layer-content">
+      <strong>No model trains on customer data without explicit opt-in</strong>
+      <p>Customer communications never leave the customer's data plane for model training. This is a hard architectural guarantee, not a policy statement. Continuous evaluation uses held-out gold sets, not live customer data.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Eval Framework</div>
+    <div class="tech-layer-content">
+      <strong>Standing evaluation with quarterly accuracy reports</strong>
+      <p>Every model change runs against a held-out gold set before shipping. Quarterly accuracy reports shipped to customers under NDA. This is the continuous evaluation discipline required for SR 11-7 compliance and regulator trust.</p>
+    </div>
+  </div>
+
+  <h3>Hybrid Cloud Infrastructure — Build Sequence</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Quarter</th><th>Region</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2026 Q2</td><td>EU (Frankfurt, AWS) — pilot</td><td>Foundation customers only</td></tr>
+      <tr><td>2026 Q4</td><td>EU GA, UK GA</td><td>Full Archive Professional and Enterprise</td></tr>
+      <tr><td>2027 Q2</td><td>APAC (Singapore, Tokyo)</td><td>GA</td></tr>
+      <tr><td>2027 Q4</td><td>Sydney, Mumbai</td><td>GA</td></tr>
+      <tr><td>2028 H1</td><td>Additional US regions (FedRAMP-targeted)</td><td>GA</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <strong>The Infrastructure Ceiling</strong>
+    Archive's private cloud in Vancouver and US data centers is the moat for Tier 1 sovereigns but the ceiling for EU, UK, and APAC growth. DORA-driven EU deals are increasingly disqualifying Global Relay before evaluation begins. Until Frankfurt is live, every EMEA deal requires a workaround conversation that Smarsh and Proofpoint do not need to have.
+  </div>
+</div>
+
+<!-- SECTIONS 5–8 AND APPENDICES GO HERE (Tasks 4–6) -->
 
 </div><!-- /container -->
 
