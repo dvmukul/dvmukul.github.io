@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vena Solutions competitive intelligence — market analysis, product audit, PM critique, and mock FP&A product strategy for the leading Excel-native mid-market planning platform by Mukul Dewangan.">
+<title>Vena Solutions: The Excel Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · May 2026</div>
+  <h1>Vena Solutions:<br>The <em>Excel</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Vena Solutions — the leading Excel-native FP&A platform for the mid-market.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Toronto, Ontario, Canada</span></div>
+    <div>FOUNDED<span>2011</span></div>
+    <div>INVESTORS<span>Vista Equity Partners ($300M Series C)</span></div>
+    <div>STATUS<span>Centaur ($100M+ ARR)</span></div>
+    <div>COVERAGE<span>venasolutions.com</span></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$100M+</div><div class="stat-label">ARR (Centaur)</div></div>
+  <div class="stat-box"><div class="stat-num blue">$476M</div><div class="stat-label">Total Funding Raised</div></div>
+  <div class="stat-box"><div class="stat-num">2,000+</div><div class="stat-label">Global Customers</div></div>
+  <div class="stat-box"><div class="stat-num accent">~715</div><div class="stat-label">Employees (2026)</div></div>
+  <div class="stat-box"><div class="stat-num blue">$16.9B</div><div class="stat-label">FP&A Market by 2030</div></div>
+  <div class="stat-box"><div class="stat-num">$300M</div><div class="stat-label">2027 ARR Target</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Vena Solutions?</h2>
+
+  <p>Toronto-based FP&A software company founded in 2011. Vena's platform is Excel-native, built on a proprietary CubeFLEX OLAP engine that provides governance, workflow, and multidimensional financial data beneath a familiar Excel interface. The company crossed $100M ARR (Centaur status) in 2024, representing a milestone that validated its Excel-native bet for the mid-market. Total funding stands at $476M, including a $300M Series C from Vista Equity Partners in 2021 — one of Canada's largest-ever SaaS rounds at the time.</p>
+
+  <p>In March 2026, Vena acquired Acterys, a Power BI write-back and operational planning platform, launching a new "Orchestrated Planning" category vision. In May 2026, the company launched Financial Consolidation (GA), Planning Agent GA, and an MCP Server — the most product-intensive quarter in the company's history.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Vena's Excel-native bet has proven commercially viable — but the same moat that built $100M ARR is the ceiling that limits the upmarket move. Implementation debt, Pigment's modern UX, and Microsoft's own AI ambitions are the three forces that will define Vena's next chapter.
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>Founded &amp; HQ</h4>
+      <p><strong>Founded:</strong> 2011</p>
+      <p><strong>Headquarters:</strong> Toronto, Ontario, Canada</p>
+    </div>
+    <div class="card">
+      <h4>Scale</h4>
+      <p><strong>ARR:</strong> $100M+ (Centaur, 2024)</p>
+      <p><strong>Total Funding:</strong> $476M</p>
+    </div>
+    <div class="card">
+      <h4>Team &amp; Reach</h4>
+      <p><strong>Employees:</strong> ~715 (down from ~732 in 2023)</p>
+      <p><strong>Customers:</strong> 2,000+ globally</p>
+    </div>
+    <div class="card">
+      <h4>Investors &amp; M&amp;A</h4>
+      <p><strong>Key Investors:</strong> Vista Equity Partners, JMI Equity, Centana Growth</p>
+      <p><strong>Recent M&amp;A:</strong> Acquired Acterys, March 2026</p>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <strong>Watch</strong>
+    Declining headcount (732 → 715) despite accelerating product launches suggests Vena is betting on AI to extend engineering capacity. Prudent, but raises execution risk across simultaneous product lines.
+  </div>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2011</div>
+      <div class="tl-title">Founded in Toronto</div>
+      <div class="tl-desc">Excel-native FP&A platform from day one — a deliberate bet on reducing change management friction for finance teams.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2021</div>
+      <div class="tl-title">$300M Series C from Vista Equity Partners</div>
+      <div class="tl-desc">One of Canada's largest-ever SaaS rounds. Positions Vena for accelerated product expansion and go-to-market scale.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2023</div>
+      <div class="tl-title">Headcount peaks at ~732</div>
+      <div class="tl-desc">Product expansion across budgeting, close, and reporting. Company at its broadest organizational footprint.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2024</div>
+      <div class="tl-title">Crosses $100M ARR — Centaur status</div>
+      <div class="tl-desc">Named a Gartner Challenger in Financial Planning Software. Validates the Excel-native mid-market thesis at scale.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">Sept 2025</div>
+      <div class="tl-title">Planning Agent reaches GA</div>
+      <div class="tl-desc">First agentic AI in Vena's product line — moves from conversational Q&A to actions that update plan cells and generate forecasts.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">March 2026</div>
+      <div class="tl-title">Acquires Acterys; launches "Orchestrated Planning"</div>
+      <div class="tl-desc">Power BI write-back and operational planning capability enters the Vena stack. New category vision announced.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">May 2026</div>
+      <div class="tl-title">Financial Consolidation GA, MCP Server GA, Acterys unified data layer</div>
+      <div class="tl-desc">Most product-intensive quarter in company history. Simultaneous launches across consolidation, AI, and integration layers.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape &amp; Competitive Context</h2>
+
+  <div class="card-grid three">
+    <div class="card">
+      <h4>📈 FP&A/CPM Market</h4>
+      <p>$5–6B in 2024, projected $16.9B by 2030 at ~15–18% CAGR. Growth driven by the shift from spreadsheet-only planning, CFO mandate expansion, AI embedding in financial workflows, real-time scenario planning demand, and increasing regulatory requirements.</p>
+    </div>
+    <div class="card">
+      <h4>🎯 Mid-Market Sweet Spot</h4>
+      <p>Vena targets $100M–$2B revenue companies with 10–200 finance staff. Large enough to have outgrown spreadsheet-only planning, not large enough for Anaplan or OneStream complexity. The segment is underserved by both ends of the market.</p>
+    </div>
+    <div class="card">
+      <h4>🤖 AI-Native Race</h4>
+      <p>Every incumbent is embedding AI. Real differentiators: (a) AI grounded in company-specific data vs. generic LLMs; (b) agent (actions) vs. chatbot (answers); (c) natural language for non-finance users. Azure OpenAI is table stakes — the moat must live in the data layer.</p>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>AI-Native Planning</h4>
+      <p>Planning Agent and MCP Server reflect serious AI commitment. Risk: Azure OpenAI is available to every competitor — model access is not a moat.</p>
+    </div>
+    <div class="card">
+      <h4>Category Expansion Beyond Finance</h4>
+      <p>Cross-functional "connected planning" is now table stakes. The Acterys acquisition is Vena's answer to extending beyond the Finance org to Sales, HR, and Operations.</p>
+    </div>
+    <div class="card">
+      <h4>Microsoft Ecosystem Alignment</h4>
+      <p>MACC channel, Power BI, Teams, and Dynamics create a procurement flywheel. The headwind: Microsoft Copilot for Finance is a direct competitive threat from the same ecosystem.</p>
+    </div>
+    <div class="card">
+      <h4>Consolidation of Niche into Platforms</h4>
+      <p>The new Financial Consolidation module benefits Vena's portfolio breadth, but it disadvantages Vena relative to OneStream's decade-deep consolidation capabilities.</p>
+    </div>
+  </div>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Vendor</th><th>Gartner Position</th><th>Target Segment</th><th>Core Differentiator</th><th>Weakness vs. Vena</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Anaplan</strong></td><td>Leader</td><td>Enterprise</td><td>Hyper-modeling, connected planning</td><td>Complex, expensive, Salesforce uncertainty</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>OneStream</strong></td><td>Leader (Close &amp; Consolidation)</td><td>Enterprise / Upper Mid-Market</td><td>Unified CPM + consolidation</td><td>Less Excel-native, IT-dependent, premium pricing</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Workday Adaptive</strong></td><td>Leader</td><td>Mid-Market to Enterprise</td><td>Workday HR/ERP integration, cloud-native</td><td>No Excel dependency; requires workflow retraining</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Pigment</strong></td><td>Challenger / Niche</td><td>Mid-Market to Enterprise</td><td>Modern UX, fast time-to-value, visual modeling</td><td>No Excel native; less ERP depth</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Planful</strong></td><td>Niche Player</td><td>Mid-Market</td><td>Pre-built financial models, fast implementation</td><td>Less AI investment, less Microsoft alignment</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Datarails</strong></td><td>Niche</td><td>SMB to Low Mid-Market</td><td>Pure Excel add-in, lightest implementation</td><td>No OLAP engine, limited governance</td><td><span class="tag grey">LOW</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Critical Observation</strong>
+    Pigment is the most dangerous near-term competitor. Pigment wins the modern, design-conscious CFO — the very buyer Vena needs to acquire as it moves upmarket. Vena's Excel UI is functional but not delightful; Pigment's interface is. If Vena does not invest in UI modernization, it risks ceding the "aspirational" buyer to Pigment.
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>Core Platform &amp; Technology Stack</h2>
+
+  <p>Vena's platform is built around "Complete Planning" — budgeting, forecasting, scenario planning, reporting, financial close, and (now) consolidation. The defining architectural choice is Excel-native: users interact through Excel while CubeFLEX provides governance, workflow, and multidimensional data beneath the surface. This architecture is both Vena's primary moat and its ceiling for UX ambition.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">CubeFLEX</div>
+    <div class="tech-layer-content">
+      <strong>CubeFLEX — Proprietary OLAP Engine</strong>
+      <p>In-memory multidimensional database purpose-built for financial planning. Provides multidimensional storage optimized for financial dimensions (time, entity, account, department, scenario), sparse data efficiency, and real-time recalculation for what-if scenario toggling. Complemented by relational databases (Amazon Redshift, Azure SQL Server, MongoDB) for large transactional volumes before aggregation into the OLAP layer.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Azure Stack</div>
+    <div class="tech-layer-content">
+      <strong>Microsoft Azure Infrastructure</strong>
+      <p>Azure OpenAI powers Copilot and Planning Agent. Power BI native connector enables embedded dashboards without a separate BI tool purchase. Microsoft Teams surfaces Copilot for conversational access. Excel Add-in is the primary UI with two-way sync to CubeFLEX. Azure Marketplace / MACC allows customers to apply Azure Consumption Commitments to Vena licenses — a procurement flywheel advantage.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Acterys</div>
+    <div class="tech-layer-content">
+      <strong>Acterys (Acquired March 2026)</strong>
+      <p>Enables Power BI write-back — non-finance users can input operational data (sales forecasts, headcount plans, ops inputs) directly in Power BI without touching Excel. Integrates with Microsoft Fabric. A bidirectional data layer launched May 2026 enables real-time flow between Acterys operational inputs and Vena financial models, forming the technical foundation of the "Orchestrated Planning" vision.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">AI Layer</div>
+    <div class="tech-layer-content">
+      <strong>AI &amp; Agent Layer</strong>
+      <p>Vena Copilot provides conversational AI, natural language Q&A, and ad-hoc report generation via Azure OpenAI. Planning Agent (GA Sept 2025) is agentic AI that takes actions — generates forecasts, updates plan cells, and applies scenario logic without manual intervention. MCP Server (GA May 2026) is an open Model Context Protocol server that exposes governed Vena financial data to external AI tools including Claude, ChatGPT, and Microsoft Copilot.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Integrations</div>
+    <div class="tech-layer-content">
+      <strong>Integration Layer</strong>
+      <p>ERP and upstream data via REST APIs, native connectors, and iPaaS platforms (MuleSoft, Dell Boomi, Snaplogic). Bidirectional: actuals pull into CubeFLEX from ERP systems, and planning outputs push back to operational systems for downstream consumption. The bidirectionality is a competitive advantage over import-only tools that require manual data reconciliation.</p>
+    </div>
+  </div>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Module</th><th>Capability</th><th>Competitive Position</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Budgeting &amp; Forecasting</strong></td><td>Multi-scenario builds, rolling forecasts, driver-based models — in Excel</td><td>Strong — core competency; 60% faster budgeting claimed with Planning Agent</td></tr>
+      <tr><td><strong>Financial Close</strong></td><td>Month-end close automation, task management, journal entries, account reconciliation</td><td>Adequate — account reconciliation lags BlackLine, Trintech</td></tr>
+      <tr><td><strong>Financial Consolidation</strong></td><td>Multi-entity consolidation, intercompany eliminations, audit trail (launched May 2026)</td><td>Nascent — Gartner Niche Player in this category; watch vs. OneStream</td></tr>
+      <tr><td><strong>Reporting &amp; Analytics</strong></td><td>Embedded Power BI dashboards, ad-hoc Excel reports, KPI tracking</td><td>Good — Power BI native gives strong BI without a separate tool</td></tr>
+      <tr><td><strong>Workforce Planning</strong></td><td>Headcount modeling, compensation planning, scenario analysis</td><td>Adequate — not a differentiator; Workday Adaptive stronger here</td></tr>
+      <tr><td><strong>Operational Planning (Acterys)</strong></td><td>Power BI write-back, sales/ops planning, cross-functional data inputs</td><td>Differentiator — unique in the Vena stack; integration maturity TBD</td></tr>
+      <tr><td><strong>AI / Copilot</strong></td><td>Natural language Q&A, Planning Agent actions, MCP Server for external AI tools</td><td>Competitive — but Azure OpenAI is table stakes across the market</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 4: CUSTOMER SEGMENTS & PERFORMANCE -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments &amp; Performance</div>
+  <h2>Who Buys Vena, Why They Stay, Why They Complain</h2>
+
+  <p>Mid-market enterprises in the $100M–$2B revenue range, with finance teams of 10–200 people. Key verticals: Financial Services, Healthcare, Manufacturing, Technology, and Real Estate. The platform is largely horizontal — Vena does not ship pre-configured vertical data models, which is a strategic gap as competitors begin to verticalize their offerings.</p>
+
+  <div class="callout blue">
+    <strong>Core Problem Solved</strong>
+    (1) Eliminates "spreadsheet hell" — disconnected Excel files, version control issues, formula errors, and manual consolidation across finance teams. (2) Gives CFOs a single source of truth with governance, workflow approvals, and audit trails. (3) Enables Finance to produce budget cycles faster without adding headcount. (4) Acterys extends this to operational departments — Sales, HR, and Ops feed data into financial models without touching the FP&A team's Excel environment.
+  </div>
+
+  <div class="card-grid">
+    <div class="callout green">
+      <strong>What Customers Love</strong>
+      <ul style="list-style:none; margin-top:8px;">
+        <li style="padding:3px 0; font-size:13px;">→ Excel familiarity eliminates re-training — no change management overhead</li>
+        <li style="padding:3px 0; font-size:13px;">→ Budgeting and forecasting depth: multi-scenario, driver-based, automated consolidation</li>
+        <li style="padding:3px 0; font-size:13px;">→ Customer support quality consistently praised during implementation</li>
+        <li style="padding:3px 0; font-size:13px;">→ Power BI integration without a separate tool purchase</li>
+        <li style="padding:3px 0; font-size:13px;">→ Workflow automation: month-end close, approval routing, task tracking</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <strong>Persistent Complaints</strong>
+      <ul style="list-style:none; margin-top:8px;">
+        <li style="padding:3px 0; font-size:13px;">→ Implementation is #1 complaint: marketed 8–10 weeks; reality is 4–8 months</li>
+        <li style="padding:3px 0; font-size:13px;">→ Performance degrades on large datasets — CubeFLEX limitations at scale</li>
+        <li style="padding:3px 0; font-size:13px;">→ Report building requires expertise; non-technical users struggle</li>
+        <li style="padding:3px 0; font-size:13px;">→ Account reconciliation underpowered vs. BlackLine, Trintech</li>
+        <li style="padding:3px 0; font-size:13px;">→ ERP synchronization failures require manual intervention</li>
+        <li style="padding:3px 0; font-size:13px;">→ Multi-year contract pressure before customers fully evaluate fit</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Data Point</strong>
+    Reddit analysis shows Vena has nearly twice as many negative comments as positive ones — a striking contrast to its 4.5/5 G2 rating (371 reviews). G2 skews toward people who successfully implemented; Reddit captures frustrated mid-implementation users. The gap is real and represents an important signal about implementation experience that aggregate star ratings obscure.
+  </div>
+
+  <p>Vena crossed $100M ARR in 2024, up from approximately $60M in 2020 — roughly 67% growth over four years. Healthy for a mid-market SaaS company, but not hypergrowth. ARR/capital ratio of approximately 0.21x sits below top-quartile SaaS benchmarks (0.4–0.7x), consistent with Vista Equity's operating model of margin improvement over growth-at-all-costs capital deployment.</p>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Working, What's at Risk</h2>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">The Excel-Native Moat Is Real and Underrated</div>
+    <div class="critique-body">Building on top of Excel rather than replacing it is the right long-term bet for the mid-market. Every competitor that asks finance teams to abandon Excel faces a change management tax Vena avoids. This is a genuine moat, not a legacy constraint. The CFO who has 15 analysts who live in Excel will choose Vena over a beautiful-but-foreign interface every time — as long as Vena keeps the governance and workflow tight.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Microsoft Ecosystem Alignment Is a Strategic Multiplier</div>
+    <div class="critique-body">MACC channel, native Power BI embedding, Teams Copilot surface, and Dynamics 365 connector create a procurement and adoption flywheel that Salesforce-owned Anaplan cannot replicate. As enterprises centralize on Microsoft infrastructure, Vena becomes the obvious FP&A layer for the Microsoft-first CFO. This alignment compounds over time — every new Microsoft enterprise customer is a potential Vena motion.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Acterys Acquisition Is Strategically Sound</div>
+    <div class="critique-body">Bringing operational planning (Power BI write-back for Sales, HR, and Ops) into the Vena orbit is the right move. Acterys gives Vena a non-Excel surface for operational users who don't live in Finance, expanding seat count per account and making the platform stickier. The strategic logic is correct: Finance needs operational inputs, and Acterys removes the data collection bottleneck that makes every budget cycle a manual war.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">MCP Server Is Architecturally Forward-Looking</div>
+    <div class="critique-body">Opening Vena's governed data to external AI tools via Model Context Protocol positions Vena as the "finance data brain" regardless of which AI assistant the organization standardizes on. A CFO using Claude or ChatGPT can query Vena's financial data directly. This is a smart hedge against AI commoditization — Vena becomes infrastructure rather than a feature.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Risk</div>
+    <div class="critique-title">Implementation Is a Product Failure, Not a Services Failure</div>
+    <div class="critique-body">Vena treats 4–6 month implementations as a customer success challenge. It is not. The product lacks: vertical-specific data model templates, guided onboarding with self-service configuration, and automated data migration tooling. Competitors are building accelerators; Vena ships a blank canvas. Implementation length is Vena's single biggest churn driver and sales objection — and it is fundamentally a product problem that can only be solved with product investment.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Risk</div>
+    <div class="critique-title">Excel as UX Is a Ceiling, Not Just a Floor</div>
+    <div class="critique-body">The same Excel familiarity that reduces change management prevents Vena from delivering a delightful experience. Pigment is winning the modern CFO because Pigment's interface communicates, not just calculates. At the executive and board level — where summary dashboards and scenario visualizations matter most — this gap is visible in every demo comparison. Vena's strength at the analyst level is a weakness at the CFO level.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Gap</div>
+    <div class="critique-title">"Orchestrated Planning" Is a Category Claim Without a Product Proof Point Yet</div>
+    <div class="critique-body">Vena acquired Acterys in March 2026 and announced a unified data layer in May 2026 — two months of integration work. Marketing a new category while running ahead of product reality. Customers who buy the vision and find two loosely connected products will churn. Category vision without integration depth is a credibility risk, not a positioning win.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Gap</div>
+    <div class="critique-title">AI Is Table Stakes, Not Differentiation</div>
+    <div class="critique-body">Vena Copilot and Planning Agent are built on Azure OpenAI — the same model every competitor uses. The real AI moat is in data quality, grounding, and proprietary training on financial planning behavior. Without depth in the CubeFLEX data model reasoning layer, Vena's AI is a checkbox feature. Every competitor will have the same bullet point on their website within 12 months.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Gap</div>
+    <div class="critique-title">The Product Is Not Verticalized</div>
+    <div class="critique-body">A SaaS CFO wants ARR waterfall models, NRR calculations, and cohort churn forecasting out of the box. A Healthcare CFO wants pre-built department budget structures aligned to cost centers. Vena ships a blank canvas for every new customer. Planful and emerging upstarts are beginning to ship pre-built vertical models. This is a near-term vulnerability as the market matures past "does it work" to "how fast can we go live."</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Risk</div>
+    <div class="critique-title">Microsoft Is Both Partner and Existential Threat</div>
+    <div class="critique-body">Microsoft Copilot for Finance — Excel-native, AI-powered, deeply integrated into Microsoft 365 — is directionally the same product as Vena's core offering. Microsoft has distribution, pricing leverage (bundled into E5/E3 suites), and zero marginal cost to bundle. Vena must build a durable differentiation layer — deep financial workflow, multi-entity consolidation, governed planning — before Microsoft decides to compete directly at scale. The partnership window is finite.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Excel-native moat — no change management tax for finance teams</li>
+        <li>Microsoft ecosystem depth (MACC, Power BI, Teams, Dynamics, Azure)</li>
+        <li>CubeFLEX OLAP engine — purpose-built for financial dimensions at scale</li>
+        <li>Centaur status ($100M+ ARR); 2,000+ customers; validated product-market fit</li>
+        <li>Planning Agent + MCP Server — architecturally forward-looking AI layer</li>
+        <li>Vista Equity backing — operational expertise and go-to-market scale</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>Implementation timelines routinely 4–6 months vs. marketed 8–10 weeks</li>
+        <li>Excel UX functional but not delightful — loses modern CFO to Pigment</li>
+        <li>No vertical templates — blank canvas for every new customer</li>
+        <li>Acterys integration nascent (2 months post-close at time of analysis)</li>
+        <li>AI layer undifferentiated — Azure OpenAI is available to every competitor</li>
+        <li>Declining headcount vs. accelerating product scope creates execution risk</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Vena Accelerator: vertical templates reducing time-to-value to under 4 weeks</li>
+        <li>Vena Intelligence: proprietary benchmarking AI from 2,000+ customer dataset</li>
+        <li>Dynamics 365 packaged integration as enterprise wedge</li>
+        <li>Financial Consolidation as upmarket entry point ($500M–$2B companies)</li>
+        <li>Microsoft Fabric First-Party-Adjacent positioning for data lakehouse customers</li>
+        <li>Acterys App Marketplace enabling third-party operational planning use cases</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Microsoft Copilot for Finance builds FP&A intelligence natively into Excel</li>
+        <li>Pigment wins the modern CFO segment before Vena invests in UX modernization</li>
+        <li>Acterys integration fails to deliver Orchestrated Planning promise — credibility loss</li>
+        <li>AI commoditization renders Copilot a checkbox feature with no moat</li>
+        <li>OneStream defends consolidation segment; Financial Consolidation fails to gain traction</li>
+        <li>Execution risk from declining headcount against simultaneous product lines</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: MOCK PRODUCT STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy FY2027: From $100M to $300M ARR</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM at Vena Solutions. It is directionally grounded in real company data but represents analytical recommendations, not Vena's actual internal roadmap.
+  </div>
+
+  <!-- STRAT 01 -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Context &amp; North Star</h3></div>
+    <p>Vena must grow from $100M to $300M ARR without sacrificing product quality or customer retention. Three structural problems stand between the current state and the target: implementation timelines that erode early trust, a product that lacks verticalization forcing every customer to build from a blank canvas, and Microsoft's dual role as strategic partner and potential existential competitor. All three are solvable — but none will resolve themselves without deliberate investment.</p>
+    <p>North Star: make Vena the operating system for the Office of the CFO in the Microsoft ecosystem — the system that every FP&A team, finance business partner, and operational leader interacts with daily, from initial plan submission to board-level reporting. Not the tool Finance uses in isolation, but the connective tissue between Finance and the rest of the business.</p>
+  </div>
+
+  <!-- STRAT 02 -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Five Strategic Pillars (FY2027)</h3></div>
+
+    <h4>Pillar 1: Win on Time-to-Value — Fix Implementation</h4>
+    <p><strong>Problem:</strong> Implementation timelines of 4–6 months are Vena's #1 churn driver and sales objection. Competitors market faster time-to-value and are beginning to deliver it with pre-built templates and guided onboarding flows.</p>
+    <p><strong>Strategy:</strong> Launch the "Vena Accelerator" library — 6 vertical template packs (SaaS, Healthcare, Financial Services, Manufacturing, Real Estate, Not-for-Profit), a guided Setup Wizard for self-service onboarding, and a CS Health Score dashboard to flag at-risk implementations before they become churn events.</p>
+    <ul style="font-size:13px; color:var(--text-muted); padding-left:20px; margin:12px 0;">
+      <li>Build 6 vertical data model template packs covering the most common planning structures for each segment</li>
+      <li>Launch guided Setup Wizard reducing self-service configuration time by 60%</li>
+      <li>CS Health Score dashboard — flag at-risk implementations before week 8 based on data completeness and user engagement signals</li>
+    </ul>
+    <div class="callout blue">
+      <strong>Success Metrics</strong>
+      Target: reduce median implementation from 16 weeks to 4 weeks. NPS improvement from 34 to 50+.
+    </div>
+
+    <h4>Pillar 2: Deepen the Orchestrated Planning Integration</h4>
+    <p><strong>Problem:</strong> Acterys was acquired 2 months ago. The "Orchestrated Planning" category vision requires a genuinely unified Vena ↔ Acterys data architecture — not two loosely connected products with a marketing layer.</p>
+    <p><strong>Strategy:</strong> Dedicate 40% of engineering capacity to building true bidirectional Vena ↔ Acterys data architecture. Launch "Live Bridge" real-time connectors, 5 Orchestrated Planning Templates, and an Acterys App Marketplace to enable third-party operational planning use cases.</p>
+    <ul style="font-size:13px; color:var(--text-muted); padding-left:20px; margin:12px 0;">
+      <li>"Live Bridge" — real-time bidirectional data connectors for Vena financial models ↔ Acterys operational inputs</li>
+      <li>5 Orchestrated Planning Templates: Sales Capacity → Revenue Forecast, Headcount → OpEx, Project Spend → Budget, etc.</li>
+      <li>Acterys App Marketplace for third-party operational planning use cases extending beyond Finance</li>
+    </ul>
+    <div class="callout blue">
+      <strong>Success Metrics</strong>
+      Target: "Orchestrated Planning" recognized in Gartner by H2 FY2027. Acterys NPS 40+.
+    </div>
+
+    <h4>Pillar 3: Build a Durable AI Moat</h4>
+    <p><strong>Problem:</strong> Azure OpenAI is table stakes. Every competitor has Copilot. Vena's AI differentiation must come from data depth and proprietary grounding — not from model access that anyone can license.</p>
+    <p><strong>Strategy:</strong> Shift from model-level features to data-grounding. Launch "Vena Intelligence" — a benchmarking AI trained on anonymized data from 2,000+ customers. Build Multi-Step Reasoning for Planning Agent. Add MCP Server permission scoping to ensure governed data exposure.</p>
+    <ul style="font-size:13px; color:var(--text-muted); padding-left:20px; margin:12px 0;">
+      <li>"Vena Intelligence" — benchmarking AI showing how a company's plan compares to anonymized peers by industry and revenue band</li>
+      <li>Multi-Step Reasoning for Planning Agent — chains of planning logic, not single-step outputs</li>
+      <li>MCP Server dimension/entity/scenario-level permission scoping for governed external AI access</li>
+    </ul>
+    <div class="callout blue">
+      <strong>Success Metrics</strong>
+      Target: Vena Intelligence cited in 20%+ of sales conversations as a differentiator. Planning Agent actions per session 2x by H2 FY2027.
+    </div>
+
+    <h4>Pillar 4: Protect and Extend the Microsoft Moat</h4>
+    <p><strong>Problem:</strong> Microsoft is Vena's biggest channel partner and its most credible competitive threat. The relationship must be managed actively — waiting for Microsoft to define the terms is not a strategy.</p>
+    <p><strong>Strategy:</strong> Achieve Microsoft IP Co-Sell Eligible status to integrate into SMC and enterprise sales motions. Position Vena as "Microsoft Fabric First-Party-Adjacent" — the planning layer for organizations standardizing on Microsoft Fabric. Launch "Vena for Dynamics 365" as a packaged zero-ETL integration.</p>
+    <ul style="font-size:13px; color:var(--text-muted); padding-left:20px; margin:12px 0;">
+      <li>Achieve Microsoft IP Co-Sell Eligible status — integrate into SMC and enterprise sales motions</li>
+      <li>"Microsoft Fabric First-Party-Adjacent" positioning — Vena as the planning layer for organizations on Microsoft Fabric</li>
+      <li>"Vena for Dynamics 365" packaged integration — zero-ETL actuals sync for the Microsoft ERP customer base</li>
+    </ul>
+    <div class="callout blue">
+      <strong>Success Metrics</strong>
+      Target: 30% of new ACV influenced by Microsoft co-sell by H2 FY2027. Fabric positioning cited in 10+ analyst reports.
+    </div>
+
+    <h4>Pillar 5: Launch Financial Consolidation as Enterprise Wedge</h4>
+    <p><strong>Problem:</strong> Vena's new consolidation module targets $500M–$2B companies — a segment currently owned by OneStream. Early positioning must be aggressive on price and migration support to win logos before OneStream entrenches further.</p>
+    <p><strong>Strategy:</strong> Price 25–35% below OneStream to acquire $500M–$2B logos. Launch a "Consolidation Starter Pack" with 5 pre-configured structures. Create a "Consolidation Migration Program" dedicated to Oracle FCCS and Cognos Controller customers.</p>
+    <ul style="font-size:13px; color:var(--text-muted); padding-left:20px; margin:12px 0;">
+      <li>Price Financial Consolidation at 25–35% below OneStream to acquire $500M–$2B logos in the first 12 months</li>
+      <li>"Consolidation Starter Pack" — 5 pre-configured consolidation structures (holding company, JV, minority interest, foreign subsidiary, intracompany)</li>
+      <li>"Consolidation Migration Program" — dedicated migration support and tooling for Oracle FCCS and Cognos Controller customers</li>
+    </ul>
+    <div class="callout blue">
+      <strong>Success Metrics</strong>
+      Target: 25 consolidation logos by end of FY2027. Average ACV 35% higher than Vena's current mid-market average.
+    </div>
+  </div>
+
+  <!-- STRAT 03 -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Resource Allocation</h3></div>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Strategic Pillar</th><th>Engineering Capacity</th><th>Priority</th><th>Time Horizon</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fix Implementation (Accelerator + Setup Wizard)</td><td>20%</td><td><span class="tag red">P0</span></td><td>H1 FY2027</td></tr>
+        <tr><td>Orchestrated Planning Integration (Acterys)</td><td>40%</td><td><span class="tag red">P0</span></td><td>Full Year</td></tr>
+        <tr><td>AI Moat (Benchmarking + Planning Agent depth)</td><td>20%</td><td><span class="tag gold">P1</span></td><td>H2 FY2027</td></tr>
+        <tr><td>Microsoft Moat (Fabric, Dynamics, Co-Sell)</td><td>10%</td><td><span class="tag gold">P1</span></td><td>H2 FY2027</td></tr>
+        <tr><td>Financial Consolidation Enterprise Wedge</td><td>10%</td><td><span class="tag blue">P2</span></td><td>H2 FY2027</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- STRAT 04 -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>Risks &amp; Mitigations</h3></div>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Microsoft launches competitive FP&A natively in Excel/Copilot</td><td><span class="tag gold">Medium</span></td><td><span class="tag red">Very High</span></td><td>Deepen co-sell relationship; position as Microsoft's preferred ISV for financial planning depth</td></tr>
+        <tr><td>Acterys integration delays erode "Orchestrated Planning" credibility</td><td><span class="tag red">High</span></td><td><span class="tag red">High</span></td><td>40% engineering investment; quarterly milestone reviews with external analyst communication</td></tr>
+        <tr><td>Pigment wins modern CFO segment before Vena improves UX</td><td><span class="tag gold">Medium-High</span></td><td><span class="tag red">High</span></td><td>Invest in web-based dashboard layer; prioritize executive reporting surface independent of Excel</td></tr>
+        <tr><td>Financial Consolidation fails to gain traction against OneStream</td><td><span class="tag gold">Medium</span></td><td><span class="tag gold">Medium</span></td><td>Price aggressively; lead with Microsoft ecosystem fit rather than feature parity</td></tr>
+        <tr><td>AI commoditization renders Copilot a checkbox</td><td><span class="tag red">High</span></td><td><span class="tag gold">Medium</span></td><td>Build proprietary benchmarking data moat; invest in multi-step agent reasoning depth</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 8: VERDICT -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — Verdict</div>
+  <h2>The Verdict</h2>
+
+  <p>Vena Solutions has built something rare: a defensible mid-market SaaS business with a genuine moat. The Excel-native bet was the right call — not because Excel is the future, but because it's the present reality for every finance team that Vena serves. The company correctly read that reducing change management friction was worth more than technical elegance. Two thousand customers and $100M ARR are not accidents — they are validation.</p>
+
+  <p>The risk profile heading into FY2027 is real but navigable. The three structural challenges — implementation timelines, UX ceiling, and Microsoft as both partner and threat — are all known quantities with tractable solutions. The question is execution velocity: can Vena close each of these gaps before they become the reason deals are lost? The declining headcount against an expanding product scope makes this a genuine execution risk, not just a strategic planning exercise.</p>
+
+  <p>The Acterys acquisition and MCP Server launch are both architecturally forward-looking moves that give Vena positioning the market doesn't fully appreciate yet. If the Orchestrated Planning integration delivers and Vena Intelligence creates a proprietary data moat, the $300M ARR target is achievable. The thesis is sound. The execution window is 18 months.</p>
+
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Vena has the right strategy — Excel-native, Microsoft-first, connected planning across Finance and Operations. The company's ability to close the gap between its category vision and product reality over the next 18 months will determine whether it reaches $300M ARR as an independent leader or becomes an acquisition target for a larger enterprise software platform.
+  </div>
+
+  <p class="footnote" style="margin-top:24px;">Sources: G2 (4.5/5 stars, 371 reviews), Gartner Peer Insights, Capterra, Reddit, BPM Partners, Nucleus Research, BARC, Vena press releases. Analysis as of May 2026. Financial metrics are estimates based on publicly available sources.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
