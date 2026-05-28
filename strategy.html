@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Product strategy analyses by Mukul Dewangan — deep competitive intelligence, PM critique, and mock strategy documents for AI and travel tech companies.">
+    <title>Product Strategy Analyses — Mukul Dewangan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+
+    <style>
+        body { background: var(--bg); color: var(--text); }
+
+        /* HERO */
+        .hero {
+            min-height: 60dvh;
+            padding: 10rem 3rem 5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: end;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-word {
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--font-display);
+            font-size: clamp(7rem, 14vw, 14rem);
+            font-weight: 300;
+            font-style: italic;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(13,12,9,0.05);
+            user-select: none;
+            line-height: 1;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .hero-eyebrow {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.0;
+            letter-spacing: -0.02em;
+        }
+        .hero-title em { font-style: italic; color: var(--text-muted); }
+        .hero-desc {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.75;
+            max-width: 40ch;
+            border-left: 2px solid var(--teal);
+            padding-left: 1.5rem;
+        }
+        .hero-stat-block { margin-top: 3rem; }
+        .hero-count {
+            font-family: var(--font-display);
+            font-size: clamp(4rem, 7vw, 6rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1;
+            color: var(--text);
+        }
+        .hero-count-label {
+            font-size: 0.70rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-top: 0.35rem;
+        }
+
+        /* ANALYSES LIST */
+        .analyses-section { padding: 0 3rem; }
+        .analyses-list { display: flex; flex-direction: column; }
+
+        .analysis-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .analysis-row:first-child { border-top: 1px solid var(--border); }
+        .analysis-row:hover { background: rgba(13,12,9,0.015); }
+        .analysis-row:hover .analysis-arrow { transform: translateX(5px); }
+
+        .analysis-left {}
+        .analysis-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.85rem;
+        }
+        .analysis-tag {
+            font-size: 0.62rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--teal);
+            font-weight: 500;
+        }
+        .analysis-tag + .analysis-tag::before {
+            content: '·';
+            margin-right: 0.5rem;
+            color: var(--text-light);
+        }
+        .analysis-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.15;
+            margin-bottom: 0.85rem;
+        }
+        .analysis-title em { font-style: italic; color: var(--text-muted); }
+        .analysis-thesis {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            max-width: 56ch;
+            font-style: italic;
+            margin-bottom: 1.25rem;
+        }
+        .analysis-read {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--teal);
+            transition: gap 0.2s;
+        }
+        .analysis-row:hover .analysis-read { gap: 1rem; }
+
+        .analysis-right {
+            text-align: right;
+            padding-top: 0.25rem;
+            min-width: 120px;
+        }
+        .analysis-date {
+            font-size: 0.70rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+        .analysis-meta {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .analysis-arrow {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            transition: transform 0.2s;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(243,237,226,0.28);
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 6rem;
+        }
+        footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; gap: 3rem; padding: 8rem 2rem 4rem; }
+            .hero-bg-word { display: none; }
+            .analyses-section { padding: 0 2rem; }
+        }
+        @media (max-width: 640px) {
+            .hero { padding: 7rem 1.5rem 3rem; }
+            .analysis-row { grid-template-columns: 1fr; }
+            .analysis-right { text-align: left; }
+            .analyses-section { padding: 0 1.5rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="index.html" class="nav-logo">Mukul Dewangan</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-left reveal">
+        <p class="hero-eyebrow">Product Strategy</p>
+        <h1 class="hero-title">Strategy <em>Analyses.</em></h1>
+    </div>
+    <div class="hero-right reveal reveal-d1">
+        <p class="hero-desc">
+            Long-form competitive intelligence and product strategy documents. Each analysis covers market landscape, product critique, technology architecture, and a mock strategy recommendation from a Senior PM perspective.
+        </p>
+        <div class="hero-stat-block">
+            <div class="hero-count">1</div>
+            <p class="hero-count-label">Analysis Published</p>
+        </div>
+    </div>
+    <div class="hero-bg-word" aria-hidden="true">Analysis</div>
+</section>
+
+<!-- ANALYSES LIST -->
+<div class="analyses-section">
+    <div class="analyses-list">
+
+        <a href="TravelAI_Analysis.html" class="analysis-row reveal">
+            <div class="analysis-left">
+                <div class="analysis-tags">
+                    <span class="analysis-tag">Travel</span>
+                    <span class="analysis-tag">AI</span>
+                    <span class="analysis-tag">Product Strategy</span>
+                </div>
+                <h2 class="analysis-title">TravelAI: The <em>Agentic</em> Bet</h2>
+                <p class="analysis-thesis">Profitable, fast-growing, and sitting on an underutilized data asset. The question is whether its agentic vision ships before Google's does.</p>
+                <span class="analysis-read">Read Analysis <span class="analysis-arrow">→</span></span>
+            </div>
+            <div class="analysis-right">
+                <p class="analysis-date">May 2026</p>
+                <p class="analysis-meta">
+                    TravelAI Solutions Inc.<br>
+                    Vancouver, BC<br>
+                    UpNext Group
+                </p>
+            </div>
+        </a>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product & AI Leadership</span>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
