@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Clio competitive intelligence — market analysis, product audit, technology deep-dive, PM critique, and mock product strategy for the $5B legal platform becoming the operating system for law, by Mukul Dewangan.">
+<title>Clio: The Legal OS Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* Clio-specific semantic color aliases */
+:root {
+  --positive: var(--teal-light);
+  --negative: var(--accent);
+  --warning: var(--gold);
+  --accent-lt: rgba(28,94,94,0.10);
+  --accent-2-lt: rgba(192,90,26,0.06);
+  --surface-2: var(--bg-alt);
+}
+
+/* Layout helpers */
+.wrap { max-width: 960px; margin: 0 auto; }
+.wrap--narrow { max-width: 720px; margin: 0 auto; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+.two-col--asym { grid-template-columns: 3fr 2fr; }
+@media (max-width: 780px) { .two-col, .two-col--asym { grid-template-columns: 1fr; } }
+
+/* Product grid */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+
+/* Card variants */
+.card--accent { background: var(--accent-lt); border-color: rgba(28,94,94,0.2); }
+.card--dark { background: var(--bg-dark); border-color: var(--bg-dark); color: #e8f4f4; }
+.card--dark h3, .card--dark h4 { color: #e8f4f4; }
+.card--dark p, .card--dark li { color: rgba(232,244,244,0.8); }
+.card--warm { background: var(--accent-2-lt); border-color: rgba(192,90,26,0.2); }
+
+/* Tag variants */
+.card-tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: var(--r-sm); margin-bottom: 10px;
+}
+.tag--teal { background: var(--accent-lt); color: var(--teal); border: 1px solid rgba(28,94,94,0.2); }
+.tag--orange { background: var(--accent-2-lt); color: var(--accent); border: 1px solid rgba(192,90,26,0.2); }
+.tag--gold { background: rgba(201,150,46,0.10); color: var(--gold); border: 1px solid rgba(201,150,46,0.25); }
+.tag--red { background: rgba(192,90,26,0.08); color: var(--accent); border: 1px solid rgba(192,90,26,0.2); }
+.tag--green { background: rgba(28,94,94,0.08); color: var(--teal-light); border: 1px solid rgba(28,94,94,0.2); }
+
+/* Callout variants */
+.callout--warning { border-left-color: var(--accent); background: var(--accent-2-lt); }
+.callout--critical { border-left-color: var(--accent); background: rgba(192,90,26,0.05); }
+
+/* Score bars */
+.score-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 12px; }
+.score-label { font-size: 13px; min-width: 160px; color: var(--text-muted); }
+.score-track { flex: 1; height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.score-fill { height: 100%; border-radius: 99px; background: var(--teal); transition: width 0.3s; }
+.score-val { font-size: 13px; font-weight: 600; color: var(--teal); min-width: 2rem; text-align: right; }
+
+/* Recommendation cards */
+.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.rec-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r-md); padding: 20px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.rec-number { font-family: var(--font-display); font-size: 2.5rem; font-weight: 400; font-style: italic; color: var(--border); line-height: 1; }
+.rec-title { font-weight: 600; font-size: 14px; color: var(--text); }
+.rec-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.rec-horizon { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); font-family: 'DM Mono', monospace; }
+
+/* Tech pills */
+.tech-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 12px; font-family: 'DM Mono', monospace;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 3px 10px; border-radius: var(--r-sm); margin: 2px;
+}
+
+/* Bullet list */
+ul.bullet { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+ul.bullet li { font-size: 13px; display: flex; gap: 8px; color: var(--text-muted); }
+ul.bullet li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+
+/* SWOT overrides for Clio semantic colors */
+.swot-cell.strengths { background: rgba(42,122,122,0.06); }
+.swot-cell.strengths .swot-label { color: var(--teal-light); }
+.swot-cell.weaknesses { background: rgba(192,90,26,0.06); }
+.swot-cell.weaknesses .swot-label { color: var(--accent); }
+.swot-cell.opportunities { background: rgba(28,94,94,0.06); }
+.swot-cell.opportunities .swot-label { color: var(--teal); }
+.swot-cell.threats { background: rgba(201,150,46,0.08); }
+.swot-cell.threats .swot-label { color: var(--gold); }
+.swot-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.swot-list li { font-size: 13px; display: flex; gap: 6px; }
+.swot-list li::before { content: '→'; opacity: 0.5; flex-shrink: 0; }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · May 2026</div>
+  <h1>Clio:<br>The <em>Legal OS</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Clio — the $5B legal platform becoming the operating system for law.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Vancouver, BC, Canada</span></div>
+    <div>FOUNDED<span>2008</span></div>
+    <div>VALUATION<span>$5B (Series G, Nov 2025)</span></div>
+    <div>STATUS<span>$500M+ ARR</span></div>
+    <div>COVERAGE<span>clio.com</span></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$500M+</div><div class="stat-label">ARR (May 2026)</div></div>
+  <div class="stat-box"><div class="stat-num blue">$5B</div><div class="stat-label">Valuation (Series G)</div></div>
+  <div class="stat-box"><div class="stat-num">400K+</div><div class="stat-label">Legal Professionals</div></div>
+  <div class="stat-box"><div class="stat-num accent">$1.7B+</div><div class="stat-label">Total Funding</div></div>
+  <div class="stat-box"><div class="stat-num blue">$34B</div><div class="stat-label">Legal Tech by 2034</div></div>
+  <div class="stat-box"><div class="stat-num">1B+</div><div class="stat-label">vLex Documents</div></div>
+</div>
+
+<div class="container">
+
+<!-- ── 1. COMPANY OVERVIEW ──────────────────────────── -->
+<div class="section" id="overview">
+    <div class="section-label">§ 01 — Company Overview</div>
+    <h2 class="section-title">Company Overview</h2>
+    <p class="section-lead">Clio (legally Themis Solutions Inc.) started as a cloud-based billing and case management tool. It is now the dominant practice management platform for small and mid-size law firms globally, aggressively expanding upmarket into enterprise and legal research.</p>
+
+    <div class="two-col two-col--asym">
+      <div>
+        <h3 style="margin-bottom:1rem;">The Clio story in brief</h3>
+        <p>Founded in 2008 by Jack Newton and Rian Gauvreau out of Vancouver, Clio addressed a painfully unsexy problem: lawyers were still billing by hand on paper and managing cases in spreadsheets. The founding insight — that a cloud-native practice management tool could replace the hodgepodge of desktop software and manila folders — turned out to be prescient.</p>
+        <p>For a decade, Clio quietly compounded. It won the SMB legal market through relentless distribution (ClioCon, bar association partnerships, referral programs) and an expanding integration ecosystem. Revenue reached $235M ARR by end of 2024, then <strong>accelerated sharply</strong> — doubling in roughly 12 months to $500M by May 2026. That pace is not organic growth alone.</p>
+        <p>The inflection point was the <strong>$1 billion acquisition of vLex</strong> in November 2025 — the largest deal in legal tech history. vLex brought over one billion primary legal documents, editorial enrichment, and Vincent AI, a GPT-powered legal research assistant. With one transaction, Clio moved from managing the business of law to powering the practice of law.</p>
+
+        <div class="callout" style="margin-top:1.5rem;">
+          <strong>Critical observation:</strong> The $500M ARR milestone almost certainly includes vLex revenue. Without disaggregation, pure organic growth rates are opaque. Investors and analysts should demand segment-level ARR disclosure.
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="card-tag tag--teal">Leadership</div>
+          <h3 style="margin-bottom:0.75rem; font-size:1rem;">Key Executives</h3>
+          <ul class="bullet">
+            <li><strong>Jack Newton</strong> — Co-Founder & CEO</li>
+            <li><strong>Rian Gauvreau</strong> — Co-Founder & President</li>
+            <li>Backed by NEA, TCV, Goldman Sachs AM, Sixth Street Growth, JMI Equity</li>
+            <li>Debt facility co-led by Blackstone and Blue Owl Capital</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-tag tag--gold">Market Context</div>
+          <h3 style="margin-bottom:0.75rem; font-size:1rem;">Legal Tech Market Size</h3>
+          <ul class="bullet">
+            <li>Global legal tech: <strong>$34B in 2025</strong> → $78B by 2034 (CAGR ~10%)</li>
+            <li>AI legal tech specifically: <strong>$5.6B in 2025</strong> → $34B by 2034 (CAGR ~22%)</li>
+            <li>Law firm tech spending grew <strong>9.7% in 2025</strong> — fastest pace ever recorded</li>
+            <li>79% of legal professionals using AI tools in 2025 vs. 19% in 2023</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div style="margin-top:3rem;">
+      <h3 style="margin-bottom:1.5rem;">Key milestones</h3>
+      <div class="two-col">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2008</div>
+            <div class="tl-title">Founded in Vancouver</div>
+            <div class="tl-desc">Jack Newton & Rian Gauvreau launch cloud-based practice management. First-mover in cloud-native legal SaaS.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2019</div>
+            <div class="tl-title">$250M Series D</div>
+            <div class="tl-desc">Reaches unicorn status. Launches Clio Payments embedded fintech capability.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">2022</div>
+            <div class="tl-title">$900M Series F at $3B</div>
+            <div class="tl-desc">Expands into enterprise. Clio Grow CRM product matures. International expansion accelerates.</div>
+          </div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">Mar 2025</div>
+            <div class="tl-title">ShareDo Acquisition → Clio Operate</div>
+            <div class="tl-desc">Acquires UK-based ShareDo for enterprise legal work management. Rebranded as Clio Operate, targeting large law and corporate legal depts.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">Nov 2025</div>
+            <div class="tl-title">$1B vLex Acquisition + $500M Series G</div>
+            <div class="tl-desc">Largest deal in legal tech history. Gains 1B+ legal documents and Vincent AI. Valuation hits $5B.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">May 2026</div>
+            <div class="tl-title">$500M+ ARR Milestone</div>
+            <div class="tl-desc">Announces $500M ARR, claiming category-defining AI platform status. Clio Work available to solo firms.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- ── 2. PRODUCTS ───────────────────────────────────── -->
+<div class="section" id="products">
+  <div class="section-label">§ 02 — Product Portfolio</div>
+  <h2 class="section-title">Product Portfolio</h2>
+  <p class="section-lead">Clio has evolved from a single product to a five-product suite spanning the full legal lifecycle — intake, case management, document work, research, and enterprise operations.</p>
+
+    <div class="product-grid" style="margin-bottom:2.5rem;">
+
+      <div class="card">
+        <div class="card-tag tag--teal">Core Platform</div>
+        <h3 style="margin-bottom:0.5rem;">Clio Manage</h3>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:1rem;">The mothership. Case/matter management, time tracking, billing, client portal, calendar, trust accounting, and document management. The product 90%+ of Clio's installed base uses daily.</p>
+        <div class="divider"></div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Target:</strong> Solo → mid-size law firms<br>
+          <strong style="color:var(--text);">Pricing:</strong> $49–$149/user/mo (EasyStart → Complete)<br>
+          <strong style="color:var(--text);">Key metric:</strong> Processes billions in transactions/year via Clio Payments
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag--orange">Client Intake</div>
+        <h3 style="margin-bottom:0.5rem;">Clio Grow</h3>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:1rem;">CRM and intake automation. Lead tracking, online scheduling, intake forms, e-signatures, and referral reporting. Designed to turn website visitors into paying clients without manual follow-up.</p>
+        <div class="divider"></div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Target:</strong> Client-acquisition-focused firms<br>
+          <strong style="color:var(--text);">Pricing:</strong> $59/user/mo standalone; bundled in Complete plan<br>
+          <strong style="color:var(--text);">Problem solved:</strong> 67% of law firms lose leads due to slow follow-up
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag--gold">Document AI</div>
+        <h3 style="margin-bottom:0.5rem;">Clio Draft</h3>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:1rem;">AI-powered document automation. Generates legal documents from matter data and templates. Reduces drafting time by auto-populating client facts, dates, and case-specific language.</p>
+        <div class="divider"></div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Target:</strong> Document-heavy practices (estate, real estate, family law)<br>
+          <strong style="color:var(--text);">Pricing:</strong> +$49/user/mo add-on<br>
+          <strong style="color:var(--text);">Gap:</strong> Limited vs. specialized tools like Smokeball for high-volume docs
+        </div>
+      </div>
+
+      <div class="card card--accent">
+        <div class="card-tag tag--teal">AI Workspace · NEW</div>
+        <h3 style="margin-bottom:0.5rem;">Clio Work</h3>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:1rem;">The flagship AI product. Combines matter context from the firm's own documents with vLex's 1B-document legal corpus for research, analysis, and case strategy. Agentic capabilities launched April 2026 — multi-step tasks from a single prompt.</p>
+        <div class="divider"></div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Target:</strong> All firm sizes (solo pricing added Apr 2026)<br>
+          <strong style="color:var(--text);">Moat:</strong> Only research tool with live matter context baked in<br>
+          <strong style="color:var(--text);">Risk:</strong> Still unproven at scale vs. Harvey, CoCounsel
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-tag tag--red">Enterprise · NEW</div>
+        <h3 style="margin-bottom:0.5rem;">Clio Operate</h3>
+        <p style="font-size:0.84rem; color:var(--text-muted); margin-bottom:1rem;">Adaptive work management for large firms and corporate legal departments. Built on the ShareDo acquisition. Connects with iManage, NetDocuments, Aderant, Elite — designed to layer on top of existing enterprise stacks, not replace them.</p>
+        <div class="divider"></div>
+        <div style="font-size:0.8rem; color:var(--text-muted);">
+          <strong style="color:var(--text);">Target:</strong> BigLaw, Fortune 500 legal depts<br>
+          <strong style="color:var(--text);">Challenge:</strong> Enterprise sales cycle is long; Clio is largely unproven here<br>
+          <strong style="color:var(--text);">Introduced to North America:</strong> 2025
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pricing ladder -->
+    <h3 style="margin-bottom:1.25rem;">Pricing architecture — Clio Manage tiers</h3>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Price / user / mo (annual)</th>
+            <th>Key capabilities unlocked</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>EasyStart</strong></td>
+            <td>$49</td>
+            <td>Time tracking, billing, basic case management, Clio Payments</td>
+            <td>Solo attorneys testing the water</td>
+          </tr>
+          <tr>
+            <td><strong>Essentials</strong></td>
+            <td>$89</td>
+            <td>+ Client portal, workflow automation, 3rd-party integrations</td>
+            <td>Small firms (2–5 attorneys)</td>
+          </tr>
+          <tr>
+            <td><strong>Advanced</strong></td>
+            <td>$119</td>
+            <td>+ Document automation, custom reports, priority support</td>
+            <td>Growing firms with reporting needs</td>
+          </tr>
+          <tr>
+            <td><strong>Complete</strong></td>
+            <td>$149</td>
+            <td>+ Clio Grow bundled — intake, scheduling, referral tracking</td>
+            <td>Firms investing in client acquisition</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout callout--warning" style="margin-top:1.5rem;">
+      <strong>Pricing pressure point:</strong> A 5-attorney Clio shop on Complete + Grow + Draft can easily hit <strong>$13,000–$15,000/year</strong> — 2× what MyCase or PracticePanther would cost for similar coverage. This creates serious churns risk if SMB-focused competitors close the feature gap.
+    </div>
+</div>
+
+<!-- ── 3. COMPETITIVE LANDSCAPE ─────────────────────── -->
+<div class="section" id="competitors">
+  <div class="section-label">§ 03 — Competitive Landscape</div>
+  <h2 class="section-title">Competitive Landscape</h2>
+  <p class="section-lead">Clio operates in two intersecting arenas: practice management (SMB-dominated, relatively stable) and legal AI (rapidly shifting, with $11B-valuation competitors entering from above).</p>
+
+    <div style="overflow-x:auto; margin-bottom:2.5rem;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Company</th>
+            <th>Valuation / Stage</th>
+            <th>Core strength</th>
+            <th>Target segment</th>
+            <th>vs. Clio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Clio</strong></td>
+            <td>$5B (Series G)</td>
+            <td>End-to-end platform, vLex corpus, embedded payments</td>
+            <td>SMB → Mid-market → Enterprise (upmarket push)</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Harvey AI</strong></td>
+            <td>$11B (Mar 2026), $190M ARR</td>
+            <td>LLM-native legal reasoning, BigLaw penetration</td>
+            <td>Large law firms, global</td>
+            <td>Not a PM tool; pure AI research/drafting. Competing for AI budget at enterprise</td>
+          </tr>
+          <tr>
+            <td><strong>Thomson Reuters CoCounsel</strong></td>
+            <td>Public (TRI)</td>
+            <td>Westlaw integration, trusted brand, enterprise relationships</td>
+            <td>Mid → Large firms</td>
+            <td>Has research depth Clio lacked pre-vLex. Still lacks PM layer</td>
+          </tr>
+          <tr>
+            <td><strong>LexisNexis Lexis+</strong></td>
+            <td>Public (RELX)</td>
+            <td>Massive case law corpus, legacy enterprise contracts</td>
+            <td>Large firms, academic, government</td>
+            <td>Dominates citation share in AI queries alongside Harvey; old-school UX</td>
+          </tr>
+          <tr>
+            <td><strong>MyCase</strong></td>
+            <td>Private (AffiniPay)</td>
+            <td>All-in-one simplicity, low price, fast onboarding</td>
+            <td>Solo → 5-person firms</td>
+            <td>Steals churns from Clio on price; 1–2 week vs. 3–4 week learning curve</td>
+          </tr>
+          <tr>
+            <td><strong>Smokeball</strong></td>
+            <td>Private</td>
+            <td>Document automation depth, Word integration</td>
+            <td>High-document-volume practices</td>
+            <td>Beats Clio on document automation; loses on ecosystem breadth</td>
+          </tr>
+          <tr>
+            <td><strong>PracticePanther</strong></td>
+            <td>Private (ProfitSolv)</td>
+            <td>Best feature-to-cost ratio in tier</td>
+            <td>Small firms</td>
+            <td>Credible value alternative; loses on integrations and ecosystem</td>
+          </tr>
+          <tr>
+            <td><strong>Luminance / Spellbook</strong></td>
+            <td>Private, rising</td>
+            <td>Contract AI, specialist use cases</td>
+            <td>Corporate legal, transactional</td>
+            <td>Gaining citation share fastest; threat in document intelligence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div>
+        <h3 style="margin-bottom:1rem;">Competitive positioning map</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Clio occupies an unusual position — broad horizontal platform with a new vertical AI bet:</p>
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="card-tag tag--teal">Clio's Unique Angle</div>
+          <p style="font-size:0.84rem; color:var(--text-muted);">The only company combining <strong>matter context</strong> (what the lawyer is working on, case history, client data) with <strong>deep legal corpus</strong> (vLex's 1B documents) in a single product. Harvey and Westlaw research in a vacuum — Clio's AI can say "given this specific case you're working on, here's what the law says."</p>
+        </div>
+        <div class="callout callout--warning">
+          <strong>Strategic warning:</strong> Harvey's $11B valuation with only $190M ARR (57× revenue) signals the market believes AI-native legal tools will eat the space. Clio's $5B at $500M ARR (10× revenue) is priced as a SaaS business, not an AI one. If Clio doesn't reposition its narrative and deepen Clio Work's moat fast, it risks being outflanked from above.
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:1rem;">AI competitive scores</h3>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:1.5rem;">Estimated competitive strength in AI legal capabilities:</p>
+        <div class="score-row"><div class="score-label">Harvey AI</div><div class="score-track"><div class="score-fill" style="width:92%; background:var(--accent);"></div></div><div class="score-val" style="color:var(--accent);">9.2</div></div>
+        <div class="score-row"><div class="score-label">Thomson Reuters CoCounsel</div><div class="score-track"><div class="score-fill" style="width:78%;"></div></div><div class="score-val">7.8</div></div>
+        <div class="score-row"><div class="score-label">LexisNexis Lexis+</div><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><div class="score-val">7.5</div></div>
+        <div class="score-row"><div class="score-label">Clio Work (vLex/Vincent)</div><div class="score-track"><div class="score-fill" style="width:65%;"></div></div><div class="score-val">6.5</div></div>
+        <div class="score-row"><div class="score-label">Smokeball AI</div><div class="score-track"><div class="score-fill" style="width:45%;"></div></div><div class="score-val">4.5</div></div>
+        <div class="score-row"><div class="score-label">MyCase AI</div><div class="score-track"><div class="score-fill" style="width:32%;"></div></div><div class="score-val">3.2</div></div>
+        <p style="font-size:0.72rem; color:var(--text-light); margin-top:1rem;">Scores are author estimates based on public product capabilities, user feedback, and market positioning — not audited metrics.</p>
+      </div>
+    </div>
+</div>
+
+<!-- ── 4. TECHNOLOGY STACK ───────────────────────────── -->
+<div class="section" id="technology">
+  <div class="section-label">§ 04 — Technology Stack</div>
+  <h2 class="section-title">Technology Stack & Architecture</h2>
+  <p class="section-lead">Clio is a cloud-native SaaS platform. Its technical foundation was a competitive advantage in 2010 and is now table stakes — the differentiation has shifted to AI infrastructure and data moats.</p>
+
+    <div class="two-col two-col--asym" style="margin-bottom:2.5rem;">
+      <div>
+        <h3 style="margin-bottom:1rem;">Core platform architecture</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">Clio runs on a multi-tenant, cloud-native architecture built for horizontal scalability. The platform maintains SOC 2 Type II certification, with encryption at rest and in transit, 24/7/365 monitoring, and centralized identity management (SSO, RBAC).</p>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem;">The integration layer is the company's most strategically important architectural asset: <strong>250+ pre-built integrations</strong> and a public API that has spawned an ecosystem of 280+ app partners and 100 certified consultants. This creates switching costs — firms wire Clio into their accounting, e-signature, calendaring, and matter-filing workflows, making migration painful.</p>
+
+        <h4 style="margin-top:1.25rem; margin-bottom:0.75rem;">Technology ecosystem</h4>
+        <div style="line-height:2.5;">
+          <span class="tech-pill">Cloud-native SaaS</span>
+          <span class="tech-pill">SOC 2 Type II</span>
+          <span class="tech-pill">REST API</span>
+          <span class="tech-pill">SSO / SAML</span>
+          <span class="tech-pill">RBAC</span>
+          <span class="tech-pill">DocuSign</span>
+          <span class="tech-pill">QuickBooks / Xero</span>
+          <span class="tech-pill">Outlook / Google Workspace</span>
+          <span class="tech-pill">iManage</span>
+          <span class="tech-pill">NetDocuments</span>
+          <span class="tech-pill">Aderant / Elite</span>
+          <span class="tech-pill">LawPay / Stripe</span>
+          <span class="tech-pill">Zapier</span>
+          <span class="tech-pill">Microsoft 365</span>
+        </div>
+      </div>
+      <div>
+        <div class="card card--dark" style="margin-bottom:1rem;">
+          <div class="card-tag tag--teal">AI Infrastructure</div>
+          <h3 style="font-size:1rem; margin-bottom:0.75rem;">The vLex data moat</h3>
+          <ul class="bullet">
+            <li>1B+ editorially enriched primary law documents</li>
+            <li>110+ country legal coverage</li>
+            <li>Vincent AI — GPT-based research assistant, now agentic</li>
+            <li>Trusted by courts and enterprise legal teams (not just startups)</li>
+            <li>Multi-step task execution via "skills infrastructure"</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="card-tag tag--orange">Embedded Fintech</div>
+          <h3 style="font-size:1rem; margin-bottom:0.75rem;">Clio Payments</h3>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Processes billions in legal payments annually. Transaction fee revenue is a high-margin, recurring revenue stream that grows with firm billings rather than headcount — making it the most underappreciated part of Clio's monetization model. This is the Shopify Payments playbook applied to legal.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Technical differentiation that matters:</strong> The combination of <em>matter-level context</em> (Clio Manage's case data) with vLex's corpus is genuinely novel. Competing AI tools run research in isolation. Clio Work can say "given the facts in this case file, here are the most relevant precedents." That context awareness, if executed well, is a durable moat. The risk is integration complexity — Vincent was built independently; stitching it to Manage's data model is a non-trivial engineering challenge.
+    </div>
+</div>
+
+<!-- ── 5. AI STRATEGY ────────────────────────────────── -->
+<div class="section" id="ai">
+  <div class="section-label">§ 05 — AI Strategy</div>
+  <h2 class="section-title">AI Strategy & Readiness</h2>
+  <p class="section-lead">Clio's AI strategy is the most consequential strategic bet in the company's history. The vLex acquisition bought them a credible AI corpus. What they do with it in the next 24 months determines whether Clio is a $5B SaaS business or a $20B+ AI platform.</p>
+
+    <div class="two-col" style="margin-bottom:2.5rem;">
+      <div>
+        <h3 style="margin-bottom:1rem;">The Intelligent Legal Work Platform</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted);">Announced October 2025, the "Intelligent Legal Work Platform" is Clio's positioning claim that it is the first company to unify the business of law (billing, intake, case management) with the practice of law (research, analysis, drafting) in a single AI-powered product.</p>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-top:0.75rem;">The four product pillars with AI at their core:</p>
+        <ul class="bullet" style="margin-top:0.75rem;">
+          <li><strong>Manage AI</strong> — Automates scheduling, communications, and billing. Court documents become calendar events; activity turns into client updates; expenses become draft invoices.</li>
+          <li><strong>Clio Work (Vincent AI)</strong> — Research, analysis, and multi-step agentic task execution grounded in 1B legal documents + live matter context.</li>
+          <li><strong>Draft AI</strong> — Document generation from matter data and templates.</li>
+          <li><strong>Grow AI</strong> — Intake optimization, automated follow-up, pipeline analytics.</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom:1rem;">AI readiness assessment</h3>
+        <div class="score-row"><div class="score-label">Data moat (corpus)</div><div class="score-track"><div class="score-fill" style="width:90%;"></div></div><div class="score-val">9.0</div></div>
+        <div class="score-row"><div class="score-label">Product integration depth</div><div class="score-track"><div class="score-fill" style="width:60%;"></div></div><div class="score-val">6.0</div></div>
+        <div class="score-row"><div class="score-label">Agentic capabilities</div><div class="score-track"><div class="score-fill" style="width:62%;"></div></div><div class="score-val">6.2</div></div>
+        <div class="score-row"><div class="score-label">Enterprise AI readiness</div><div class="score-track"><div class="score-fill" style="width:50%;"></div></div><div class="score-val">5.0</div></div>
+        <div class="score-row"><div class="score-label">AI brand / market perception</div><div class="score-track"><div class="score-fill" style="width:55%;"></div></div><div class="score-val">5.5</div></div>
+        <div class="score-row"><div class="score-label">Responsible AI / hallucination guard</div><div class="score-track"><div class="score-fill" style="width:68%;"></div></div><div class="score-val">6.8</div></div>
+        <p style="font-size:0.72rem; color:var(--text-light); margin-top:1rem;">Author estimates based on public product information and competitive benchmarking.</p>
+
+        <div class="callout callout--warning" style="margin-top:1.25rem;">
+          <strong>The gap:</strong> Clio has a 9/10 data moat but only a 6/10 product integration. The vLex acquisition is strategically sound but operationally early-stage. Harvey was born AI-first; Clio is retrofitting AI onto a 17-year-old practice management platform. That integration debt is the single biggest risk to the AI strategy.
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card card--accent">
+        <div class="card-tag tag--teal">What's working</div>
+        <ul class="bullet" style="margin-top:0.5rem;">
+          <li>vLex corpus is a genuine, defensible data moat — not available to competitors</li>
+          <li>Matter-context AI is a meaningful differentiation vs. standalone research tools</li>
+          <li>April 2026 agentic release (Vincent) shows product velocity</li>
+          <li>Manage AI's practical automations (invoice generation, calendar) have clear ROI for users</li>
+          <li>Opened Clio Work to solos — smart distribution play to seed adoption bottom-up</li>
+        </ul>
+      </div>
+      <div class="card card--warm">
+        <div class="card-tag tag--orange">What's at risk</div>
+        <ul class="bullet" style="margin-top:0.5rem;">
+          <li>Harvey AI dominates BigLaw mindshare at 57× ARR valuation — Clio is priced as SaaS</li>
+          <li>vLex integration into Manage data model is engineering-hard; latency and accuracy TBD</li>
+          <li>No disclosed accuracy/hallucination benchmarks vs. CoCounsel or Harvey</li>
+          <li>"First Intelligent Legal Work Platform" is a claim, not yet a proven category</li>
+          <li>Enterprise AI sales require different GTM than SMB — Clio's muscle memory is PLG</li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+<!-- ── 6. PM CRITIQUE ────────────────────────────────── -->
+<div class="section" id="pm">
+  <div class="section-label">§ 06 — PM Critique</div>
+  <h2 class="section-title">PM Critique: Product Strategy</h2>
+  <p class="section-lead">What a senior PM would flag if they inherited Clio's product portfolio today — the real problems underneath the impressive metrics.</p>
+
+    <div class="two-col two-col--asym" style="margin-bottom:2.5rem;">
+      <div>
+
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="card-tag tag--red">Critical Issue #1</div>
+          <h3 style="margin-bottom:0.5rem;">The pricing trap is eroding the core</h3>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Clio's pricing has crept upward with each product addition, and the modular structure — pay more for workflows, pay more for AI, pay more for intake — creates a sense of feature-gating that frustrates existing users. A 5-attorney firm on a full stack pays 2× what MyCase charges for equivalent functionality. When smaller competitors close the feature gap (and they are), the price premium becomes indefensible. <strong>Clio has not articulated a clear price-to-value narrative for its SMB base in the AI era.</strong></p>
+        </div>
+
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="card-tag tag--red">Critical Issue #2</div>
+          <h3 style="margin-bottom:0.5rem;">Five products with unclear integration seams</h3>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Manage, Grow, Draft, Work, Operate — five products acquired or built across 17 years, now positioned as a unified platform. The claim of "unified" is marketing; the UX reality is more like five different apps with a shared login. Users report needing to switch contexts, data doesn't flow automatically between modules, and enterprise integrations (Operate → Manage) are nascent. <strong>The platform story is ahead of the platform reality.</strong></p>
+        </div>
+
+        <div class="card" style="margin-bottom:1rem;">
+          <div class="card-tag tag--orange">Concern #3</div>
+          <h3 style="margin-bottom:0.5rem;">SMB vs. enterprise tension is unresolved</h3>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Clio's go-to-market, product design, support model, and brand are optimized for small law firms — firms where one person is the lawyer, billing manager, and IT department. Operate and the $500M enterprise push require a different product motion: longer sales cycles, IT gatekeepers, procurement processes, compliance requirements. Clio is running both motions simultaneously with no announced organizational separation. This almost always causes the enterprise motion to underperform or the SMB experience to degrade.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-tag tag--orange">Concern #4</div>
+          <h3 style="margin-bottom:0.5rem;">AI differentiation requires proof, not claims</h3>
+          <p style="font-size:0.84rem; color:var(--text-muted);">Clio Work launched with compelling positioning. But the legal AI market has become brutally demanding about accuracy. Harvey and CoCounsel publish benchmark comparisons. Clio has published none. In a market where hallucinations in legal briefs can result in sanctions (see: the well-publicized cases of lawyers citing AI-fabricated case law), unverified AI claims are a liability. <strong>Clio needs head-to-head accuracy data, not positioning copy.</strong></p>
+        </div>
+      </div>
+      <div>
+        <div class="card card--dark" style="margin-bottom:1rem;">
+          <div class="card-tag tag--teal">What Clio gets right</div>
+          <ul class="bullet" style="margin-top:0.5rem;">
+            <li>Distribution is world-class — ClioCon, bar partnerships, referral networks</li>
+            <li>Payments monetization is under-discussed; it's a recurring high-margin revenue stream that grows with firm billings</li>
+            <li>Opening Clio Work to solos is a smart PLG seed — research-first use cases will pull users into the full platform</li>
+            <li>vLex gives Clio something no competitor can easily replicate: a proprietary, editorially enriched corpus that LLM providers can't just train away</li>
+            <li>The consultant ecosystem (100 certified partners) creates implementation stickiness competitors can't match</li>
+          </ul>
+        </div>
+
+        <h3 style="margin-bottom:0.75rem; margin-top:1.5rem;">User sentiment signals</h3>
+        <ul class="bullet">
+          <li>Steep learning curve — 3–4 weeks vs. 1–2 weeks for MyCase</li>
+          <li>Duplicate entry detection missing across modules</li>
+          <li>No built-in accounting (requires QuickBooks/Xero add-on)</li>
+          <li>Customer support quality perceived as declining in 2025</li>
+          <li>Reporting flexibility limited without Advanced tier</li>
+          <li>Integration complexity adds overhead for smaller firms</li>
+          <li>Per-user pricing feels punitive as firms grow headcount</li>
+        </ul>
+
+        <div class="callout callout--critical" style="margin-top:1.25rem;">
+          <strong>API lawsuit flag:</strong> Reports of a legal dispute (Clio vs. LegalTech Solutions, late 2025) over whether Clio can restrict third-party API access. If Clio is locking down its API to protect its integration moat, it risks alienating the partner ecosystem that is a core retention driver. This bears close monitoring.
+        </div>
+      </div>
+    </div>
+
+    <!-- SWOT -->
+    <h3 style="margin-bottom:1.25rem;">SWOT analysis</h3>
+    <div class="swot">
+      <div class="swot-box">
+        <div class="swot-label">Strengths</div>
+        <ul>
+          <li>Market-leading brand in SMB legal PM — 400K+ users, network effects</li>
+          <li>vLex corpus moat — 1B+ documents, editorially enriched, 110 countries</li>
+          <li>Embedded payments creating high-margin, billing-correlated revenue</li>
+          <li>280+ integration ecosystem and consultant network = deep switching costs</li>
+          <li>Strong distribution engine (ClioCon, bar associations, referrals)</li>
+          <li>Diversified funding base — equity + $350M debt facility for M&A optionality</li>
+        </ul>
+      </div>
+      <div class="swot-box">
+        <div class="swot-label">Weaknesses</div>
+        <ul>
+          <li>Premium pricing relative to comparable SMB alternatives</li>
+          <li>Steep UX learning curve — onboarding friction hurts retention at the margin</li>
+          <li>No native accounting module — gap vs. all-in-one competitors</li>
+          <li>Five-product platform is architecturally fragmented</li>
+          <li>SMB DNA conflicts with enterprise motion — organizational tension</li>
+          <li>AI accuracy benchmarks undisclosed — credibility risk</li>
+        </ul>
+      </div>
+      <div class="swot-box">
+        <div class="swot-label">Opportunities</div>
+        <ul>
+          <li>79% of legal professionals using AI — the market is trained; Clio just needs distribution</li>
+          <li>Legal tech spending at record growth (9.7%) — budget available</li>
+          <li>Corporate legal depts chronically underserved — Operate could be a breakout segment</li>
+          <li>International expansion (vLex's 110-country coverage is a distribution unlock)</li>
+          <li>Vertical AI for specific practice areas (immigration, family, real estate) with deep workflow automation</li>
+          <li>Billing intelligence — AI-powered fee optimization, write-off prediction, realization rate improvement</li>
+        </ul>
+      </div>
+      <div class="swot-box">
+        <div class="swot-label">Threats</div>
+        <ul>
+          <li>Harvey AI at $11B valuation is drawing enterprise legal AI budgets and talent</li>
+          <li>Thomson Reuters and LexisNexis have deep enterprise relationships and begin integrating PM</li>
+          <li>SMB competitors closing feature gap at materially lower price</li>
+          <li>Demand deceleration risk — Thomson Reuters projects legal market contraction by Q3 2026</li>
+          <li>vLex integration complexity — overpaying for an asset and failing to integrate it fully</li>
+          <li>General-purpose AI (GPT, Gemini) lowering lawyers' willingness to pay for specialized AI tools</li>
+        </ul>
+      </div>
+    </div>
+</div>
+
+<!-- ── 7. PRODUCT STRATEGY DOC ──────────────────────── -->
+<div class="section" id="strategy">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2 class="section-title">Mock Product Strategy: What Clio Should Do Next</h2>
+  <p class="section-lead">A concrete, prioritized product strategy for FY2026–2027, written as if for Clio's CPO. Three strategic bets, nine tactical moves.</p>
+
+    <!-- Strategic bets -->
+    <div class="card card--dark" style="margin-bottom:2.5rem; padding:2rem;">
+      <h3 style="color:#e8f4f4; margin-bottom:1rem; font-size:1.2rem;">The strategic thesis</h3>
+      <p style="color:rgba(232,244,244,0.85); font-size:0.92rem;">Clio has a window of roughly 18–24 months to convert its SMB distribution dominance into a defensible AI platform before Harvey and Thomson Reuters close the SMB gap from above and MyCase/PracticePanther close the value gap from below. The three bets: (1) weaponize the vLex corpus into a verifiably accurate AI research product, (2) create a unified product experience that earns the "platform" label, and (3) lock in enterprise legal departments before the legacy players replatform.</p>
+    </div>
+
+    <div class="rec-grid" style="margin-bottom:3rem;">
+
+      <div class="rec-card">
+        <div class="rec-number">01</div>
+        <div class="rec-title">Launch "Clio Verified" accuracy benchmarks for Clio Work</div>
+        <div class="rec-body">Publish head-to-head accuracy comparisons against Harvey and CoCounsel on standard legal research benchmark suites (LegalBench, bar exam Q&A, case citation accuracy). In an era of hallucination anxiety, verified accuracy is a purchasing argument no competitor currently owns clearly in SMB. Legal AI buyers are trained to ask "can I trust this?" Clio needs to answer that question with data, not marketing copy.</div>
+        <div class="rec-horizon">H1 2026 · High priority</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">02</div>
+        <div class="rec-title">Build a unified "matter intelligence" layer across all five products</div>
+        <div class="rec-body">Create a shared data layer — a single matter graph — that surfaces context across Manage, Grow, Draft, Work, and Operate without context switching. A client's intake form in Grow should auto-populate a Manage matter; research in Work should appear in Draft; billing anomalies in Manage should trigger workflow alerts. This is the product that earns the "Intelligent Legal Work Platform" name. Currently it doesn't exist.</div>
+        <div class="rec-horizon">H2 2026 · Critical</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">03</div>
+        <div class="rec-title">Introduce practice-area AI bundles at a flat-per-firm price</div>
+        <div class="rec-body">Create vertically-tuned AI bundles for the top 5 practice areas (family law, immigration, real estate, personal injury, estate planning) that include tailored document templates, jurisdiction-specific research, and intake forms — priced per firm, not per user. This directly addresses the per-user pricing backlash, creates a clear upgrade narrative, and is defensible because Harvey won't build micro-practice-area workflows at SMB price points.</div>
+        <div class="rec-horizon">H2 2026 · High priority</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">04</div>
+        <div class="rec-title">Accelerate international distribution with vLex's existing footprint</div>
+        <div class="rec-body">vLex serves courts and legal teams in 110+ countries. Clio Manage serves 130 countries but with thin localization. Use vLex's enterprise legal relationships as a Trojan horse for Clio Manage adoption in markets where Clio has no distribution. Target EU (Spain, UK, Germany) and Latin America first — vLex has deep coverage and relationships; Clio has product but no local GTM. This is a faster path than building from zero.</div>
+        <div class="rec-horizon">2026–2027 · Strategic</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">05</div>
+        <div class="rec-title">Build AI-powered billing intelligence into Manage</div>
+        <div class="rec-body">Clio processes billions in legal transactions. That data is a goldmine for billing AI: predicting write-off risk before it happens, surfacing realization rate patterns by matter type, recommending optimal billing cadences, flagging scope creep on flat-fee matters. This is entirely proprietary — no competitor has this data at scale. A "Billing Intelligence" module would be a natural expansion of the payments flywheel and would speak directly to law firm economics pain.</div>
+        <div class="rec-horizon">H1 2027 · High potential</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">06</div>
+        <div class="rec-title">Separate the SMB and enterprise product organizations</div>
+        <div class="rec-body">Clio Operate targeting Fortune 500 legal departments needs a dedicated PM org, engineering team, and GTM motion that doesn't compete for resources with the 400K-user SMB base. The organizational tension is not just strategic — it's showing up in product quality signals (customer support degradation, onboarding complexity). Create two distinct product lines with separate P&Ls and surface them to investors clearly: "Clio for Firms" and "Clio for Enterprise".</div>
+        <div class="rec-horizon">Now · Organizational</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">07</div>
+        <div class="rec-title">Reduce onboarding time from 3–4 weeks to under 1 week</div>
+        <div class="rec-body">MyCase wins on simplicity. Clio loses accounts not because of missing features but because new users hit friction in week one and don't make it to week four. An AI-guided onboarding experience — "tell me about your practice; I'll configure Clio for you" — combined with migration tooling from the top 3 competitors could halve time-to-value. This is the highest-ROI retention investment available to the product team right now.</div>
+        <div class="rec-horizon">H1 2026 · Quick win</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">08</div>
+        <div class="rec-title">Embed native accounting (or acquire a partner)</div>
+        <div class="rec-body">The absence of native accounting is the most-cited gap in user reviews. Every QuickBooks or Xero integration Clio facilitates is a churn vector — if a firm's accountant prefers a different tool, it creates friction on Clio's side. Either build lightweight trust accounting natively (Clio already has billing; accounting is a short hop) or make a targeted acquisition of a legal-specific accounting tool. This would close a hole that has existed for 10+ years.</div>
+        <div class="rec-horizon">2027 · Close the gap</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-number">09</div>
+        <div class="rec-title">Open a developer platform — "Clio App Store"</div>
+        <div class="rec-body">Clio has 280 integration partners. It does not have an app marketplace with discovery, ratings, and direct monetization for developers. An App Store model — where legal tech builders pay a listing fee or revenue share to distribute on Clio's platform — would create a platform flywheel: more apps → more utility → lower churn → more users → more app demand. Salesforce, Shopify, and Atlassian built durable moats this way. Clio's installed base is large enough to support this now.</div>
+        <div class="rec-horizon">2027 · Platform bet</div>
+      </div>
+
+    </div>
+
+    <!-- Priority matrix -->
+    <h3 style="margin-bottom:1.25rem;">Recommended investment prioritization</h3>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Initiative</th>
+            <th>Impact</th>
+            <th>Effort</th>
+            <th>Horizon</th>
+            <th>Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>AI onboarding (→ 1 week)</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--teal-light)">Low–Med</span></td>
+            <td>Now</td>
+            <td>Highest ROI per engineering hour; directly addresses churn at top of funnel</td>
+          </tr>
+          <tr>
+            <td><strong>Clio Verified benchmarks</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--teal-light)">Low</span></td>
+            <td>H1 2026</td>
+            <td>Marketing and product trust signal; no engineering required, just rigor</td>
+          </tr>
+          <tr>
+            <td><strong>Org separation (SMB vs. Enterprise)</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--accent)">Med</span></td>
+            <td>Now</td>
+            <td>Eliminates resource conflict before it damages both segments</td>
+          </tr>
+          <tr>
+            <td><strong>Practice-area AI bundles</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--accent)">Med</span></td>
+            <td>H2 2026</td>
+            <td>Directly attacks pricing backlash; builds vertical moats</td>
+          </tr>
+          <tr>
+            <td><strong>Matter intelligence layer</strong></td>
+            <td><span style="color:var(--teal-light)">Very High</span></td>
+            <td><span style="color:var(--accent)">High</span></td>
+            <td>H2 2026</td>
+            <td>The product that makes the platform claim real; must start now</td>
+          </tr>
+          <tr>
+            <td><strong>Billing intelligence module</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--accent)">Med</span></td>
+            <td>H1 2027</td>
+            <td>Proprietary data asset; no competitor can replicate</td>
+          </tr>
+          <tr>
+            <td><strong>International via vLex GTM</strong></td>
+            <td><span style="color:var(--teal-light)">High</span></td>
+            <td><span style="color:var(--accent)">Med</span></td>
+            <td>2026–2027</td>
+            <td>Fastest path to new markets; leverages existing vLex relationships</td>
+          </tr>
+          <tr>
+            <td><strong>App Store / developer platform</strong></td>
+            <td><span style="color:var(--accent)">Med–High</span></td>
+            <td><span style="color:var(--accent)">High</span></td>
+            <td>2027</td>
+            <td>Long-term platform moat; builds after core product is unified</td>
+          </tr>
+          <tr>
+            <td><strong>Native accounting</strong></td>
+            <td><span style="color:var(--accent)">Med</span></td>
+            <td><span style="color:var(--accent)">High</span></td>
+            <td>2027</td>
+            <td>Closes a known gap; M&A may be faster than build</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- ── CLOSING TAKE ───────────────────────────────────── -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — Verdict</div>
+  <h2>The Verdict</h2>
+  <h2 style="font-style:italic; margin-top:0; margin-bottom:1.5rem;">Clio is the best-positioned company<br>in legal tech history — and its most dangerous moment.</h2>
+  <p style="font-size:1rem; max-width:640px; line-height:1.75;">The $1B vLex bet was bold and correct. The $500M ARR milestone is real. But the gap between Clio's platform narrative and its platform reality is growing, not shrinking. Harvey is moving up from AI-native. MyCase is moving up from value. Clio has 18 months to close the integration seams, prove Clio Work's accuracy, and define what "enterprise" actually means for a company built for the solo practitioner. The data moat is extraordinary. The question is execution.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    The $1B vLex bet was bold and correct. The $500M ARR milestone is real. But the gap between Clio's platform narrative and its platform reality is growing, not shrinking. Harvey is moving up from AI-native. MyCase is moving up from value. Clio has 18 months to close the integration seams, prove Clio Work's accuracy, and define what "enterprise" actually means for a company built for the solo practitioner. The data moat is extraordinary. The question is execution.
+  </div>
+  <p class="footnote">Analysis prepared May 2026 · Sources: Clio press releases, Sacra, GeekWire, LawNext, Silicon Republic, Capterra, G2, PracticePanther, CounselStack, Thomson Reuters Institute, Fortune Business Insights, Crunchbase, LegalTech MG, Artificial Lawyer, ABA Journal</p>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
