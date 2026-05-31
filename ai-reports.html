@@ -214,8 +214,18 @@
             }
             countEl.textContent = reports.length;
             reports.forEach(function (report) {
-                var card = document.createElement('div');
+                var isPdf = report.filename.endsWith('.pdf');
+
+                var card = document.createElement('a');
                 card.className = 'report-card';
+                if (isPdf) {
+                    card.href = 'reports/' + report.filename;
+                    card.setAttribute('download', '');
+                    card.setAttribute('aria-label', report.title + ' — download PDF');
+                } else {
+                    card.href = report.filename;
+                    card.setAttribute('aria-label', report.title + ' — read issue');
+                }
 
                 var title = document.createElement('h3');
                 title.className = 'report-title';
@@ -229,17 +239,17 @@
                 summary.className = 'report-summary';
                 summary.textContent = report.summary;
 
-                var btn = document.createElement('a');
-                btn.className = 'download-btn';
-                btn.href = 'reports/' + report.filename;
-                btn.setAttribute('download', '');
-                btn.setAttribute('aria-label', 'Download ' + report.title + ' PDF');
-                btn.textContent = 'Download PDF ↓';
-
                 card.appendChild(title);
                 card.appendChild(date);
                 card.appendChild(summary);
-                card.appendChild(btn);
+
+                if (isPdf) {
+                    var badge = document.createElement('span');
+                    badge.className = 'report-type-badge';
+                    badge.textContent = 'PDF';
+                    card.appendChild(badge);
+                }
+
                 listEl.appendChild(card);
             });
         })

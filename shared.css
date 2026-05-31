@@ -178,8 +178,27 @@ nav.nav-dark {
     align-items: start;
     padding: 2.5rem 0;
     border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.25s;
 }
 .report-card:first-child { border-top: 1px solid var(--border); }
+.report-card::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--teal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.report-card:hover { background: var(--bg-alt); }
+.report-card:hover::after { transform: scaleX(1); }
 .report-title {
     font-family: var(--font-display);
     font-size: clamp(1.2rem, 1.8vw, 1.6rem);
@@ -206,29 +225,19 @@ nav.nav-dark {
     grid-column: 1;
     grid-row: 2;
 }
-.download-btn {
+.report-type-badge {
     grid-column: 2;
     grid-row: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    color: var(--teal);
-    border: 1px solid var(--teal);
-    background: transparent;
-    padding: 0.55rem 1.25rem;
-    font-size: 0.70rem;
-    font-weight: 400;
-    letter-spacing: 0.10em;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    text-decoration: none;
+    color: var(--text-light);
+    border: 1px solid var(--border);
     border-radius: var(--r-sm);
-    transition: background 0.2s, color 0.2s;
-    white-space: nowrap;
+    padding: 0.25rem 0.6rem;
     align-self: start;
-}
-.download-btn:hover {
-    background: var(--teal);
-    color: var(--bg);
+    justify-self: end;
+    white-space: nowrap;
 }
 .reports-empty {
     border-top: 1px solid var(--border);
@@ -254,7 +263,7 @@ nav.nav-dark {
     .report-summary {
         grid-row: 3;
     }
-    .download-btn {
+    .report-type-badge {
         grid-column: 1;
         grid-row: 4;
         justify-self: start;
@@ -262,5 +271,6 @@ nav.nav-dark {
     }
 }
 @media (prefers-reduced-motion: reduce) {
-    .download-btn { transition: none; }
+    .report-card { transition: none; }
+    .report-card::after { transition: none; }
 }
