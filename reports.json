@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 23",
+    "date": "2026-05-31",
+    "summary": "OpenAI opens its IPO roadshow at a $1.75T valuation; Anthropic enters $1T term-sheet talks after its first operating profit; Tim Gowers verifies OpenAI's Erdos proof as a second model run tightens the unit-distance bound to n^1.05; and Apple previews third-party AI Extensions for iOS at WWDC.",
+    "filename": "AI-Brief-2026-05-31.pdf"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 22",
     "date": "2026-05-25",
     "summary": "OpenAI's reasoning model autonomously disproves an 80-year geometry conjecture with a 125-page proof; Meta commits $145B to AI while cutting 8,000 jobs; Anthropic posts its first operating profit on $10.9B Q2 revenue; and a supply chain attack steals 3,800 GitHub repos in an 18-minute window.",
