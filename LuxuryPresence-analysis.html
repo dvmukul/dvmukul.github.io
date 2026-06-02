@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Luxury Presence competitive intelligence — market analysis, product audit, technology deep-dive, PM critique, and mock product strategy for the $100M ARR real estate OS platform, by Mukul Dewangan.">
+<title>Luxury Presence: The OS Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* LP-specific semantic aliases */
+:root {
+  --positive: var(--teal-light);
+  --negative: var(--accent);
+  --warning: var(--gold);
+  --accent-lt: rgba(28,94,94,0.10);
+  --accent-2-lt: rgba(192,90,26,0.06);
+  --surface-2: var(--bg-alt);
+}
+
+/* Layout helpers */
+.wrap { max-width: 960px; margin: 0 auto; }
+.wrap--narrow { max-width: 720px; margin: 0 auto; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+.two-col--asym { grid-template-columns: 3fr 2fr; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+@media (max-width: 780px) { .two-col, .two-col--asym, .three-col { grid-template-columns: 1fr; } }
+
+/* Product grid */
+.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 20px 0; }
+
+/* Card variants */
+.card--dark { background: var(--bg-dark); border-color: var(--bg-dark); color: #e8f4f4; }
+.card--dark h3, .card--dark h4 { color: #e8f4f4; }
+.card--dark p, .card--dark li { color: rgba(232,244,244,0.8); }
+.card--warm { background: var(--accent-2-lt); border-color: rgba(192,90,26,0.2); }
+
+/* Card tags */
+.card-tag {
+  display: inline-block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: var(--r-sm); margin-bottom: 10px;
+}
+.tag--green { background: var(--accent-lt); color: var(--teal); border: 1px solid rgba(28,94,94,0.2); }
+.tag--gold { background: rgba(201,150,46,0.10); color: var(--gold); border: 1px solid rgba(201,150,46,0.25); }
+.tag--orange { background: var(--accent-2-lt); color: var(--accent); border: 1px solid rgba(192,90,26,0.2); }
+.tag--red { background: rgba(192,90,26,0.08); color: var(--accent); border: 1px solid rgba(192,90,26,0.2); }
+.tag--teal { background: var(--accent-lt); color: var(--teal); border: 1px solid rgba(28,94,94,0.2); }
+
+/* Callout variants */
+.callout--warning { border-left-color: var(--accent); background: var(--accent-2-lt); }
+.callout--critical { border-left-color: var(--accent); background: rgba(192,90,26,0.05); }
+
+/* Score bars */
+.score-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 12px; }
+.score-label { font-size: 13px; min-width: 160px; color: var(--text-muted); }
+.score-track { flex: 1; height: 6px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+.score-fill { height: 100%; border-radius: 99px; background: var(--teal); }
+.score-val { font-size: 13px; font-weight: 600; color: var(--teal); min-width: 2rem; text-align: right; }
+
+/* Recommendation cards */
+.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+.rec-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; }
+.rec-num { font-family: var(--font-display); font-size: 2rem; font-weight: 400; font-style: italic; color: var(--border); line-height: 1; }
+.rec-title { font-weight: 600; font-size: 14px; color: var(--text); }
+.rec-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.rec-horizon { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); font-family: 'DM Mono', monospace; }
+
+/* Tech pills */
+.tech-pill { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-family: 'DM Mono', monospace; background: var(--surface); border: 1px solid var(--border); padding: 3px 10px; border-radius: var(--r-sm); margin: 2px; }
+
+/* Bullet list */
+ul.bullet { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+ul.bullet li { font-size: 13px; display: flex; gap: 8px; color: var(--text-muted); }
+ul.bullet li::before { content: '→'; color: var(--teal); flex-shrink: 0; }
+
+/* Check / Cross lists (LP-specific) */
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.check-list li { font-size: 13px; display: flex; gap: 8px; align-items: flex-start; color: var(--text-muted); }
+.check-list li::before { content: '✓'; color: var(--teal-light); font-weight: 700; flex-shrink: 0; }
+.cross-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.cross-list li { font-size: 13px; display: flex; gap: 8px; align-items: flex-start; color: var(--text-muted); }
+.cross-list li::before { content: '✗'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+/* Chips (LP-specific) */
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chip { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 99px; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-family: 'DM Mono', monospace; }
+.chip--accent { background: var(--accent-lt); border-color: rgba(28,94,94,0.25); color: var(--teal); }
+.chip--gold { background: rgba(201,150,46,0.10); border-color: rgba(201,150,46,0.3); color: var(--gold); }
+.chip--orange { background: var(--accent-2-lt); border-color: rgba(192,90,26,0.3); color: var(--accent); }
+
+/* SWOT overrides */
+.swot-cell.strengths { background: rgba(42,122,122,0.06); }
+.swot-cell.strengths .swot-label { color: var(--teal-light); }
+.swot-cell.weaknesses { background: rgba(192,90,26,0.06); }
+.swot-cell.weaknesses .swot-label { color: var(--accent); }
+.swot-cell.opportunities { background: rgba(28,94,94,0.06); }
+.swot-cell.opportunities .swot-label { color: var(--teal); }
+.swot-cell.threats { background: rgba(201,150,46,0.08); }
+.swot-cell.threats .swot-label { color: var(--gold); }
+.swot-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.swot-list li { font-size: 13px; display: flex; gap: 6px; color: var(--text-muted); }
+.swot-list li::before { content: '→'; opacity: 0.5; flex-shrink: 0; }
+
+/* Divider */
+.divider { height: 1px; background: var(--border); margin: 16px 0; }
+</style>
+</head>
+<body>
+
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · June 2026</div>
+  <h1>Luxury Presence:<br>The <em>OS</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Luxury Presence — the $100M ARR real estate platform becoming the operating system for agents.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Austin, TX</span></div>
+    <div>FOUNDED<span>2016</span></div>
+    <div>TOTAL RAISED<span>$94.3M</span></div>
+    <div>STATUS<span>$100M+ ARR (May 2026)</span></div>
+    <div>COVERAGE<span>luxurypresence.com</span></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$100M</div><div class="stat-label">ARR (May 2026)</div></div>
+  <div class="stat-box"><div class="stat-num blue">40%+</div><div class="stat-label">YoY Revenue Growth</div></div>
+  <div class="stat-box"><div class="stat-num">100K+</div><div class="stat-label">Agents on Platform</div></div>
+  <div class="stat-box"><div class="stat-num accent">30%</div><div class="stat-label">WSJ Top Agents</div></div>
+  <div class="stat-box"><div class="stat-num blue">~974</div><div class="stat-label">Employees</div></div>
+  <div class="stat-box"><div class="stat-num">$450B</div><div class="stat-label">Transaction Volume</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 01: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2 class="section-title">The ascent to $100M ARR</h2>
+  <p class="section-lead">Founded after CEO Malte Kramer met luxury agent Jade Mills at Stanford, Luxury Presence compounded from a premium website shop into a full growth platform through aggressive product expansion and AI investment.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="margin-bottom:1.25rem;">Company Timeline</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2016</div>
+          <div class="tl-title">Founded in Los Angeles</div>
+          <div class="tl-desc">Malte Kramer, Stanford GSB alum and former professional basketball player, meets luxury agent Jade Mills and spots the gap in premium real estate web design.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2019&ndash;2021</div>
+          <div class="tl-title">Series A &amp; Platform Expansion</div>
+          <div class="tl-desc">Raises seed and Series A from Bessemer Venture Partners and Switch Ventures. Expands from websites into SEO, content marketing, and social media management. Hits Inc. 5000 fastest-growing companies list.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2022&ndash;2023</div>
+          <div class="tl-title">Series B &amp; Austin HQ</div>
+          <div class="tl-desc">Opens Austin headquarters with satellite offices in LA, NYC, Denver, and Phoenix. Hits Inc. 5000 for the second and third consecutive years. Grows to 500+ employees.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Mid 2024</div>
+          <div class="tl-title">Presence Copilot Launch</div>
+          <div class="tl-desc">Launches mobile AI assistant: meeting prep, voice note transcription, MLS data access across 270+ services, and in-app lead nurture conversation management.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Aug 2025</div>
+          <div class="tl-title">$75M ARR &amp; AI Team 3&times; Expansion</div>
+          <div class="tl-desc">AI product and engineering team grows 300% YTD. Ships features 5&times; faster than prior year via Anthropic Claude-powered AI engineering. Hires McKinsey alum as Chief of Staff.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Jan 2026</div>
+          <div class="tl-title">$37M Series C + Presence CRM Announced</div>
+          <div class="tl-desc">Bessemer leads Series C for the third consecutive time. Presence CRM announced as "first AI relationship engine" &mdash; predicts market readiness before visible intent. Rolls out February 2026.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-year">May 2026</div>
+          <div class="tl-title">$100M ARR Milestone</div>
+          <div class="tl-desc">Crosses $100M ARR. Near-profitability. Plans $10M+ AI infrastructure investment over next 12 months. 400,000+ listings, $450B annual transaction volume on platform.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div class="card card--dark">
+        <div class="card-tag" style="background:rgba(232,244,244,0.12);color:rgba(232,244,244,0.7);border:1px solid rgba(232,244,244,0.2);">Investors</div>
+        <h3 style="margin-bottom:0.75rem;font-size:1rem;">Notable Backers</h3>
+        <p style="font-size:0.85rem;margin-bottom:1rem;color:rgba(232,244,244,0.8);">Bessemer Venture Partners (led all three rounds), Switch Ventures, NextEquity, Toba Capital.</p>
+        <p style="font-size:0.85rem;color:rgba(232,244,244,0.8);">Strategic angels include <strong>Spencer Rascoff</strong> (Zillow co-founder) and <strong>Tom Ferry</strong> (top real estate coach) &mdash; both provide distribution leverage beyond capital.</p>
+      </div>
+      <div class="card card--warm">
+        <div class="card-tag tag--gold">Positioning</div>
+        <h3 style="margin-bottom:0.75rem;font-size:1rem;">The "Growth Platform" Pivot</h3>
+        <p style="font-size:0.85rem;color:var(--text-muted);">LP has quietly dropped the "luxury" positioning from its core pitch. The new tagline &mdash; <em>"growth platform for relationship-driven real estate agents"</em> &mdash; signals mass-market ambition. Serving 100,000 agents is structurally incompatible with a genuine luxury niche identity.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag--teal">Business Model</div>
+        <h3 style="margin-bottom:0.75rem;font-size:1rem;">SaaS + Usage Hybrid</h3>
+        <ul class="check-list">
+          <li>Tiered subscriptions for agents, teams, and brokerages</li>
+          <li>Usage-based pricing for AI conversation handling</li>
+          <li>Premium add-ons: custom design, paid ads management</li>
+          <li>Enterprise contracts for large brokerages</li>
+          <li>Presence CRM now included across all plan tiers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 02: PRODUCT PORTFOLIO -->
+<div class="section">
+  <div class="section-label">§ 02 — Product Portfolio</div>
+  <h2 class="section-title">The Presence Platform</h2>
+  <p class="section-lead">Luxury Presence has consolidated its products into a unified platform &mdash; an ambitious land-grab across every layer of an agent's digital business.</p>
+
+  <div class="product-grid" style="margin-bottom:3rem;">
+    <div class="card">
+      <div class="card-tag tag--green">Core &middot; Website</div>
+      <h3>IDX Websites</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Award-winning custom-branded websites with MLS integration across 270+ services. Property sites, agent subdomain sites, home valuation tools, lead capture, private listings, blog publisher. The original product and still the core moat.</p>
+      <div class="chip-row"><span class="chip chip--accent">270+ MLS feeds</span><span class="chip chip--accent">IDX search</span><span class="chip chip--accent">Custom design</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--green">Core &middot; CRM</div>
+      <h3>Presence&reg; CRM</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Launched Feb 2026. Aggregates contacts, social followers, communication logs, website activity, and third-party enrichment. Detects life events (job changes, family expansion, net worth growth) to surface market-ready leads <em>before</em> visible intent.</p>
+      <div class="chip-row"><span class="chip chip--accent">Predictive intent</span><span class="chip chip--accent">Life event detection</span><span class="chip chip--accent">Autonomous outreach</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--gold">AI &middot; Mobile</div>
+      <h3>Presence Copilot&trade;</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Mobile AI assistant for meeting prep, voice note transcription, client preference tracking, and real-time MLS data. Agents can intercept and take over AI lead nurture conversations within the same text thread.</p>
+      <div class="chip-row"><span class="chip chip--gold">iOS / Android</span><span class="chip chip--gold">Voice AI</span><span class="chip chip--gold">MLS real-time</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--teal">Marketing &middot; SEO</div>
+      <h3>SEO &amp; Content Marketing</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Managed SEO services targeting local real estate search. AI-assisted blog generation, market reports, and GEO (Generative Engine Optimization) for AI search discoverability. 500+ marketing professionals in the service layer.</p>
+      <div class="chip-row"><span class="chip">Local SEO</span><span class="chip">AI content</span><span class="chip">GEO</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--teal">Marketing &middot; Social</div>
+      <h3>Social Media Management</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Fully managed social presence across platforms. AI-generated content calendars, listing promotions, brand-consistent posting. Done-for-you service positioning that reduces agent time-on-marketing.</p>
+      <div class="chip-row"><span class="chip">Done-for-you</span><span class="chip">AI content</span><span class="chip">Multi-platform</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--teal">Marketing &middot; Ads</div>
+      <h3>Paid Ads Management</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">AI-managed listing advertising and budget optimization. Note: PPC and retargeting are not in base plans &mdash; a documented friction point. Only available as an add-on, creating a notable competitive gap vs. full-stack rivals.</p>
+      <div class="chip-row"><span class="chip">AI budget mgmt</span><span class="chip">Listing ads</span><span class="chip chip--orange">Add-on only</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--orange">Tool &middot; Presentation</div>
+      <h3>Digital CMA</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Interactive Comparative Market Analysis presentations with video, maps, and live market data &mdash; all on-brand. Converts listing presentations and differentiates agents in competitive seller pitches.</p>
+      <div class="chip-row"><span class="chip">Interactive</span><span class="chip">Branded</span><span class="chip">Market data</span></div>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--orange">Network &middot; Growth</div>
+      <h3>Referral Network</h3>
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-top:0.5rem;">Exclusive agent-to-agent referral network within the 100,000-agent platform. Cross-market deal flow for top producers. Potentially the most defensible long-term moat &mdash; competitor replication requires equivalent agent density.</p>
+      <div class="chip-row"><span class="chip">100K+ agents</span><span class="chip">Cross-market</span><span class="chip">Exclusive access</span></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Platform Bet:</strong> Every product above is bundled into the Presence Platform, with Presence CRM now included across all plans. Classic platform consolidation &mdash; reduce vendor relationships, increase switching costs, expand ARPU. The risk: executing 8+ product lines simultaneously while maintaining consistent quality is a substantial organizational challenge.
+  </div>
+
+  <div class="two-col" style="margin-top:2rem;">
+    <div>
+      <h3 style="margin-bottom:1rem;">Target Customer Segments</h3>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div class="card" style="padding:1rem 1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
+            <strong style="font-size:0.9rem;">Top-Producing Solo Agents</strong>
+            <span class="chip chip--accent">Core ICP</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);">$5M&ndash;$50M+ annual transaction volume. Want brand elevation and less marketing overhead. Price-insensitive if ROI is clear. The prestige anchor that validates the platform.</p>
+        </div>
+        <div class="card" style="padding:1rem 1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
+            <strong style="font-size:0.9rem;">High-Performance Teams</strong>
+            <span class="chip chip--gold">Growth Segment</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);">3&ndash;30 agent teams needing consistent brand infrastructure, lead routing, and CRM that works across agents. WSJ top teams are the benchmark for this segment.</p>
+        </div>
+        <div class="card" style="padding:1rem 1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
+            <strong style="font-size:0.9rem;">Independent Brokerages</strong>
+            <span class="chip chip--accent">Enterprise Push</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);">Multi-office operations needing centralized tech, agent subdomain sites, and enterprise permissions. Highest ARPU, but longer sales cycles and more complex onboarding.</p>
+        </div>
+        <div class="card" style="padding:1rem 1.25rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem;">
+            <strong style="font-size:0.9rem;">Emerging &amp; Mid-Tier Agents</strong>
+            <span class="chip chip--orange">Brand Tension</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-muted);">At 100,000 agents, LP clearly serves beyond "luxury." Entry-tier agents find pricing high and features over-engineered. This segment creates genuine brand dilution risk for the top-producer ICP.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom:1rem;">Key Performance Claims</h3>
+      <p style="font-size:0.84rem;color:var(--text-muted);margin-bottom:1.25rem;">Self-reported by LP. Treat as directional, not independently verified.</p>
+      <div class="score-row"><div class="score-label">Agent growth vs. market peers</div><div class="score-track"><div class="score-fill" style="width:85%;"></div></div><div class="score-val">6&times;</div></div>
+      <div class="score-row"><div class="score-label">Transaction volume vs. peers</div><div class="score-track"><div class="score-fill" style="width:60%;"></div></div><div class="score-val">3&times;</div></div>
+      <div class="score-row"><div class="score-label">WSJ Top 100 agent penetration</div><div class="score-track"><div class="score-fill" style="width:30%;"></div></div><div class="score-val">30%</div></div>
+      <div class="score-row"><div class="score-label">Deploy velocity improvement</div><div class="score-track"><div class="score-fill" style="width:80%;"></div></div><div class="score-val">5&times;</div></div>
+      <div class="score-row"><div class="score-label">AI/Eng team growth YTD '25</div><div class="score-track"><div class="score-fill" style="width:75%;"></div></div><div class="score-val">300%</div></div>
+      <div class="callout callout--warning" style="margin-top:1.5rem;">
+        <strong>Analyst flag:</strong> The "6&times; growth" claim compares LP agents against "peers in the same markets" &mdash; a self-selected, survivorship-biased cohort. Top producers likely grow faster independent of tooling. LP has not published its methodology.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03: TECHNOLOGY & AI -->
+<div class="section">
+  <div class="section-label">§ 03 — Technology &amp; AI</div>
+  <h2 class="section-title">Genuine AI depth or marketing veneer?</h2>
+  <p class="section-lead">LP's AI investment is real and structurally ahead of most proptech competitors &mdash; but the gap between the marketing narrative and actual product capability deserves scrutiny.</p>
+
+  <div class="two-col two-col--asym" style="margin-bottom:3rem;">
+    <div>
+      <h3 style="margin-bottom:1.25rem;">Core Technology Stack</h3>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag tag--green">Frontend / Web Platform</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Agent websites run on a proprietary CMS delivering custom-branded, IDX-connected property search pages. Engineering job postings signal a modern React/Next.js frontend with global CDN delivery. Engineers are expected to ship production code with AI pair programming at velocity &mdash; this is a "use AI by default" engineering culture, not an optional practice.</p>
+      </div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag tag--gold">AI Infrastructure</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Anthropic Claude is the primary LLM backbone. Job postings explicitly reference an "unlimited Anthropic token budget" and describe LP as "top 1% of companies applying AI." Models are trained on 100M+ annual platform interactions and billions of data points. AI agents handle SEO generation, social content, ad budget optimization, and autonomous lead nurture conversations.</p>
+      </div>
+      <div class="card" style="margin-bottom:1rem;">
+        <div class="card-tag tag--teal">Data Layer</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">Presence CRM aggregates 270+ MLS feeds, social activity, communication logs, website behavioral data, and third-party enrichment (job changes, net worth signals, life events). This data moat is the real competitive asset &mdash; harder to replicate than any UI feature and requires years of time-in-market to build depth.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag--orange">Managed Service Layer</div>
+        <p style="font-size:0.85rem;color:var(--text-muted);">500+ marketing and technology professionals operate as a managed service layer on top of the software. This human+AI hybrid delivers quality outcomes but creates margin pressure. LP is "nearly profitable" at $100M ARR &mdash; below SaaS benchmarks &mdash; because this labor cost hasn't been fully automated away.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:1.25rem;">
+      <div class="card card--dark">
+        <h4 style="color:rgba(232,244,244,0.7);margin-bottom:1rem;">AI Readiness Score</h4>
+        <div class="score-row"><div class="score-label" style="color:rgba(232,244,244,0.7);min-width:150px;">Data Assets</div><div class="score-track" style="background:rgba(255,255,255,0.1);"><div class="score-fill" style="width:85%;background:var(--teal-light);"></div></div><div class="score-val" style="color:var(--teal-light);">8/10</div></div>
+        <div class="score-row"><div class="score-label" style="color:rgba(232,244,244,0.7);min-width:150px;">Model Sophistication</div><div class="score-track" style="background:rgba(255,255,255,0.1);"><div class="score-fill" style="width:70%;background:var(--teal-light);"></div></div><div class="score-val" style="color:var(--teal-light);">7/10</div></div>
+        <div class="score-row"><div class="score-label" style="color:rgba(232,244,244,0.7);min-width:150px;">Product Integration</div><div class="score-track" style="background:rgba(255,255,255,0.1);"><div class="score-fill" style="width:65%;background:var(--teal-light);"></div></div><div class="score-val" style="color:var(--teal-light);">6/10</div></div>
+        <div class="score-row"><div class="score-label" style="color:rgba(232,244,244,0.7);min-width:150px;">AI Autonomy (actual)</div><div class="score-track" style="background:rgba(255,255,255,0.1);"><div class="score-fill" style="width:50%;background:var(--teal-light);"></div></div><div class="score-val" style="color:var(--teal-light);">5/10</div></div>
+        <div class="score-row"><div class="score-label" style="color:rgba(232,244,244,0.7);min-width:150px;">Engineering Velocity</div><div class="score-track" style="background:rgba(255,255,255,0.1);"><div class="score-fill" style="width:80%;background:var(--teal-light);"></div></div><div class="score-val" style="color:var(--teal-light);">8/10</div></div>
+        <p style="font-size:0.75rem;color:rgba(232,244,244,0.55);margin-top:0.75rem;">Composite: 6.8/10. Strong data foundation and engineering culture. AI autonomy claims are ahead of actual product maturity.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag--teal">AI Product Suite</div>
+        <ul class="check-list">
+          <li>Presence CRM &mdash; predictive relationship engine</li>
+          <li>AI Lead Nurture Specialist &mdash; autonomous texting</li>
+          <li>AI SEO Blogger &mdash; content generation at scale</li>
+          <li>AI Ads Optimizer &mdash; budget &amp; bid management</li>
+          <li>AI Social Specialist &mdash; content calendar automation</li>
+          <li>Presence Copilot &mdash; mobile agent AI assistant</li>
+        </ul>
+      </div>
+      <div class="card card--warm">
+        <div class="card-tag tag--orange">Critical Lens</div>
+        <p style="font-size:0.84rem;color:var(--text-muted);">LP calls its AI marketing suite "fully autonomous." The 500-person service layer exists precisely because the AI isn't reliable enough for client-facing real estate output without human review. User complaints about bulk-posted, generic AI blog content confirm the quality gap between the marketing claim and the delivered product.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:1.25rem;">Presence CRM &mdash; What Differentiates It</h3>
+  <div class="three-col">
+    <div class="card">
+      <div class="card-tag tag--green">Layer 1: Data Aggregation</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);">Pulls contacts, social followers, email/SMS history, website behavioral data, and legacy CRM exports into a unified contact graph. Auto-updates records and enriches with third-party signals &mdash; job changes, address updates, income proxies.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--gold">Layer 2: Predictive Intelligence</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);">Detects job promotions, new family members, income growth, and net worth increases that statistically precede real estate transactions. Surfaces deals in an agent's existing network before competitors know the contact is looking.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag--teal">Layer 3: Prescriptive Action</div>
+      <p style="font-size:0.85rem;color:var(--text-muted);">Tells the agent exactly who to contact, when, and with what message &mdash; then executes outreach autonomously if configured. Closes the loop from insight to action. If this works at scale, it's a genuine category-defining capability with no current equivalent.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04: COMPETITIVE LANDSCAPE -->
+<div class="section">
+  <div class="section-label">§ 04 — Competitive Landscape</div>
+  <h2 class="section-title">The fragmented battlefield</h2>
+  <p class="section-lead">Real estate tech is crowded but historically under-integrated. LP's platform play is strategically sound &mdash; the question is whether any competitor can match breadth before LP solidifies switching costs.</p>
+
+  <div style="overflow-x:auto;margin-bottom:2.5rem;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Competitor</th><th>Core Strength</th><th>Website Design</th><th>CRM / AI</th><th>Managed Services</th><th>Primary Weakness</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="highlight">
+          <td><strong>Luxury Presence</strong></td>
+          <td>Brand + platform breadth</td>
+          <td>&#11088;&#11088;&#11088;&#11088;&#11088; Award-winning</td>
+          <td>&#11088;&#11088;&#11088;&#11088; AI-native (new)</td>
+          <td>&#11088;&#11088;&#11088;&#11088;&#11088; 500+ staff</td>
+          <td>Brand identity tension; compressed margins from service layer</td>
+        </tr>
+        <tr>
+          <td><strong>BoldTrail / kvCORE</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Inside Real Estate</span></td>
+          <td>Brokerage scale &amp; relationships</td>
+          <td>&#11088;&#11088; Dated, template-heavy</td>
+          <td>&#11088;&#11088;&#11088; Mature CRM, bolt-on AI</td>
+          <td>&#11088;&#11088; Mostly self-serve</td>
+          <td>Generic design; integration complexity post-acquisition</td>
+        </tr>
+        <tr>
+          <td><strong>Sierra Interactive</strong></td>
+          <td>SEO-first lead generation</td>
+          <td>&#11088;&#11088; Utilitarian</td>
+          <td>&#11088;&#11088;&#11088; Solid CRM, limited AI</td>
+          <td>&#11088;&#11088; Partial</td>
+          <td>Design brand doesn't impress luxury sellers or high-end listings</td>
+        </tr>
+        <tr>
+          <td><strong>Agent Image</strong></td>
+          <td>Custom design pedigree (25 yrs)</td>
+          <td>&#11088;&#11088;&#11088;&#11088; High-end custom</td>
+          <td>&#11088; Design-only, no CRM</td>
+          <td>&#11088;&#11088; Design only</td>
+          <td>No CRM, no AI, no marketing automation &mdash; pure point solution</td>
+        </tr>
+        <tr>
+          <td><strong>Follow Up Boss</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Acquired by Zillow 2023</span></td>
+          <td>CRM depth, ecosystem integrations</td>
+          <td>&#11088; No website product</td>
+          <td>&#11088;&#11088;&#11088;&#11088;&#11088; Best-in-class CRM</td>
+          <td>&#11088; None</td>
+          <td>Single product; Zillow ownership creates structural agent distrust</td>
+        </tr>
+        <tr>
+          <td><strong>Brivity</strong></td>
+          <td>Team-focused CRM + lead gen</td>
+          <td>&#11088;&#11088;&#11088; Decent</td>
+          <td>&#11088;&#11088;&#11088; Good for teams</td>
+          <td>&#11088;&#11088;&#11088; Full marketing suite</td>
+          <td>Lower design ceiling; less brand prestige positioning</td>
+        </tr>
+        <tr>
+          <td><strong>MoxiWorks</strong></td>
+          <td>Enterprise brokerage suite</td>
+          <td>&#11088;&#11088; Basic</td>
+          <td>&#11088;&#11088;&#11088; CRM + analytics</td>
+          <td>&#11088;&#11088; Limited</td>
+          <td>Brokerage-centric; agent UX secondary; AI behind the curve</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div>
+      <h3 style="margin-bottom:1rem;">Where LP Wins</h3>
+      <ul class="check-list">
+        <li><strong>Design brand:</strong> No competitor approaches LP's visual quality at scale. High-end sellers evaluate agent websites as a proxy for how their property will be marketed &mdash; LP wins this signal war.</li>
+        <li><strong>Platform breadth:</strong> The only player combining website + CRM + SEO + social + ads + mobile AI in one subscription, creating a high-friction bundle to leave.</li>
+        <li><strong>Referral flywheel:</strong> 30% of top agents creates self-reinforcing network effects. Agents recruit peers for referral access, growing the network, attracting more top agents.</li>
+        <li><strong>Predictive CRM concept:</strong> Life-event-based deal prediction is genuinely novel &mdash; no current direct equivalent in the market.</li>
+        <li><strong>Anthropic-backed AI infrastructure:</strong> Unlimited token budget and 300% AI team growth is a structural advantage vs. competitors retrofitting LLMs onto legacy stacks.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="margin-bottom:1rem;">Where LP Is Vulnerable</h3>
+      <ul class="cross-list">
+        <li><strong>CRM late-mover disadvantage:</strong> Follow Up Boss and kvCORE have years of head-start on relationship data. CRM migration is high-friction and requires convincing agents to move years of contact history.</li>
+        <li><strong>SEO content quality in practice:</strong> Multiple public reviews cite AI blog content as bulk-generated, posted in batches on the same day, and minimally customized. Directly undermines the premium brand.</li>
+        <li><strong>Margin structure:</strong> "Near profitability" at $100M ARR signals structural labor intensity atypical for a SaaS business at this scale.</li>
+        <li><strong>Zillow shadow risk:</strong> Zillow (Follow Up Boss parent) could bundle free CRM + marketing into listing tools, undercutting LP's newest product before switching costs set in.</li>
+        <li><strong>Brand dilution at scale:</strong> "Luxury Presence" serving 100K unfiltered agents loses the exclusivity signal top producers paid a premium to access.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 05: SWOT -->
+<div class="section">
+  <div class="section-label">§ 05 — SWOT</div>
+  <h2 class="section-title">SWOT Analysis</h2>
+  <p class="section-lead" style="margin-bottom:2rem;">An honest read on LP's strategic position heading into H2 2026.</p>
+  <div class="swot-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border-radius:var(--r-md);overflow:hidden;border:1px solid var(--border);">
+    <div class="swot-cell strengths" style="padding:1.5rem;background:var(--surface);">
+      <div class="swot-label">Strengths</div>
+      <ul class="swot-list">
+        <li>Industry-leading website design quality &mdash; genuine moat vs. all competitors</li>
+        <li>First-mover in AI-native real estate growth platform positioning</li>
+        <li>100,000-agent network creates self-reinforcing referral flywheel</li>
+        <li>Bessemer-backed for three consecutive rounds &mdash; institutional conviction is rare</li>
+        <li>Strategic angels (Rascoff, Ferry) provide distribution leverage beyond capital</li>
+        <li>Anthropic-powered AI infrastructure with 5&times; engineering deploy velocity</li>
+        <li>30% WSJ top-agent penetration provides elite brand signal at zero marginal cost</li>
+        <li>Data moat: 100M+ interactions, 400K+ listings, 270+ MLS feeds</li>
+      </ul>
+    </div>
+    <div class="swot-cell weaknesses" style="padding:1.5rem;background:var(--surface);">
+      <div class="swot-label">Weaknesses</div>
+      <ul class="swot-list">
+        <li>500-person service layer caps SaaS margins; "near profitability" at $100M ARR is below benchmark</li>
+        <li>AI blog content quality documented as subpar in public reviews</li>
+        <li>Brand identity tension: "luxury" name vs. 100K mass-market agent base</li>
+        <li>CRM is a late entrant into a market with entrenched incumbents holding years of relationship data</li>
+        <li>PPC/retargeting not in base plans &mdash; creates competitive gap vs. full-stack rivals</li>
+        <li>Backend SEO architecture criticized as technically shallow</li>
+        <li>8+ simultaneous product lines create execution and quality-consistency risk</li>
+      </ul>
+    </div>
+    <div class="swot-cell opportunities" style="padding:1.5rem;background:var(--surface);">
+      <div class="swot-label">Opportunities</div>
+      <ul class="swot-list">
+        <li>If Presence CRM's predictive intent delivers, it becomes the platform OS others integrate into</li>
+        <li>Brokerage enterprise expansion &mdash; 20,000 business accounts suggests multi-agent contracts are underpenetrated</li>
+        <li>International expansion &mdash; luxury real estate is global; LP is US-only today</li>
+        <li>GEO leadership &mdash; early mover as AI search displaces Google for local property queries</li>
+        <li>Selective M&amp;A &mdash; acquire paid ads or SEO specialists rather than building from scratch</li>
+        <li>Data product monetization &mdash; aggregated transaction signals have value beyond LP's own platform</li>
+      </ul>
+    </div>
+    <div class="swot-cell threats" style="padding:1.5rem;background:var(--surface);">
+      <div class="swot-label">Threats</div>
+      <ul class="swot-list">
+        <li>Zillow could bundle CRM + marketing into listing tools, undercutting LP's newest product line before switching costs set in</li>
+        <li>Enterprise CRM players (Salesforce, HubSpot) verticalizing into real estate with AI would directly compete in LP's new CRM segment</li>
+        <li>Real estate market cyclicality: agent count contractions in downturns directly compress LP's addressable base</li>
+        <li>LLM commoditization narrows "AI-first" differentiation as every competitor adds the same underlying models</li>
+        <li>AI autonomy liability: a mishandled autonomous message to a high-value contact creates reputational damage and churn risk</li>
+        <li>NAR/MLS regulatory shifts could affect IDX integration access models</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 06: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 06 — PM Critique</div>
+  <h2 class="section-title">What the strategy deck doesn't say</h2>
+  <p class="section-lead">LP's product roadmap is ambitious and often directionally right &mdash; but several core strategic bets deserve harder interrogation before the next fundraise.</p>
+
+  <div style="display:flex;flex-direction:column;gap:1.5rem;">
+    <div class="card">
+      <div class="card-tag tag--red">Critical Issue 1</div>
+      <h3 style="margin-bottom:0.75rem;">The Luxury Brand Is a Liability at Scale</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);">The company is named "Luxury Presence" but serves 100,000 agents &mdash; many of whom operate nowhere near luxury markets. When a $50M-a-year luxury agent discovers their "exclusive" platform shares infrastructure with entry-level agents in suburban mid-markets, the prestige signal collapses. LP has quietly shifted its messaging toward "relationship-driven growth platform" &mdash; but the domain, brand identity, and public positioning haven't followed. Holding both audiences simultaneously is the worst outcome: the mass-tier dilutes the premium tier's willingness to pay, while the premium tier's expectations exceed what the mass-market product delivers.</p>
+      <div class="callout callout--critical" style="margin-top:1rem;margin-bottom:0;">
+        <strong>What they should do:</strong> Formally bifurcate the brand. "Presence" serves 95K agents at competitive market price. "Luxury Presence" becomes invitation-only for agents above $25M annual volume &mdash; white-glove service, bespoke design, dedicated account team, exclusive network, and 3&ndash;5&times; pricing. Top-tier prestige sells the mid-tier brand; mid-tier scale funds the top-tier quality.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-tag tag--red">Critical Issue 2</div>
+      <h3 style="margin-bottom:0.75rem;">The CRM War Is Winnable but the Timeline Is Razor-Thin</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);">Follow Up Boss has been the gold standard for top-producing agent CRMs for years. Zillow's 2023 acquisition adds strategic complexity. LP entered with a compelling differentiator &mdash; predictive intent from life event signals genuinely doesn't exist anywhere else today. But CRM migration is among the highest-friction actions in software. Agents have years of contact history, deal notes, and communication logs. The risk: Presence CRM ships, underwhelms in V1, and the narrative reverses from "innovative AI CRM" to "late-mover that missed." The entire $37M Series C is specifically earmarked for this launch, making year-one pressure acute.</p>
+      <div class="callout callout--warning" style="margin-top:1rem;margin-bottom:0;">
+        <strong>What they should do:</strong> Focus Presence CRM's first 12 months entirely on migration quality and enrichment accuracy. Don't oversell AI autonomy in V1. Nail the single use case: "who should I call today, and why." One right recommendation per day beats ten autonomous messages the agent hasn't reviewed.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-tag tag--orange">Strategic Issue 3</div>
+      <h3 style="margin-bottom:0.75rem;">The Service Layer Is the Unsolved Margin Problem</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);">500 marketing professionals serving 100,000 agents is roughly a 1:200 staff-to-agent ratio. At $100M ARR, LP is "nearly profitable" &mdash; not comfortably profitable. Mature SaaS companies at this revenue scale run 15&ndash;25% net margins. The gap signals the managed service cost structure hasn't been solved by AI yet. LP's own narrative is that AI will replace human work &mdash; but documented AI content quality issues suggest the models still need human oversight. The strategic risk isn't revenue growth; it's whether unit economics ever achieve true software margins before a market downturn forces the question.</p>
+      <div class="callout callout--warning" style="margin-top:1rem;margin-bottom:0;">
+        <strong>What they should do:</strong> Publish an explicit service-to-software transition roadmap with margin milestones tied to AI adoption thresholds. "Nearly profitable" without a public commitment to when and how is a credibility gap at the $100M ARR inflection point.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-tag tag--gold">Strategic Issue 4</div>
+      <h3 style="margin-bottom:0.75rem;">Eight Product Lines Is Five Too Many to Execute at Quality</h3>
+      <p style="font-size:0.88rem;color:var(--text-muted);">Websites, CRM, SEO, social, paid ads, Copilot mobile, Digital CMA, Referral Network. Each is a standalone competitive market with entrenched specialists. LP's excellence in websites doesn't transfer automatically to paid ads management or CRM. The "all-in-one" value proposition is credible only if every module is at minimum competitive-tier quality. Right now that's inconsistent &mdash; some products are excellent (websites, Copilot), some are documented as underperforming (SEO content quality, ads flexibility). Weak modules erode trust in strong ones, and the compound brand risk across eight lines is underappreciated internally.</p>
+      <div class="callout" style="margin-top:1rem;margin-bottom:0;">
+        <strong>What they should do:</strong> Rank all product lines by NPS and retention impact. Invest until the top 3 are unambiguously best-in-class. For weaker modules, acquire specialists rather than stretching engineering across all fronts simultaneously &mdash; the $37M enables selective M&amp;A.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 07: MOCK PRODUCT STRATEGY -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2 class="section-title">What LP should build next</h2>
+  <p class="section-lead">A PM-level strategy document for Luxury Presence's next 18 months, given the $37M Series C and $100M ARR inflection point.</p>
+
+  <div class="callout" style="margin-bottom:2.5rem;">
+    <strong>Strategic thesis:</strong> LP's durable competitive advantage is its data &mdash; not its AI, not its design, not its service layer. The priority for the next 18 months is deepening the data moat and converting it into network-effect infrastructure competitors cannot replicate with capital alone.
+  </div>
+
+  <div class="rec-grid" style="margin-bottom:2.5rem;">
+    <div class="rec-card">
+      <div class="rec-num">01</div>
+      <div class="rec-horizon">0&ndash;6 months &middot; Now</div>
+      <div class="rec-title">Presence CRM: Ship the Daily Brief First</div>
+      <div class="rec-body">Launch one daily push notification: "3 contacts to reach today, and why." Zero setup required. The AI proves its value before the agent trusts it with autonomous outreach. This one feature becomes the beachhead for full CRM lock-in. Target: 60%+ daily brief open rate within 90 days of launch.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">02</div>
+      <div class="rec-horizon">0&ndash;6 months &middot; Now</div>
+      <div class="rec-title">Fix SEO Quality or Reframe the Product</div>
+      <div class="rec-body">AI bulk-blog is a documented, public quality problem. Two paths: invest in personalization layers so each article sounds like the specific agent (costs margin, worth it for brand protection), or honestly reframe as "content framework" requiring agent input. Do not continue selling a product that generates public quality complaints. Target: improved SEO sentiment on G2/Trustpilot within 6 months.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">03</div>
+      <div class="rec-horizon">6&ndash;12 months &middot; Next</div>
+      <div class="rec-title">LP Intelligence: Benchmark Reports as Distribution</div>
+      <div class="rec-body">Aggregate platform data across 100K agents to produce hyperlocal market intelligence &mdash; "how LP agents in your zip code perform vs. your market." Agents get unique insights at near-zero marginal cost; LP deeply entrenches the platform. This is the LinkedIn Economic Graph play for real estate. Target: 30% of agents share reports externally within 90 days, driving organic acquisition.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">04</div>
+      <div class="rec-horizon">6&ndash;12 months &middot; Next</div>
+      <div class="rec-title">CRM Referral Graph: Monetize the Network</div>
+      <div class="rec-body">Turn the 100K-agent network into a structured referral marketplace in the CRM. When Agent A's contact relocates to Agent B's market, the CRM auto-surfaces the opportunity and facilitates introduction. Charge a facilitation fee. Only LP at this agent density can make this work. Target: $1M in facilitated referral fees within 12 months &mdash; proving the network-effects flywheel.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">05</div>
+      <div class="rec-horizon">12&ndash;18 months &middot; Later</div>
+      <div class="rec-title">Formal Brand Bifurcation: Presence vs. Luxury Presence</div>
+      <div class="rec-body">Launch "Presence" as the mass-market brand. Maintain "Luxury Presence" as invitation-only for agents above $25M annual volume: bespoke design, dedicated team, exclusive network access, 3&ndash;5&times; pricing. Prestige tier validates the mass-market tier without contaminating it. Target: 1,000 Luxury Presence tier agents at $3K+/month ACV within 6 months of launch.</div>
+    </div>
+    <div class="rec-card">
+      <div class="rec-num">06</div>
+      <div class="rec-horizon">12&ndash;18 months &middot; Later</div>
+      <div class="rec-title">Own AI Search for Real Estate (GEO Leadership)</div>
+      <div class="rec-body">ChatGPT and Perplexity are already routing property queries away from Google. LP has flagged GEO but needs to move from blog content to structured data feeds that make LP-hosted listings and agent profiles natively retrievable by AI assistants. Become the default real estate data layer for AI search. Target: LP agents appear in AI-generated local real estate answers at 2&times; the rate of non-LP agents within 18 months.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:1.25rem;">What LP Should Stop Doing</h3>
+  <div class="three-col">
+    <div class="card card--warm">
+      <div class="card-tag tag--orange">Stop</div>
+      <h4 style="margin-bottom:0.5rem;font-size:0.9rem;">Overselling AI Autonomy</h4>
+      <p style="font-size:0.84rem;color:var(--text-muted);">"Fully autonomous" describes what is actually human-supervised AI output. The expectation gap generates public complaints and erodes the premium brand. Under-promise, over-deliver. The 500-person service layer exists because the AI isn't ready to fly solo on client-facing real estate marketing.</p>
+    </div>
+    <div class="card card--warm">
+      <div class="card-tag tag--orange">Stop</div>
+      <h4 style="margin-bottom:0.5rem;font-size:0.9rem;">Building Every Module In-House</h4>
+      <p style="font-size:0.84rem;color:var(--text-muted);">LP is simultaneously building paid ads, social, SEO, CRM, and mobile AI. The $37M enables selective M&amp;A. Acquiring a proven paid ads agency gives instant domain expertise. Building from scratch in eight competitive specialties simultaneously is the fastest path to thin execution.</p>
+    </div>
+    <div class="card card--warm">
+      <div class="card-tag tag--orange">Stop</div>
+      <h4 style="margin-bottom:0.5rem;font-size:0.9rem;">Conflating Design Awards with Outcomes</h4>
+      <p style="font-size:0.84rem;color:var(--text-muted);">Beautiful websites are table stakes if they don't convert. LP's investor narrative centers on design quality, but enterprise buyers want lead conversion rates, CRM retention data, and transaction attribution ROI. Ship an agent ROI dashboard before the next design award submission cycle.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
