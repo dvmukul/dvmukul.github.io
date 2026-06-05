@@ -1,0 +1,152 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "← Portfolio" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: ←
+      - text: Portfolio
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "Work" [ref=e7] [cursor=pointer]:
+          - /url: index.html#work
+      - listitem [ref=e8]:
+        - link "Teardowns" [ref=e9] [cursor=pointer]:
+          - /url: teardowns.html
+      - listitem [ref=e10]:
+        - link "AI Reports" [ref=e11] [cursor=pointer]:
+          - /url: ai-reports.html
+      - listitem [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: index.html#about
+      - listitem [ref=e14]:
+        - link "Contact" [ref=e15] [cursor=pointer]:
+          - /url: index.html#contact
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - paragraph [ref=e19]: Product Analysis
+        - heading "Product Teardowns" [level=1] [ref=e20]:
+          - text: Product
+          - emphasis [ref=e21]: Teardowns
+      - generic [ref=e22]:
+        - paragraph [ref=e23]:
+          - text: Structured dissections of AI and SaaS products — examining
+          - strong [ref=e24]: how they work, why they're designed that way, and where they're most exposed.
+          - text: Written from a Senior PM perspective, focused on products at inflection points.
+        - paragraph [ref=e25]: Each analysis covers jobs-to-be-done, UX decision rationale, business model mechanics, and strategic risk — using a consistent framework to make comparisons meaningful.
+      - generic [ref=e26]: Analysis
+    - generic [ref=e27]:
+      - generic [ref=e28]: Framework
+      - generic [ref=e29]:
+        - generic [ref=e30]: Jobs-to-be-Done
+        - generic [ref=e31]: UX Decision Rationale
+        - generic [ref=e32]: Business Model Mechanics
+        - generic [ref=e33]: Competitive Positioning
+        - generic [ref=e34]: Strategic Risk Assessment
+        - generic [ref=e35]: AI Disruption Exposure
+    - generic [ref=e36]:
+      - generic [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]: "01"
+          - generic [ref=e40]:
+            - generic [ref=e41]: Featured
+            - generic [ref=e42]: AI-Native Search
+          - heading "Perplexity AI" [level=2] [ref=e43]:
+            - text: Perplexity
+            - emphasis [ref=e44]: AI
+        - paragraph [ref=e46]: Consumer search is the wrong battleground. Enterprise verticalization and workflow embedding are the only paths to a durable moat — before Google's distribution advantage closes the quality gap entirely.
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: Key Findings
+          - list [ref=e50]:
+            - listitem [ref=e51]: — Collapses the search-read-synthesize workflow into a single interaction — the core UX bet against Google's link-centric model
+            - listitem [ref=e52]: — Inline citations differentiate from ChatGPT on trust; Focus modes acknowledge epistemological diversity (Reddit ≠ PubMed)
+            - listitem [ref=e53]: — Sponsored follow-up questions as monetization mirrors Google's model — the product it initially positioned against
+            - listitem [ref=e54]: — Publisher backlash (AP, Forbes, News Corp) could degrade answer quality if blocking spreads; no proactive revenue-sharing in place
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: Standout Insight
+            - paragraph [ref=e57]: "\"Consumer search is a demonstration market. Verticalized, workflow-embedded enterprise tools — Medical, Legal, Finance — are where the defensible business actually lives.\""
+        - link "Read full teardown →" [ref=e58] [cursor=pointer]:
+          - /url: https://github.com/dvmukul/ProductTeardowns/blob/main/Perplexity_Teardown.md
+          - text: Read full teardown
+          - generic [ref=e59]: →
+    - generic [ref=e60]:
+      - link "Read Duolingo product teardown on GitHub" [ref=e61] [cursor=pointer]:
+        - /url: https://github.com/dvmukul/ProductTeardowns/blob/main/Duolingo_Teardown.md
+        - generic [ref=e62]:
+          - generic [ref=e63]: "02"
+          - generic [ref=e64]:
+            - generic [ref=e65]: EdTech
+            - generic [ref=e66]: Consumer
+            - generic [ref=e67]: Gamification
+          - heading "Duolingo" [level=2] [ref=e68]
+          - paragraph [ref=e69]: Translation earbuds are the existential threat. Gamification and emotional attachment are the only moat — because functional necessity is eroding.
+        - generic [ref=e71]:
+          - paragraph [ref=e72]: Key Findings
+          - list [ref=e73]:
+            - listitem [ref=e74]: — Delayed registration (drop into lesson before sign-up) is the smartest onboarding decision in consumer ed-tech
+            - listitem [ref=e75]: — Streak mechanics exploit loss aversion; this is the real retention engine, not the content
+            - listitem [ref=e76]: "— Hearts system (mistake limits) serves dual purpose: focus attention and drive premium conversion"
+            - listitem [ref=e77]: "— Long-term risk: real-time translation tech makes casual language learning functionally unnecessary — platform must pivot to intrinsic motivation"
+        - generic [ref=e79]: →
+      - link "Read Character.AI product teardown on GitHub" [ref=e80] [cursor=pointer]:
+        - /url: https://github.com/dvmukul/ProductTeardowns/blob/main/CharacterAI_Teardown.md
+        - generic [ref=e81]:
+          - generic [ref=e82]: "03"
+          - generic [ref=e83]:
+            - generic [ref=e84]: AI Social
+            - generic [ref=e85]: Consumer
+            - generic [ref=e86]: Gen Z
+          - heading "Character.AI" [level=2] [ref=e87]:
+            - text: Character
+            - emphasis [ref=e88]: .AI
+          - paragraph [ref=e89]: A social simulation engine offering risk-free connection. Simultaneously the strongest retention mechanic and the most dangerous liability in consumer AI.
+        - generic [ref=e91]:
+          - paragraph [ref=e92]: Key Findings
+          - list [ref=e93]:
+            - listitem [ref=e94]: — Community-created character marketplace is the primary moat — not the underlying AI quality
+            - listitem [ref=e95]: — Monetization via speed/reliability keeps free tier accessible to Gen Z; smart constraint on the paywall
+            - listitem [ref=e96]: — Highest-value users (2+ daily hours) are likely the highest-risk from a wellbeing standpoint — an unresolvable revenue vs. safety tension
+            - listitem [ref=e97]: — As frontier models add personas and memory, competitive advantage shifts entirely to community lock-in
+        - generic [ref=e99]: →
+      - link "Read LinkedIn Job Matching product teardown on GitHub" [ref=e100] [cursor=pointer]:
+        - /url: https://github.com/dvmukul/ProductTeardowns/blob/main/LinkedIn_JobMatching_Teardown.md
+        - generic [ref=e101]:
+          - generic [ref=e102]: "04"
+          - generic [ref=e103]:
+            - generic [ref=e104]: HR Tech
+            - generic [ref=e105]: Enterprise
+            - generic [ref=e106]: LLM Matching
+          - heading "LinkedIn Job Matching" [level=2] [ref=e107]:
+            - text: LinkedIn
+            - emphasis [ref=e108]: Job Matching
+          - paragraph [ref=e109]: LLM matching improves the product. It also threatens the Recruiter revenue line — the business model that funds everything else.
+        - generic [ref=e111]:
+          - paragraph [ref=e112]: Key Findings
+          - list [ref=e113]:
+            - listitem [ref=e114]: — Multi-dimensional matching (skills, seniority, network, engagement) vs. keyword-only competitors is the real differentiator
+            - listitem [ref=e115]: — Microsoft flywheel creates an enterprise HR data moat no point-solution can replicate
+            - listitem [ref=e116]: — "The black hole problem" persists — better matching doesn't solve the trust-eroding silence after applications
+            - listitem [ref=e117]: — When the algorithm misleads (low match score on a role you're qualified for), the advisor posture actively damages trust
+        - generic [ref=e119]: →
+      - link "Read Splitwise product teardown on GitHub" [ref=e120] [cursor=pointer]:
+        - /url: https://github.com/dvmukul/ProductTeardowns/blob/main/Splitwise_Teardown.md
+        - generic [ref=e121]:
+          - generic [ref=e122]: "05"
+          - generic [ref=e123]:
+            - generic [ref=e124]: Fintech
+            - generic [ref=e125]: Consumer
+            - generic [ref=e126]: Network Effects
+          - heading "Splitwise" [level=2] [ref=e127]
+          - paragraph [ref=e128]: The app everyone uses and nobody pays for. Solves an emotional job — removing awkwardness from money conversations — that P2P payments never have.
+        - generic [ref=e130]:
+          - paragraph [ref=e131]: Key Findings
+          - list [ref=e132]:
+            - listitem [ref=e133]: — "Simplify Debts" algorithm — minimizing transaction complexity through intelligent optimization — is the core differentiator, not the UI
+            - listitem [ref=e134]: "— Viral growth is inherent: creating a group requires inviting friends; adoption is the product experience"
+            - listitem [ref=e135]: — Recent shift to aggressive friction (3 daily transactions before ads) risks the goodwill that built the user base
+            - listitem [ref=e136]: "— Existential threat: if Venmo or Apple Cash integrates sophisticated group expense tracking, standalone relevance shrinks fast"
+        - generic [ref=e138]: →
+  - generic [ref=e139]:
+    - generic [ref=e140]: © 2026 Mukul Dewangan
+    - link "View all on GitHub →" [ref=e141] [cursor=pointer]:
+      - /url: https://github.com/dvmukul/ProductTeardowns

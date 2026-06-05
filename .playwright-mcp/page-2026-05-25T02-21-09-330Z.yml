@@ -1,0 +1,49 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "← Portfolio" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: ←
+      - text: Portfolio
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "Work" [ref=e7] [cursor=pointer]:
+          - /url: index.html#work
+      - listitem [ref=e8]:
+        - link "Teardowns" [ref=e9] [cursor=pointer]:
+          - /url: teardowns.html
+      - listitem [ref=e10]:
+        - link "AI Reports" [ref=e11] [cursor=pointer]:
+          - /url: ai-reports.html
+      - listitem [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: index.html#about
+      - listitem [ref=e14]:
+        - link "Contact" [ref=e15] [cursor=pointer]:
+          - /url: index.html#contact
+  - main [ref=e16]:
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - paragraph [ref=e19]: Weekly Briefing
+        - heading "AI Weekly." [level=1] [ref=e20]:
+          - text: AI
+          - emphasis [ref=e21]: Weekly.
+      - generic [ref=e22]:
+        - generic: Signal
+        - paragraph [ref=e23]: A weekly briefing on what matters in AI — no hype, just signal. Each issue cuts through the noise to what practitioners and product people actually need to know.
+        - generic [ref=e24]:
+          - generic [ref=e25]: "1"
+          - paragraph [ref=e26]: Issues Published
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - heading "All Issues" [level=2] [ref=e29]
+        - generic [ref=e30]: Newest first
+      - generic [ref=e32]:
+        - 'heading "AI Weekly — Issue #1" [level=3] [ref=e33]'
+        - generic [ref=e34]: May 24, 2026
+        - paragraph [ref=e35]: "Test entry: GPT-5 announcement, Google Gemini 2.0 benchmarks, and open-source Llama 4 performance analysis."
+        - 'link "Download AI Weekly — Issue #1 PDF" [ref=e36] [cursor=pointer]':
+          - /url: reports/test.pdf
+          - text: Download PDF ↓
+  - contentinfo [ref=e37]:
+    - generic [ref=e38]: © 2026 Mukul Dewangan
+    - generic [ref=e39]: AI Weekly Reports

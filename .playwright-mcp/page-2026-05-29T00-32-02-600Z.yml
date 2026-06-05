@@ -1,0 +1,696 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: CLIO · Strategic Analysis · May 2026
+      - generic [ref=e5]:
+        - link "Overview" [ref=e6] [cursor=pointer]:
+          - /url: "#overview"
+        - link "Products" [ref=e7] [cursor=pointer]:
+          - /url: "#products"
+        - link "Competitors" [ref=e8] [cursor=pointer]:
+          - /url: "#competitors"
+        - link "Technology" [ref=e9] [cursor=pointer]:
+          - /url: "#technology"
+        - link "AI Strategy" [ref=e10] [cursor=pointer]:
+          - /url: "#ai"
+        - link "PM Critique" [ref=e11] [cursor=pointer]:
+          - /url: "#pm"
+        - link "Strategy" [ref=e12] [cursor=pointer]:
+          - /url: "#strategy"
+  - banner [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: Legal Technology · Practice Management · AI
+      - heading "Clio is becoming the operating system for law." [level=1] [ref=e16]:
+        - text: Clio is becoming
+        - emphasis [ref=e17]: the operating system
+        - text: for law.
+      - paragraph [ref=e18]: From a billing tool for small firms to a $5B AI-powered legal platform — and why the next 18 months are the most critical in the company's history.
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - strong [ref=e21]: $500M+
+          - text: ARR (May 2026)
+        - generic [ref=e22]:
+          - strong [ref=e23]: $5B
+          - text: Valuation (Series G)
+        - generic [ref=e24]:
+          - strong [ref=e25]: 400K+
+          - text: Users / 130 Countries
+        - generic [ref=e26]:
+          - strong [ref=e27]: $1.7B+
+          - text: Total Funding
+        - generic [ref=e28]:
+          - strong [ref=e29]: Founded
+          - text: 2008 · Vancouver, BC
+  - generic [ref=e31]:
+    - generic [ref=e32]: Section 01
+    - heading "Company Overview" [level=2] [ref=e33]
+    - paragraph [ref=e34]: Clio (legally Themis Solutions Inc.) started as a cloud-based billing and case management tool. It is now the dominant practice management platform for small and mid-size law firms globally, aggressively expanding upmarket into enterprise and legal research.
+    - generic [ref=e35]:
+      - generic [ref=e36]:
+        - generic [ref=e37]: $500M+
+        - generic [ref=e38]: Annual Recurring Revenue
+        - generic [ref=e39]: +113% vs. Dec 2024 ($235M)
+      - generic [ref=e40]:
+        - generic [ref=e41]: $5B
+        - generic [ref=e42]: Valuation (Nov 2025)
+        - generic [ref=e43]: Series G led by NEA
+      - generic [ref=e44]:
+        - generic [ref=e45]: 400K+
+        - generic [ref=e46]: Legal Professionals
+        - generic [ref=e47]: 130 countries
+      - generic [ref=e48]:
+        - generic [ref=e49]: $1.7B+
+        - generic [ref=e50]: Total Funding Raised
+        - generic [ref=e51]: incl. $350M debt facility
+      - generic [ref=e52]:
+        - generic [ref=e53]: 1B+
+        - generic [ref=e54]: Legal Documents (vLex)
+        - generic [ref=e55]: 110+ country coverage
+      - generic [ref=e56]:
+        - generic [ref=e57]: 250+
+        - generic [ref=e58]: App Integrations
+        - generic [ref=e59]: 100+ Certified Consultants
+    - generic [ref=e60]:
+      - generic [ref=e61]:
+        - heading "The Clio story in brief" [level=3] [ref=e62]
+        - paragraph [ref=e63]: "Founded in 2008 by Jack Newton and Rian Gauvreau out of Vancouver, Clio addressed a painfully unsexy problem: lawyers were still billing by hand on paper and managing cases in spreadsheets. The founding insight — that a cloud-native practice management tool could replace the hodgepodge of desktop software and manila folders — turned out to be prescient."
+        - paragraph [ref=e64]:
+          - text: For a decade, Clio quietly compounded. It won the SMB legal market through relentless distribution (ClioCon, bar association partnerships, referral programs) and an expanding integration ecosystem. Revenue reached $235M ARR by end of 2024, then
+          - strong [ref=e65]: accelerated sharply
+          - text: — doubling in roughly 12 months to $500M by May 2026. That pace is not organic growth alone.
+        - paragraph [ref=e66]:
+          - text: The inflection point was the
+          - strong [ref=e67]: $1 billion acquisition of vLex
+          - text: in November 2025 — the largest deal in legal tech history. vLex brought over one billion primary legal documents, editorial enrichment, and Vincent AI, a GPT-powered legal research assistant. With one transaction, Clio moved from managing the business of law to powering the practice of law.
+        - generic [ref=e68]:
+          - strong [ref=e69]: "Critical observation:"
+          - text: The $500M ARR milestone almost certainly includes vLex revenue. Without disaggregation, pure organic growth rates are opaque. Investors and analysts should demand segment-level ARR disclosure.
+      - generic [ref=e70]:
+        - generic [ref=e71]:
+          - generic [ref=e72]: Leadership
+          - heading "Key Executives" [level=3] [ref=e73]
+          - list [ref=e74]:
+            - listitem [ref=e75]:
+              - text: —
+              - strong [ref=e76]: Jack Newton
+              - text: — Co-Founder & CEO
+            - listitem [ref=e77]:
+              - text: —
+              - strong [ref=e78]: Rian Gauvreau
+              - text: — Co-Founder & President
+            - listitem [ref=e79]: — Backed by NEA, TCV, Goldman Sachs AM, Sixth Street Growth, JMI Equity
+            - listitem [ref=e80]: — Debt facility co-led by Blackstone and Blue Owl Capital
+        - generic [ref=e81]:
+          - generic [ref=e82]: Market Context
+          - heading "Legal Tech Market Size" [level=3] [ref=e83]
+          - list [ref=e84]:
+            - listitem [ref=e85]:
+              - text: "— Global legal tech:"
+              - strong [ref=e86]: $34B in 2025
+              - text: → $78B by 2034 (CAGR ~10%)
+            - listitem [ref=e87]:
+              - text: "— AI legal tech specifically:"
+              - strong [ref=e88]: $5.6B in 2025
+              - text: → $34B by 2034 (CAGR ~22%)
+            - listitem [ref=e89]:
+              - text: — Law firm tech spending grew
+              - strong [ref=e90]: 9.7% in 2025
+              - text: — fastest pace ever recorded
+            - listitem [ref=e91]: — 79% of legal professionals using AI tools in 2025 vs. 19% in 2023
+    - generic [ref=e92]:
+      - heading "Key milestones" [level=3] [ref=e93]
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e97]: "2008"
+            - generic [ref=e98]: Founded in Vancouver
+            - generic [ref=e99]: Jack Newton & Rian Gauvreau launch cloud-based practice management. First-mover in cloud-native legal SaaS.
+          - generic [ref=e100]:
+            - generic [ref=e101]: "2019"
+            - generic [ref=e102]: $250M Series D
+            - generic [ref=e103]: Reaches unicorn status. Launches Clio Payments embedded fintech capability.
+          - generic [ref=e104]:
+            - generic [ref=e105]: "2022"
+            - generic [ref=e106]: $900M Series F at $3B
+            - generic [ref=e107]: Expands into enterprise. Clio Grow CRM product matures. International expansion accelerates.
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - generic [ref=e110]: Mar 2025
+            - generic [ref=e111]: ShareDo Acquisition → Clio Operate
+            - generic [ref=e112]: Acquires UK-based ShareDo for enterprise legal work management. Rebranded as Clio Operate, targeting large law and corporate legal depts.
+          - generic [ref=e113]:
+            - generic [ref=e114]: Nov 2025
+            - generic [ref=e115]: $1B vLex Acquisition + $500M Series G
+            - generic [ref=e116]: Largest deal in legal tech history. Gains 1B+ legal documents and Vincent AI. Valuation hits $5B.
+          - generic [ref=e117]:
+            - generic [ref=e118]: May 2026
+            - generic [ref=e119]: $500M+ ARR Milestone
+            - generic [ref=e120]: Announces $500M ARR, claiming category-defining AI platform status. Clio Work available to solo firms.
+  - generic [ref=e122]:
+    - generic [ref=e123]: Section 02
+    - heading "Product Portfolio" [level=2] [ref=e124]
+    - paragraph [ref=e125]: Clio has evolved from a single product to a five-product suite spanning the full legal lifecycle — intake, case management, document work, research, and enterprise operations.
+    - generic [ref=e126]:
+      - generic [ref=e127]:
+        - generic [ref=e128]: Core Platform
+        - heading "Clio Manage" [level=3] [ref=e129]
+        - paragraph [ref=e130]: The mothership. Case/matter management, time tracking, billing, client portal, calendar, trust accounting, and document management. The product 90%+ of Clio's installed base uses daily.
+        - generic [ref=e132]:
+          - strong [ref=e133]: "Target:"
+          - text: Solo → mid-size law firms
+          - strong [ref=e134]: "Pricing:"
+          - text: $49–$149/user/mo (EasyStart → Complete)
+          - strong [ref=e135]: "Key metric:"
+          - text: Processes billions in transactions/year via Clio Payments
+      - generic [ref=e136]:
+        - generic [ref=e137]: Client Intake
+        - heading "Clio Grow" [level=3] [ref=e138]
+        - paragraph [ref=e139]: CRM and intake automation. Lead tracking, online scheduling, intake forms, e-signatures, and referral reporting. Designed to turn website visitors into paying clients without manual follow-up.
+        - generic [ref=e141]:
+          - strong [ref=e142]: "Target:"
+          - text: Client-acquisition-focused firms
+          - strong [ref=e143]: "Pricing:"
+          - text: $59/user/mo standalone; bundled in Complete plan
+          - strong [ref=e144]: "Problem solved:"
+          - text: 67% of law firms lose leads due to slow follow-up
+      - generic [ref=e145]:
+        - generic [ref=e146]: Document AI
+        - heading "Clio Draft" [level=3] [ref=e147]
+        - paragraph [ref=e148]: AI-powered document automation. Generates legal documents from matter data and templates. Reduces drafting time by auto-populating client facts, dates, and case-specific language.
+        - generic [ref=e150]:
+          - strong [ref=e151]: "Target:"
+          - text: Document-heavy practices (estate, real estate, family law)
+          - strong [ref=e152]: "Pricing:"
+          - text: +$49/user/mo add-on
+          - strong [ref=e153]: "Gap:"
+          - text: Limited vs. specialized tools like Smokeball for high-volume docs
+      - generic [ref=e154]:
+        - generic [ref=e155]: AI Workspace · NEW
+        - heading "Clio Work" [level=3] [ref=e156]
+        - paragraph [ref=e157]: The flagship AI product. Combines matter context from the firm's own documents with vLex's 1B-document legal corpus for research, analysis, and case strategy. Agentic capabilities launched April 2026 — multi-step tasks from a single prompt.
+        - generic [ref=e159]:
+          - strong [ref=e160]: "Target:"
+          - text: All firm sizes (solo pricing added Apr 2026)
+          - strong [ref=e161]: "Moat:"
+          - text: Only research tool with live matter context baked in
+          - strong [ref=e162]: "Risk:"
+          - text: Still unproven at scale vs. Harvey, CoCounsel
+      - generic [ref=e163]:
+        - generic [ref=e164]: Enterprise · NEW
+        - heading "Clio Operate" [level=3] [ref=e165]
+        - paragraph [ref=e166]: Adaptive work management for large firms and corporate legal departments. Built on the ShareDo acquisition. Connects with iManage, NetDocuments, Aderant, Elite — designed to layer on top of existing enterprise stacks, not replace them.
+        - generic [ref=e168]:
+          - strong [ref=e169]: "Target:"
+          - text: BigLaw, Fortune 500 legal depts
+          - strong [ref=e170]: "Challenge:"
+          - text: Enterprise sales cycle is long; Clio is largely unproven here
+          - strong [ref=e171]: "Introduced to North America:"
+          - text: "2025"
+    - heading "Pricing architecture — Clio Manage tiers" [level=3] [ref=e172]
+    - table [ref=e174]:
+      - rowgroup [ref=e175]:
+        - row "Plan Price / user / mo (annual) Key capabilities unlocked Best for" [ref=e176]:
+          - columnheader "Plan" [ref=e177]
+          - columnheader "Price / user / mo (annual)" [ref=e178]
+          - columnheader "Key capabilities unlocked" [ref=e179]
+          - columnheader "Best for" [ref=e180]
+      - rowgroup [ref=e181]:
+        - row "EasyStart $49 Time tracking, billing, basic case management, Clio Payments Solo attorneys testing the water" [ref=e182]:
+          - cell "EasyStart" [ref=e183]:
+            - strong [ref=e184]: EasyStart
+          - cell "$49" [ref=e185]
+          - cell "Time tracking, billing, basic case management, Clio Payments" [ref=e186]
+          - cell "Solo attorneys testing the water" [ref=e187]
+        - row "Essentials $89 + Client portal, workflow automation, 3rd-party integrations Small firms (2–5 attorneys)" [ref=e188]:
+          - cell "Essentials" [ref=e189]:
+            - strong [ref=e190]: Essentials
+          - cell "$89" [ref=e191]
+          - cell "+ Client portal, workflow automation, 3rd-party integrations" [ref=e192]
+          - cell "Small firms (2–5 attorneys)" [ref=e193]
+        - row "Advanced $119 + Document automation, custom reports, priority support Growing firms with reporting needs" [ref=e194]:
+          - cell "Advanced" [ref=e195]:
+            - strong [ref=e196]: Advanced
+          - cell "$119" [ref=e197]
+          - cell "+ Document automation, custom reports, priority support" [ref=e198]
+          - cell "Growing firms with reporting needs" [ref=e199]
+        - row "Complete $149 + Clio Grow bundled — intake, scheduling, referral tracking Firms investing in client acquisition" [ref=e200]:
+          - cell "Complete" [ref=e201]:
+            - strong [ref=e202]: Complete
+          - cell "$149" [ref=e203]
+          - cell "+ Clio Grow bundled — intake, scheduling, referral tracking" [ref=e204]
+          - cell "Firms investing in client acquisition" [ref=e205]
+    - generic [ref=e206]:
+      - strong [ref=e207]: "Pricing pressure point:"
+      - text: A 5-attorney Clio shop on Complete + Grow + Draft can easily hit
+      - strong [ref=e208]: $13,000–$15,000/year
+      - text: — 2× what MyCase or PracticePanther would cost for similar coverage. This creates serious churns risk if SMB-focused competitors close the feature gap.
+  - generic [ref=e210]:
+    - generic [ref=e211]: Section 03
+    - heading "Competitive Landscape" [level=2] [ref=e212]
+    - paragraph [ref=e213]: "Clio operates in two intersecting arenas: practice management (SMB-dominated, relatively stable) and legal AI (rapidly shifting, with $11B-valuation competitors entering from above)."
+    - table [ref=e215]:
+      - rowgroup [ref=e216]:
+        - row "Company Valuation / Stage Core strength Target segment vs. Clio" [ref=e217]:
+          - columnheader "Company" [ref=e218]
+          - columnheader "Valuation / Stage" [ref=e219]
+          - columnheader "Core strength" [ref=e220]
+          - columnheader "Target segment" [ref=e221]
+          - columnheader "vs. Clio" [ref=e222]
+      - rowgroup [ref=e223]:
+        - row "Clio $5B (Series G) End-to-end platform, vLex corpus, embedded payments SMB → Mid-market → Enterprise (upmarket push) —" [ref=e224]:
+          - cell "Clio" [ref=e225]:
+            - strong [ref=e226]: Clio
+          - cell "$5B (Series G)" [ref=e227]
+          - cell "End-to-end platform, vLex corpus, embedded payments" [ref=e228]
+          - cell "SMB → Mid-market → Enterprise (upmarket push)" [ref=e229]
+          - cell "—" [ref=e230]
+        - row "Harvey AI $11B (Mar 2026), $190M ARR LLM-native legal reasoning, BigLaw penetration Large law firms, global Not a PM tool; pure AI research/drafting. Competing for AI budget at enterprise" [ref=e231]:
+          - cell "Harvey AI" [ref=e232]:
+            - strong [ref=e233]: Harvey AI
+          - cell "$11B (Mar 2026), $190M ARR" [ref=e234]
+          - cell "LLM-native legal reasoning, BigLaw penetration" [ref=e235]
+          - cell "Large law firms, global" [ref=e236]
+          - cell "Not a PM tool; pure AI research/drafting. Competing for AI budget at enterprise" [ref=e237]
+        - row "Thomson Reuters CoCounsel Public (TRI) Westlaw integration, trusted brand, enterprise relationships Mid → Large firms Has research depth Clio lacked pre-vLex. Still lacks PM layer" [ref=e238]:
+          - cell "Thomson Reuters CoCounsel" [ref=e239]:
+            - strong [ref=e240]: Thomson Reuters CoCounsel
+          - cell "Public (TRI)" [ref=e241]
+          - cell "Westlaw integration, trusted brand, enterprise relationships" [ref=e242]
+          - cell "Mid → Large firms" [ref=e243]
+          - cell "Has research depth Clio lacked pre-vLex. Still lacks PM layer" [ref=e244]
+        - row "LexisNexis Lexis+ Public (RELX) Massive case law corpus, legacy enterprise contracts Large firms, academic, government Dominates citation share in AI queries alongside Harvey; old-school UX" [ref=e245]:
+          - cell "LexisNexis Lexis+" [ref=e246]:
+            - strong [ref=e247]: LexisNexis Lexis+
+          - cell "Public (RELX)" [ref=e248]
+          - cell "Massive case law corpus, legacy enterprise contracts" [ref=e249]
+          - cell "Large firms, academic, government" [ref=e250]
+          - cell "Dominates citation share in AI queries alongside Harvey; old-school UX" [ref=e251]
+        - row "MyCase Private (AffiniPay) All-in-one simplicity, low price, fast onboarding Solo → 5-person firms Steals churns from Clio on price; 1–2 week vs. 3–4 week learning curve" [ref=e252]:
+          - cell "MyCase" [ref=e253]:
+            - strong [ref=e254]: MyCase
+          - cell "Private (AffiniPay)" [ref=e255]
+          - cell "All-in-one simplicity, low price, fast onboarding" [ref=e256]
+          - cell "Solo → 5-person firms" [ref=e257]
+          - cell "Steals churns from Clio on price; 1–2 week vs. 3–4 week learning curve" [ref=e258]
+        - row "Smokeball Private Document automation depth, Word integration High-document-volume practices Beats Clio on document automation; loses on ecosystem breadth" [ref=e259]:
+          - cell "Smokeball" [ref=e260]:
+            - strong [ref=e261]: Smokeball
+          - cell "Private" [ref=e262]
+          - cell "Document automation depth, Word integration" [ref=e263]
+          - cell "High-document-volume practices" [ref=e264]
+          - cell "Beats Clio on document automation; loses on ecosystem breadth" [ref=e265]
+        - row "PracticePanther Private (ProfitSolv) Best feature-to-cost ratio in tier Small firms Credible value alternative; loses on integrations and ecosystem" [ref=e266]:
+          - cell "PracticePanther" [ref=e267]:
+            - strong [ref=e268]: PracticePanther
+          - cell "Private (ProfitSolv)" [ref=e269]
+          - cell "Best feature-to-cost ratio in tier" [ref=e270]
+          - cell "Small firms" [ref=e271]
+          - cell "Credible value alternative; loses on integrations and ecosystem" [ref=e272]
+        - row "Luminance / Spellbook Private, rising Contract AI, specialist use cases Corporate legal, transactional Gaining citation share fastest; threat in document intelligence" [ref=e273]:
+          - cell "Luminance / Spellbook" [ref=e274]:
+            - strong [ref=e275]: Luminance / Spellbook
+          - cell "Private, rising" [ref=e276]
+          - cell "Contract AI, specialist use cases" [ref=e277]
+          - cell "Corporate legal, transactional" [ref=e278]
+          - cell "Gaining citation share fastest; threat in document intelligence" [ref=e279]
+    - generic [ref=e280]:
+      - generic [ref=e281]:
+        - heading "Competitive positioning map" [level=3] [ref=e282]
+        - paragraph [ref=e283]: "Clio occupies an unusual position — broad horizontal platform with a new vertical AI bet:"
+        - generic [ref=e284]:
+          - generic [ref=e285]: Clio's Unique Angle
+          - paragraph [ref=e286]:
+            - text: The only company combining
+            - strong [ref=e287]: matter context
+            - text: (what the lawyer is working on, case history, client data) with
+            - strong [ref=e288]: deep legal corpus
+            - text: (vLex's 1B documents) in a single product. Harvey and Westlaw research in a vacuum — Clio's AI can say "given this specific case you're working on, here's what the law says."
+        - generic [ref=e289]:
+          - strong [ref=e290]: "Strategic warning:"
+          - text: Harvey's $11B valuation with only $190M ARR (57× revenue) signals the market believes AI-native legal tools will eat the space. Clio's $5B at $500M ARR (10× revenue) is priced as a SaaS business, not an AI one. If Clio doesn't reposition its narrative and deepen Clio Work's moat fast, it risks being outflanked from above.
+      - generic [ref=e291]:
+        - heading "AI competitive scores" [level=3] [ref=e292]
+        - paragraph [ref=e293]: "Estimated competitive strength in AI legal capabilities:"
+        - generic [ref=e294]:
+          - generic [ref=e295]: Harvey AI
+          - generic [ref=e298]: "9.2"
+        - generic [ref=e299]:
+          - generic [ref=e300]: Thomson Reuters CoCounsel
+          - generic [ref=e303]: "7.8"
+        - generic [ref=e304]:
+          - generic [ref=e305]: LexisNexis Lexis+
+          - generic [ref=e308]: "7.5"
+        - generic [ref=e309]:
+          - generic [ref=e310]: Clio Work (vLex/Vincent)
+          - generic [ref=e313]: "6.5"
+        - generic [ref=e314]:
+          - generic [ref=e315]: Smokeball AI
+          - generic [ref=e318]: "4.5"
+        - generic [ref=e319]:
+          - generic [ref=e320]: MyCase AI
+          - generic [ref=e323]: "3.2"
+        - paragraph [ref=e324]: Scores are author estimates based on public product capabilities, user feedback, and market positioning — not audited metrics.
+  - generic [ref=e326]:
+    - generic [ref=e327]: Section 04
+    - heading "Technology Stack & Architecture" [level=2] [ref=e328]
+    - paragraph [ref=e329]: Clio is a cloud-native SaaS platform. Its technical foundation was a competitive advantage in 2010 and is now table stakes — the differentiation has shifted to AI infrastructure and data moats.
+    - generic [ref=e330]:
+      - generic [ref=e331]:
+        - heading "Core platform architecture" [level=3] [ref=e332]
+        - paragraph [ref=e333]: Clio runs on a multi-tenant, cloud-native architecture built for horizontal scalability. The platform maintains SOC 2 Type II certification, with encryption at rest and in transit, 24/7/365 monitoring, and centralized identity management (SSO, RBAC).
+        - paragraph [ref=e334]:
+          - text: "The integration layer is the company's most strategically important architectural asset:"
+          - strong [ref=e335]: 250+ pre-built integrations
+          - text: and a public API that has spawned an ecosystem of 280+ app partners and 100 certified consultants. This creates switching costs — firms wire Clio into their accounting, e-signature, calendaring, and matter-filing workflows, making migration painful.
+        - heading "Technology ecosystem" [level=4] [ref=e336]
+        - generic [ref=e337]:
+          - generic [ref=e338]: Cloud-native SaaS
+          - generic [ref=e339]: SOC 2 Type II
+          - generic [ref=e340]: REST API
+          - generic [ref=e341]: SSO / SAML
+          - generic [ref=e342]: RBAC
+          - generic [ref=e343]: DocuSign
+          - generic [ref=e344]: QuickBooks / Xero
+          - generic [ref=e345]: Outlook / Google Workspace
+          - generic [ref=e346]: iManage
+          - generic [ref=e347]: NetDocuments
+          - generic [ref=e348]: Aderant / Elite
+          - generic [ref=e349]: LawPay / Stripe
+          - generic [ref=e350]: Zapier
+          - generic [ref=e351]: Microsoft 365
+      - generic [ref=e352]:
+        - generic [ref=e353]:
+          - generic [ref=e354]: AI Infrastructure
+          - heading "The vLex data moat" [level=3] [ref=e355]
+          - list [ref=e356]:
+            - listitem [ref=e357]: — 1B+ editorially enriched primary law documents
+            - listitem [ref=e358]: — 110+ country legal coverage
+            - listitem [ref=e359]: — Vincent AI — GPT-based research assistant, now agentic
+            - listitem [ref=e360]: — Trusted by courts and enterprise legal teams (not just startups)
+            - listitem [ref=e361]: — Multi-step task execution via "skills infrastructure"
+        - generic [ref=e362]:
+          - generic [ref=e363]: Embedded Fintech
+          - heading "Clio Payments" [level=3] [ref=e364]
+          - paragraph [ref=e365]: Processes billions in legal payments annually. Transaction fee revenue is a high-margin, recurring revenue stream that grows with firm billings rather than headcount — making it the most underappreciated part of Clio's monetization model. This is the Shopify Payments playbook applied to legal.
+    - generic [ref=e366]:
+      - strong [ref=e367]: "Technical differentiation that matters:"
+      - text: The combination of
+      - emphasis [ref=e368]: matter-level context
+      - text: (Clio Manage's case data) with vLex's corpus is genuinely novel. Competing AI tools run research in isolation. Clio Work can say "given the facts in this case file, here are the most relevant precedents." That context awareness, if executed well, is a durable moat. The risk is integration complexity — Vincent was built independently; stitching it to Manage's data model is a non-trivial engineering challenge.
+  - generic [ref=e370]:
+    - generic [ref=e371]: Section 05
+    - heading "AI Strategy & Readiness" [level=2] [ref=e372]
+    - paragraph [ref=e373]: Clio's AI strategy is the most consequential strategic bet in the company's history. The vLex acquisition bought them a credible AI corpus. What they do with it in the next 24 months determines whether Clio is a $5B SaaS business or a $20B+ AI platform.
+    - generic [ref=e374]:
+      - generic [ref=e375]:
+        - heading "The Intelligent Legal Work Platform" [level=3] [ref=e376]
+        - paragraph [ref=e377]: Announced October 2025, the "Intelligent Legal Work Platform" is Clio's positioning claim that it is the first company to unify the business of law (billing, intake, case management) with the practice of law (research, analysis, drafting) in a single AI-powered product.
+        - paragraph [ref=e378]: "The four product pillars with AI at their core:"
+        - list [ref=e379]:
+          - listitem [ref=e380]:
+            - text: —
+            - strong [ref=e381]: Manage AI
+            - text: — Automates scheduling, communications, and billing. Court documents become calendar events; activity turns into client updates; expenses become draft invoices.
+          - listitem [ref=e382]:
+            - text: —
+            - strong [ref=e383]: Clio Work (Vincent AI)
+            - text: — Research, analysis, and multi-step agentic task execution grounded in 1B legal documents + live matter context.
+          - listitem [ref=e384]:
+            - text: —
+            - strong [ref=e385]: Draft AI
+            - text: — Document generation from matter data and templates.
+          - listitem [ref=e386]:
+            - text: —
+            - strong [ref=e387]: Grow AI
+            - text: — Intake optimization, automated follow-up, pipeline analytics.
+      - generic [ref=e388]:
+        - heading "AI readiness assessment" [level=3] [ref=e389]
+        - generic [ref=e390]:
+          - generic [ref=e391]: Data moat (corpus)
+          - generic [ref=e394]: "9.0"
+        - generic [ref=e395]:
+          - generic [ref=e396]: Product integration depth
+          - generic [ref=e399]: "6.0"
+        - generic [ref=e400]:
+          - generic [ref=e401]: Agentic capabilities
+          - generic [ref=e404]: "6.2"
+        - generic [ref=e405]:
+          - generic [ref=e406]: Enterprise AI readiness
+          - generic [ref=e409]: "5.0"
+        - generic [ref=e410]:
+          - generic [ref=e411]: AI brand / market perception
+          - generic [ref=e414]: "5.5"
+        - generic [ref=e415]:
+          - generic [ref=e416]: Responsible AI / hallucination guard
+          - generic [ref=e419]: "6.8"
+        - paragraph [ref=e420]: Author estimates based on public product information and competitive benchmarking.
+        - generic [ref=e421]:
+          - strong [ref=e422]: "The gap:"
+          - text: Clio has a 9/10 data moat but only a 6/10 product integration. The vLex acquisition is strategically sound but operationally early-stage. Harvey was born AI-first; Clio is retrofitting AI onto a 17-year-old practice management platform. That integration debt is the single biggest risk to the AI strategy.
+    - generic [ref=e423]:
+      - generic [ref=e424]:
+        - generic [ref=e425]: What's working
+        - list [ref=e426]:
+          - listitem [ref=e427]: — vLex corpus is a genuine, defensible data moat — not available to competitors
+          - listitem [ref=e428]: — Matter-context AI is a meaningful differentiation vs. standalone research tools
+          - listitem [ref=e429]: — April 2026 agentic release (Vincent) shows product velocity
+          - listitem [ref=e430]: — Manage AI's practical automations (invoice generation, calendar) have clear ROI for users
+          - listitem [ref=e431]: — Opened Clio Work to solos — smart distribution play to seed adoption bottom-up
+      - generic [ref=e432]:
+        - generic [ref=e433]: What's at risk
+        - list [ref=e434]:
+          - listitem [ref=e435]: — Harvey AI dominates BigLaw mindshare at 57× ARR valuation — Clio is priced as SaaS
+          - listitem [ref=e436]: — vLex integration into Manage data model is engineering-hard; latency and accuracy TBD
+          - listitem [ref=e437]: — No disclosed accuracy/hallucination benchmarks vs. CoCounsel or Harvey
+          - listitem [ref=e438]: — "First Intelligent Legal Work Platform" is a claim, not yet a proven category
+          - listitem [ref=e439]: — Enterprise AI sales require different GTM than SMB — Clio's muscle memory is PLG
+  - generic [ref=e441]:
+    - generic [ref=e442]: Section 06
+    - 'heading "PM Critique: Product Strategy" [level=2] [ref=e443]'
+    - paragraph [ref=e444]: What a senior PM would flag if they inherited Clio's product portfolio today — the real problems underneath the impressive metrics.
+    - generic [ref=e445]:
+      - generic [ref=e446]:
+        - generic [ref=e447]:
+          - generic [ref=e448]: "Critical Issue #1"
+          - heading "The pricing trap is eroding the core" [level=3] [ref=e449]
+          - paragraph [ref=e450]:
+            - text: Clio's pricing has crept upward with each product addition, and the modular structure — pay more for workflows, pay more for AI, pay more for intake — creates a sense of feature-gating that frustrates existing users. A 5-attorney firm on a full stack pays 2× what MyCase charges for equivalent functionality. When smaller competitors close the feature gap (and they are), the price premium becomes indefensible.
+            - strong [ref=e451]: Clio has not articulated a clear price-to-value narrative for its SMB base in the AI era.
+        - generic [ref=e452]:
+          - generic [ref=e453]: "Critical Issue #2"
+          - heading "Five products with unclear integration seams" [level=3] [ref=e454]
+          - paragraph [ref=e455]:
+            - text: Manage, Grow, Draft, Work, Operate — five products acquired or built across 17 years, now positioned as a unified platform. The claim of "unified" is marketing; the UX reality is more like five different apps with a shared login. Users report needing to switch contexts, data doesn't flow automatically between modules, and enterprise integrations (Operate → Manage) are nascent.
+            - strong [ref=e456]: The platform story is ahead of the platform reality.
+        - generic [ref=e457]:
+          - generic [ref=e458]: "Concern #3"
+          - heading "SMB vs. enterprise tension is unresolved" [level=3] [ref=e459]
+          - paragraph [ref=e460]: "Clio's go-to-market, product design, support model, and brand are optimized for small law firms — firms where one person is the lawyer, billing manager, and IT department. Operate and the $500M enterprise push require a different product motion: longer sales cycles, IT gatekeepers, procurement processes, compliance requirements. Clio is running both motions simultaneously with no announced organizational separation. This almost always causes the enterprise motion to underperform or the SMB experience to degrade."
+        - generic [ref=e461]:
+          - generic [ref=e462]: "Concern #4"
+          - heading "AI differentiation requires proof, not claims" [level=3] [ref=e463]
+          - paragraph [ref=e464]:
+            - text: "Clio Work launched with compelling positioning. But the legal AI market has become brutally demanding about accuracy. Harvey and CoCounsel publish benchmark comparisons. Clio has published none. In a market where hallucinations in legal briefs can result in sanctions (see: the well-publicized cases of lawyers citing AI-fabricated case law), unverified AI claims are a liability."
+            - strong [ref=e465]: Clio needs head-to-head accuracy data, not positioning copy.
+      - generic [ref=e466]:
+        - generic [ref=e467]:
+          - generic [ref=e468]: What Clio gets right
+          - list [ref=e469]:
+            - listitem [ref=e470]: — Distribution is world-class — ClioCon, bar partnerships, referral networks
+            - listitem [ref=e471]: — Payments monetization is under-discussed; it's a recurring high-margin revenue stream that grows with firm billings
+            - listitem [ref=e472]: — Opening Clio Work to solos is a smart PLG seed — research-first use cases will pull users into the full platform
+            - listitem [ref=e473]: "— vLex gives Clio something no competitor can easily replicate: a proprietary, editorially enriched corpus that LLM providers can't just train away"
+            - listitem [ref=e474]: — The consultant ecosystem (100 certified partners) creates implementation stickiness competitors can't match
+        - heading "User sentiment signals" [level=3] [ref=e475]
+        - list [ref=e476]:
+          - listitem [ref=e477]: — Steep learning curve — 3–4 weeks vs. 1–2 weeks for MyCase
+          - listitem [ref=e478]: — Duplicate entry detection missing across modules
+          - listitem [ref=e479]: — No built-in accounting (requires QuickBooks/Xero add-on)
+          - listitem [ref=e480]: — Customer support quality perceived as declining in 2025
+          - listitem [ref=e481]: — Reporting flexibility limited without Advanced tier
+          - listitem [ref=e482]: — Integration complexity adds overhead for smaller firms
+          - listitem [ref=e483]: — Per-user pricing feels punitive as firms grow headcount
+        - generic [ref=e484]:
+          - strong [ref=e485]: "API lawsuit flag:"
+          - text: Reports of a legal dispute (Clio vs. LegalTech Solutions, late 2025) over whether Clio can restrict third-party API access. If Clio is locking down its API to protect its integration moat, it risks alienating the partner ecosystem that is a core retention driver. This bears close monitoring.
+    - heading "SWOT analysis" [level=3] [ref=e486]
+    - generic [ref=e487]:
+      - generic [ref=e488]:
+        - generic [ref=e489]: Strengths
+        - list [ref=e490]:
+          - listitem [ref=e491]: → Market-leading brand in SMB legal PM — 400K+ users, network effects
+          - listitem [ref=e492]: → vLex corpus moat — 1B+ documents, editorially enriched, 110 countries
+          - listitem [ref=e493]: → Embedded payments creating high-margin, billing-correlated revenue
+          - listitem [ref=e494]: → 280+ integration ecosystem and consultant network = deep switching costs
+          - listitem [ref=e495]: → Strong distribution engine (ClioCon, bar associations, referrals)
+          - listitem [ref=e496]: → Diversified funding base — equity + $350M debt facility for M&A optionality
+      - generic [ref=e497]:
+        - generic [ref=e498]: Weaknesses
+        - list [ref=e499]:
+          - listitem [ref=e500]: → Premium pricing relative to comparable SMB alternatives
+          - listitem [ref=e501]: → Steep UX learning curve — onboarding friction hurts retention at the margin
+          - listitem [ref=e502]: → No native accounting module — gap vs. all-in-one competitors
+          - listitem [ref=e503]: → Five-product platform is architecturally fragmented
+          - listitem [ref=e504]: → SMB DNA conflicts with enterprise motion — organizational tension
+          - listitem [ref=e505]: → AI accuracy benchmarks undisclosed — credibility risk
+      - generic [ref=e506]:
+        - generic [ref=e507]: Opportunities
+        - list [ref=e508]:
+          - listitem [ref=e509]: → 79% of legal professionals using AI — the market is trained; Clio just needs distribution
+          - listitem [ref=e510]: → Legal tech spending at record growth (9.7%) — budget available
+          - listitem [ref=e511]: → Corporate legal depts chronically underserved — Operate could be a breakout segment
+          - listitem [ref=e512]: → International expansion (vLex's 110-country coverage is a distribution unlock)
+          - listitem [ref=e513]: → Vertical AI for specific practice areas (immigration, family, real estate) with deep workflow automation
+          - listitem [ref=e514]: → Billing intelligence — AI-powered fee optimization, write-off prediction, realization rate improvement
+      - generic [ref=e515]:
+        - generic [ref=e516]: Threats
+        - list [ref=e517]:
+          - listitem [ref=e518]: → Harvey AI at $11B valuation is drawing enterprise legal AI budgets and talent
+          - listitem [ref=e519]: → Thomson Reuters and LexisNexis have deep enterprise relationships and begin integrating PM
+          - listitem [ref=e520]: → SMB competitors closing feature gap at materially lower price
+          - listitem [ref=e521]: → Demand deceleration risk — Thomson Reuters projects legal market contraction by Q3 2026
+          - listitem [ref=e522]: → vLex integration complexity — overpaying for an asset and failing to integrate it fully
+          - listitem [ref=e523]: → General-purpose AI (GPT, Gemini) lowering lawyers' willingness to pay for specialized AI tools
+  - generic [ref=e525]:
+    - generic [ref=e526]: Section 07
+    - 'heading "Mock Product Strategy: What Clio Should Do Next" [level=2] [ref=e527]'
+    - paragraph [ref=e528]: A concrete, prioritized product strategy for FY2026–2027, written as if for Clio's CPO. Three strategic bets, nine tactical moves.
+    - generic [ref=e529]:
+      - heading "The strategic thesis" [level=3] [ref=e530]
+      - paragraph [ref=e531]: "Clio has a window of roughly 18–24 months to convert its SMB distribution dominance into a defensible AI platform before Harvey and Thomson Reuters close the SMB gap from above and MyCase/PracticePanther close the value gap from below. The three bets: (1) weaponize the vLex corpus into a verifiably accurate AI research product, (2) create a unified product experience that earns the \"platform\" label, and (3) lock in enterprise legal departments before the legacy players replatform."
+    - generic [ref=e532]:
+      - generic [ref=e533]:
+        - generic [ref=e534]: "01"
+        - generic [ref=e535]: Launch "Clio Verified" accuracy benchmarks for Clio Work
+        - generic [ref=e536]: Publish head-to-head accuracy comparisons against Harvey and CoCounsel on standard legal research benchmark suites (LegalBench, bar exam Q&A, case citation accuracy). In an era of hallucination anxiety, verified accuracy is a purchasing argument no competitor currently owns clearly in SMB. Legal AI buyers are trained to ask "can I trust this?" Clio needs to answer that question with data, not marketing copy.
+        - generic [ref=e537]: H1 2026 · High priority
+      - generic [ref=e538]:
+        - generic [ref=e539]: "02"
+        - generic [ref=e540]: Build a unified "matter intelligence" layer across all five products
+        - generic [ref=e541]: Create a shared data layer — a single matter graph — that surfaces context across Manage, Grow, Draft, Work, and Operate without context switching. A client's intake form in Grow should auto-populate a Manage matter; research in Work should appear in Draft; billing anomalies in Manage should trigger workflow alerts. This is the product that earns the "Intelligent Legal Work Platform" name. Currently it doesn't exist.
+        - generic [ref=e542]: H2 2026 · Critical
+      - generic [ref=e543]:
+        - generic [ref=e544]: "03"
+        - generic [ref=e545]: Introduce practice-area AI bundles at a flat-per-firm price
+        - generic [ref=e546]: Create vertically-tuned AI bundles for the top 5 practice areas (family law, immigration, real estate, personal injury, estate planning) that include tailored document templates, jurisdiction-specific research, and intake forms — priced per firm, not per user. This directly addresses the per-user pricing backlash, creates a clear upgrade narrative, and is defensible because Harvey won't build micro-practice-area workflows at SMB price points.
+        - generic [ref=e547]: H2 2026 · High priority
+      - generic [ref=e548]:
+        - generic [ref=e549]: "04"
+        - generic [ref=e550]: Accelerate international distribution with vLex's existing footprint
+        - generic [ref=e551]: vLex serves courts and legal teams in 110+ countries. Clio Manage serves 130 countries but with thin localization. Use vLex's enterprise legal relationships as a Trojan horse for Clio Manage adoption in markets where Clio has no distribution. Target EU (Spain, UK, Germany) and Latin America first — vLex has deep coverage and relationships; Clio has product but no local GTM. This is a faster path than building from zero.
+        - generic [ref=e552]: 2026–2027 · Strategic
+      - generic [ref=e553]:
+        - generic [ref=e554]: "05"
+        - generic [ref=e555]: Build AI-powered billing intelligence into Manage
+        - generic [ref=e556]: "Clio processes billions in legal transactions. That data is a goldmine for billing AI: predicting write-off risk before it happens, surfacing realization rate patterns by matter type, recommending optimal billing cadences, flagging scope creep on flat-fee matters. This is entirely proprietary — no competitor has this data at scale. A \"Billing Intelligence\" module would be a natural expansion of the payments flywheel and would speak directly to law firm economics pain."
+        - generic [ref=e557]: H1 2027 · High potential
+      - generic [ref=e558]:
+        - generic [ref=e559]: "06"
+        - generic [ref=e560]: Separate the SMB and enterprise product organizations
+        - generic [ref=e561]: "Clio Operate targeting Fortune 500 legal departments needs a dedicated PM org, engineering team, and GTM motion that doesn't compete for resources with the 400K-user SMB base. The organizational tension is not just strategic — it's showing up in product quality signals (customer support degradation, onboarding complexity). Create two distinct product lines with separate P&Ls and surface them to investors clearly: \"Clio for Firms\" and \"Clio for Enterprise\"."
+        - generic [ref=e562]: Now · Organizational
+      - generic [ref=e563]:
+        - generic [ref=e564]: "07"
+        - generic [ref=e565]: Reduce onboarding time from 3–4 weeks to under 1 week
+        - generic [ref=e566]: MyCase wins on simplicity. Clio loses accounts not because of missing features but because new users hit friction in week one and don't make it to week four. An AI-guided onboarding experience — "tell me about your practice; I'll configure Clio for you" — combined with migration tooling from the top 3 competitors could halve time-to-value. This is the highest-ROI retention investment available to the product team right now.
+        - generic [ref=e567]: H1 2026 · Quick win
+      - generic [ref=e568]:
+        - generic [ref=e569]: "08"
+        - generic [ref=e570]: Embed native accounting (or acquire a partner)
+        - generic [ref=e571]: The absence of native accounting is the most-cited gap in user reviews. Every QuickBooks or Xero integration Clio facilitates is a churn vector — if a firm's accountant prefers a different tool, it creates friction on Clio's side. Either build lightweight trust accounting natively (Clio already has billing; accounting is a short hop) or make a targeted acquisition of a legal-specific accounting tool. This would close a hole that has existed for 10+ years.
+        - generic [ref=e572]: 2027 · Close the gap
+      - generic [ref=e573]:
+        - generic [ref=e574]: "09"
+        - generic [ref=e575]: Open a developer platform — "Clio App Store"
+        - generic [ref=e576]: "Clio has 280 integration partners. It does not have an app marketplace with discovery, ratings, and direct monetization for developers. An App Store model — where legal tech builders pay a listing fee or revenue share to distribute on Clio's platform — would create a platform flywheel: more apps → more utility → lower churn → more users → more app demand. Salesforce, Shopify, and Atlassian built durable moats this way. Clio's installed base is large enough to support this now."
+        - generic [ref=e577]: 2027 · Platform bet
+    - heading "Recommended investment prioritization" [level=3] [ref=e578]
+    - table [ref=e580]:
+      - rowgroup [ref=e581]:
+        - row "Initiative Impact Effort Horizon Rationale" [ref=e582]:
+          - columnheader "Initiative" [ref=e583]
+          - columnheader "Impact" [ref=e584]
+          - columnheader "Effort" [ref=e585]
+          - columnheader "Horizon" [ref=e586]
+          - columnheader "Rationale" [ref=e587]
+      - rowgroup [ref=e588]:
+        - row "AI onboarding (→ 1 week) High Low–Med Now Highest ROI per engineering hour; directly addresses churn at top of funnel" [ref=e589]:
+          - cell "AI onboarding (→ 1 week)" [ref=e590]:
+            - strong [ref=e591]: AI onboarding (→ 1 week)
+          - cell "High" [ref=e592]
+          - cell "Low–Med" [ref=e593]
+          - cell "Now" [ref=e594]
+          - cell "Highest ROI per engineering hour; directly addresses churn at top of funnel" [ref=e595]
+        - row "Clio Verified benchmarks High Low H1 2026 Marketing and product trust signal; no engineering required, just rigor" [ref=e596]:
+          - cell "Clio Verified benchmarks" [ref=e597]:
+            - strong [ref=e598]: Clio Verified benchmarks
+          - cell "High" [ref=e599]
+          - cell "Low" [ref=e600]
+          - cell "H1 2026" [ref=e601]
+          - cell "Marketing and product trust signal; no engineering required, just rigor" [ref=e602]
+        - row "Org separation (SMB vs. Enterprise) High Med Now Eliminates resource conflict before it damages both segments" [ref=e603]:
+          - cell "Org separation (SMB vs. Enterprise)" [ref=e604]:
+            - strong [ref=e605]: Org separation (SMB vs. Enterprise)
+          - cell "High" [ref=e606]
+          - cell "Med" [ref=e607]
+          - cell "Now" [ref=e608]
+          - cell "Eliminates resource conflict before it damages both segments" [ref=e609]
+        - row "Practice-area AI bundles High Med H2 2026 Directly attacks pricing backlash; builds vertical moats" [ref=e610]:
+          - cell "Practice-area AI bundles" [ref=e611]:
+            - strong [ref=e612]: Practice-area AI bundles
+          - cell "High" [ref=e613]
+          - cell "Med" [ref=e614]
+          - cell "H2 2026" [ref=e615]
+          - cell "Directly attacks pricing backlash; builds vertical moats" [ref=e616]
+        - row "Matter intelligence layer Very High High H2 2026 The product that makes the platform claim real; must start now" [ref=e617]:
+          - cell "Matter intelligence layer" [ref=e618]:
+            - strong [ref=e619]: Matter intelligence layer
+          - cell "Very High" [ref=e620]
+          - cell "High" [ref=e621]
+          - cell "H2 2026" [ref=e622]
+          - cell "The product that makes the platform claim real; must start now" [ref=e623]
+        - row "Billing intelligence module High Med H1 2027 Proprietary data asset; no competitor can replicate" [ref=e624]:
+          - cell "Billing intelligence module" [ref=e625]:
+            - strong [ref=e626]: Billing intelligence module
+          - cell "High" [ref=e627]
+          - cell "Med" [ref=e628]
+          - cell "H1 2027" [ref=e629]
+          - cell "Proprietary data asset; no competitor can replicate" [ref=e630]
+        - row "International via vLex GTM High Med 2026–2027 Fastest path to new markets; leverages existing vLex relationships" [ref=e631]:
+          - cell "International via vLex GTM" [ref=e632]:
+            - strong [ref=e633]: International via vLex GTM
+          - cell "High" [ref=e634]
+          - cell "Med" [ref=e635]
+          - cell "2026–2027" [ref=e636]
+          - cell "Fastest path to new markets; leverages existing vLex relationships" [ref=e637]
+        - row "App Store / developer platform Med–High High 2027 Long-term platform moat; builds after core product is unified" [ref=e638]:
+          - cell "App Store / developer platform" [ref=e639]:
+            - strong [ref=e640]: App Store / developer platform
+          - cell "Med–High" [ref=e641]
+          - cell "High" [ref=e642]
+          - cell "2027" [ref=e643]
+          - cell "Long-term platform moat; builds after core product is unified" [ref=e644]
+        - row "Native accounting Med High 2027 Closes a known gap; M&A may be faster than build" [ref=e645]:
+          - cell "Native accounting" [ref=e646]:
+            - strong [ref=e647]: Native accounting
+          - cell "Med" [ref=e648]
+          - cell "High" [ref=e649]
+          - cell "2027" [ref=e650]
+          - cell "Closes a known gap; M&A may be faster than build" [ref=e651]
+  - generic [ref=e653]:
+    - paragraph [ref=e654]: Bottom Line
+    - heading "Clio is the best-positioned company in legal tech history — and its most dangerous moment." [level=2] [ref=e655]:
+      - text: Clio is the best-positioned company
+      - text: in legal tech history — and its most dangerous moment.
+    - paragraph [ref=e656]: The $1B vLex bet was bold and correct. The $500M ARR milestone is real. But the gap between Clio's platform narrative and its platform reality is growing, not shrinking. Harvey is moving up from AI-native. MyCase is moving up from value. Clio has 18 months to close the integration seams, prove Clio Work's accuracy, and define what "enterprise" actually means for a company built for the solo practitioner. The data moat is extraordinary. The question is execution.
+    - paragraph [ref=e657]: "Analysis prepared May 2026 · Sources: Clio press releases, Sacra, GeekWire, LawNext, Silicon Republic, Capterra, G2, PracticePanther, CounselStack, Thomson Reuters Institute, Fortune Business Insights, Crunchbase, LegalTech MG, Artificial Lawyer, ABA Journal"
+  - contentinfo [ref=e658]:
+    - generic [ref=e659]:
+      - generic [ref=e660]:
+        - generic [ref=e661]: Clio — Strategic Analysis
+        - generic [ref=e662]: Independent research · May 2026 · Not affiliated with Clio
+      - generic [ref=e664]:
+        - text: "Market sizing: Fortune Business Insights, Market Research Future"
+        - text: "Company data: Clio press releases, Sacra, Crunchbase, PitchBook"
+        - text: "Competitive intel: G2, Capterra, LawNext, Artificial Lawyer"
+        - text: "User feedback: Trustpilot, G2, Capterra reviews"

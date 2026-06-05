@@ -1,0 +1,126 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Mukul Dewangan" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+    - list [ref=e4]:
+      - listitem [ref=e5]:
+        - link "Work" [ref=e6] [cursor=pointer]:
+          - /url: index.html#work
+      - listitem [ref=e7]:
+        - link "Teardowns" [ref=e8] [cursor=pointer]:
+          - /url: teardowns.html
+      - listitem [ref=e9]:
+        - link "AI Reports" [ref=e10] [cursor=pointer]:
+          - /url: ai-reports.html
+      - listitem [ref=e11]:
+        - link "Strategy" [ref=e12] [cursor=pointer]:
+          - /url: strategy.html
+      - listitem [ref=e13]:
+        - link "About" [ref=e14] [cursor=pointer]:
+          - /url: index.html#about
+      - listitem [ref=e15]:
+        - link "Resume" [ref=e16] [cursor=pointer]:
+          - /url: index.html#resume
+      - listitem [ref=e17]:
+        - link "Contact" [ref=e18] [cursor=pointer]:
+          - /url: index.html#contact
+  - generic [ref=e19]:
+    - generic [ref=e20]:
+      - paragraph [ref=e21]: Product Strategy
+      - heading "Strategy Analyses." [level=1] [ref=e22]:
+        - text: Strategy
+        - emphasis [ref=e23]: Analyses.
+    - generic [ref=e24]:
+      - paragraph [ref=e25]: Long-form competitive intelligence and product strategy documents. Each analysis covers market landscape, product critique, technology architecture, and a mock strategy recommendation from a Senior PM perspective.
+      - generic [ref=e26]:
+        - generic [ref=e27]: "4"
+        - paragraph [ref=e28]: Analyses Published
+    - generic: Analysis
+  - generic [ref=e30]:
+    - 'link "Legal Technology ·SaaS ·Competitive Intelligence Clio: The Legal OS Bet A $5B legal platform sitting on a billion-document AI corpus and 400K users — and a critical 18-month window to prove it''s an AI platform, not just a practice management tool. Read Analysis → May 2026 Clio (Themis Solutions) Vancouver, BC NEA, TCV, Goldman Sachs" [ref=e31] [cursor=pointer]':
+      - /url: clio-analysis.html
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: Legal Technology
+          - generic [ref=e35]: ·SaaS
+          - generic [ref=e36]: ·Competitive Intelligence
+        - 'heading "Clio: The Legal OS Bet" [level=2] [ref=e37]':
+          - text: "Clio: The"
+          - emphasis [ref=e38]: Legal OS
+          - text: Bet
+        - paragraph [ref=e39]: A $5B legal platform sitting on a billion-document AI corpus and 400K users — and a critical 18-month window to prove it's an AI platform, not just a practice management tool.
+        - generic [ref=e40]:
+          - text: Read Analysis
+          - generic [ref=e41]: →
+      - generic [ref=e42]:
+        - paragraph [ref=e43]: May 2026
+        - paragraph [ref=e44]:
+          - text: Clio (Themis Solutions)
+          - text: Vancouver, BC
+          - text: NEA, TCV, Goldman Sachs
+    - 'link "FP&A ·Enterprise SaaS ·Competitive Intelligence Vena Solutions: The Excel Bet Centaur-status FP&A with a genuine Excel moat and the Microsoft ecosystem behind it. The question is whether implementation debt, Pigment''s UX, and Microsoft''s own AI ambitions close in faster than Vena can fix them. Read Analysis → May 2026 Vena Solutions Toronto, ON Vista Equity Partners" [ref=e45] [cursor=pointer]':
+      - /url: VenaSolutions_Analysis.html
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]: FP&A
+          - generic [ref=e49]: ·Enterprise SaaS
+          - generic [ref=e50]: ·Competitive Intelligence
+        - 'heading "Vena Solutions: The Excel Bet" [level=2] [ref=e51]':
+          - text: "Vena Solutions: The"
+          - emphasis [ref=e52]: Excel
+          - text: Bet
+        - paragraph [ref=e53]: Centaur-status FP&A with a genuine Excel moat and the Microsoft ecosystem behind it. The question is whether implementation debt, Pigment's UX, and Microsoft's own AI ambitions close in faster than Vena can fix them.
+        - generic [ref=e54]:
+          - text: Read Analysis
+          - generic [ref=e55]: →
+      - generic [ref=e56]:
+        - paragraph [ref=e57]: May 2026
+        - paragraph [ref=e58]:
+          - text: Vena Solutions
+          - text: Toronto, ON
+          - text: Vista Equity Partners
+    - 'link "Financial Services ·Compliance ·Product Strategy Global Relay Archive: The Platform Bet The trusted archive for 22 of the top 25 global banks is at a strategic inflection. Extraction fees, geographic ceilings, and AI competitors are converging — and the window to respond is 18 months. Read Analysis → May 2026 Global Relay Communications Vancouver, BC GTCR" [ref=e59] [cursor=pointer]':
+      - /url: GlobalRelay_Archive_Strategy.html
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]: Financial Services
+          - generic [ref=e63]: ·Compliance
+          - generic [ref=e64]: ·Product Strategy
+        - 'heading "Global Relay Archive: The Platform Bet" [level=2] [ref=e65]':
+          - text: "Global Relay Archive: The"
+          - emphasis [ref=e66]: Platform
+          - text: Bet
+        - paragraph [ref=e67]: The trusted archive for 22 of the top 25 global banks is at a strategic inflection. Extraction fees, geographic ceilings, and AI competitors are converging — and the window to respond is 18 months.
+        - generic [ref=e68]:
+          - text: Read Analysis
+          - generic [ref=e69]: →
+      - generic [ref=e70]:
+        - paragraph [ref=e71]: May 2026
+        - paragraph [ref=e72]:
+          - text: Global Relay Communications
+          - text: Vancouver, BC
+          - text: GTCR
+    - 'link "Travel ·AI ·Product Strategy TravelAI: The Agentic Bet Profitable, fast-growing, and sitting on an underutilized data asset. The question is whether its agentic vision ships before Google''s does. Read Analysis → May 2026 TravelAI Solutions Inc. Vancouver, BC UpNext Group" [ref=e73] [cursor=pointer]':
+      - /url: TravelAI_Analysis.html
+      - generic [ref=e74]:
+        - generic [ref=e75]:
+          - generic [ref=e76]: Travel
+          - generic [ref=e77]: ·AI
+          - generic [ref=e78]: ·Product Strategy
+        - 'heading "TravelAI: The Agentic Bet" [level=2] [ref=e79]':
+          - text: "TravelAI: The"
+          - emphasis [ref=e80]: Agentic
+          - text: Bet
+        - paragraph [ref=e81]: Profitable, fast-growing, and sitting on an underutilized data asset. The question is whether its agentic vision ships before Google's does.
+        - generic [ref=e82]:
+          - text: Read Analysis
+          - generic [ref=e83]: →
+      - generic [ref=e84]:
+        - paragraph [ref=e85]: May 2026
+        - paragraph [ref=e86]:
+          - text: TravelAI Solutions Inc.
+          - text: Vancouver, BC
+          - text: UpNext Group
+  - contentinfo [ref=e87]:
+    - generic [ref=e88]: © 2026 Mukul Dewangan
+    - generic [ref=e89]: Product & AI Leadership

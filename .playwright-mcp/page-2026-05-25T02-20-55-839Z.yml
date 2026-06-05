@@ -1,0 +1,227 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Mukul Dewangan" [ref=e3] [cursor=pointer]:
+      - /url: "#hero"
+    - list [ref=e4]:
+      - listitem [ref=e5]:
+        - link "Work" [ref=e6] [cursor=pointer]:
+          - /url: "#work"
+      - listitem [ref=e7]:
+        - link "Teardowns" [ref=e8] [cursor=pointer]:
+          - /url: teardowns.html
+      - listitem [ref=e9]:
+        - link "AI Reports" [ref=e10] [cursor=pointer]:
+          - /url: ai-reports.html
+      - listitem [ref=e11]:
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: "#about"
+      - listitem [ref=e13]:
+        - link "Resume" [ref=e14] [cursor=pointer]:
+          - /url: "#resume"
+      - listitem [ref=e15]:
+        - link "Contact" [ref=e16] [cursor=pointer]:
+          - /url: "#contact"
+  - generic [ref=e17]:
+    - generic [ref=e18]:
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: Product & AI Leadership
+        - heading "Mukul Dewangan." [level=1] [ref=e21]:
+          - text: Mukul
+          - emphasis [ref=e22]: Dewangan.
+        - paragraph [ref=e23]: Senior PM — AI Systems & Enterprise SaaS
+        - paragraph [ref=e24]: The gap between what AI can do and what enterprises will actually ship is a product problem. 10+ years in B2B taught me that problem. The last few years taught me the AI side.
+      - generic [ref=e25]:
+        - link "View Work →" [ref=e26] [cursor=pointer]:
+          - /url: "#work"
+          - text: View Work
+          - generic [ref=e27]: →
+        - generic [ref=e30]: Scroll
+    - region "Career highlights" [ref=e31]:
+      - generic: AI
+      - paragraph [ref=e32]: At a glance
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: 10+
+          - generic [ref=e36]: Years in Product
+        - generic [ref=e37]:
+          - generic [ref=e38]: $12M+
+          - generic [ref=e39]: Annual Savings Driven
+        - generic [ref=e40]:
+          - generic [ref=e41]: 10M+
+          - generic [ref=e42]: Users Impacted
+  - generic [ref=e43]:
+    - generic [ref=e44]:
+      - generic [ref=e45]:
+        - paragraph [ref=e46]: Selected Work
+        - heading "Case Studies" [level=2] [ref=e47]:
+          - text: Case
+          - emphasis [ref=e48]: Studies
+      - paragraph [ref=e49]: Four projects at the intersection of AI, enterprise SaaS, and the hard question of what actually ships vs. what just demos well.
+    - link "01 Data Infrastructure B2B SaaS Analytics Fixing fragmented customer data and saving $9M in ARR — by convincing leadership to rebuild the infrastructure At Vendasta, high churn was the symptom. The actual problem was that customer data lived in 6 different systems and no one had a coherent view of it. I found the gap, built the business case, and launched the reporting and analytics platform that reduced churn by 89%. Read case study →" [ref=e50] [cursor=pointer]:
+      - /url: case-study-01.html
+      - img [ref=e52]:
+        - generic [ref=e73]: FRAGMENTED
+        - generic [ref=e82]: CUSTOMER ANALYTICS
+        - generic [ref=e90]: Q1
+        - generic [ref=e91]: Q2
+        - generic [ref=e92]: Q3
+        - generic [ref=e93]: Q4
+        - generic [ref=e94]: Q5
+        - generic [ref=e100]: UNIFIED
+      - generic [ref=e101]:
+        - generic [ref=e102]: "01"
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - generic [ref=e105]: Data Infrastructure
+            - generic [ref=e106]: B2B SaaS
+            - generic [ref=e107]: Analytics
+          - heading "Fixing fragmented customer data and saving $9M in ARR — by convincing leadership to rebuild the infrastructure" [level=3] [ref=e108]
+          - paragraph [ref=e109]: At Vendasta, high churn was the symptom. The actual problem was that customer data lived in 6 different systems and no one had a coherent view of it. I found the gap, built the business case, and launched the reporting and analytics platform that reduced churn by 89%.
+          - generic [ref=e110]:
+            - text: Read case study
+            - generic [ref=e111]: →
+    - generic [ref=e112]:
+      - link "02 Generative AI Enterprise Shipping a conversational AI assistant inside a B2B platform with 10M+ users Building AI features in enterprise is a different problem than building AI features in a startup. Here's what that difference actually looks like." [ref=e113] [cursor=pointer]:
+        - /url: case-study-02.html
+        - generic [ref=e114]: "02"
+        - generic [ref=e115]:
+          - generic [ref=e116]: Generative AI
+          - generic [ref=e117]: Enterprise
+        - heading "Shipping a conversational AI assistant inside a B2B platform with 10M+ users" [level=3] [ref=e118]
+        - paragraph [ref=e119]: Building AI features in enterprise is a different problem than building AI features in a startup. Here's what that difference actually looks like.
+      - link "03 Agentic AI PM Tooling Building the AI agent that turns 4 hours of competitive research into 2 minutes A personal project that became a working product. Multi-step autonomous research with adaptive loops and structured scoring." [ref=e120] [cursor=pointer]:
+        - /url: case-study-03.html
+        - generic [ref=e121]: "03"
+        - generic [ref=e122]:
+          - generic [ref=e123]: Agentic AI
+          - generic [ref=e124]: PM Tooling
+        - heading "Building the AI agent that turns 4 hours of competitive research into 2 minutes" [level=3] [ref=e125]
+        - paragraph [ref=e126]: A personal project that became a working product. Multi-step autonomous research with adaptive loops and structured scoring.
+      - link "04 AI Evaluation Governance A structured framework for evaluating LLM outputs before they reach users \"It seemed good in testing\" is not an enterprise-grade evaluation strategy. This is what a real one looks like." [ref=e127] [cursor=pointer]:
+        - /url: case-study-04.html
+        - generic [ref=e128]: "04"
+        - generic [ref=e129]:
+          - generic [ref=e130]: AI Evaluation
+          - generic [ref=e131]: Governance
+        - heading "A structured framework for evaluating LLM outputs before they reach users" [level=3] [ref=e132]
+        - paragraph [ref=e133]: "\"It seemed good in testing\" is not an enterprise-grade evaluation strategy. This is what a real one looks like."
+  - generic [ref=e135]:
+    - generic [ref=e136]:
+      - paragraph [ref=e137]: About
+      - heading "The longer version." [level=2] [ref=e138]:
+        - text: The
+        - text: longer
+        - text: version.
+      - img "Mukul Dewangan" [ref=e139]
+      - list [ref=e140]:
+        - listitem [ref=e141]:
+          - strong [ref=e142]: Currently
+          - text: Product Consultant — Creo Softech
+        - listitem [ref=e143]:
+          - strong [ref=e144]: Previously
+          - text: Senior PM — Vendasta Technologies
+          - text: PM — Userful Corporation
+        - listitem [ref=e145]:
+          - strong [ref=e146]: Education
+          - text: MBA — Rice University
+          - text: B.Tech — NIT
+        - listitem [ref=e147]:
+          - strong [ref=e148]: Certifications
+          - text: AI PM — Duke University
+          - text: CSPO — Scrum Alliance
+        - listitem [ref=e149]:
+          - strong [ref=e150]: GitHub
+          - link "github.com/dvmukul" [ref=e151] [cursor=pointer]:
+            - /url: https://github.com/dvmukul
+        - listitem [ref=e152]:
+          - strong [ref=e153]: LinkedIn
+          - link "in/mukuldewangan" [ref=e154] [cursor=pointer]:
+            - /url: https://linkedin.com/in/mukuldewangan
+    - generic [ref=e155]:
+      - 'heading "I''ve spent 10 years getting good at one thing: closing the gap between what users need and what can actually be built." [level=2] [ref=e156]':
+        - text: "I've spent 10 years getting good at one thing:"
+        - emphasis [ref=e157]: closing the gap between what users need and what can actually be built.
+      - generic [ref=e159]:
+        - paragraph [ref=e160]: "My background is B2B SaaS — data infrastructure, enterprise IAM, platform architecture. I've worked at companies where the sales cycle is long, the compliance requirements are real, and \"move fast\" is not a strategy. That context shapes how I think about AI: not as a feature to ship, but as a system to govern."
+        - paragraph [ref=e161]: My move into AI was deliberate. I spent months studying the actual capability curve before I led my first AI product. I've built agentic workflows, evaluation frameworks, and governance layers for enterprise deployment. I've seen what happens when teams skip the hard parts — trust architecture, data quality, edge-case behavior — and I know how to not do that.
+        - paragraph [ref=e162]: Outside of product work, I'm working toward my private pilot license. It turns out that pre-flight checklists and pre-launch checklists have more in common than most people think.
+      - generic [ref=e163]:
+        - paragraph [ref=e164]: Areas of Depth
+        - generic [ref=e165]:
+          - generic [ref=e166]: Agentic Systems
+          - generic [ref=e167]: Data Infrastructure
+          - generic [ref=e168]: Enterprise IAM
+          - generic [ref=e169]: LLM Evaluation
+          - generic [ref=e170]: Platform & API
+          - generic [ref=e171]: AI Governance
+          - generic [ref=e172]: Competitive Strategy
+          - generic [ref=e173]: 0 → 1 Products
+          - generic [ref=e174]: Roadmap Strategy
+  - generic [ref=e176]:
+    - generic [ref=e177]:
+      - paragraph [ref=e178]: Resume
+      - heading "The full history." [level=2] [ref=e179]:
+        - text: The
+        - emphasis [ref=e180]: full
+        - text: history.
+      - link "Download PDF ↓" [ref=e181] [cursor=pointer]:
+        - /url: Resume_Mukul_Dewangan.pdf
+    - generic [ref=e182]:
+      - generic [ref=e183]:
+        - generic [ref=e184]:
+          - paragraph [ref=e185]: Oct 2024 — Present
+          - paragraph [ref=e186]: Creo Softech
+        - generic [ref=e187]:
+          - heading "Product Consultant" [level=3] [ref=e188]
+          - paragraph [ref=e189]: Advising a startup building a small-business marketplace with localized discounts and promotions. Leading customer discovery, MVP scoping, and go-to-market for the pilot launch.
+      - generic [ref=e190]:
+        - generic [ref=e191]:
+          - paragraph [ref=e192]: May 2021 — Sep 2024
+          - paragraph [ref=e193]: Vendasta Technologies
+        - generic [ref=e194]:
+          - heading "Senior Product Manager" [level=3] [ref=e195]
+          - paragraph [ref=e196]: Owned platform and infrastructure for a B2B SaaS company with $93M revenue and 10M+ active users. Shipped a reporting and analytics platform that reduced churn by 89% and saved $9M in ARR. Built and launched a conversational AI assistant using generative AI and custom data. Led data governance and RBAC initiatives reducing security incidents by 70%. Managed a team of 7 PMs.
+      - generic [ref=e197]:
+        - generic [ref=e198]:
+          - paragraph [ref=e199]: Mar 2020 — Feb 2021
+          - paragraph [ref=e200]: Userful Corporation
+        - generic [ref=e201]:
+          - heading "Product Manager" [level=3] [ref=e202]
+          - paragraph [ref=e203]: Led strategy and execution for the digital signage segment of a B2B SaaS AV company. Spearheaded end-to-end development of a new digital signage solution, growing segment revenue by 17%.
+      - generic [ref=e204]:
+        - generic [ref=e205]:
+          - paragraph [ref=e206]: Jun 2017 — May 2019
+          - paragraph [ref=e207]: Greenview Capital Group
+        - generic [ref=e208]:
+          - heading "Product Manager" [level=3] [ref=e209]
+          - paragraph [ref=e210]: Led automation and digital transformation at an asset management firm with $250M AUM. Transformed the reporting and analytics system, saving $1.5M — 28% of operational costs.
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - paragraph [ref=e213]: Sep 2014 — Jul 2016
+          - paragraph [ref=e214]: ZeroMiles
+        - generic [ref=e215]:
+          - heading "Head of Product & Co-Founder" [level=3] [ref=e216]
+          - paragraph [ref=e217]: Co-founded a social impact startup focused on healthcare cost reduction and clean water access. Scaled to 6,000+ users, secured institutional and government funding.
+  - generic [ref=e219]:
+    - generic [ref=e220]:
+      - paragraph [ref=e221]: Contact
+      - heading "Let's talk." [level=2] [ref=e222]:
+        - text: Let's
+        - emphasis [ref=e223]: talk.
+      - paragraph [ref=e224]: Got a product problem, a half-formed idea, or just want to think through something out loud? I'm always up for a good conversation.
+    - generic [ref=e225]:
+      - generic [ref=e226]:
+        - generic [ref=e227]: Email
+        - link "hello@mukuldewangan.com" [ref=e228] [cursor=pointer]:
+          - /url: mailto:hello@mukuldewangan.com
+      - generic [ref=e229]:
+        - generic [ref=e230]: LinkedIn
+        - link "linkedin.com/in/mukuldewangan" [ref=e231] [cursor=pointer]:
+          - /url: https://linkedin.com/in/mukuldewangan
+      - generic [ref=e232]:
+        - generic [ref=e233]: GitHub
+        - link "github.com/dvmukul" [ref=e234] [cursor=pointer]:
+          - /url: https://github.com/dvmukul
+  - contentinfo [ref=e235]:
+    - generic [ref=e236]: © 2026 Mukul Dewangan
+    - generic [ref=e237]: Product & AI Leadership

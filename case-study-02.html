@@ -3,65 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Case Study 02: Shipping a conversational AI assistant inside a B2B platform with 10M+ users — enterprise AI product strategy by Mukul Dewangan.">
-    <title>Case Study 02 — Conversational AI — Mukul Dewangan</title>
+    <meta name="description" content="Case Study 05: Designing AI nutrition tracking for clinical populations — 87% meal confirmation rate, 95%+ pregnancy safety recall — by Mukul Dewangan.">
+    <title>Case Study 05 — Clinical Nutrition AI — Mukul Dewangan</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <link rel="stylesheet" href="case-study.css">
+    <style>
+        /* ===== CASE STUDY 05 EXTRAS ===== */
+
+        /* Accuracy gates — per-category eval thresholds */
+        .accuracy-gates {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            margin: 2.5rem 0;
+        }
+        .accuracy-gate {
+            background: var(--surface);
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .accuracy-gate-value {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--teal);
+            line-height: 1;
+        }
+        .accuracy-gate-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .accuracy-gate-desc {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Freemium tiers */
+        .tier-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3px;
+            margin: 2.5rem 0;
+        }
+        .tier-box {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .tier-box.free { background: var(--surface); }
+        .tier-box.paid { background: var(--bg-dark); color: #F3EDE2; }
+        .tier-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .tier-box.free .tier-label { color: var(--teal); }
+        .tier-box.paid .tier-label { color: rgba(44,122,122,0.9); }
+        .tier-items { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+        .tier-items li {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+        }
+        .tier-box.free .tier-items li { color: var(--text-muted); }
+        .tier-box.paid .tier-items li { color: rgba(243,237,226,0.6); }
+        .tier-check {
+            flex-shrink: 0;
+            font-size: 0.75rem;
+            margin-top: 0.1rem;
+        }
+        .tier-box.free .tier-check { color: var(--teal); }
+        .tier-box.paid .tier-check { color: rgba(44,122,122,0.9); }
+        .tier-note {
+            font-size: 0.75rem;
+            font-style: italic;
+            padding-top: 0.5rem;
+            border-top: 1px solid rgba(243,237,226,0.08);
+        }
+        .tier-box.free .tier-note { color: var(--text-light); border-color: var(--border); }
+        .tier-box.paid .tier-note { color: rgba(243,237,226,0.35); }
+
+        /* Safety flag callout */
+        .safety-callout {
+            background: var(--bg-dark);
+            color: #F3EDE2;
+            padding: 2rem 2.5rem;
+            margin: 2.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            border-radius: 0 var(--r-md) var(--r-md) 0;
+            border-left: 3px solid var(--teal);
+        }
+        .safety-callout-icon {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(44,122,122,0.6);
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .safety-callout-body h4 {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(243,237,226,0.45);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .safety-callout-body p {
+            font-size: 0.9rem;
+            color: rgba(243,237,226,0.7);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        @media (max-width: 640px) {
+            .accuracy-gates { grid-template-columns: 1fr; }
+            .tier-split { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
 <nav class="nav-light">
     <a href="index.html" class="nav-back"><span class="arrow">←</span> All Work</a>
-    <span class="nav-meta">Case Study 03 of 05</span>
+    <span class="nav-meta">Case Study 02 of 05</span>
 </nav>
 
 <main>
 <div class="cs-hero">
     <div>
-        <p class="cs-eyebrow">Case Study — 03</p>
-        <div class="cs-number">03</div>
-        <h1 class="cs-title">Shipping a conversational AI assistant inside a B2B platform <em>with 10M+ users</em></h1>
+        <p class="cs-eyebrow">Case Study — 02</p>
+        <div class="cs-number">02</div>
+        <h1 class="cs-title">Designing AI nutrition tracking that clinicians and high-risk patients can <em>actually trust</em></h1>
     </div>
     <div>
         <div class="cs-tags">
+            <span class="cs-tag">Consumer Health</span>
+            <span class="cs-tag">Clinical AI</span>
             <span class="cs-tag">Generative AI</span>
-            <span class="cs-tag">Enterprise SaaS</span>
-            <span class="cs-tag">Workflow Automation</span>
-            <span class="cs-tag">Vendasta</span>
+            <span class="cs-tag">0-to-1 Product</span>
         </div>
         <p class="cs-summary">
-            Building AI features inside an enterprise B2B platform is a fundamentally different problem than building a greenfield AI product. The constraints are real: legacy data models, enterprise security requirements, a diverse user base with varying technical literacy, and a sales team that needs to explain it on calls. This is how we navigated that.
+            A pregnancy-first nutrition app architected for clinical populations — with the accuracy standards, privacy model, and trust architecture that implies. The product photos a meal, identifies it with Claude vision, fires condition-specific safety flags, and returns a structured log entry for user confirmation.
         </p>
     </div>
 </div>
 
 <div class="metrics-bar">
     <div class="metric">
-        <div class="metric-number">10M+</div>
-        <div class="metric-label">Active Platform Users</div>
+        <div class="metric-number">87%</div>
+        <div class="metric-label">Meal Confirmation Rate</div>
     </div>
     <div class="metric">
-        <div class="metric-number">500</div>
-        <div class="metric-label">Beta Accounts at Launch</div>
+        <div class="metric-number">95%+</div>
+        <div class="metric-label">Pregnancy Safety Recall</div>
     </div>
     <div class="metric">
-        <div class="metric-number">3</div>
-        <div class="metric-label">Iteration Cycles Pre-Launch</div>
+        <div class="metric-number">4</div>
+        <div class="metric-label">Clinical Populations in Architecture</div>
     </div>
 </div>
 
 <div class="cs-body">
     <div class="cs-section">
         <p class="section-label">Context</p>
-        <h2>A platform with $93M in revenue and a user base that spans from solo agencies to enterprise teams</h2>
+        <h2>The market that no nutrition app actually built for</h2>
         <p>
-            Vendasta's platform serves a wide range of users — from individual digital agency owners managing 20 clients to enterprise operations teams running thousands of accounts. That user diversity is a strength commercially and a significant challenge for AI product design.
+            Nutrition tracking apps are built for general dieters. They show macros. They do not understand that folate and DHA matter more than calories during pregnancy, that potassium is a ceiling nutrient in CKD, or that glycemic load means something categorically different to a diabetic than to someone cutting for summer.
         </p>
         <p>
-            When we began exploring where generative AI could add meaningful value, the options were numerous. The question was how to ship something that would work across that range of users, integrate safely with existing data models, and not create new support burden. We needed to be deliberate.
+            3.6 million pregnancies occur in the United States each year. 37 million Americans have diabetes. 120 million have hypertension. These are not edge cases — they are the majority of adults who most need nutrition precision. Yet every major tracker (MyFitnessPal, Cronometer, Noom, ZOE) was designed for the motivated-but-healthy dieter. Clinical populations are either excluded or stripped of clinical context in favor of general-diet monetization.
+        </p>
+        <p>
+            No AI-native nutrition tracker existed that was built for clinical-adjacent use — with the precision standards, privacy posture, and trust architecture that implies. That was the gap.
         </p>
     </div>
 
@@ -69,44 +198,124 @@
 
     <div class="cs-section">
         <p class="section-label">Problem</p>
-        <h2>Workflow complexity was the core friction. <em>AI was the right lever — if applied correctly.</em></h2>
+        <h2>It wasn't that nutrition apps are bad. They were designed for <em>the wrong user.</em></h2>
         <p>
-            Through user research and support ticket analysis, a consistent pattern emerged: users were spending disproportionate time on repetitive, context-intensive tasks — drafting client reports, creating campaign briefs, generating performance summaries. The platform had the data; users were doing the synthesis manually.
+            That user-choice baked in assumptions that make the product wrong for clinical populations at every layer: what nutrients to surface, what counts as a dangerous food, how to share data with a care team, how to handle the fact that a serving of tuna means something categorically different in the second trimester than in a general diet.
         </p>
+        <p>
+            Clinical populations don't need a feature request on top of a fitness app. They need a different trust model from the ground up. And underneath that was a harder problem:
+        </p>
+
         <div class="pull-quote">
-            <p>"The platform had the data. Users were doing the synthesis manually. That gap is where AI belongs."</p>
+            <p>"In a fitness app, a 30% calorie overestimate is noise. In a pregnancy app shared with an OB, it's a liability. The job was defining what clinical-grade accuracy means — then building the eval methodology to prove it."</p>
         </div>
+
+        <p>
+            ZOE's published validation study shows AI models score 0.07 out of 1.0 on soups and 0.13 out of 1.0 on plant milks. The PM question wasn't "should we use AI?" — it was how to define what clinical-grade accuracy means for this context, and then build the methodology to verify we actually hit it.
+        </p>
     </div>
 
     <div class="divider"></div>
 
     <div class="cs-section">
         <p class="section-label">Approach</p>
-        <h2>Custom data grounding, security first, then user experience</h2>
-        <p>
-            The AI assistant couldn't just be a generic LLM wrapper. For it to be useful on a B2B platform, responses needed to be grounded in platform-specific data: account performance metrics, campaign history, client context, product usage signals. We built the data grounding layer before we designed the interface.
-        </p>
+        <h2>Six decisions that determined everything else</h2>
 
         <div class="approach-steps">
             <div class="step">
                 <span class="step-num">1</span>
                 <div class="step-content">
-                    <h3>Data inventory and access scoping</h3>
-                    <p>Mapped which platform data was safe to surface to which user types. Multi-tenant architecture means one agency's data cannot leak into another's AI context — this had to be structural, not just a policy. Worked with security and engineering to define the access model before writing any prompts.</p>
+                    <h3>Define the user precisely before designing anything</h3>
+                    <p>Primary user: a pregnant person in the US who wants confidence she is meeting key pregnancy nutrient targets (folate, iron, calcium, DHA, vitamin D, choline, iodine), avoiding pregnancy food risks, and able to share a coherent summary with her OB. Explicit non-users for v1: general dieters, bodybuilders, eating-disorder recovery, and clinicians as the primary app user (they consume the shared report only). This precision resolved ambiguous decisions cleanly throughout the build — every feature question had a direct answer.</p>
                 </div>
             </div>
             <div class="step">
                 <span class="step-num">2</span>
                 <div class="step-content">
-                    <h3>Use case prioritization by automation ROI</h3>
-                    <p>Ranked potential AI use cases by: time currently spent by users, feasibility of grounding responses in platform data, and risk of incorrect output. Performance report drafting scored highest on all three. Started there.</p>
+                    <h3>Map the AI failure modes first, then design around them</h3>
+                    <p>Before writing a line of product code, ZOE's published accuracy research was used to identify where AI food logging fails hardest: soups, stews, plant milks, nut butters, sauce-based dishes. Per-category accuracy gates were set before any code was written. The 250-photo golden evaluation set — stratified with ~40 safety-risk photos and ~30 weak-category photos — became the gate for every prompt change and model upgrade.</p>
+
+                    <div class="accuracy-gates">
+                        <div class="accuracy-gate">
+                            <div class="accuracy-gate-value">≥0.80</div>
+                            <div class="accuracy-gate-label">Overall recognition</div>
+                            <div class="accuracy-gate-desc">Baseline across all food categories in the eval set</div>
+                        </div>
+                        <div class="accuracy-gate">
+                            <div class="accuracy-gate-value">≥0.85</div>
+                            <div class="accuracy-gate-label">Pregnancy-relevant foods</div>
+                            <div class="accuracy-gate-desc">Leafy greens, dairy, fish, legumes — higher bar for clinical relevance</div>
+                        </div>
+                        <div class="accuracy-gate">
+                            <div class="accuracy-gate-value">≥0.50</div>
+                            <div class="accuracy-gate-label">Known-weak categories</div>
+                            <div class="accuracy-gate-desc">Soups, smoothies, plant milks — honest bar that reflects real difficulty</div>
+                        </div>
+                        <div class="accuracy-gate">
+                            <div class="accuracy-gate-value">≥95%</div>
+                            <div class="accuracy-gate-label">Safety flag recall</div>
+                            <div class="accuracy-gate-desc">No safety risk passes through undetected — this was non-negotiable</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="step">
                 <span class="step-num">3</span>
                 <div class="step-content">
-                    <h3>Built and launched the conversational assistant</h3>
-                    <p>Used generative AI with custom-grounded platform data to power the assistant. Rolled out to a beta cohort of 500 accounts, monitored output quality, gathered structured feedback, iterated on prompt architecture and response formatting before broader release.</p>
+                    <h3>Design the confirmation UX as the trust mechanism</h3>
+                    <p>No AI decision writes to the log without the user reviewing it. Low-confidence items render with a distinct visual treatment and a "tap to verify" affordance. Safety flags (unpasteurized dairy, high-mercury fish, raw seafood, excess caffeine) surface at the top of the confirmation screen with blocking or dismissable treatments depending on severity. The user cannot tap Log until every flag is acknowledged or resolved. After two weeks of use, the model incorporates per-user portion history ("your typical oatmeal is ~65g based on 12 prior logs") — building trust by showing the system is learning from the user, not just guessing.</p>
+
+                    <div class="safety-callout">
+                        <div class="safety-callout-icon">⚑</div>
+                        <div class="safety-callout-body">
+                            <h4>Design principle</h4>
+                            <p>A silent wrong answer is worse than a friction-generating right one. For structurally ambiguous categories, the model returns a clarification prompt and a mandatory input — not a slider. A slider implies the model's estimate is a reasonable starting point. A mandatory input signals the model is genuinely unsure.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">4</span>
+                <div class="step-content">
+                    <h3>Build a clinician-shareable report with a privacy architecture to match</h3>
+                    <p>The clinician report is the feature that separates this from every other nutrition tracker. An OB or dietitian receives a nutrient trend summary — daily averages against trimester-adjusted targets, safety flag history, supplement breakdown, gestational weight-gain chart — without requiring a login or installing anything. The privacy architecture: snapshot-frozen payloads (later food log edits do not retroactively mutate what the clinician saw), time-limited revocable tokens with default 7-day expiry, and per-access logging surfaced in-app ("Dr. Smith's browser viewed this report 3 times"). The report presents data without editorializing — no risk scores, no recommendations. Data presentation, not medical advice.</p>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">5</span>
+                <div class="step-content">
+                    <h3>Design freemium to prove clinical value first, gate depth not relevance</h3>
+                    <p>The first version paywalled all pregnancy-specific micronutrients — folate, iron, DHA. This was wrong. If those are paywalled, the free tier proves nothing except that the app understands macros, which every competitor already does. The revised design keeps three nutrients free: the three a pregnant user is most actively trying to track.</p>
+
+                    <div class="tier-split">
+                        <div class="tier-box free">
+                            <span class="tier-label">Free tier</span>
+                            <ul class="tier-items">
+                                <li><span class="tier-check">✓</span>Folate, iron, DHA tracking with trimester-adjusted targets</li>
+                                <li><span class="tier-check">✓</span>All pregnancy safety flags (unpasteurized dairy, mercury, etc.)</li>
+                                <li><span class="tier-check">✓</span>Accurate daily totals including supplement adjustment</li>
+                                <li><span class="tier-check">✓</span>7 days of log history</li>
+                            </ul>
+                            <p class="tier-note">Proves pregnancy-specificity on day one. The product's core value is not paywalled.</p>
+                        </div>
+                        <div class="tier-box paid">
+                            <span class="tier-label">Paid — $8–10/mo</span>
+                            <ul class="tier-items">
+                                <li><span class="tier-check">✓</span>Full micronutrient panel (calcium, choline, iodine, B12, magnesium, vitamin A ceiling)</li>
+                                <li><span class="tier-check">✓</span>Clinician report + shareable link</li>
+                                <li><span class="tier-check">✓</span>Unlimited log history</li>
+                                <li><span class="tier-check">✓</span>Condition-aware meal planner</li>
+                            </ul>
+                            <p class="tier-note">Additive depth, not a punitive gate on relevance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <span class="step-num">6</span>
+                <div class="step-content">
+                    <h3>Architect for extensibility before the first public release</h3>
+                    <p>The nutrient target layer was built as condition-parameterized from day one. The <code>pregnancy_rdas</code> reference table is not a pregnancy table — it is a <code>condition_rdas</code> table that happens to be seeded with pregnancy data first. Each row has a <code>stage</code> and an <code>adjustments</code> field for diet-pattern modifiers (vegans need ~40% more iron due to non-heme absorption; multiple pregnancies have higher DHA targets). The same schema serves CKD potassium ceilings, diabetic glycemic targets, and hypertension sodium limits — with different condition values, not different tables. The multi-condition framework was shipped during the closed beta period, not Phase 4 as originally planned.</p>
                 </div>
             </div>
         </div>
@@ -116,9 +325,21 @@
 
     <div class="cs-section">
         <p class="section-label">Outcome</p>
-        <h2>Improved engagement, faster workflows, <em>and measurable adoption across the platform</em></h2>
+        <h2>87% confirmation rate. Every safety risk caught. Architecture ready for four conditions.</h2>
         <p>
-            The conversational AI assistant improved workflow efficiency and engagement metrics across the platform. Users who adopted the assistant generated reports and briefs faster, with higher satisfaction scores in post-task surveys. Automation of repetitive synthesis tasks reduced support tickets related to reporting complexity.
+            26 closed beta users recruited through pregnancy communities and one OB/RD partner. 87% of meals were confirmed without manual ingredient edits within the first two weeks — exceeding the ≥85% design target set at the start of the project.
+        </p>
+        <p>
+            The evaluation methodology: a 250-photo golden test set assembled before the beta began, with ground-truth ingredients, portions, and nutrients for every image. The set was explicitly stratified: ~40 photos of pregnancy safety risks, ~30 photos in known-weak categories, and ~180 photos across the general distribution. Per-category accuracy gates were set before any code was written — so the eval set functioned as an objective gate on every prompt change, not a post-hoc rationalization.
+        </p>
+        <p>
+            All 40 pregnancy safety-risk photos in the evaluation set triggered the correct flag type. No safety risk passed through the model undetected during the beta period.
+        </p>
+        <p>
+            The multi-condition framework, pantry management, and condition-aware meal planning all shipped before the public launch. The backend architecture that pregnancy users are using today is the same one that will serve CKD, diabetes, and hypertension users without a rebuild. The HIPAA-ready data posture, versioned clinical reference tables, and snapshot-frozen report tokens are the same infrastructure a regulated DTx product would need.
+        </p>
+        <p>
+            On competitive position: the free tier offers folate, iron, and DHA tracking with trimester-adjusted targets — the three nutrients a pregnant user is actively searching for. No competing free tier in the market offers this. ZOE's free tier shows macros and excludes pregnancy entirely.
         </p>
     </div>
 
@@ -126,20 +347,79 @@
 
     <div class="cs-section">
         <p class="section-label">What I Learned</p>
-        <h2>Enterprise AI is 40% capability, <em>60% trust architecture.</em></h2>
+        <h2>Two things about clinical products that are <em>not obvious</em> in fitness apps</h2>
         <p>
-            The hardest part of shipping AI inside an enterprise platform isn't building the AI — it's building the infrastructure that makes the AI safe to deploy. Multi-tenant data isolation, access controls, output quality thresholds, and escalation paths for uncertain responses all have to be designed before the user experience.
+            <strong>Trust is an architecture decision, not a copy decision.</strong> You can write all the disclaimers you want. What actually builds trust in a clinical-adjacent product is structural: the AI never writes to the record without the user confirming it, the report payload is frozen at generation time so the clinician sees exactly what existed then, and the audit log tells the user when their report was accessed and by whom. These are not UX decisions. They are architecture decisions, and they need to be made at the beginning — not added as an afterthought when a clinician asks uncomfortable questions.
         </p>
         <p>
-            The second lesson: shipping AI on a mature platform means inheriting its complexity. The data access model, the tenant isolation architecture, the existing user mental models — all of it constrains what you can build and how fast you can move. Understanding those constraints early is what lets you move confidently later.
+            <strong>Paywalling accuracy is fatal in clinical freemium.</strong> A user who can't trust the free tier won't pay for the paid one. In practice, this meant keeping safety flags and the three core pregnancy nutrients free even though they are the product's clearest demonstration of value. The right paywall gates depth of data and clinical workflow features — not the clinical relevance that makes the product worth opening in the first place.
         </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="cs-section">
+        <p class="section-label">Key Decisions</p>
+        <h2>Eight calls that defined the product</h2>
+
+        <table class="eval-table">
+            <thead>
+                <tr>
+                    <th>Decision</th>
+                    <th>What was chosen</th>
+                    <th>Why</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Primary persona</td>
+                    <td>Pregnant user, not general dieter</td>
+                    <td>Enables clinical specificity; general-diet app is a different product</td>
+                </tr>
+                <tr>
+                    <td>AI architecture</td>
+                    <td>Claude vision → user confirm → USDA fallback</td>
+                    <td>Confirm-before-save + cited fallback enables clinician trust</td>
+                </tr>
+                <tr>
+                    <td>Safety paywall</td>
+                    <td>Never</td>
+                    <td>Safety gap destroys trust faster than any conversion lift recovers it</td>
+                </tr>
+                <tr>
+                    <td>Free-tier nutrients</td>
+                    <td>Folate, iron, DHA only</td>
+                    <td>Prove pregnancy-specificity in the free tier; gate depth not relevance</td>
+                </tr>
+                <tr>
+                    <td>Nutrient target schema</td>
+                    <td>Condition-parameterized, not pregnancy-specific</td>
+                    <td>Multi-condition extensibility without schema rebuild</td>
+                </tr>
+                <tr>
+                    <td>Report payload</td>
+                    <td>Snapshot-frozen at generation time</td>
+                    <td>Clinical record integrity — later edits cannot alter what the clinician saw</td>
+                </tr>
+                <tr>
+                    <td>Regulatory posture</td>
+                    <td>Wellness + optional clinician share (HIPAA-ready)</td>
+                    <td>Avoids FDA medical device pathway while preserving upgrade option</td>
+                </tr>
+                <tr>
+                    <td>Eval methodology</td>
+                    <td>Stratified 250-photo golden set, gates set before code</td>
+                    <td>Objective gate on every prompt change, not post-hoc rationalization</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 
 <a href="case-study-03.html" class="cs-next">
     <div>
         <p class="cs-next-label">Next Case Study — 03</p>
-        <p class="cs-next-title">Building the AI agent that turns 4 hours of competitive research <em>into 2 minutes</em></p>
+        <p class="cs-next-title">Shipping a conversational AI assistant inside a B2B platform <em>with 10M+ users</em></p>
     </div>
     <span class="cs-next-arrow">→</span>
 </a>
