@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 24",
+    "date": "2026-06-07",
+    "summary": "Microsoft launches 7 MAI models at Build 2026 — trained without OpenAI data — marking a direct pivot to self-sufficiency; Anthropic discloses Claude writes 80%+ of its own code and warns of recursive self-improvement risk; OpenAI targets a September IPO at $850B while Anthropic files its own S-1; and Google agrees to pay xAI $920M/month for compute, alongside Anthropic's existing $1.25B/month deal.",
+    "filename": "AI-Report-2026-06-07.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 23",
     "date": "2026-05-31",
     "summary": "OpenAI opens its IPO roadshow at a $1.75T valuation; Anthropic enters $1T term-sheet talks after its first operating profit; Tim Gowers verifies OpenAI's Erdos proof as a second model run tightens the unit-distance bound to n^1.05; and Apple previews third-party AI Extensions for iOS at WWDC.",
