@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 25",
+    "date": "2026-06-15",
+    "summary": "Anthropic releases Claude Fable 5 (80.3% SWE-bench Pro, the highest public coding score ever) and then suspends global access within 72 hours after a US Commerce Department export-control directive — the first retroactive ban on a commercially released AI model. Also this week: Apple WWDC 2026 confirms Siri AI rebuilt with Google Gemini across 2.2B devices as Tim Cook announces his September retirement; OpenAI files a confidential S-1 targeting ~$1T IPO; and MiniMax 3 delivers frontier-class multimodal performance at $0.53 per million tokens.",
+    "filename": "AI-Report-2026-06-15.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 24",
     "date": "2026-06-07",
     "summary": "Microsoft launches 7 MAI models at Build 2026 — trained without OpenAI data — marking a direct pivot to self-sufficiency; Anthropic discloses Claude writes 80%+ of its own code and warns of recursive self-improvement risk; OpenAI targets a September IPO at $850B while Anthropic files its own S-1; and Google agrees to pay xAI $920M/month for compute, alongside Anthropic's existing $1.25B/month deal.",
