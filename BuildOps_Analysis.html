@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="BuildOps competitive intelligence — market analysis, product audit, AI strategy deep-dive, PM critique, and mock product strategy by Mukul Dewangan.">
+<title>BuildOps: The Commercial OS Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · June 2026</div>
+  <h1>BuildOps:<br>The <em>Commercial OS</em> Bet</h1>
+  <p class="cover-sub">A full market analysis, product audit, technology deep-dive, AI strategy assessment, PM critique, and mock product strategy for the trades software unicorn betting everything on commercial-only.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Santa Monica, CA</span></div>
+    <div>FOUNDED<span>2018</span></div>
+    <div>ARR<span>$97.4M (2025)</span></div>
+    <div>STATUS<span>$1B Unicorn · Series C</span></div>
+    <div>COVERAGE<span>buildops.com</span></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$127M</div><div class="stat-label">Series C (Mar 2025)</div></div>
+  <div class="stat-box"><div class="stat-num blue">$1B</div><div class="stat-label">Valuation</div></div>
+  <div class="stat-box"><div class="stat-num accent">$97.4M</div><div class="stat-label">2025 ARR</div></div>
+  <div class="stat-box"><div class="stat-num">1,500+</div><div class="stat-label">Contractors</div></div>
+  <div class="stat-box"><div class="stat-num blue">626</div><div class="stat-label">Employees</div></div>
+  <div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Commercial Only</div></div>
+</div>
+
+<div class="container">
+
+<!-- §01 COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is BuildOps?</h2>
+
+  <p>BuildOps is a Santa Monica-based SaaS company that has made an uncommon strategic bet: build the definitive operating system for commercial specialty contractors — and only them. No residential. No enterprise facilities management. No construction generalists. The company targets mechanical, electrical, and plumbing (MEP) subcontractors that service commercial buildings, the kind of businesses running $5M–$200M in revenue on a combination of spreadsheets, text messages, and aging point solutions.</p>
+
+  <p>The company was co-founded in 2018 by <strong>Alok Chanani</strong>, a U.S. Army veteran, and <strong>Steve Chew</strong>. Chanani's military background is more than brand narrative — it shapes the product philosophy: operational clarity, chain of accountability, and removing ambiguity from the field. The company reached unicorn status in March 2025 with a $127M Series C led by Meritech Capital Partners at a $1B valuation, bringing total funding to $226M. Revenue grew from $51.9M in 2024 to $97.4M in 2025 — an 88% growth rate that validates the vertical-SaaS playbook.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    BuildOps is not trying to be the next ServiceTitan. It is trying to own the commercial trades segment that ServiceTitan grew up ignoring. The bet: commercial contractors are sufficiently different from residential that a purpose-built system will always win on depth — even against a better-funded generalist. This thesis is working. The question is whether it continues to work as ServiceTitan sharpens its commercial product and the market consolidates.
+  </div>
+
+  <h3>Leadership</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Alok Chanani — CEO & Co-Founder</h4><p>U.S. Army veteran who saw contractors running multimillion-dollar operations on WhatsApp. The product's founding hypothesis is his field observation. Named to the LA500 in 2026.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Steve Chew — Co-Founder</h4><p>Technical co-founder responsible for the platform's early architecture. Focused on product and engineering alongside Chanani since the 2018 founding.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Dzmitry Markovich — CTO (appointed May 2026)</h4><p>Former SVP Engineering at Apollo.io; spent 7 years at Dropbox rising to VP Engineering, including the 2018 IPO. A signal that BuildOps is scaling engineering toward autonomous, agentic infrastructure.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Will Lehrmann — CPO</h4><p>Oversees product strategy and works closely with the new CTO on expanding OpsAI's autonomous capabilities. The team cites Salesforce, Autodesk, and Amazon backgrounds across engineering and product.</p></div>
+  </div>
+
+  <h3>Funding Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2018</div>
+      <div class="tl-title">Founded — Santa Monica, CA</div>
+      <div class="tl-desc">Alok Chanani and Steve Chew co-found BuildOps after observing commercial contractors managing multimillion-dollar operations on spreadsheets and texts.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2020</div>
+      <div class="tl-title">Foundation — Commercial Core</div>
+      <div class="tl-desc">Built the first true commercial data architecture: asset-level records, bidirectional ERP syncing, and workflows designed for multi-trade complexity — not adapted from residential.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2023</div>
+      <div class="tl-title">First Forge Conference + Series B</div>
+      <div class="tl-desc">Launched the Forge user conference, bringing contractors together to shape the roadmap. Forge now draws 600+ attendees — a community moat. Series B closed with Next47 and StepStone Group.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2024</div>
+      <div class="tl-title">Tyson for the Trades + $51.9M ARR</div>
+      <div class="tl-desc">Partnered with Mike Tyson to spotlight the skilled labor gap in commercial trades. ARR reaches $51.9M. ServiceTitan goes public (NASDAQ: TTAN) at $9.5B valuation, validating the category but raising the competitive bar.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2025</div>
+      <div class="tl-title">Unicorn + OpsAI Launch</div>
+      <div class="tl-desc">$127M Series C led by Meritech Capital Partners. Unicorn status at $1B valuation. OpsAI launched across all workflows: Smart Dispatch, Smart Recap, AI PO Scanning, Invoice Summary. ARR hits $97.4M — 88% YoY growth.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-year">2026</div>
+      <div class="tl-title">CTO Hire + Raleigh Expansion</div>
+      <div class="tl-desc">Dzmitry Markovich named CTO. New Raleigh, NC office opened. Forbes Best Startup Employer for the fourth consecutive year. Platform pushes toward "autonomous execution."</div>
+    </div>
+  </div>
+</div>
+
+<!-- §02 MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>The Field Service Management Landscape</h2>
+
+  <p>The global Field Service Management software market was valued at approximately $5.66B in 2025, projected to reach $6.26B in 2026 and grow at a CAGR of 12–15% through 2030. BuildOps operates within the <strong>commercial specialty contracting sub-vertical</strong> — a narrower, higher-value segment where contract sizes run larger, workflows are more complex (asset-level tracking, multi-trade scheduling, progress billing), and switching costs are correspondingly higher.</p>
+
+  <p>The macro tailwinds are significant. Aging U.S. commercial infrastructure is accelerating maintenance and retrofit demand. Electrification mandates, building decarbonization, and fire life safety compliance are all driving multi-year service contract pipelines. On the labor side, 48% of commercial contractors report more than one in five positions unfilled — a structural labor gap that makes automation tools not nice-to-have but operationally essential.</p>
+
+  <div class="callout blue">
+    <strong>Market Dynamics</strong>
+    78% of commercial contractors report turning to AI tools in 2025. 9 in 10 say competition has intensified year-over-year. This is a market under pressure to modernize — and it's moving faster than FSM vendors expected. The contractor that doesn't digitize loses margin to the one that does.
+  </div>
+
+  <h3>Competitive Landscape</h3>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Company</th>
+        <th>Focus</th>
+        <th>Strength</th>
+        <th>Weakness vs. BuildOps</th>
+        <th>Threat Level</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ServiceTitan</strong></td>
+        <td>Residential + Commercial</td>
+        <td>Largest platform, NASDAQ IPO (TTAN), deep residential DNA, $9.5B valuation</td>
+        <td>Commercial is an extension, not origin. UX reflects residential roots. Expensive, complex implementation</td>
+        <td><span class="tag red">High</span></td>
+      </tr>
+      <tr>
+        <td><strong>FieldEdge</strong></td>
+        <td>Residential HVAC/Plumbing</td>
+        <td>QuickBooks-native, strong flat-rate price books, HVAC workflows</td>
+        <td>Residential-first. Limited commercial asset tracking. No multi-trade project management</td>
+        <td><span class="tag gold">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Jobber</strong></td>
+        <td>SMB Service Businesses</td>
+        <td>Polished UX, strong customer comms, large SMB base, PLG motion</td>
+        <td>Not built for commercial complexity. No contract management, limited asset tracking, no ERP integration depth</td>
+        <td><span class="tag blue">Low-Med</span></td>
+      </tr>
+      <tr>
+        <td><strong>Davisware</strong></td>
+        <td>Commercial HVAC/Refrigeration</td>
+        <td>Deep commercial workflows, legacy install base in refrigeration/HVAC</td>
+        <td>Aging UI, limited AI investment, lacks modern mobile experience</td>
+        <td><span class="tag gold">Medium</span></td>
+      </tr>
+      <tr>
+        <td><strong>Salesforce FSL</strong></td>
+        <td>Enterprise Field Service</td>
+        <td>Enterprise CRM integration, routing AI, massive ecosystem</td>
+        <td>Overkill for most contractors, high implementation cost, no trades-specific workflows out of the box</td>
+        <td><span class="tag blue">Low-Med</span></td>
+      </tr>
+      <tr>
+        <td><strong>Dynamics 365 FS</strong></td>
+        <td>Enterprise Field Service</td>
+        <td>Microsoft ecosystem integration, strong for enterprise facilities management</td>
+        <td>Not designed for independent commercial subcontractors. Requires heavy customization</td>
+        <td><span class="tag grey">Low</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>BuildOps' Strategic Position</h3>
+  <p>BuildOps occupies a narrow but defensible niche: it is the only pure-play commercial specialty contractor platform at scale. ServiceTitan is the primary threat — not because their commercial product is better today, but because they have the resources to get there and the public market pressure to expand TAM. The clock is ticking on how long commercial-only differentiation holds as a meaningful moat.</p>
+
+  <p>The most underappreciated competitive threat is not another FSM platform — it is the ERP giants. Sage, Viewpoint, and NetSuite all have contractor modules. If any of them add a credible mobile dispatch layer and AI, BuildOps' integration positioning weakens. Right now BuildOps leverages ERP integrations as a selling point ("we sync with your Sage"). That could flip to a vulnerability if the ERPs close the feature gap.</p>
+</div>
+
+<!-- §03 PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>Platform Deep-Dive</h2>
+
+  <p>BuildOps operates as a unified platform across five core modules, with OpsAI as the intelligence layer running across all of them. The product's fundamental insight is that commercial contractors don't need better point tools — they need the data from a service call, a project job, a PO, and a technician's time sheet to exist in one system so the office and field stay synchronized without manual reconciliation.</p>
+
+  <h3>Core Modules</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>OpsAI</h4>
+      <p>The intelligence layer embedded across every workflow. Includes Smart Dispatch (AI technician routing), Smart Recap (voice-to-doc field notes), AI PO Scanning (photo-to-purchase order), Invoice Summary (customer-readable invoice generation), and conversational field queries ("what parts do I need for this unit?").</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔧</div>
+      <h4>Service Management</h4>
+      <p>Drag-and-drop dispatch board, work order management, asset-level tracking (equipment records tied to specific building locations), preventive maintenance contracts, and service agreement billing. The commercial asset data model is genuinely different from residential — each asset has a history, warranty status, and recommended maintenance cadence.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <h4>Project Management</h4>
+      <p>Bid-to-closeout job tracking: RFIs, daily field logs, subcontractor coordination, progress billing, and change order management. This is the "construction side" of commercial contracting — distinct from the service/maintenance workflow but running on the same data layer.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <h4>Financials</h4>
+      <p>Job costing, time tracking, procurement, invoicing, and AR management. Bidirectional ERP sync with QuickBooks (Desktop and Online), Sage Intacct, Viewpoint Spectrum/Vista, and NetSuite. One customer (Omnia Mechanical) cut receivables from 120 days to 30 days. Another (JL Minter) reported 73% faster billing.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>Sales & CRM</h4>
+      <p>Pipeline management, quote generation, and lead-to-contract handoff. OpsAI reads completed service visit notes and flags repair, replacement, and upsell opportunities — turning field work into a sales signal. Quote approval rates at Sloan Mechanical reached 75% after adopting the platform.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h4>Mobile App + Add-Ons</h4>
+      <p>Field technician mobile app designed for commercial workflows: asset scanning, voice note capture, work order access, and offline capability. Add-on modules include Fleet+ (GPS fleet tracking), Payments+ (field payment collection), and CRM+ (enhanced customer management).</p>
+    </div>
+  </div>
+
+  <h3>Key Product Metrics</h3>
+  <div class="card-grid three">
+    <div class="card">
+      <h4>50% Reduction</h4>
+      <p>Admin work reduction reported by Jolma Electric after OpsAI deployment.</p>
+    </div>
+    <div class="card">
+      <h4>73% Faster</h4>
+      <p>Billing cycle improvement at JL Minter using AI invoice generation.</p>
+    </div>
+    <div class="card">
+      <h4>75% Savings</h4>
+      <p>Time saved in receivables at Omnia Mechanical — from 120 to 30 days average collection.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Critical Observation</strong>
+    BuildOps' product metrics are impressive but all sourced from its own customer success stories. No independent third-party benchmarks exist. The Capterra score (4.5 stars, 151 reviews) is solid but reveals recurring pain points: QuickBooks sync errors, daily glitches, complicated time tracking UI, and the invoicing module needing a major UX overhaul. A product that commands $299/user/month needs to be essentially bug-free. It is not yet.
+  </div>
+
+  <h3>ERP Integration Ecosystem</h3>
+  <div class="brand-grid">
+    <span class="brand-pill flagship">QuickBooks Desktop</span>
+    <span class="brand-pill flagship">QuickBooks Online</span>
+    <span class="brand-pill flagship">Sage Intacct</span>
+    <span class="brand-pill flagship">Viewpoint Spectrum</span>
+    <span class="brand-pill flagship">Viewpoint Vista</span>
+    <span class="brand-pill">NetSuite</span>
+    <span class="brand-pill">Stripe Payments</span>
+    <span class="brand-pill">GPS Fleet Tracking</span>
+  </div>
+  <p class="footnote">Bidirectional ERP sync is BuildOps' strongest technical differentiator and a meaningful switching-cost driver. QuickBooks sync errors remain the most common customer complaint — the connector logic needs hardening.</p>
+</div>
+
+<!-- §04 CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments</div>
+  <h2>Who Buys BuildOps</h2>
+
+  <p>BuildOps targets commercial specialty contractors across five primary trades. The platform is industry-agnostic within commercial MEP, but each trade has distinct workflows that BuildOps has invested in modeling at the data layer.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🌡️</div>
+      <h4>HVAC & Mechanical</h4>
+      <p>The largest vertical. Commercial HVAC contractors run preventive maintenance contracts on large portfolios of rooftop units, chillers, and air handling equipment. Asset-level tracking and PM scheduling are the core value drivers. BuildOps' data model — tying equipment to building locations, not home addresses — makes it uniquely suited here.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <h4>Electrical</h4>
+      <p>Commercial electrical contractors are heavy project-management users. The bid-to-closeout workflow, RFI management, and progress billing modules get the most use in this segment. Customers like Jolma Electric, Classic Electric, and Holmes Electric are showcased prominently in case studies.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💧</div>
+      <h4>Plumbing</h4>
+      <p>Commercial plumbing workflows overlap heavily with HVAC: service contracts on commercial buildings, emergency dispatch, and recurring preventive maintenance. A natural cross-sell after HVAC acquisition.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔥</div>
+      <h4>Fire & Life Safety</h4>
+      <p>A growing vertical with strong recurring revenue characteristics (mandated annual inspections). Compliance documentation and certification tracking make BuildOps' digital paperwork capabilities especially valuable here.</p>
+    </div>
+  </div>
+
+  <h3>Business Size Targeting</h3>
+  <p>BuildOps' sweet spot is commercial contractors with 15–250 technicians — large enough to feel the operational pain of disconnected systems, not so large that they need an enterprise ERP to run the business. The $299/user/month pricing points to a deliberate choice: they are not trying to serve 5-person shops (Jobber owns that), and they are not trying to compete on pure enterprise scale (Salesforce FSL territory). The company does have an Enterprise tier and a <strong>Private Equity</strong> module — targeting PE-backed contractor roll-ups, which is one of the smartest strategic moves in the portfolio given how actively private equity is consolidating the trades.</p>
+
+  <div class="callout green">
+    <strong>Underappreciated Segment</strong>
+    The Private Equity module deserves far more product investment than it appears to be receiving. PE-backed multi-location contractor roll-ups are the fastest-growing buyer segment in commercial trades. A platform win with one PE firm's portfolio company is a referral engine across their entire portfolio. BuildOps should be engineering this motion aggressively.
+  </div>
+</div>
+
+<!-- §05 TECHNOLOGY STACK -->
+<div class="section">
+  <div class="section-label">§ 05 — Technology Stack</div>
+  <h2>Technical Architecture</h2>
+
+  <p>BuildOps does not disclose its full technical stack publicly, but the architecture can be inferred from job postings, product behavior, integration patterns, and the backgrounds of engineering leadership. The company's CTO hire (Dzmitry Markovich from Apollo.io and Dropbox) signals a specific trajectory: building toward agentic, autonomous infrastructure — not just AI-assisted workflows.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Frontend</div>
+    <div class="tech-layer-content">
+      <strong>React / TypeScript — Web; React Native — Mobile</strong>
+      <p>The dispatch board and office-side interface is a web application. The technician-facing mobile app shows React Native patterns based on cross-platform behavior and update cadence. The mobile app is core to the value proposition — field techs do not use desktop software.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Backend</div>
+    <div class="tech-layer-content">
+      <strong>Node.js / Python microservices — Cloud-hosted (AWS likely)</strong>
+      <p>Modern SaaS architecture with microservice decomposition. The ERP sync connectors (QuickBooks, Sage, Viewpoint) are among the most technically complex components — bidirectional sync with eventual consistency guarantees is hard. The recurring customer complaint about QuickBooks sync errors suggests the connector layer has accumulated technical debt.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Layer</div>
+    <div class="tech-layer-content">
+      <strong>Commercial-first data model — Asset-centric, not address-centric</strong>
+      <p>The single most important technical differentiator. BuildOps' data model structures work around commercial assets (a rooftop HVAC unit at Building X, Floor 3) rather than residential addresses. This makes the platform fundamentally incompatible with residential contractors — and fundamentally superior for commercial use cases. Asset history, warranty tracking, and PM scheduling all depend on this model being correct from day one.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">OpsAI Layer</div>
+    <div class="tech-layer-content">
+      <strong>LLM-based extraction + domain-specific fine-tuning + computer vision</strong>
+      <p>OpsAI is a multi-modal AI layer. Smart Recap uses speech-to-text + LLM summarization to convert field voice notes into structured documentation. AI PO Scanning uses computer vision to extract line items from purchase order photos. Smart Dispatch uses ML-based routing optimization (skills, proximity, availability). Invoice Summary uses LLM generation from structured job data. The CTO description of "autonomous execution" suggests agentic architecture (multi-step, tool-using AI) is on the roadmap.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Integrations</div>
+    <div class="tech-layer-content">
+      <strong>REST APIs + Webhooks — ERP connectors built in-house</strong>
+      <p>Connectors to QuickBooks (Desktop and Online), Sage Intacct, Viewpoint Spectrum/Vista, and NetSuite. These are built and maintained by BuildOps rather than using a connector middleware like Merge.dev or Workato — which gives them control but also creates ongoing maintenance burden as the ERPs update their APIs.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Security</div>
+    <div class="tech-layer-content">
+      <strong>SOC 2 compliant — Trust Center published</strong>
+      <p>BuildOps maintains a public Trust Center. Holmes Electric cites BuildOps' cybersecurity infrastructure as mission-critical ("If we didn't have BuildOps and the additional cyber security, we would be dead in the water"). Security is table stakes in B2B SaaS but appears to be a genuine selling point for small contractors without in-house IT.</p>
+    </div>
+  </div>
+</div>
+
+<!-- §06 AI STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 06 — AI Strategy</div>
+  <h2>OpsAI: Built-In, Not Bolted On</h2>
+
+  <p>BuildOps' AI strategy is centered on one claim that gets repeated across every marketing surface: "built in, not bolted on." OpsAI is positioned as the intelligence layer that runs inside every existing workflow — dispatch board, work order, invoice, purchase order — rather than a separate AI assistant the user has to remember to open. This is a deliberate differentiation from competitors who are shipping AI chatbots and calling it an AI strategy.</p>
+
+  <h3>What OpsAI Actually Does Today</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>Smart Dispatch</h4>
+      <p>AI-recommended technician assignments based on skill sets, certifications, proximity, and live availability. Claims to cut technician travel time by 50%. Uses ML routing optimization — comparable to what ServiceTitan is building but with commercial asset context (not residential address density optimization).</p>
+    </div>
+    <div class="card">
+      <h4>Smart Recap</h4>
+      <p>Voice note capture by field technicians → AI converts to customer-ready documentation. Reduces admin time and creates cleaner job records. The 50% admin reduction at Jolma Electric is attributed primarily to this feature.</p>
+    </div>
+    <div class="card">
+      <h4>AI PO Scanning</h4>
+      <p>Field tech photographs a purchase order → AI extracts line items into the system. Eliminates manual PO data entry, which is a surprisingly significant time drain in commercial contracting where parts are frequent and varied.</p>
+    </div>
+    <div class="card">
+      <h4>Nameplate Recognition</h4>
+      <p>Tech photographs an equipment nameplate → asset record fills in automatically (make, model, serial number). Speeds asset registration and improves data accuracy. A genuine innovation for commercial asset management.</p>
+    </div>
+    <div class="card">
+      <h4>Invoice Summary</h4>
+      <p>AI generates customer-readable invoice summaries from structured job data. Reduces billing disputes by making invoices legible and detailed. The 73% billing time reduction at JL Minter suggests this is high-impact.</p>
+    </div>
+    <div class="card">
+      <h4>Sales Intelligence</h4>
+      <p>OpsAI reads completed visit notes and flags repair, replacement, and upsell opportunities. Turns the service team into a passive revenue-generation channel. Still early — the quality of recommendations depends on the quality of field notes upstream.</p>
+    </div>
+  </div>
+
+  <h3>AI Readiness Assessment</h3>
+
+  <div class="callout blue">
+    <strong>Verdict: Genuine AI-First at the Workflow Layer — Not Yet Autonomous</strong>
+    OpsAI is not marketing gloss. The features are in production, the customer results are real (50% admin reduction, 73% faster billing), and the "built-in" architecture avoids the most common AI trap: building a chatbot that users ignore. But the CTO's stated mission — "autonomous execution" — is 2–3 years away. Today OpsAI handles busywork and surfaces recommendations. Autonomous means OpsAI schedules the job, generates the invoice, and routes the PO without a human approving each step. BuildOps is not there yet, and the gap between the vision they're selling and the current state matters.
+  </div>
+
+  <p>The critical question for OpsAI's defensibility is data. AI models trained on domain-specific data outperform generalist models. BuildOps has a meaningful head start: 1,500+ contractors generating millions of work orders, service histories, and dispatch events. This creates a feedback loop where better data → better AI → better outcomes → more customers → more data. But this moat only materializes if BuildOps uses its data advantage to train proprietary models, not just wrap OpenAI API calls in a nice UI.</p>
+
+  <p>The CTO hire of Dzmitry Markovich (Dropbox IPO veteran, Apollo.io engineering leader) is the clearest signal that BuildOps is serious about the infrastructure needed to make AI autonomous at scale. The question is timeline: can they build it before ServiceTitan's AI team catches up?</p>
+</div>
+
+<!-- §07 PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 07 — PM Critique</div>
+  <h2>What BuildOps Is Getting Wrong</h2>
+
+  <p>BuildOps is executing well. But execution against the current plan is not the same as having the right plan. As a PM, five structural issues stand out — the kind of things that are easy to miss when revenue is growing 88% year-over-year but that become compounding problems as the company scales.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Strategic Risk</div>
+    <div class="critique-title">The "Commercial-Only" Moat Has a Timer</div>
+    <div class="critique-body">The entire BuildOps value proposition rests on commercial-only depth. ServiceTitan has the resources and the public-market incentive to close the commercial feature gap. When they do — not if — BuildOps' primary differentiator erodes. The company needs to develop defensibility that goes beyond "we thought of commercial first." That means proprietary data assets, deep industry relationships, and switching costs so high that even a marginally better product can't dislodge them. Right now the switching costs are real (data migration is painful) but not irreversible. The Forge community and the PE module are the right instincts — they need 3–5x more investment.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◆ Product Gap</div>
+    <div class="critique-title">Private Equity Module Is Underleveraged</div>
+    <div class="critique-body">PE-backed contractor roll-ups are the single fastest-growing buyer segment in commercial trades. When a PE firm acquires a portfolio of 8 HVAC companies and needs a unified platform, a BuildOps win with one company becomes a win with all eight. The current PE module exists but appears to be a light-touch positioning play rather than a purpose-built multi-tenant experience with portfolio-level analytics, cross-entity reporting, and consolidation tooling. Building this properly is a $50M ARR opportunity hidden in plain sight. This should be a dedicated product team with a dedicated go-to-market motion, not a landing page.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Product Risk</div>
+    <div class="critique-title">OpsAI Is Being Oversold Before It's Fully Cooked</div>
+    <div class="critique-body">The gap between "AI that knows your operation" and "AI that flags what matters" is large. The current OpsAI reduces busywork and surfaces recommendations — genuinely valuable, genuinely differentiated. But the marketing is already using words like "autonomous execution" and "agentic." Customer expectations are being set for capabilities that are 18–36 months away. When the AI makes a wrong dispatch recommendation or generates an incorrect invoice and the customer can't figure out why, the trust damage compounds. The right framing is "AI that accelerates your team," not "AI that runs your operation." Deliver the latter before claiming it.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◆ Product Gap</div>
+    <div class="critique-title">ERP Sync Quality Is a Reputation Risk</div>
+    <div class="critique-body">The most consistent customer complaint across Capterra reviews is QuickBooks sync errors — items syncing multiple times, failed exports, reconciliation headaches. For a product that charges $299/user/month and positions financial integrity as a core value proposition ("we treat your accounting as the source of truth"), sync bugs are a direct contradiction of the brand promise. This is not a minor UX issue — it is a trust issue. A single billing discrepancy that triggers an audit for a contractor doing $20M/year causes irreversible damage. The ERP connector layer needs a dedicated quality engineering effort, better observability, and proactive error alerting before the customer notices.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✓ Missed Opportunity</div>
+    <div class="critique-title">No Industry Data Product — Sitting on a Gold Mine</div>
+    <div class="critique-body">1,500+ commercial contractors are running their operations on BuildOps. That means BuildOps has aggregate data on technician productivity benchmarks, equipment failure rates by make/model, parts pricing by region, and contract renewal patterns — data that no individual contractor has and that the industry is desperate for. A "BuildOps Intelligence" product that provides anonymized industry benchmarks ("your technician utilization is 67% — top quartile contractors in HVAC are at 79%") would create a new revenue stream, deepen stickiness, and establish a data moat that competitors without the customer base literally cannot replicate. This is the product that transitions BuildOps from a workflow tool to an industry intelligence platform.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✓ Missed Opportunity</div>
+    <div class="critique-title">Go-To-Market Is Demo-Gated — PLG Is the Missing Motion</div>
+    <div class="critique-body">BuildOps' entire acquisition motion requires booking a demo. There is no freemium, no self-serve trial, no PLG entry point. At $299/user/month this is understandable — the sales complexity justifies a human in the loop. But the mid-market is increasingly self-directed. A 50-technician electrical contractor who Googles "commercial electrical dispatch software" and hits a "Book Demo" wall will bounce to a competitor offering a 14-day trial. An SMB-tier product (limited users, core dispatch + mobile, basic invoicing at $79/user/month) with a self-serve signup would expand top-of-funnel dramatically and create an upgrade motion into the full platform. The risk of cannibalization is real but manageable with deliberate tier design.</div>
+  </div>
+</div>
+
+<!-- §08 SWOT -->
+<div class="section">
+  <div class="section-label">§ 08 — SWOT Analysis</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Commercial-only data model — architecturally superior to residential-adapted platforms</li>
+        <li>Bidirectional ERP sync across 5+ accounting systems — high switching costs</li>
+        <li>OpsAI embedded across all workflows, not bolted on as a chatbot</li>
+        <li>Forge community conference (600+ attendees) — customer moat and roadmap signal</li>
+        <li>88% YoY ARR growth — fastest-growing commercial FSM platform</li>
+        <li>Forbes Best Startup Employer 4 consecutive years — talent signal</li>
+        <li>CTO hire with Dropbox/Apollo.io pedigree — engineering credibility</li>
+        <li>Meritech + Schneider Electric as investors — strategic + financial alignment</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>QuickBooks sync errors — recurring complaint undermining financial trust positioning</li>
+        <li>Daily glitches reported by customers — QA and reliability gap</li>
+        <li>No self-serve or PLG motion — demo-gated acquisition limits top-of-funnel</li>
+        <li>Invoicing UI rated poorly — a critical workflow with suboptimal UX</li>
+        <li>Agentic AI is aspirational, not current — risk of overpromising</li>
+        <li>Commercial-only moat is time-limited as ServiceTitan improves</li>
+        <li>No international expansion — U.S.-only limits long-term TAM</li>
+        <li>Limited ecosystem depth compared to ServiceTitan's partner network</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>PE roll-up buyer segment — multi-entity, multi-location deal sizes are 5–20x standard</li>
+        <li>Industry data/benchmark product — proprietary insights from 1,500+ contractors</li>
+        <li>Embedded financial services — payments, contractor financing, insurance</li>
+        <li>International expansion — commercial contracting is global</li>
+        <li>Refrigeration vertical — regulatory-driven compliance need, underserved</li>
+        <li>PLG / SMB-tier entry product — expand top-of-funnel into 10–50 tech contractors</li>
+        <li>Workforce platform — labor matching for the skilled trades gap</li>
+        <li>Marketplace — parts procurement, preferred vendor directory</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>ServiceTitan commercial product maturation — best-funded competitor with public market capital</li>
+        <li>ERP vendors (Sage, Viewpoint) adding FSM capabilities — integration advantage flips</li>
+        <li>AI commoditization — if LLM API calls are the AI layer, there is no AI moat</li>
+        <li>Macroeconomic sensitivity — commercial construction and retrofit spending is cyclical</li>
+        <li>Skilled labor shortage limits contractor growth — constrains customer expansion</li>
+        <li>PE consolidation — if PE firms standardize on a competitor platform, BuildOps loses the roll-up opportunity</li>
+        <li>Pricing pressure at renewal — $299/user/month is high for SMB contractors</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- §09 MOCK PRODUCT STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 09 — Mock Product Strategy</div>
+  <h2>BuildOps 2027: The Intelligent Trade OS</h2>
+
+  <p class="footnote" style="font-size:12px; margin-bottom: 24px;">The following is a mock product strategy document written from the perspective of a VP of Product at BuildOps, synthesizing the findings of this analysis into an actionable 18-month plan. This is analytical and speculative — not an internal document.</p>
+
+  <div class="strat-section">
+    <div class="strat-header">
+      <div class="num">01</div>
+      <h3>North Star & Strategic Context</h3>
+    </div>
+    <p><strong>Mission:</strong> To be the agentic operating system for commercial contracting — where every workflow is intelligent, every data point is trusted, and the office and field operate as one.</p>
+    <p><strong>Strategic Context:</strong> We hit $97.4M ARR in 2025 on the strength of commercial-only depth and OpsAI. The next $100M comes from three places: (1) expanding within our existing customer base via new modules and PE deals, (2) adding a self-serve entry point to capture the mid-market below our current ICP, and (3) building a proprietary data layer that creates defensibility no competitor can replicate without a decade of commercial-only focus. We have 18 months to entrench before ServiceTitan's commercial product matures.</p>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header">
+      <div class="num">02</div>
+      <h3>Key Initiatives — Now / Next / Later</h3>
+    </div>
+    <div class="initiative-row" style="font-weight:700; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); padding-bottom:8px;">
+      <div>Initiative</div><div>Timeline</div><div>Priority</div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">ERP Sync Quality Overhaul</div>
+        <div class="initiative-desc">Dedicated connector reliability team. Proactive sync error alerting. QuickBooks connector rewrite with idempotency guarantees. Zero sync failures is the bar.</div>
+      </div>
+      <div><span class="tag blue">Now (Q3 2026)</span></div>
+      <div><span class="tag red">P0</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">BuildOps PE Suite — Portfolio Intelligence</div>
+        <div class="initiative-desc">Multi-entity dashboard, cross-portfolio analytics, entity-level P&amp;L comparisons, consolidated AR aging. Purpose-built for PE operating partners managing 5–20 contractor entities. Target: 3 PE firm partnerships by Q1 2027.</div>
+      </div>
+      <div><span class="tag blue">Now (Q4 2026)</span></div>
+      <div><span class="tag red">P0</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">BuildOps Intelligence — Industry Benchmarks</div>
+        <div class="initiative-desc">Anonymized aggregate insights from 1,500+ contractor data. Technician utilization benchmarks, equipment failure rates, regional parts pricing, contract renewal predictors. New revenue stream and stickiness driver.</div>
+      </div>
+      <div><span class="tag gold">Next (Q1 2027)</span></div>
+      <div><span class="tag gold">P1</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">OpsAI Autonomous Scheduling (Closed Loop)</div>
+        <div class="initiative-desc">OpsAI moves from recommending to executing: auto-schedule PM visits within approved parameters, auto-generate and send invoices for completed work orders, auto-flag POs for approval when cost exceeds threshold. Human approval stays in loop for exceptions only.</div>
+      </div>
+      <div><span class="tag gold">Next (Q2 2027)</span></div>
+      <div><span class="tag gold">P1</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">BuildOps Starter — Self-Serve Entry Tier</div>
+        <div class="initiative-desc">$79/user/month, 3-user minimum, core dispatch + mobile + basic invoicing. 14-day free trial with no credit card required. Upgrade path to full platform. Expands top-of-funnel to 10–50 tech contractors that currently bounce on "Book Demo."</div>
+      </div>
+      <div><span class="tag gold">Next (Q2 2027)</span></div>
+      <div><span class="tag gold">P1</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">Embedded Payments &amp; Contractor Financing</div>
+        <div class="initiative-desc">Expand Payments+ into a full embedded finance product: same-day payment settlement, contractor credit lines based on BuildOps AR data, equipment financing through BNPL integration. Revenue share model, not just SaaS fees.</div>
+      </div>
+      <div><span class="tag grey">Later (H2 2027)</span></div>
+      <div><span class="tag blue">P2</span></div>
+    </div>
+    <div class="initiative-row">
+      <div>
+        <div class="initiative-name">Parts &amp; Procurement Marketplace</div>
+        <div class="initiative-desc">Connect technicians to preferred vendor directories for parts ordering within the mobile app. Integrate with Greybar, Ferguson, and other commercial supply distributors. Yield on supply-chain margins — massive TAM, defensible with BuildOps' asset-level data context.</div>
+      </div>
+      <div><span class="tag grey">Later (2028)</span></div>
+      <div><span class="tag blue">P2</span></div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header">
+      <div class="num">03</div>
+      <h3>OKRs — FY 2027</h3>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Become the undisputed platform for PE-backed commercial contractor portfolios</div>
+      <div class="okr-kr">
+        <ul>
+          <li>KR1: Sign 5 PE firm operating partner agreements (portfolio standardization commits)</li>
+          <li>KR2: Deploy BuildOps PE Suite across at least 25 portfolio companies</li>
+          <li>KR3: Average PE portfolio deal size exceeds $200K ARR</li>
+        </ul>
+      </div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: OpsAI handles at least 40% of routine workflow steps without human initiation</div>
+      <div class="okr-kr">
+        <ul>
+          <li>KR1: Auto-scheduled PM visits account for 40% of all PM events booked</li>
+          <li>KR2: AI-generated invoices sent without human edit rate reaches 60%</li>
+          <li>KR3: OpsAI sales opportunity flags result in &gt;25% conversion to quoted work</li>
+        </ul>
+      </div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Achieve $160M ARR with NRR &gt; 120%</div>
+      <div class="okr-kr">
+        <ul>
+          <li>KR1: Launch Starter tier — acquire 500+ new accounts at lower ACV to create upgrade pipeline</li>
+          <li>KR2: Fleet+, Payments+, CRM+ attach rate exceeds 45% of accounts</li>
+          <li>KR3: BuildOps Intelligence adopted by 30% of existing customer base as paid add-on</li>
+        </ul>
+      </div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Eliminate ERP sync errors as a customer complaint category</div>
+      <div class="okr-kr">
+        <ul>
+          <li>KR1: QuickBooks sync error rate drops below 0.01% of transactions</li>
+          <li>KR2: Capterra "integrations" rating improves from current baseline to 4.7+</li>
+          <li>KR3: Zero customer-facing sync failures go undetected for more than 15 minutes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header">
+      <div class="num">04</div>
+      <h3>Risks &amp; Mitigations</h3>
+    </div>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Risk</th><th>Likelihood</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>ServiceTitan commercial product closes gap</strong></td>
+          <td><span class="tag red">High</span></td>
+          <td>Accelerate data moat (BuildOps Intelligence) and PE moat (portfolio lock-in). Make switching cost so high that feature parity is not enough to displace.</td>
+        </tr>
+        <tr>
+          <td><strong>OpsAI fails to deliver on autonomous execution vision</strong></td>
+          <td><span class="tag gold">Medium</span></td>
+          <td>Reframe marketing to "AI-accelerated team" rather than "autonomous." Ship incremental automation milestones publicly. Let customers see progress.</td>
+        </tr>
+        <tr>
+          <td><strong>ERP vendors add FSM capabilities</strong></td>
+          <td><span class="tag gold">Medium</span></td>
+          <td>Deepen integration depth and become the preferred ISV for Sage and Viewpoint — make BuildOps the choice ERPs recommend rather than compete with.</td>
+        </tr>
+        <tr>
+          <td><strong>Macroeconomic downturn slows commercial renovation/construction</strong></td>
+          <td><span class="tag gold">Medium</span></td>
+          <td>Diversify toward maintenance contracts (non-discretionary spending) and service-heavy verticals (fire & life safety, refrigeration with compliance mandates).</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- §10 THE VERDICT -->
+<div class="section">
+  <div class="section-label">§ 10 — The Verdict</div>
+  <h2>How This Plays Out</h2>
+
+  <p>BuildOps has made a correct and increasingly validated bet: commercial specialty contracting is a large, underserved market where a purpose-built system can generate enormous value and durable switching costs. The ARR trajectory ($51.9M to $97.4M in one year), the unicorn status, and the caliber of investors and talent coming in all suggest this is not a niche curiosity — it is a real platform business.</p>
+
+  <p>The product is good. OpsAI is not vaporware. The customer results are credible (even accounting for selection bias in case studies). The data model — asset-centric rather than address-centric — gives BuildOps a structural advantage that competitors cannot easily replicate without a ground-up rebuild.</p>
+
+  <div class="callout gold">
+    <strong>The Bull Case</strong>
+    BuildOps becomes the undisputed OS for commercial specialty contracting, extends into adjacent services (embedded finance, parts marketplace, workforce matching), builds the industry's only proprietary data intelligence layer, and reaches $400M ARR by 2029. The PE go-to-market becomes the primary growth engine: one PE firm win = 8–15 portfolio companies. The IPO follows.
+  </div>
+
+  <div class="callout">
+    <strong>The Bear Case</strong>
+    ServiceTitan ships a credible commercial-first experience in 2026 with the post-IPO capital to market aggressively. Mid-market contractors — price-sensitive and pragmatic — see "good enough commercial from a trusted name" and stop choosing BuildOps. The commercial-only moat turns into a commercial-only prison: BuildOps can't expand upmarket (enterprise ERP territory) or downmarket (too expensive for small shops) without a major product overhaul. Growth slows, and the path to IPO extends indefinitely.
+  </div>
+
+  <p>The variable that matters most is not OpsAI — it is the private equity motion and the data intelligence layer. OpsAI makes existing customers more productive. But PE portfolio standardization and industry benchmark data are the products that create defensibility that no amount of ServiceTitan investment can easily replicate. BuildOps has the ingredients. The question is whether they execute on the defensibility before the window closes.</p>
+
+  <p style="color: var(--text-muted); font-size: 13px; margin-top: 32px;"><em>Analysis based on public filings, customer reviews (Capterra, G2), TechCrunch, SiliconAngle, company press releases, BuildOps.com platform and product pages, and market research from Mordor Intelligence, Fortune Business Insights, and MarketsandMarkets. Published June 2026.</em></p>
+</div>
+
+</div><!-- end .container -->
+
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
