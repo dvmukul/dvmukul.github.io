@@ -64,24 +64,6 @@
             border-left: 2px solid var(--teal);
             padding-left: 1.5rem;
         }
-        .hero-stat-block {
-            margin-top: 3rem;
-        }
-        .hero-issue-count {
-            font-family: var(--font-display);
-            font-size: clamp(4rem, 7vw, 6rem);
-            font-weight: 300;
-            font-style: italic;
-            line-height: 1;
-            color: var(--text);
-        }
-        .hero-issue-label {
-            font-size: 0.70rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-top: 0.35rem;
-        }
 
         /* REPORTS SECTION */
         .reports-section {
@@ -159,10 +141,6 @@
         <p class="hero-desc">
             A weekly briefing on what matters in AI — no hype, just signal. Each issue cuts through the noise to what practitioners and product people actually need to know.
         </p>
-        <div class="hero-stat-block">
-            <div class="hero-issue-count" id="issue-count">—</div>
-            <p class="hero-issue-label">Issues Published</p>
-        </div>
     </div>
 </div>
 
@@ -186,7 +164,6 @@
 <script>
 (function () {
     const listEl = document.getElementById('reports-list');
-    const countEl = document.getElementById('issue-count');
 
     function formatDate(iso) {
         const d = new Date(iso + 'T00:00:00');
@@ -208,11 +185,9 @@
         })
         .then(function (reports) {
             if (!Array.isArray(reports) || reports.length === 0) {
-                countEl.textContent = '0';
                 renderEmpty('The first issue is coming soon.');
                 return;
             }
-            countEl.textContent = reports.length;
             reports.forEach(function (report) {
                 var isPdf = report.filename.endsWith('.pdf');
 
@@ -254,7 +229,6 @@
             });
         })
         .catch(function () {
-            countEl.textContent = '—';
             renderEmpty('Reports could not be loaded. Please try again later.');
         });
 })();
