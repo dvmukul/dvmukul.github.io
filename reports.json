@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 26",
+    "date": "2026-06-22",
+    "summary": "Fable 5 remains offline on Day 11 as autonomous exploit generation — not a jailbreak — is confirmed as the export-control trigger; Altman, Amodei, and Hassabis become the first frontier AI CEOs to jointly address G7 leaders in France, proposing a US-led AI governance forum and chip-trade rules excluding China. Odyssey closes a $310M Series B at $1.45B (backed by Amazon, GV, and AMD) to build world-simulation AI infrastructure, while DeepSeek V4 prices at $0.87 per million output tokens and GLM-5.2 ships an MIT-licensed 1M-context open-weights model.",
+    "filename": "AI-Report-2026-06-22.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 25",
     "date": "2026-06-15",
     "summary": "Anthropic releases Claude Fable 5 (80.3% SWE-bench Pro, the highest public coding score ever) and then suspends global access within 72 hours after a US Commerce Department export-control directive — the first retroactive ban on a commercially released AI model. Also this week: Apple WWDC 2026 confirms Siri AI rebuilt with Google Gemini across 2.2B devices as Tim Cook announces his September retirement; OpenAI files a confidential S-1 targeting ~$1T IPO; and MiniMax 3 delivers frontier-class multimodal performance at $0.53 per million tokens.",
