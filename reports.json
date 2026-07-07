@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 28",
+    "date": "2026-07-06",
+    "summary": "Fable 5 is restored worldwide on July 1 after a 19-day US export-control suspension, with Anthropic simultaneously launching Claude Sonnet 5 as the new default model for all users; GPT-5.6 Sol deploys on Cerebras at 750 tokens per second — the fastest frontier inference in production. Microsoft commits $2.5B and 6,000 specialists to a new Frontier Company enterprise AI unit, Grok 4.5 enters private beta at SpaceX and Tesla on xAI's 1.5T V9 model, and the Five Eyes alliance warns AI-capable cyberattack models are months away from broad availability.",
+    "filename": "AI-Report-2026-07-06.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 27",
     "date": "2026-06-29",
     "summary": "OpenAI previews GPT-5.6 Sol, Terra, and Luna under US government-gated access — Sol Ultra scores 91.9% on Terminal-Bench 2.1 and becomes the first model to cross 50% on Agent's Last Exam — while Mythos 5 is partially restored for ~100 US critical infrastructure operators and Fable 5 remains banned. SpaceX acquires Cursor maker Anysphere for $60B (the largest VC-backed acquisition in history), OpenAI and Broadcom launch the Jalapeño custom inference chip, and enterprise CFOs mandate model-routing strategies cutting per-token costs 70–90%.",
