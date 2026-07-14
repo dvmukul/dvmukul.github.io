@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 29",
+    "date": "2026-07-13",
+    "summary": "GPT-5.6 Sol, Terra, and Luna open to all users on July 9 alongside ChatGPT Work and GPT-Live voice — OpenAI's largest single-day release — while Grok 4.5 launches publicly at $2/$6 per million tokens, creating four competing frontier stacks at mid-tier pricing within 48 hours. Apple files a federal trade secret lawsuit against OpenAI alleging coordinated hardware-secret extraction via recruiting; Sysdig documents JADEPUFFER, the first fully autonomous AI ransomware requiring no human operator; and Google, Microsoft, Salesforce, Snowflake, and ServiceNow back a rival enterprise agent protocol to challenge Anthropic's MCP standard.",
+    "filename": "AI-Report-2026-07-13.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 28",
     "date": "2026-07-06",
     "summary": "Fable 5 is restored worldwide on July 1 after a 19-day US export-control suspension, with Anthropic simultaneously launching Claude Sonnet 5 as the new default model for all users; GPT-5.6 Sol deploys on Cerebras at 750 tokens per second — the fastest frontier inference in production. Microsoft commits $2.5B and 6,000 specialists to a new Frontier Company enterprise AI unit, Grok 4.5 enters private beta at SpaceX and Tesla on xAI's 1.5T V9 model, and the Five Eyes alliance warns AI-capable cyberattack models are months away from broad availability.",
