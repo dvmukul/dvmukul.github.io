@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Workday Prism Analytics competitive intelligence — market analysis, product audit, technology deep-dive, PM critique, and mock product strategy by Mukul Dewangan.">
+<title>Workday Prism Analytics: The Data Infrastructure Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · July 2026</div>
+  <h1>Workday Prism Analytics:<br>The <em>Data Infrastructure</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Workday's Prism Analytics platform.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Pleasanton, CA</span></div>
+    <div>FOUNDED<span>2005</span></div>
+    <div>FY2026 REVENUE<span>$9.55B</span></div>
+    <div>STATUS<span>Public (NASDAQ: WDAY)</span></div>
+    <div>COVERAGE<span>workday.com/prism</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$9.55B</div><div class="stat-label">FY2026 Total Revenue</div></div>
+  <div class="stat-box"><div class="stat-num blue">+14.5%</div><div class="stat-label">Subscription Growth</div></div>
+  <div class="stat-box"><div class="stat-num accent">1.1M</div><div class="stat-label">Monthly Prism Users</div></div>
+  <div class="stat-box"><div class="stat-num">30M</div><div class="stat-label">Monthly Queries</div></div>
+  <div class="stat-box"><div class="stat-num blue">215T</div><div class="stat-label">Processed Data Rows</div></div>
+  <div class="stat-box"><div class="stat-num">9.8%</div><div class="stat-label">Global HCM Market Share</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Workday — and What Is Prism?</h2>
+
+  <p>Workday, Inc. is the dominant cloud-native enterprise software company for human capital management (HCM) and financial management. Founded in 2005 by Dave Duffield and Aneel Bhusri — both former PeopleSoft executives — Workday went public in 2012 and has steadily grown to a $9.55B revenue business serving over 10,500 organizations globally, including more than half of the Fortune 500.</p>
+
+  <p>Workday Prism Analytics is the company's premium analytics and data hub product, embedded within the Workday AI Platform. Originally launched as a self-service analytics layer sitting atop Workday HCM and Financial data, Prism has undergone a significant strategic repositioning: it is now marketed as the company's <strong>governed data ingestion and transformation engine</strong> — the inbound data layer that feeds AI agents, financial plans, and workforce models with enriched, trusted data from both inside and outside Workday.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Workday is betting that the enterprise analytics market will be won not by the best charts, but by the company that controls the most trusted, semantically-enriched data layer beneath those charts. Prism Analytics is the foundation of that bet — and in 2025–2026, Workday doubled down by launching Workday Data Cloud with zero-copy integration to Snowflake, Databricks, and Salesforce.
+  </div>
+
+  <h3>Leadership</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Carl Eschenbach — CEO</h4><p>Former Sequoia Capital partner and VMware COO. Joined as CEO in 2023. Repositioning Workday around AI agents and platform extensibility following a period of slower growth and margin pressure.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Zane Rowe — CFO</h4><p>Joined 2024 from VMware alongside Eschenbach. Driving margin discipline — non-GAAP operating margin improved to 29.6% in FY2026, with 30% targeted for FY2027.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Sayan Chakraborty — President, Product & Technology</h4><p>Engineering and product chief. Architect of the Workday AI Platform, Illuminate agent framework, and the Data Cloud strategy. The most important product executive shaping Prism's future direction.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Doug Robinson — GM, Analytics</h4><p>Leads the Prism Analytics business unit. Oversaw the pivot from self-service BI positioning to "governed data hub" and the 2025R1 tables architecture transition.</p></div>
+  </div>
+
+  <h3>The Prism Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2017</div><div class="tl-title">Prism Analytics launched</div><div class="tl-desc">Introduced as a self-service data preparation and analytics layer on top of Workday HCM and Financials. Early positioning: "bring your own data into Workday reports." Base datasets as the primary construct.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2019–2022</div><div class="tl-title">Scale and ecosystem expansion</div><div class="tl-desc">Added API-based ingestion, SFTP connectors, Workday Custom Reports integration. Positioned as a data hub for HR and Finance analytics. Grew to support enterprise-scale workloads on Apache Spark.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024</div><div class="tl-title">Visual pipeline experience and catalog</div><div class="tl-desc">Launched a no-code/low-code visual pipeline builder for data transformation. Added a data catalog for discovering and managing datasets. ML-based resource management added to the Spark engine.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025R1</div><div class="tl-title">Tables architecture replaces base datasets</div><div class="tl-desc">The single most significant architectural shift in Prism's history. Tables become the standard for all data ingestion, transformation, and reporting — replacing the base datasets model. Enables direct SQL queries, stronger data lineage, and tighter Workday Extend integration.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Sept 2025</div><div class="tl-title">Workday Data Cloud announced at Rising 2025</div><div class="tl-desc">Zero-copy integration with Snowflake, Databricks, and Salesforce Data Cloud. Apache Iceberg tables exposed as inbound shares. Prism formally repositioned as the "governed inbound layer for the ecosystem." Early adopter access begins H1 2026.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Sept 2025</div><div class="tl-title">Workday Illuminate expands with new AI agents</div><div class="tl-desc">Cost & Profitability Agent, Workforce Planning Agent, and industry-specific agents announced. Prism designated as the data foundation feeding all Illuminate agent workflows. The data layer and AI layer formally converge.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2026</div><div class="tl-title">General availability: Data Cloud + Workday Build</div><div class="tl-desc">Workday Data Cloud moves from early adopter to GA. Workday Build (low-code agent builder) ships, allowing partners and customers to build on top of Prism-enriched data.</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape & Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>Prism competes across two overlapping market categories: the <strong>enterprise BI and analytics platform</strong> market (dominated by Power BI and Tableau) and the <strong>HR/workforce analytics</strong> market (where Visier and One Model specialize). Workday's bet is that neither category fully captures what Prism is — and that by owning the governed enterprise data layer, they can create a new category entirely.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>Global Enterprise Analytics Market</h4><p>The worldwide business analytics software market is growing at ~13% CAGR. Microsoft Power BI holds ~9.4% mindshare, Tableau ~6.7%. Workday Prism Analytics sits at 1.3% mindshare — a niche player in the broad BI market but dominant within the Workday ecosystem.</p></div>
+    <div class="card"><h4>HR Analytics Segment</h4><p>People analytics is one of the fastest-growing BI sub-verticals. Visier, the pure-play leader, serves 1,000+ enterprise customers. Workday HCM's installed base of 10,500+ customers gives Prism a structural distribution advantage no standalone HR analytics vendor can match.</p></div>
+    <div class="card"><h4>AI-Driven Enterprise Data Market</h4><p>The AI agent and data fabric market is the frontier Workday is racing to capture. The Workday Data Cloud launch (zero-copy Iceberg sharing with Snowflake/Databricks) positions Prism as infrastructure for the AI era — a fundamentally different value proposition than "build dashboards."</p></div>
+  </div>
+
+  <h3>Competitive Landscape</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Competitor</th><th>Category</th><th>Moat</th><th>Overlap with Prism</th><th>Threat Level</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Microsoft Power BI</strong></td><td>General BI / M365 integration</td><td>Microsoft bundle, price ($10/user/mo), Teams/Excel native</td><td>Visualization, self-service analytics, HR dashboards</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Tableau (Salesforce)</strong></td><td>Enterprise visualization</td><td>Best-in-class charts, large user community, Salesforce CRM data</td><td>Advanced visualization, data exploration</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Visier</strong></td><td>Pure-play people analytics</td><td>Purpose-built HR analytics UX, "Vee" AI assistant, 1,000+ customers</td><td>Workforce planning, retention analytics, D&I reporting</td><td><span class="tag gold">MEDIUM-HIGH</span></td></tr>
+      <tr><td><strong>SAP Analytics Cloud</strong></td><td>ERP-native analytics</td><td>SAP S/4HANA data integration, planning + analytics combined</td><td>Finance analytics, workforce planning for SAP shops</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Oracle Analytics Cloud</strong></td><td>ERP-native analytics</td><td>Native Oracle Fusion data access, AI-ML built-in</td><td>Financial reporting, HR analytics for Oracle HCM customers</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Snowflake (Data Cloud)</strong></td><td>Data platform / marketplace</td><td>Multi-cloud, zero-copy sharing, largest analytics ecosystem</td><td>Now a partner AND a competitor — customers may use Snowflake instead of Prism for data prep</td><td><span class="tag blue">PARTNER-RIVAL</span></td></tr>
+      <tr><td><strong>One Model</strong></td><td>HR data warehouse + analytics</td><td>Vendor-agnostic (connects to any HRIS), strong data modeling</td><td>Workforce analytics, connects to Workday HCM natively</td><td><span class="tag grey">LOW-MEDIUM</span></td></tr>
+      <tr><td><strong>ServiceNow HR Analytics</strong></td><td>HRSD + reporting</td><td>IT/HR workflow convergence, Now Intelligence, large enterprise installed base</td><td>Employee experience analytics, HR service delivery reporting</td><td><span class="tag grey">LOW</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Industry Trends</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>AI Agents Require Clean, Governed Data</h4>
+      <p>Enterprise AI agents — whether for HR planning, financial forecasting, or cost allocation — are only as good as the data they run on. Prism's strategic positioning as the "governed inbound layer" is well-timed: every Illuminate AI agent Workday ships needs Prism-quality data to function reliably. This gives Prism a pull market it didn't previously have.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">❄️</div>
+      <h4>Zero-Copy Data Sharing Becomes the Standard</h4>
+      <p>Snowflake, Databricks, and Google BigQuery are converging on Apache Iceberg as the open table format for zero-copy data sharing. Workday's move to expose Prism data as Iceberg tables (via Data Cloud) is architecturally sound — it prevents data silos and positions Workday as a participant in, rather than an obstacle to, the modern data stack.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <h4>Self-Service Analytics Commoditizes Downward</h4>
+      <p>Power BI's $10/user/month pricing and Microsoft's M365 bundle are commoditizing traditional BI visualization. Workday cannot win on dashboards — they are structurally priced out of that fight. The pivot to "governed data hub" is the correct response: compete on data quality and governance, not chart types.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔒</div>
+      <h4>Enterprise Data Governance Under Regulatory Pressure</h4>
+      <p>GDPR, SOX, and emerging AI governance regulations are increasing demand for auditable, role-based data access. Workday's native security model — applied automatically to all Prism datasets — is a genuine differentiator. No other BI vendor applies enterprise HR security controls as seamlessly.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Native Data Integration</h4><p>Speed to first insight matters. Every hour spent writing ETL connectors is an hour Prism doesn't earn. Prism's native Workday data access is a 6–18 month implementation advantage over standalone tools.</p></div>
+    <div class="card"><h4>Security & Compliance Inheritance</h4><p>Enterprise HR data carries the most sensitive information in any organization. Tools that require separate security configurations will always carry implementation risk. Prism inherits Workday's security model automatically.</p></div>
+    <div class="card"><h4>AI Agent Readiness</h4><p>The next wave of enterprise analytics won't be humans running queries — it will be AI agents synthesizing data for human decisions. Vendors whose data layers agents can trust will win.</p></div>
+    <div class="card"><h4>Ecosystem Openness</h4><p>Enterprises have many data sources. A governed hub that can ingest external data (payroll, CRM, LMS, market data) without requiring migration is far more valuable than a walled garden requiring all data to live in one vendor's cloud.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What Workday Prism Analytics Actually Does</h2>
+
+  <p>Prism Analytics is best understood as a <strong>three-layer product</strong>: a data ingestion and transformation engine, a governed analytics and reporting layer, and — as of 2025 — an AI data foundation layer feeding Illuminate agents and external data platforms. Users access it through the Workday interface without a separate application.</p>
+
+  <h3>Layer 1 — Data Ingestion & Transformation</h3>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Ingestion</div>
+    <div class="tech-layer-content">
+      <strong>Multi-modal external data loading</strong>
+      <p>Prism accepts data via REST API, SFTP, browser-based file upload (CSV, XLSX), and Workday Custom Reports. Connectors exist for third-party payroll systems, CRM platforms, LMS tools, vendor data, and market benchmarking data. As of 2025R1, all ingested data lands in Prism Tables — replacing the legacy base datasets model.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Transformation</div>
+    <div class="tech-layer-content">
+      <strong>Visual pipeline builder — no-code joins, unions, filters, group-bys</strong>
+      <p>A drag-and-drop pipeline experience allows Finance and HR users to blend external data with Workday business objects without writing SQL. Available operations: join (inner, left, right), union, group-by/aggregation, calculated fields, and filter. The visual lineage view shows pipeline structure and data provenance. Power users can write PRISM-flavored SQL directly against tables.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Catalog</div>
+    <div class="tech-layer-content">
+      <strong>Searchable metadata and dataset discovery</strong>
+      <p>Users can search, tag, and discover all Prism datasets within the organization. The catalog exposes data lineage — showing what source each field came from and which transformations were applied. Governance policies (row-level security, contextual access) are visible in the catalog, enabling data stewards to audit what each role can see.</p>
+    </div>
+  </div>
+
+  <h3>Layer 2 — Analytics & Reporting</h3>
+
+  <p>Prism datasets surface in Workday's native reporting environment — the same interface used for standard Workday reports and dashboards. This is both a strength and a limitation: HR and Finance users don't need to leave Workday to access blended data, but the visualization capabilities are narrower than Power BI or Tableau. Prism is not trying to be a best-in-class visualization tool — it is trying to be the best-governed data source that <em>feeds</em> visualization tools.</p>
+
+  <div class="callout blue">
+    <strong>Key Positioning Insight</strong>
+    Workday explicitly positions Prism as the data hub, not the front-end. The FY2026 positioning is: "Prism is where you govern and prepare data; Workday Reports, Adaptive Planning, or your external BI tool is where you visualize it." This is a strategically sound concession — but it means Prism must be evaluated as infrastructure, not as a BI platform.
+  </div>
+
+  <h3>Layer 3 — AI Agent Data Foundation</h3>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Illuminate Foundation</div>
+    <div class="tech-layer-content">
+      <strong>Prism as the data layer beneath Workday AI agents</strong>
+      <p>Workday's Illuminate AI agents — Cost & Profitability Agent, Workforce Planning Agent, Succession Agent, Recruiting Agent — all draw from Prism-governed data. An agent running workforce planning models needs blended data (Workday HCM + external labor market benchmarks + third-party compensation data) — exactly what Prism supplies. Prism ensures agents operate on trusted, security-filtered data rather than raw feeds.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Cloud</div>
+    <div class="tech-layer-content">
+      <strong>Zero-copy outbound sharing via Apache Iceberg</strong>
+      <p>Workday Data Cloud (GA 2026) allows customers to share modeled Workday HR and financial data with Snowflake, Databricks, and Salesforce Data Cloud without copying data. Workday automatically creates externally managed Iceberg tables backed by Parquet files in Workday Data Cloud. Teams in Snowflake can query Workday employee, business, and financial data natively — without the traditional 3-month ETL project.</p>
+    </div>
+  </div>
+
+  <h3>Target Customer Segments & Use Cases</h3>
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Primary User</th><th>Problem Solved</th><th>Example Use Case</th></tr></thead>
+    <tbody>
+      <tr><td>Large Enterprise (5,000–100,000+ employees)</td><td>CHRO, CFO, People Analytics team</td><td>Blending Workday HR data with external sources (market pay data, industry benchmarks, acquired company data)</td><td>Post-merger workforce integration analytics; consolidated headcount reporting across 40+ legal entities</td></tr>
+      <tr><td>Global Multinationals</td><td>Finance operations, FP&A</td><td>Consolidating financial data from subsidiary ERP systems (SAP, Oracle) into Workday Financials</td><td>Real-time P&L reporting blending Workday Financials with legacy ERP data during multi-year migration</td></tr>
+      <tr><td>Regulated Industries (Financial Services, Healthcare, Life Sciences)</td><td>Compliance, HR Ops</td><td>Auditable, role-based data access for sensitive workforce data</td><td>SOX-compliant compensation reporting; EEOC analytics with row-level security inherited from Workday</td></tr>
+      <tr><td>Tech/Media Companies with Complex Compensation</td><td>Total Rewards, HR Analytics</td><td>Blending equity, variable pay, and base comp across multiple systems</td><td>Total compensation benchmarking incorporating third-party survey data (Radford, Mercer) with Workday comp records</td></tr>
+      <tr><td>Data-Mature Enterprises with Snowflake/Databricks</td><td>Data Engineering, Analytics</td><td>Accessing Workday HR/Finance data without ETL in existing data platform</td><td>Querying Workday employee records directly from Snowflake for ML model training (attrition prediction, skills gap analysis)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Performance Metrics</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👥</div><h4>1.1M Monthly Active Users</h4><p>Active Prism users across the installed base. Workday does not disclose Prism-specific revenue or attach rate — a deliberate opacity that prevents competitors from sizing the opportunity. Estimate: Prism is a meaningful premium add-on, likely 15–25% above base Workday HCM pricing.</p></div>
+    <div class="card"><div class="card-icon">🔢</div><h4>30M Monthly Queries / 215T Data Rows</h4><p>Scale metrics published in Workday's FY2025 Annual Report. The 215T processed rows figure demonstrates the platform handles enterprise-class data volumes. However, these are aggregate figures — individual customer limits are set by contract tier, and very large datasets have historically required workarounds.</p></div>
+    <div class="card"><div class="card-icon">📈</div><h4>Workday Total Revenue: $9.55B FY2026</h4><p>+13.1% YoY total; +14.5% subscription growth. Non-GAAP operating margin 29.6%. Operating cash flow $2.94B (+19.4%). Workday does not break out Prism revenue separately — it is reported within the broader subscription revenue line.</p></div>
+    <div class="card"><div class="card-icon">⭐</div><h4>Gartner Peer Insights: 4.3/5</h4><p>Users praise stability, Workday security inheritance, and native data blending. Criticisms cluster around visualization limitations vs. Tableau/Power BI, limited ability to edit uploaded data row-by-row, and implementation complexity for users outside the Workday ecosystem.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 4: TECHNOLOGY DEEP DIVE -->
+<div class="section">
+  <div class="section-label">§ 04 — Technology Deep Dive</div>
+  <h2>Core Technology Stack & Architecture</h2>
+
+  <p>Workday Prism Analytics is built on a proprietary data processing infrastructure optimized for the specific requirements of enterprise HR and Finance data: large volume, high sensitivity, strong governance, and deep integration with Workday's object model. The 2025 architecture is substantially more modern than most users realize — the shift to tables and Apache Iceberg puts Prism in the same architectural conversation as Snowflake and Databricks.</p>
+
+  <h3>Processing Engine</h3>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Compute</div>
+    <div class="tech-layer-content">
+      <strong>Apache Spark engine with ML-based resource management</strong>
+      <p>Prism's compute layer is built on Apache Spark — the same engine underlying Databricks and many data lake architectures. Workday's implementation adds machine learning-based resource management that dynamically allocates compute across concurrent queries, enabling the 30M monthly query scale. Multi-cloud deployment (AWS, Azure, GCP) with data residency controls for regulated industries.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Storage Layer</div>
+    <div class="tech-layer-content">
+      <strong>Prism Tables on Apache Iceberg / Parquet</strong>
+      <p>As of 2025R1, all Prism data lives in Tables — an Iceberg-compatible columnar format stored as Parquet files. This is architecturally significant: it makes Prism data externally queryable via Workday Data Cloud without copying. Tables support ACID transactions, schema evolution, and partition pruning — capabilities that the legacy base datasets model lacked. The Iceberg format also positions Workday for interoperability with the broader lakehouse ecosystem.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Integration</div>
+    <div class="tech-layer-content">
+      <strong>REST API, SFTP, Workday Studio, browser upload, Custom Reports</strong>
+      <p>Ingestion pathways include: Workday Custom Reports (scheduled or on-demand export from Workday's transaction layer), REST API with OAuth 2.0 authentication, SFTP for bulk file delivery, and browser-based upload for ad hoc files. Workday Studio provides a low-code integration builder for complex ETL workflows. Direct connectors exist for major third-party payroll vendors, LMS platforms, and compensation survey providers.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Security Model</div>
+    <div class="tech-layer-content">
+      <strong>Inherited Workday security — role-based and contextual access control</strong>
+      <p>This is Prism's most technically differentiated capability. All Prism datasets inherit Workday's security domain framework — the same row-level and column-level access controls governing Workday HCM data apply automatically to blended Prism data. A manager in Workday who can only see their direct reports will see only their reports' data in Prism analytics — without any additional configuration. This is architecturally impossible to replicate in a standalone BI tool, and it is the strongest moat Prism has.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Workday Data Cloud</div>
+    <div class="tech-layer-content">
+      <strong>Zero-copy bi-directional sharing via Apache Iceberg (GA 2026)</strong>
+      <p>Workday Data Cloud introduces two capabilities: <em>Workday Data Connect</em> (outbound — share Workday data to Snowflake/Databricks/Salesforce as Iceberg tables, zero-copy) and <em>Workday Live Data Query</em> (direct SQL access to Workday's operational data in near real-time). The Snowflake implementation creates externally managed Iceberg tables referencing Parquet files in Workday Data Cloud — appearing as a native inbound share within Snowflake. Data teams can join Workday employee records with Salesforce opportunity data, Snowflake data lake assets, or Databricks ML training pipelines without a single byte of data movement.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Illuminate AI Layer</div>
+    <div class="tech-layer-content">
+      <strong>Agentic AI framework built on Prism data</strong>
+      <p>Workday's Illuminate AI agents consume Prism-governed data through a structured context layer that enforces the same security controls as the reporting layer. Agents cannot access data a human user couldn't see — a critical trust property for enterprise AI deployment. The Workday Build platform provides a low-code agent builder allowing customers and partners to create custom agents on the Prism data substrate. Microsoft Entra integration handles agent identity governance across the enterprise.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Critical Technical Gap</strong>
+    Prism's largest technical limitation is visualization depth. The native Workday reporting interface lacks the advanced chart types, formatting control, and exploratory analytics UX of Power BI or Tableau. Workday's response — "use Prism as your governed data layer and connect your visualization tool" — is architecturally correct but requires customers to buy and maintain a second tool. The friction of that handoff reduces adoption, particularly among Finance users who are comfortable in Excel and don't want to switch to Tableau for one dashboard.
+  </div>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>What Workday Is Getting Right, Wrong, and Missing</h2>
+
+  <p>Prism Analytics occupies a strategically enviable position — it is embedded in the most mission-critical enterprise systems of record for half the Fortune 500. And yet user sentiment reveals a product that often frustrates the people it most needs to delight. The following critique is structured from a senior PM perspective: validating the bets, identifying the gaps, and calling out the risks that Workday's product team should not be comfortable with.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">Prism Has an Identity Crisis — Data Hub or BI Tool?</div>
+    <div class="critique-body">For its first eight years, Workday marketed Prism as a self-service analytics and reporting tool — inviting comparison with Tableau and Power BI. It inevitably lost that comparison because its visualization layer was never designed to match best-in-class BI tools. The 2025 pivot to "governed data hub" is strategically correct, but it requires retiring a positioning that thousands of Workday customers still hold. When customers evaluate Prism renewal, they are still frequently asking "why don't we just use Power BI?" — a question Workday's own sales team struggles to answer clearly. The product team must resolve this identity externally, not just internally, or the attach rate will remain constrained below potential.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">No Published Pricing = Invisible Moat</div>
+    <div class="critique-body">Workday Prism Analytics has no published pricing. It is sold as a premium add-on through enterprise negotiation. This creates two problems: (1) Competitors like Power BI ($10/user/month) can anchor customer perception on price regardless of actual Prism pricing, and (2) data-driven buyers — the very personas Prism needs to win — cannot self-evaluate ROI without engaging a sales rep. The opacity benefits Workday in individual deals but suppresses the top of funnel. Workday should consider a published entry-tier with a clear ROI framework (time-to-first-dashboard, connectors included, Illuminate agents unlocked) to reduce friction for the 10,000+ Workday customers who do not yet use Prism.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Execution Risk</div>
+    <div class="critique-title">The Tables Migration Is a Usability Debt Bomb</div>
+    <div class="critique-body">The 2025R1 transition from base datasets to tables is architecturally right, but the migration experience has been painful for customers who had built significant data pipelines on the legacy model. Every customer running production Prism workflows had to rebuild or migrate pipeline logic. This is not hypothetical — Gartner Peer Insights reviews from 2025 show spikes in negative feedback specifically around migration complexity. Workday has offered tooling and guidance, but the disruption has eroded goodwill among the advanced Prism users who are the product's most important advocates. A smoother migration with a longer parallel-run window and automated pipeline conversion tooling should have been the standard, not the exception.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Snowflake-Databricks Partnership Creates a Cannibalization Risk</div>
+    <div class="critique-body">Workday Data Cloud is brilliant as an ecosystem move — but it may be the most consequential double-edged sword in Workday's product portfolio. By exposing Prism-enriched data as Iceberg shares in Snowflake, Workday is telling data-mature customers: "you can do all your analytics in Snowflake." That's a true statement. But it also means that the Prism transformation and governance layer — the core Prism value proposition — may increasingly be replaced by customer-built pipelines in dbt or Databricks, querying Workday data via Live Data Query. Workday has not clearly defined what Prism does that Workday Data Cloud alone cannot. If the answer is "Prism adds governance and role-based security," that needs to be front and center in every positioning conversation — before a CFO decides to cancel Prism and use Snowflake's Horizon governance layer instead.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Product Gap</div>
+    <div class="critique-title">The Visualization Deficit Is a Real Adoption Barrier</div>
+    <div class="critique-body">Users consistently report that Workday's native report builder — while functional — cannot match Power BI or Tableau for advanced chart types, conditional formatting, custom drill-through, or mobile visualization. This is a known limitation Workday has chosen to live with rather than fix. The correct long-term move is a first-class embedded visualization engine — either built, acquired (Sigma Computing, Mode, Omni), or deeply OEM'd (PowerBI embedded) — that elevates Prism's front-end without requiring customers to manage a second tool. The current "use Prism for data, Tableau for charts" workflow creates integration friction, slows time-to-insight, and gives IT teams a reason to question the TCO of the Prism add-on.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Underexploited Opportunity</div>
+    <div class="critique-title">The Illuminate-Prism Flywheel Is the Most Powerful Story Workday Isn't Telling</div>
+    <div class="critique-body">Every Illuminate AI agent Workday ships — Workforce Planning, Cost & Profitability, Succession, Recruiting — requires high-quality, governed, blended data to function reliably. That data comes from Prism. This creates a near-perfect flywheel: more AI agents → more demand for Prism → more Prism data → smarter AI agents. This is the most compelling strategic argument for Prism renewal and new customer attach that exists. And yet Workday's current product marketing leads with "self-service analytics" before mentioning AI agent enablement. The narrative should be inverted: "Prism is the only way to make your Illuminate AI agents trustworthy" — full stop.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Underexploited Opportunity</div>
+    <div class="critique-title">Mid-Market Is Almost Entirely Untouched</div>
+    <div class="critique-body">Workday's enterprise focus means Prism is effectively inaccessible to organizations with fewer than 1,000 employees. PeerSpot data confirms that 52.6% of Prism reviewers are from enterprises with 5,000+ employees. The mid-market (500–5,000 employees) is underserved — these customers have Workday HCM, want data blending, but cannot justify Prism's pricing or complexity. A "Prism Essentials" tier — pre-built connectors, templated workforce and financial dashboards, no transformation pipeline required — could capture a massive attach opportunity while building data habits that convert to full Prism over time. The risk of not doing this: Visier, One Model, and even Rippling's nascent analytics offering will lock up the mid-market first.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Native Workday security model — zero additional configuration for row/column access</li>
+        <li>Deep HCM and Financials data integration without ETL projects</li>
+        <li>Apache Spark engine scales to 215T+ rows processed monthly</li>
+        <li>Workday Data Cloud (Iceberg, zero-copy) is architecturally ahead of ERP peers</li>
+        <li>10,500+ existing Workday customers = captive distribution channel</li>
+        <li>9.8% global HCM market share — largest single vendor globally</li>
+        <li>Gartner Financial Planning MQ Leader for 4 consecutive years</li>
+        <li>Strong data lineage and catalog in the new tables architecture</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>Visualization capabilities weak vs. Power BI, Tableau, Sigma</li>
+        <li>No published pricing — top-of-funnel friction, self-serve impossible</li>
+        <li>2025R1 tables migration created adoption pain and goodwill erosion</li>
+        <li>Effective only for Workday customers — zero TAM outside existing base</li>
+        <li>Limited ability to edit uploaded data at the row level post-ingestion</li>
+        <li>Complex implementation — typically requires Workday-certified consultant</li>
+        <li>Product messaging still conflates data hub and BI tool positioning</li>
+        <li>No mid-market offering — effectively priced out of sub-1,000 employee segment</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>AI agent adoption (Illuminate) pulls Prism as the required data foundation</li>
+        <li>Workday Data Cloud can become the enterprise HR data sharing standard</li>
+        <li>Acquire or OEM a best-in-class visualization engine to close the front-end gap</li>
+        <li>Launch Prism Essentials tier for mid-market and greenfield Workday customers</li>
+        <li>Expand Illuminate agent portfolio — each new agent = new Prism demand signal</li>
+        <li>Data marketplace: let third-party data providers list data for Prism consumption</li>
+        <li>Build AI-powered pipeline generator ("describe what you want, Prism writes the join")</li>
+        <li>ServiceNow partnership: surface HR operational data in Workday analytics</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Microsoft Power BI + Fabric platform bundled with M365 at near-zero marginal cost</li>
+        <li>Snowflake/Databricks could replicate Prism governance for Workday data</li>
+        <li>SAP S/4HANA with Analytics Cloud pulling ERP-adjacent analytics budget</li>
+        <li>Visier deepening Workday HCM native connectors, eating Prism HR analytics share</li>
+        <li>Rippling expanding analytics for mid-market — locking out Prism before it enters</li>
+        <li>Workday Data Cloud cannibalization: advanced customers bypass Prism entirely</li>
+        <li>Oracle Fusion bundled analytics improving, closing quality gap with Prism</li>
+        <li>Customer fatigue with Workday add-on pricing after large HCM/Financials investment</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: MOCK PRODUCT STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2026–2028: From Data Hub to the Enterprise Insight OS</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM/GPM for Workday Prism Analytics. It is directionally grounded in real product and market data but represents analytical recommendations, not Workday's actual internal roadmap.
+  </div>
+
+  <!-- VISION -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision & North Star</h3></div>
+    <p><strong>Vision:</strong> Prism Analytics becomes the definitive data foundation for every insight, plan, and AI decision made by Workday customers — the layer that makes Workday data the most trusted, most accessible, and most AI-ready enterprise data in the world.</p>
+    <p><strong>North Star Metric:</strong> <em>Prism Attach Rate on Net New Workday Customers</em> — the percentage of new Workday HCM and Financials deals that include a Prism contract. Current estimated baseline: 20–30% (inferred from company disclosures). Target by end of FY2028: 55%+. This single metric captures whether Prism is becoming a mandatory part of the Workday value proposition or remaining an optional premium. Every strategy below serves this metric.</p>
+    <p><strong>The Strategic Shift:</strong> Stop competing as a BI tool. Win as the enterprise's most trusted AI data substrate. This means leading with "Prism makes your Illuminate agents trustworthy" before leading with "Prism lets you blend your external data." The agent story is larger, more defensible, and harder for Microsoft or Tableau to copy.</p>
+  </div>
+
+  <!-- BETS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2026–2028)</h3></div>
+
+    <h4>Bet 1: Make Prism the Mandatory AI Agent Data Layer</h4>
+    <p>Reframe Prism's entire go-to-market around a single claim: <em>"Without Prism, your Illuminate AI agents are guessing. With Prism, they know."</em> Operationalize this by launching <strong>Agent Data Profiles</strong> — a new Prism product primitive that pre-configures the exact data schema each Illuminate agent needs to function. Install a Cost & Profitability Agent? Prism surfaces a step-by-step guided wizard for ingesting the 6 external data sources the agent needs to give reliable cost allocation output. This reduces time-to-value from months to days, and it makes Prism a purchase prerequisite — not an optional add-on — for every AI agent deployment.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      Illuminate agents are Workday's primary FY2027–2028 revenue growth driver. Every agent that fails due to bad data is a Prism sell that didn't happen. Every agent that succeeds on clean Prism data is a renewal that happens automatically. Making agents the primary Prism demand signal also positions Workday to charge for Prism based on AI outcomes (cost allocation accuracy, attrition prediction lift) rather than per-user seats — a fundamentally more defensible pricing model.
+    </div>
+
+    <h4>Bet 2: Launch Prism Essentials for the Mid-Market</h4>
+    <p>A stripped-down, pre-configured Prism tier designed for Workday customers with 250–2,500 employees. <strong>Prism Essentials</strong> includes: 12 pre-built industry-specific data connectors (third-party payroll, compensation surveys, LMS, ATS), 20 pre-built workforce and financial dashboards, and a simplified no-code data upload interface — no visual pipeline builder required. Pricing: flat annual fee per organization, not per user seat. Target: close 800 Essentials deals in FY2027 (approximately 8% of the sub-2,500 employee Workday installed base).</p>
+    <div class="card-grid">
+      <div class="card"><h4>Why Mid-Market Now</h4><p>Visier's growth and Rippling's expanding analytics capabilities are building habits in exactly the customer segment Workday has ignored. Each year Prism is absent from mid-market, a competitor is embedding a data workflow Workday will later have to displace at a switching cost.</p></div>
+      <div class="card"><h4>Essentials to Full Prism Conversion</h4><p>Essentials customers who outgrow the pre-built dashboards (typically within 18–24 months) are high-intent conversion candidates for full Prism. This is a deliberate land-and-expand motion — not a product line standalone.</p></div>
+      <div class="card"><h4>Data Connector Marketplace</h4><p>As part of Essentials, launch a Prism Connector Marketplace where ISV partners publish certified data connectors. Partners get distribution; Workday gets a broader data ecosystem without owning all connector development. Benchmark: Salesforce AppExchange, Snowflake Marketplace.</p></div>
+      <div class="card"><h4>Risk to Manage</h4><p>Essentials pricing must not undercut full Prism renewals. Guardrails: Essentials is capped at pre-built connectors only (no custom ingestion via API/SFTP), no Illuminate agent compatibility (requires full Prism), and no data catalog or lineage features.</p></div>
+    </div>
+
+    <h4>Bet 3: Acquire a Best-in-Class Visualization Engine</h4>
+    <p>Workday cannot and should not build a better chart library than Tableau or Power BI. But it can acquire a modern, embedded-first analytics front-end that makes Prism data beautiful without requiring customers to manage a second vendor. Top acquisition targets: <strong>Sigma Computing</strong> (spreadsheet-native BI, cloud-first, Snowflake-native — would slot directly onto Prism tables), <strong>Omni</strong> (semantic layer + beautiful visualization, architected for data engineers who want governance), or an OEM agreement with a market-leading vendor to brand Workday Analytics powered by [Partner]. This resolves the #1 user complaint without the 5-year engineering investment of rebuilding the reporting layer from scratch.</p>
+  </div>
+
+  <!-- INITIATIVES -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent Data Profiles for Illuminate Agents</div><div class="initiative-desc">Pre-configured Prism data schemas for each AI agent. Guided wizard for non-technical users.</div></div>
+      <div><span class="tag red">P0 · Q3 2026</span></div>
+      <div>80% of Illuminate agent deployments include Prism; time-to-first-agent-insight under 2 weeks</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Reposition Prism as AI Data Foundation (GTM)</div><div class="initiative-desc">Unified messaging, new sales motion, revised product marketing leading with agent enablement.</div></div>
+      <div><span class="tag red">P0 · Q3 2026</span></div>
+      <div>Prism attach rate in new deals increases 10+ percentage points YoY by Q4 FY2027</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Prism Essentials Tier Launch</div><div class="initiative-desc">Pre-built connectors, templated dashboards, flat annual pricing for 250–2,500 employee customers.</div></div>
+      <div><span class="tag gold">P1 · Q4 2026</span></div>
+      <div>800 Essentials contracts by end of FY2027; 15% conversion to full Prism within 24 months</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Prism Connector Marketplace (Partner-built)</div><div class="initiative-desc">ISV-certified connectors for 50+ common enterprise data sources: ADP, BambooHR, SAP, Radford, etc.</div></div>
+      <div><span class="tag gold">P1 · Q1 2027</span></div>
+      <div>50 certified connectors at launch; 25% of Essentials customers using at least 1 partner connector</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">AI-Powered Pipeline Generator</div><div class="initiative-desc">"Describe what you want" → Prism generates the join/transformation SQL. LLM-backed no-code authoring.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>Pipeline creation time reduced 60%+ vs. manual builder; 30% of new pipelines authored via AI</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Visualization Engine Acquisition / OEM</div><div class="initiative-desc">M&A or deep OEM partnership to embed best-in-class charts natively in Prism Analytics front-end.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>User satisfaction score on visualization increases 20+ points; "visualization gap" no longer top-3 complaint in Gartner Peer Insights</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Workday Data Cloud: Inbound Zero-Copy (GA)</div><div class="initiative-desc">GA release of Databricks + Snowflake inbound sharing — external data into Prism without ETL.</div></div>
+      <div><span class="tag blue">P2 · Q4 2027</span></div>
+      <div>500+ customers using Workday Data Cloud inbound; average time-to-insight for Snowflake data under 1 day</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Outcome-Based Prism Pricing Tier</div><div class="initiative-desc">Pilot pricing model tied to AI agent outcomes (cost allocation accuracy, attrition prediction lift) vs. per-seat.</div></div>
+      <div><span class="tag grey">P3 · FY2028</span></div>
+      <div>5 large enterprise customers on outcome pricing by end of FY2028; 15% higher ACV vs. comparable seat-based deals</div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (FY2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Establish Prism as the Default AI Agent Data Layer</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Prism included in 80%+ of Illuminate agent deployments (up from estimated 40–50% today)</li>
+        <li>KR2: Median time-to-first-agent-insight reduced to under 14 days (from current 60–90 days for new Prism implementations)</li>
+        <li>KR3: Agent Data Profiles launched for all 6 GA Illuminate agents by Q4 FY2027</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Expand the Addressable Market via Prism Essentials</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: 800 Prism Essentials contracts signed by end of FY2027</li>
+        <li>KR2: Prism attach rate on new Workday deals with sub-2,500 employees reaches 35%+ (up from near-zero)</li>
+        <li>KR3: 50 certified ISV connectors available in Prism Connector Marketplace at launch</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Close the User Satisfaction Gap</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Gartner Peer Insights rating improves from 4.3 to 4.6 (driven by visualization and migration experience)</li>
+        <li>KR2: Visualization gap complaint drops from top-3 to not-in-top-5 customer feedback themes by Q3 FY2027</li>
+        <li>KR3: AI Pipeline Generator adopted by 30%+ of active Prism customers within 6 months of launch</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Advance Workday Data Cloud Adoption</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: 500+ enterprise customers using Workday Data Cloud (outbound or inbound) by end of FY2027</li>
+        <li>KR2: At least 3 major ISVs (compensation benchmarking, labor market data, ESG data) listed on Workday Data Cloud marketplace</li>
+        <li>KR3: Zero-copy Databricks integration reaches GA and achieves feature parity with Snowflake implementation</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks & Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Microsoft bundles Power BI + Copilot analytics into M365 at $0 marginal cost for Workday customers</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Double down on governance and security inheritance as the differentiation story. No BI tool embedded in a horizontal suite will inherit Workday's security model. Make this the irreplaceable argument.</td></tr>
+        <tr><td>Workday Data Cloud accelerates customer bypass of Prism transformation layer</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Ensure governance, security, and Agent Data Profiles remain Prism-exclusive — not available via Live Data Query alone. Prism must add value beyond raw data access.</td></tr>
+        <tr><td>Visualization acquisition fails integration (acqui-hire risk, culture mismatch)</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>OEM partnership as first step before full acquisition. Pilot embedded visualization with 50 customers before committing. Architect integration points before the deal closes, not after.</td></tr>
+        <tr><td>Prism Essentials cannibalizes full Prism renewals</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag grey">LOW</span></td><td>Hard feature gates: Essentials has zero API ingestion, zero AI agent compatibility, zero custom transformation. These are not configuration choices — they are architectural constraints. Customers who need any of these must upgrade.</td></tr>
+        <tr><td>AI agent quality failures erode Prism's "trustworthy data" positioning</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Invest in data quality scoring at the Prism table level. Surface data completeness, freshness, and confidence scores in Agent Data Profiles so customers know when an agent is operating on insufficient data — and why.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT NOT TO DO -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't rebuild the visualization layer from scratch</h4><p>The engineering cost and time-to-market of building a Tableau-quality chart library from scratch is 4–6 years and hundreds of millions in R&D. Acquire or OEM. Use that engineering capacity to deepen governance, lineage, and agent compatibility instead.</p></div>
+      <div class="card"><h4>Don't compete with Snowflake — partner deeper</h4><p>Snowflake is simultaneously Workday's biggest Data Cloud partner and a potential disintermediator. The answer is not to compete — it is to make Workday's governed HR and financial data the most valuable asset on Snowflake's platform. Snowflake customers should feel they'd be leaving money on the table without Workday Data Cloud.</p></div>
+      <div class="card"><h4>Don't lead with "self-service analytics" in any new deal</h4><p>This framing invites comparison with Power BI and Tableau on their home turf. Every Prism sales motion from FY2027 onward should lead with AI agent enablement and security inheritance. Let competitors fight on dashboard features.</p></div>
+      <div class="card"><h4>Don't let Prism Essentials become a standalone product team</h4><p>Essentials must be maintained as a simplified entry point into full Prism — not a separate product with its own roadmap and PM. The moment Essentials develops distinct features not in full Prism, it risks fragmenting the platform and creating customer confusion about which tier to buy.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: VERDICT -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>What This Report Concludes</h2>
+
+  <p>Workday Prism Analytics is not the most exciting product in enterprise software — and that is precisely its advantage. It does something fundamental and difficult: it makes the most sensitive, complex, and regulatory-laden data in the enterprise — HR and financial records — accessible, governable, and AI-ready without requiring an army of data engineers.</p>
+
+  <p>The platform's architecture has matured significantly. The shift to Apache Iceberg tables, the launch of Workday Data Cloud with zero-copy Snowflake and Databricks sharing, and the designation of Prism as the data foundation for all Illuminate AI agents represent a coherent and defensible long-term bet. Workday is not trying to out-chart Tableau. It is trying to be the most trusted data layer beneath any chart anyone builds with Workday data.</p>
+
+  <p>The risks are real. Power BI's price point, Visier's people analytics UX depth, and the cannibalization tension created by Workday Data Cloud all represent genuine headwinds. The identity crisis between "self-service BI tool" and "governed data hub" has cost Workday attachment rate and has created unnecessary customer confusion. And the visualization gap — while strategically defensible to accept — remains the single most consistent user complaint year after year.</p>
+
+  <p>The Illuminate AI agent ecosystem is the variable that changes everything. If Workday's AI agents become meaningful productivity tools for HR and Finance leaders — and early indicators from the Cost & Profitability Agent and Workforce Planning Agent suggest they might — then Prism shifts from "premium analytics add-on" to "the only thing standing between your AI agents and hallucinated business decisions." That is an entirely different product conversation, with an entirely different willingness to pay.</p>
+
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Workday Prism Analytics is a strategically sound, architecturally maturing platform whose primary problem is not technical — it is narrative. The product team needs to stop defending Prism as a BI tool and start positioning it as the security and governance layer that makes enterprise AI agents trustworthy. In a world where every CFO is being sold an AI agent for cost allocation and every CHRO is being sold an AI agent for talent planning, the company that owns the data those agents trust owns the relationship. That company can be Workday — if Prism's product team moves faster than the market's current expectations.
+  </div>
+
+  <p class="footnote" style="margin-top:24px;">Sources: Workday FY2026 Q4 Earnings Release, Workday ARS FY2025, Workday Rising 2025 announcements (newsroom.workday.com), Gartner Peer Insights, G2, PeerSpot, TrustRadius, PeerSpot, Surety Systems, Sama Integrations, Futurum Research, StockTitan, PR Newswire, Snowflake/Databricks partnership documentation, SEC filings. Analysis as of July 2026. Revenue figures are company-reported. Prism-specific attach rates and revenue are estimated from public signals; Workday does not disclose product-level revenue.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
