@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Brief · Vol. 02 · Issue 30 · July 20, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.3/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    width: 100%; background: #1a1a1a;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; padding: 0 16px;
+    border-bottom: 1px solid #333;
+    scrollbar-width: none;
+  }
+  #nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none;
+    color: #888; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #FAFAF7; border-bottom-color: #FAFAF7; }
+  #report-root {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 32px 16px 64px;
+    gap: 0;
+  }
+  .report-page {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 860px) {
+    .report-page { transform: scale(0.95); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-bar"></div>
+<div id="report-root"></div>
+
+<!-- ─── CONTENT DATA ──────────────────────────────────────────── -->
+<script type="text/babel" data-presets="react">
+// ─────────────────────────────────────────────────────────────────
+// The AI Brief — Content for the current issue.
+// Issue 30 — Week of July 14–20, 2026. Lead story: China's Moonshot
+// AI releases Kimi K3, the world's first open-weight 2.8T-parameter
+// model, beating Fable 5 and GPT-5.6 Sol in Arena front-end coding.
+// Gemini 3.5 Pro misses July 17 target — third slip in four months.
+// OpenAI proposes 5% equity stake for US government. TSMC adds $100B
+// Arizona pledge ($265B total). New York pauses data center permits.
+// ─────────────────────────────────────────────────────────────────
+
+const REPORT_META = {
+  title:    "The AI Brief",
+  tagline:  "A weekly intelligence briefing for executives",
+  issue:    "Vol. 02 · Issue 30",
+  date:     "Week of July 14 – 20, 2026",
+  edition:  "Executive Edition",
+  audience: "Prepared for leadership",
+};
+
+// 5 hero stats for the cover.
+const HERO_STATS = [
+  { value: "2.8T",    label: "KIMI K3 PARAMS",      sub: "World's largest open-weight"     },
+  { value: "$265B",   label: "TSMC US PLEDGE",       sub: "Arizona total, 12 fabs"          },
+  { value: "$42.6B",  label: "OPENAI GOV STAKE",     sub: "5% equity at $852B value"        },
+  { value: "40%+",    label: "TSMC 2026 REVENUE",    sub: "Full-year growth guidance"        },
+  { value: "3",       label: "GEMINI 3.5 PRO SLIPS", sub: "Third launch date missed"        },
+];
+
+// 5–7 one-line bullets for the cover.
+const TODAY_HEADLINES = [
+  "China's Moonshot AI releases Kimi K3, a 2.8-trillion-parameter open-weight model that beats US flagships in front-end coding benchmarks.",
+  "Gemini 3.5 Pro misses its July 17 launch target for the third time in four months, with no confirmed replacement date from Google.",
+  "OpenAI proposes granting the US government a 5% equity stake worth $42.6B, modeled on Alaska's Permanent Fund.",
+  "TSMC pledges an additional $100B for Arizona, bringing its total US commitment to $265B across 12 planned fabs.",
+  "New York becomes the first US state to pause new hyperscale data center permits, citing electricity grid strain and water use.",
+  "Goldman Sachs formally begins recommending Chinese AI models to Wall Street clients as price-adjusted quality closes the US lead.",
+];
+
+// Exactly 3 executive themes.
+const EXECUTIVE_THEMES = [
+  {
+    tag:   "CHINA CLOSES THE GAP",
+    body:  "Moonshot AI's Kimi K3 — 2.8T parameters, open weights, 1M-token context — tops Fable 5 and GPT-5.6 Sol in Arena front-end coding while costing 40% less than Opus 4.8. Goldman Sachs this week formally recommended Chinese models to Wall Street clients. The divergence narrative that framed US frontier AI through 2024 is empirically over.",
+    stat:  { v: "2.8T",   l: "Kimi K3 open-weight parameters" },
+  },
+  {
+    tag:   "SILICON SOVEREIGNTY WAR",
+    body:  "TSMC's $100B Arizona add ($265B total, 12 fabs) and Anthropic's Samsung 2nm chip talks signal a new phase: AI compute supply chains are now a geopolitical instrument. New York paused hyperscale data center permits this week. The physical infrastructure of AI is as contested as the models themselves.",
+    stat:  { v: "$265B",  l: "TSMC total US investment pledge" },
+  },
+  {
+    tag:   "GOOGLE DELIVERY CRISIS",
+    body:  "Gemini 3.5 Pro missed its July 17 target — the third slip in four months. With Kimi K3, Grok 4.5, and GPT-5.6 Sol all in public access, Google is the only frontier lab without a new flagship in general availability. A fourth miss in Q3 would confirm a structural product leadership problem, not a scheduling quirk.",
+    stat:  { v: "3×",     l: "Gemini 3.5 Pro launch misses" },
+  },
+];
+
+// TOP_STORIES[0] is the LEAD (full page). [1..4] are the short stories.
+const TOP_STORIES = [
+  {
+    rank: "01",
+    category: "Frontier models",
+    headline: "Kimi K3 tops US flagships in coding and opens weights July 27",
+    deck:
+      "China's Moonshot AI released a 2.8T open-weight model that beats Fable 5 and GPT-5.6 Sol on Arena front-end coding, costs 40% less than Opus 4.8, and releases full weights publicly on July 27.",
+    body: [
+      "Moonshot AI released Kimi K3 on July 17, 2026 — the world's first open-weight model at 2.8 trillion parameters. Built on Kimi Delta Attention and Stable LatentMoE, the model routes inference through 16 of 896 expert subnetworks at any moment, keeping compute costs manageable while drawing on a parameter pool no public model has previously reached. The 1-million-token context window is native, not retrofitted, and vision is included from the base model.",
+      "In Arena's front-end coding benchmark — the most closely watched evaluation for real developer tasks — Kimi K3 ranked above both Claude Fable 5 and GPT-5.6 Sol, the two US frontier flagships. In Arena's broader text ranking, Kimi finished ahead of Anthropic's Opus 4.8. The competitive result landed with force: Chinese open-weight models had been competitive on price for months; this week they were competitive on capability.",
+      "The open-weight dimension amplifies the significance. When Moonshot releases the full 2.8T weights on July 27 under a Modified MIT license, any organization will be able to download, fine-tune, and self-host Kimi K3 without an API key or usage fee. The open-source community began building deployment guides and quantization roadmaps immediately after the announcement — before the weights even shipped.",
+      "For enterprise buyers, the calculus is now three-way. US frontier APIs still lead on safety evaluations, model-level support SLAs, and depth of enterprise tooling. Chinese open-weight models lead on cost and are competitive on key benchmarks. Goldman Sachs formally recommended Chinese models to Wall Street clients this week — declaring that price-adjusted quality parity is bankable. Organizations still treating open-weight Chinese models as a speculative hedge should treat July 27 as an eval deadline.",
+    ],
+    read: "5 min read",
+    matters:
+      "Evaluate Kimi K3 before July 27 weights release — at 40% below Opus 4.8 on cost and competitive on Arena coding, it is a credible Sonnet-class alternative. Run your eval suite now, before the open-source fine-tuning wave arrives.",
+  },
+  {
+    rank: "02",
+    category: "AI labs",
+    headline: "Gemini 3.5 Pro misses third launch date; no timeline from Google",
+    deck:
+      "The July 17 GA target passed with no launch. Google is running enterprise previews while every other frontier lab now has a general-access flagship in market.",
+    read: "3 min read",
+    matters:
+      "Google's third consecutive Gemini 3.5 Pro miss is now a product leadership signal, not a scheduling quirk. Discount Gemini 3.5 Pro benchmarks until the model ships publicly and hold Gemini 2.5 Pro for production workloads until a replacement is confirmed.",
+  },
+  {
+    rank: "03",
+    category: "AI governance",
+    headline: "OpenAI pitches 5% equity stake to Trump administration",
+    deck:
+      "Sam Altman proposed a $42.6B government stake to President Trump, Lutnick, and Bessent — modeled on Alaska's Permanent Fund and requiring an act of Congress to implement.",
+    read: "4 min read",
+    matters:
+      "A government equity stake in OpenAI would restructure the regulatory relationship between frontier labs and Washington. Add this to the risk matrix for enterprise AI vendor evaluation alongside IPO timeline and model access restrictions.",
+  },
+  {
+    rank: "04",
+    category: "AI hardware",
+    headline: "TSMC adds $100B to Arizona, total US pledge reaches $265B",
+    deck:
+      "TSMC Q2 earnings confirmed a new $100B Arizona commitment, raising its US total to $265B across 12 planned fabs. 2026 revenue guidance raised to above 40% in US dollar terms; capex lifted to $60–64B.",
+    read: "3 min read",
+    matters:
+      "TSMC's accelerated US buildout reduces AI supply chain concentration in Taiwan through 2030. Monitor 2nm node allocation priority for your AI hardware vendors — TSMC Arizona capacity will increasingly determine which chips ship first.",
+  },
+  {
+    rank: "05",
+    category: "AI infrastructure",
+    headline: "New York first US state to pause hyperscale data center permits",
+    deck:
+      "New York paused new hyperscale data center permits citing grid strain and water use — the first US state to restrict AI infrastructure construction.",
+    read: "3 min read",
+    matters:
+      "AI infrastructure permitting is now a political variable across all 50 states. Data center planning timelines must incorporate state regulatory risk alongside power procurement and fiber access.",
+  },
+];
+
+// Frontier labs — exactly 5, each with exactly 4 items.
+const FRONTIER_LABS = [
+  {
+    lab: "Anthropic",
+    tag: "Samsung chip · IPO prep · Sonnet 5 live",
+    items: [
+      "Claude Sonnet 5 — at $2/$10/M intro pricing through August 31 — is now the default on all plans at near-Opus 4.8 performance.",
+      "Anthropic in early-stage talks with Samsung to build a custom AI chip on Samsung's 2nm process and advanced packaging facilities.",
+      "Anthropic reported to target October 2026 for an IPO filing, pending Fable 5 regulatory clarity and the August 1 EO deadline.",
+      "Fable 5 export restrictions remain; access limited to ~100 US critical infrastructure organizations cleared by Commerce.",
+    ],
+  },
+  {
+    lab: "OpenAI",
+    tag: "Gov stake offer · GPT-5.6 live · GPT-Live",
+    items: [
+      "GPT-5.6 Sol, Terra, and Luna entered broad public access July 9 after US Commerce Department CAISI review cleared wider rollout.",
+      "OpenAI proposed granting the US government a 5% equity stake, worth $42.6B, in talks with Trump, Lutnick, and Bessent.",
+      "GPT-Live-1 launched: full-duplex voice with live translation, nine voices, and mid-conversation agent handoff; mini tier is free.",
+      "ChatGPT Work — enterprise automation agent integrating M365, Google Drive, Slack, and Notion — rolled out to all paid plans.",
+    ],
+  },
+  {
+    lab: "Google DeepMind",
+    tag: "3.5 Pro missed again · enterprise preview",
+    items: [
+      "Gemini 3.5 Pro missed its July 17 target for the third time; enterprise preview continues, public release has no confirmed date.",
+      "Google joined Microsoft, Salesforce, and Snowflake to back a shared enterprise agent protocol countering Anthropic's MCP.",
+      "Google Search now runs on Gemini 3.5 Flash, providing at-scale proof of the rebuilt infrastructure before 3.5 Pro ships.",
+      "Boston Dynamics integrated Gemini Robotics-ER 1.6 into Spot and Orbit for spatial reasoning and autonomous planning in industry.",
+    ],
+  },
+  {
+    lab: "xAI / SpaceX",
+    tag: "Grok 4.5 live · APR Energy · Grok 5 delayed",
+    items: [
+      "Grok 4.5 released July 8: 1.5T V9 model at $2/$6/M, Cursor-trained, 4th on Artificial Analysis Intelligence Index.",
+      "Musk acquired APR Energy for ~$1B, adding 1 GW of mobile gas turbines to power xAI's Colossus data center cluster in Memphis.",
+      "Grok 5 — targeting 6T parameters on a Mixture-of-Experts architecture — remains in internal testing; no public timeline confirmed.",
+      "Grok 4.5 claims 4.2× token efficiency vs. Opus 4.8 on SWE-Bench Pro; EU rollout expected; available in Grok Build and Cursor IDE.",
+    ],
+  },
+  {
+    lab: "Moonshot AI",
+    tag: "Kimi K3 frontier · weights July 27",
+    items: [
+      "Kimi K3: 2.8T parameters, 896 experts with 16 active per pass, 1M-token context, native vision — largest open-weight model ever.",
+      "In Arena benchmarks, Kimi K3 ranked above Fable 5 and Sol on front-end coding; above Opus 4.8 on broader text.",
+      "Full weights released publicly July 27 under Modified MIT license; designed for distributed compute deployment.",
+      "Kimi K3 priced roughly 40% below Anthropic Opus 4.8 per token while matching Opus on most Arena text ranking metrics.",
+    ],
+  },
+];
+
+// Benchmark table. Keep ≤ 3 columns.
+const BENCHMARK_TABLE = {
+  caption: "Kimi K3 vs US frontier models — Arena rankings, July 17, 2026",
+  models: ["Benchmark", "Kimi K3", "US Frontier Best"],
+  rows: [
+    ["Arena Frontend Code rank",      "#1 ★",         "Below Kimi K3"  ],
+    ["Arena Text vs Opus 4.8",        "Above",         "Opus 4.8"       ],
+    ["Total parameters",              "2.8T",          "~4T (Sol est.)" ],
+    ["Active params per forward pass","~16 of 896",    "—"              ],
+    ["Context window",                "1M tokens",     "200K (Fable 5)" ],
+    ["Input price vs Opus 4.8",       "–40%",          "$15/M (Opus)"   ],
+    ["Open weights",                  "July 27 ★",     "No"             ],
+  ],
+  footnote:
+    "Kimi K3 Arena results as of July 17, 2026; US parameter counts are estimates. Weights release July 27 under Modified MIT. GPT-5.6 Sol, Terra, and Luna in broad access since July 9; Gemini 3.5 Pro remains in enterprise preview only.",
+};
+
+// Developer tools — exactly 4.
+const DEV_TOOLS = [
+  {
+    tool: "Kimi K3 (Moonshot AI)",
+    updated: "July 17",
+    bullets: [
+      "World's first open 2.8T model; 896-expert LatentMoE activates 16 per pass; 1M context and vision. Weights drop July 27 under Modified MIT.",
+      "Priced ~40% below Anthropic Opus 4.8 per token; ranks above Fable 5 and GPT-5.6 Sol on Arena front-end coding as of July 17.",
+    ],
+  },
+  {
+    tool: "GPT-Live-1",
+    updated: "July 9",
+    bullets: [
+      "Full-duplex voice: processes input while generating speech, enabling natural interruptions, live translation, and mid-call agent handoff.",
+      "Ships as GPT-Live-1 (paid) and GPT-Live-1 mini (free); nine remastered voices; delegates complex reasoning to GPT-5.5 in background.",
+    ],
+  },
+  {
+    tool: "ChatGPT Work",
+    updated: "July 9",
+    bullets: [
+      "Enterprise agent connecting to M365, Google Drive, Slack, and Notion; returns finished documents, spreadsheets, slides, and web apps.",
+      "Available to all paid ChatGPT plans on desktop immediately, mobile rollout in days. Codex merged into unified ChatGPT desktop app.",
+    ],
+  },
+  {
+    tool: "Enterprise Agent Protocol",
+    updated: "July 2026",
+    bullets: [
+      "Google, Microsoft, Salesforce, and Snowflake backed a shared AI agent protocol for enterprise integration, countering Anthropic's MCP.",
+      "Protocol standardizes agent-to-enterprise data connections; both camps simultaneously co-founded Linux Foundation's Agentic AI Foundation.",
+    ],
+  },
+];
+
+// Research highlights — exactly 6.
+const RESEARCH = [
+  {
+    title: "Kimi K3: Open Frontier at 2.8T Scale",
+    source: "Moonshot AI · July 17, 2026",
+    summary:
+      "Technical report on Kimi K3's architecture: 896 expert subnetworks, 16 active per forward pass via Kimi Delta Attention and Stable LatentMoE. 1M-token context, native vision. Tops Fable 5 and GPT-5.6 Sol in Arena front-end coding; ahead of Opus 4.8 on broader text at 40% lower cost.",
+  },
+  {
+    title: "Selective Activation Sparsity",
+    source: "ICML 2026 · July 2026",
+    summary:
+      "Models trained with selective activation sparsity perform comparably to models 3× their size on reasoning benchmarks, by keeping only task-relevant parameters active. Reduces training and inference cost with direct implications for on-device frontier-class AI deployment.",
+  },
+  {
+    title: "Prospective Credit Assignment",
+    source: "Google DeepMind · NeurIPS 2026",
+    summary:
+      "Training approach teaching models to anticipate how current decisions affect outcomes many steps ahead, addressing long-horizon task failure modes. Results show improved performance on planning-intensive benchmarks where standard RLHF degrades after 5–10 action steps.",
+  },
+  {
+    title: "ResearchGym: AI on Real Research",
+    source: "arXiv · July 2026",
+    summary:
+      "Benchmark evaluating whether LLM agents can reproduce real AI experiments, validate methods, and extend findings. Leading agents complete 23% of tasks autonomously; structured human-AI collaboration raises this to 61%, suggesting the bottleneck is delegation strategy, not raw capability.",
+  },
+  {
+    title: "AI Papers: 170K in H1 2026",
+    source: "Medium / arXiv analysis · July 2026",
+    summary:
+      "Analysis of 170,927 AI papers in H1 2026 finds Chinese institutions outpace US in raw paper volume for the second consecutive half-year. US research maintains a citation-impact advantage in frontier model papers; the gap is narrowing in agentic systems and robotics categories.",
+  },
+  {
+    title: "Robostral Navigate: One Camera",
+    source: "Mistral AI · July 2026",
+    summary:
+      "8B embodied navigation model guiding robots through unseen environments using a single RGB camera and plain-language instructions — no LiDAR, no depth sensors. Claims 76.6% task completion on indoor navigation benchmarks, well above sensor-rich baselines.",
+  },
+];
+
+// AI Index findings — exactly 5.
+const INDEX_FINDINGS = [
+  {
+    metric: "OPEN-WEIGHT PARITY",
+    body: "Kimi K3 is the first Chinese open-weight model to beat US frontier flagships in a head-to-head Arena benchmark category. The open-source advantage US labs relied on to close quality gaps in 2024–2025 is now operating in the opposite direction. Weights drop July 27.",
+  },
+  {
+    metric: "SILICON TIMELINE",
+    body: "TSMC's $265B Arizona total ($100B added this week) and Anthropic's Samsung chip talks show the same dynamic: frontier AI economics require owned silicon, not rented. Most new capacity comes online 2028–2030 — well ahead of the current demand inflection.",
+  },
+  {
+    metric: "ENTERPRISE PROTOCOL WAR",
+    body: "Four major enterprise software vendors backed a rival agent protocol in a week. MCP and OpenAI's API are dominant today; the coalition aims to prevent lock-in at the integration layer before it becomes structural — precisely the pattern MCP itself used to win in 2025.",
+  },
+  {
+    metric: "GOV EQUITY IN AI",
+    body: "OpenAI's proposed 5% stake would make Washington a financial stakeholder in frontier AI, not just a regulator. The invitation for Anthropic, Google, and Meta to follow means the arrangement would cover every major US frontier lab. No US precedent exists; requires an act of Congress.",
+  },
+  {
+    metric: "GOOGLE DELIVERY GAP",
+    body: "Gemini 3.5 Pro's third consecutive miss now spans four months and three public timelines. With Kimi K3 releasing open weights, Grok 4.5 in public API, and GPT-5.6 in broad access, Google is the only frontier lab without a new flagship in general availability heading into August.",
+  },
+];
+
+// VC funding hero stats — exactly 4.
+const FUNDING_HERO = [
+  { v: "$510B",  l: "H1 2026 startup funding",     n: "Record; >70% in AI-focused companies"   },
+  { v: "$1B",    l: "SambaNova Series F close",     n: "$11B valuation; JPMorgan as partner"    },
+  { v: "$800M",  l: "Together AI Series C",         n: "$8.3B valuation, open-model platform"   },
+  { v: "$130M",  l: "Prime Intellect Series A",     n: "$1B val.; Nvidia, Intel, Dell invest"   },
+];
+
+// Mega rounds table — 6–8 rows.
+const MEGA_ROUNDS = [
+  { co: "SambaNova Systems",    round: "Series F",       amount: "$1B",    lead: "General Atlantic",     val: "$11B post-money",    note: "JPMorgan Chase named as inference partner for on-premise bank AI via SN40L/SN50." },
+  { co: "Together AI",          round: "Series C",       amount: "$800M",  lead: "Altimeter Capital",    val: "$8.3B post-money",   note: "Open-source model training and inference platform for enterprise fine-tuning." },
+  { co: "Prime Intellect",      round: "Series A",       amount: "$130M",  lead: "Radical Ventures",     val: "$1B post-money",     note: "Distributed AI training platform; Nvidia, Intel, and Dell Capital participate." },
+  { co: "TSMC (Arizona capex)", round: "Reinvestment",   amount: "+$100B", lead: "Public markets",       val: "$265B total US",     note: "12 Arizona fabs planned; 2026 capex $60–64B; revenue growth guidance >40%." },
+  { co: "Unitree Robotics",     round: "IPO (approved)", amount: "TBD",    lead: "STAR Market Shanghai", val: "—",                  note: "China's top humanoid robot maker cleared for Shanghai STAR Market IPO." },
+  { co: "Oxmiq",                round: "Seed",           amount: "$35M",   lead: "Undisclosed",          val: "—",                  note: "Merges GPU, CPU, and TPU into a single chip architecture for AI infrastructure." },
+];
+
+// Enterprise and industry moves — 5–6.
+const ENTERPRISE_MOVES = [
+  { co: "New York State",           move: "Paused new hyperscale data center permits, citing electricity grid strain and water usage — the first US state to restrict AI infrastructure construction." },
+  { co: "Google / MS / Salesforce", move: "Backed a shared enterprise AI agent protocol with Snowflake and ServiceNow, standardizing agent-to-enterprise integration and countering Anthropic's MCP." },
+  { co: "Amazon",                   move: "Announced deployment of 50,000 AI-powered robots across its global warehouse network, targeting 35% throughput gains and an estimated 12% annual labor cost reduction." },
+  { co: "Cloudflare",               move: "Launched granular AI bot controls letting site owners separately block Search, Agent, and Training crawlers; defaults block Agent and Training bots on ad-supported pages." },
+  { co: "Goldman Sachs",            move: "Formally began recommending Chinese AI models — including Kimi K3 and DeepSeek — to Wall Street clients, citing price-adjusted quality parity with US frontier models." },
+  { co: "Anthropic",                move: "In talks with Samsung to build a custom AI chip on Samsung's 2nm process — following OpenAI's Jalapeño chip and Google's TPU in the race to exit Nvidia dependence." },
+];
+
+// Robotics and science — exactly 4.
+const ROBOTICS_SCIENCE = [
+  { title: "Boston Dynamics + Gemini 1.6",    note: "Spot and Orbit robots integrated with Gemini Robotics-ER 1.6, adding spatial reasoning and autonomous planning for industrial environments." },
+  { title: "Mistral Robostral Navigate",      note: "8B navigation model achieves 76.6% task completion in unseen spaces using one RGB camera and natural language — no LiDAR or depth sensors required." },
+  { title: "Unitree Robotics IPO Approved",   note: "China's top humanoid robot maker cleared for Shanghai STAR Market listing, the first major robotics IPO since the 2025 embodied AI investment surge." },
+  { title: "Japan Physical AI Initiative",    note: "Japan and NVIDIA launched a government-backed physical AI program to develop open multimodal models for robotics, digital twins, and edge deployment." },
+];
+
+// Regulatory — 4–5.
+const REGULATORY = [
+  { region: "European Union",  item: "EU AI Act Article 50 — Aug 2",        summary: "Providers must disclose AI content, notify chatbot users, and watermark synthetic media from August 2. Compliance window closes July 31; enforcement is immediate from day one.",    impact: "High"        },
+  { region: "China",           item: "AI Anthropomorphic Services rules",    summary: "China's new rules for AI anthropomorphic services took effect July 15 — the first binding framework globally for virtual companions and AI relationship assistants.",              impact: "High"        },
+  { region: "China",           item: "Agentic AI Joint Rules — July 15",     summary: "China's CAC, NDRC, and MIIT issued joint agentic AI rules effective July 15, covering registration, safety evaluations, and transparency for deployed agents in commercial settings.", impact: "Medium-High"  },
+  { region: "United States",   item: "OpenAI 5% stake — conceptual talks",   summary: "OpenAI proposed a 5% stake for the US government in conceptual talks with Trump, Lutnick, and Bessent. Modeled on Alaska's Permanent Fund; any deal requires legislation.",         impact: "Medium"      },
+  { region: "New York State",  item: "Hyperscale data center pause",         summary: "New York paused hyperscale data center permits, citing grid strain and water use. The first US state-level restriction on AI infrastructure build-out.",                            impact: "Medium"      },
+];
+
+// Thought leader quotes — exactly 4.
+const THOUGHT_LEADERS = [
+  {
+    name: "Wendell Huang",
+    affiliation: "TSMC",
+    quote: "We see strong, multi-year demand for AI chips from leading customers globally. The $265 billion Arizona commitment reflects our view that this demand is structural — not a cycle — and we are accelerating.",
+    context: "TSMC Q2 2026 earnings call, July 16, 2026.",
+  },
+  {
+    name: "Jensen Huang",
+    affiliation: "NVIDIA",
+    quote: "Physical AI is the next industrial revolution. The countries building physical AI infrastructure — combining robotics, digital twins, and edge compute — will capture disproportionate economic value from the AI era.",
+    context: "Japan Physical AI Initiative launch, July 2026.",
+  },
+  {
+    name: "Sam Altman",
+    affiliation: "OpenAI",
+    quote: "We think the American people should directly share in AI's upside through a public fund, similar to how Alaska manages oil revenue — broadly and transparently, not through private arrangements alone.",
+    context: "On the proposed 5% government equity stake, FT report, July 2026.",
+  },
+  {
+    name: "Yang Zhilin",
+    affiliation: "Moonshot AI",
+    quote: "Open weights are not a concession to cost — they are the product. Frontier AI should be accessible to every researcher and developer, not only those who can afford a commercial API.",
+    context: "On Kimi K3 open-weight release decision, July 17, 2026.",
+  },
+];
+
+// Community pulse — exactly 4.
+const COMMUNITY_PULSE = [
+  { source: "X / AI community",         theme: "Kimi K3 topping US flagships in Arena coding split X: some declared the US quality lead gone; others noted benchmark weighting and that overall rankings still favor US models. July 27 weights are the real test." },
+  { source: "HackerNews / r/LocalLLaMA", theme: "Kimi K3's weights dropping July 27 under Modified MIT generated immediate build threads — quantization plans, API-compatible deployment guides, and fine-tune targets — before weights even shipped." },
+  { source: "r/singularity / X",         theme: "OpenAI's 5% stake proposal split X: libertarian builders called it regulatory capture; others argued sovereign participation is the only realistic path to preventing US AI governance fragmentation." },
+  { source: "r/MachineLearning",         theme: "Gemini 3.5 Pro's third consecutive miss generated pointed analysis: commenters documented each slip date, the scrapped base model, and a four-month credibility gap matching Google's Bard-era over-promising pattern." },
+];
+
+// What to watch — exactly 5.
+const WHAT_TO_WATCH = [
+  { when: "July 27",     title: "Kimi K3 Weights Public Release",    body: "Moonshot AI releases 2.8T Kimi K3 weights under Modified MIT. Expect fine-tuning forks, quantizations, and API-compatible deployments within days of the drop." },
+  { when: "August 1",    title: "US Frontier AI EO Framework",        body: "NSA, CISA, and Treasury finalize the frontier-model framework — the structural path to Fable 5 restoration and the template for future export controls." },
+  { when: "August 2",    title: "EU AI Act Article 50 Enforced",      body: "AI content disclosure, chatbot notifications, and synthetic media watermarking become enforceable. No grace period; compliance must be in place July 31." },
+  { when: "Q3 2026 (TBD)", title: "Gemini 3.5 Pro — Will It Ship?",  body: "Google's fourth Gemini 3.5 Pro window. Enterprise previews are active; a public launch still lacks a confirmed date and carries fourth-miss risk." },
+  { when: "Oct 2026",    title: "Anthropic IPO Filing Window",         body: "Anthropic reportedly targets October 2026 for an IPO filing, pending Fable 5 clarity and the August 1 frontier AI framework deadline." },
+];
+
+const SOURCES = [
+  "Moonshot AI. Kimi K3 technical blog post. moonshot.cn. July 17, 2026.",
+  "Axios. China's open-weight Kimi K3 stuns AI world. axios.com. July 16, 2026.",
+  "CNBC. OpenAI proposes 5% stake to Trump administration. cnbc.com. July 2, 2026.",
+  "TSMC Q2 2026 Earnings. $265B Arizona commitment announced; capex raised to $60–64B. tsmc.com. July 16, 2026.",
+  "TechCrunch. Anthropic in talks with Samsung for custom AI chip. techcrunch.com. July 2, 2026.",
+  "Tom's Hardware. Kimi K3 2.8T beats Claude Fable 5 in coding benchmarks. tomshardware.com. July 2026.",
+  "American Bazaar Online. TSMC to invest $100 billion in Arizona. americanbazaaronline.com. July 16, 2026.",
+  "Tech Startups. Top tech news July 17, 2026: Kimi K3, TSMC, Gemini 3.5 Pro miss. techstartups.com.",
+];
+
+const GLOSSARY = [
+  { term: "Kimi K3",              def: "Moonshot AI's 2.8T open-weight model, the world's largest — routes 16 of 896 experts per pass; beats US flagships in Arena coding; weights drop July 27." },
+  { term: "Open-weight model",    def: "AI model whose parameter weights are publicly released, allowing any organization to download, fine-tune, and self-host without commercial API access." },
+  { term: "Sovereign AI fund",    def: "A proposed government fund — modeled on Alaska's Permanent Fund — holding equity in US frontier AI companies to share economic upside with taxpayers." },
+  { term: "Physical AI",          def: "AI systems designed to act on the physical world — robots, wearables, industrial sensors, and digital twins bridging model intelligence with hardware action." },
+  { term: "Agent protocol",       def: "Shared standard for AI agent integration. Anthropic MCP leads; Google-Microsoft-Salesforce launched a rival protocol to challenge it this week." },
+  { term: "Article 50 (EU AI Act)", def: "EU transparency rules live August 2, 2026: disclose AI content, notify chatbot users, and watermark synthetic media. Enforceable immediately, no grace period." },
+];
+
+Object.assign(window, {
+  REPORT_META, HERO_STATS, TODAY_HEADLINES, EXECUTIVE_THEMES, TOP_STORIES,
+  FRONTIER_LABS, BENCHMARK_TABLE, DEV_TOOLS, RESEARCH, INDEX_FINDINGS,
+  FUNDING_HERO, MEGA_ROUNDS, ENTERPRISE_MOVES, ROBOTICS_SCIENCE, REGULATORY,
+  THOUGHT_LEADERS, COMMUNITY_PULSE, WHAT_TO_WATCH, SOURCES, GLOSSARY,
+});
+
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+const T = {
+  bg:      "#FAFAF7",
+  ink:     "#1A1A1A",
+  mid:     "#5A5A55",
+  faint:   "#8A8678",
+  rule:    "#D8D4C7",
+  accent:  "#C9C4B8",
+  paper:   "#F2EEE3",
+  inkPanel:"#1A1A1A",
+  serif:   "'Source Serif 4', 'Source Serif Pro', Georgia, serif",
+  sans:    "'IBM Plex Sans', system-ui, sans-serif",
+  mono:    "'IBM Plex Mono', ui-monospace, monospace",
+};
+
+// ─── SHARED COMPONENTS ──────────────────────────────────────────
+const Page = ({ children, style }) => (
+  <section className="report-page" style={{
+    width: 794, height: 1123, background: T.bg, color: T.ink,
+    fontFamily: T.sans, fontSize: 11, lineHeight: 1.5,
+    position: "relative", overflow: "hidden", ...style,
+  }}>{children}</section>
+);
+
+const RunningHeader = ({ page }) => (
+  <div style={{
+    position: "absolute", top: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingBottom: 12, borderBottom: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief · {REPORT_META.issue}</span>
+    <span>{REPORT_META.date}</span>
+    <span>{page}</span>
+  </div>
+);
+
+const Footer = ({ page }) => (
+  <div style={{
+    position: "absolute", bottom: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingTop: 12, borderTop: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief</span>
+    <span style={{ fontFamily: T.serif, fontStyle: "italic", letterSpacing: 0, textTransform: "none", fontSize: 10 }}>
+      AI generated by Mukul Dewangan
+    </span>
+    <span>{page}</span>
+  </div>
+);
+
+const PageTitle = ({ eyebrow, title, intro, size = "lg" }) => {
+  const sizes = { lg: { fontSize: 56, lineHeight: 1.0 }, md: { fontSize: 44, lineHeight: 1.02 }, sm: { fontSize: 36, lineHeight: 1.05 } };
+  return (
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", color: T.mid, textTransform: "uppercase" }}>{eyebrow}</div>
+      <h1 style={{ fontFamily: T.serif, fontWeight: 400, ...sizes[size], letterSpacing: "-0.02em", margin: "10px 0 0", color: T.ink }}>{title}</h1>
+      {intro && <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 16, color: T.mid, marginTop: 16, maxWidth: 560, lineHeight: 1.4 }}>{intro}</div>}
+    </div>
+  );
+};
+
+const SectionHead = ({ children, style }) => (
+  <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 20, color: T.ink, marginBottom: 12, ...style }}>{children}</div>
+);
+
+const WhyItMatters = ({ text, variant = "cream" }) => {
+  if (variant === "cream") return (
+    <div style={{ background: T.paper, padding: "22px 26px" }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.45, color: T.ink, marginTop: 10, maxWidth: 580 }}>{text}</div>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 10, borderLeft: "2px solid " + T.ink, paddingLeft: 12 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 12, lineHeight: 1.5, color: T.ink, marginTop: 4 }}>{text}</div>
+    </div>
+  );
+};
+
+// ─── PAGE 01 — COVER ────────────────────────────────────────────
+const CoverViz = () => {
+  const dots = [];
+  let s = 42;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  for (let i = 0; i < 28; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 50 + rnd() * 170;
+    dots.push(<circle key={i} cx={200 + Math.cos(a)*r} cy={200 + Math.sin(a)*r} r={1.3 + rnd()*2.6}
+      fill={i%5===0 ? T.ink : T.mid} opacity={i%5===0 ? 1 : 0.45} />);
+  }
+  return (
+    <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+      {[70, 115, 160, 200].map(r => <circle key={r} cx={200} cy={200} r={r} fill="none" stroke={T.rule} strokeWidth="0.6" />)}
+      <circle cx={200} cy={200} r={3} fill={T.ink} />
+      {dots}
+    </svg>
+  );
+};
+
+const CoverPage = () => (
+  <Page>
+    <div style={{ position: "absolute", top: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>The AI Brief</span><span>{REPORT_META.issue}</span>
+    </div>
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.serif, fontSize: 80, lineHeight: 0.95, letterSpacing: "-0.02em", fontWeight: 400, color: T.ink }}>The AI<br />Brief.</div>
+      <div style={{ marginTop: 18, fontFamily: T.serif, fontStyle: "italic", fontSize: 18, color: T.mid, maxWidth: 420, lineHeight: 1.35 }}>{REPORT_META.tagline}.</div>
+    </div>
+    <div style={{ position: "absolute", top: 100, right: 56, width: 250, height: 250 }}><CoverViz /></div>
+    <div style={{ position: "absolute", top: 400, left: 56, right: 56, paddingTop: 16, paddingBottom: 16, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 14 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{s.label}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 32, color: T.ink, lineHeight: 1, marginTop: 6 }}>{s.value}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 560, left: 56, right: 56 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Today's headlines</div>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>{TODAY_HEADLINES.length} signals</div>
+      </div>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        {TODAY_HEADLINES.map((h, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 14, padding: "13px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink, letterSpacing: "0.06em" }}>{String(i+1).padStart(2,"0")}</span>
+            <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink, lineHeight: 1.4 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{ position: "absolute", bottom: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>{REPORT_META.date}</span><span>{REPORT_META.edition}</span>
+    </div>
+  </Page>
+);
+
+// ─── PAGE 02 — EXECUTIVE SUMMARY ────────────────────────────────
+const ExecSummaryPage = () => (
+  <Page>
+    <RunningHeader page="Page 02" />
+    <PageTitle eyebrow="Section One" title={<>Executive<br />summary.</>} intro="The three themes that frame this week's signals — and the reasoning behind why each belongs on a leadership agenda." />
+    <div style={{ position: "absolute", top: 320, left: 56, display: "flex", gap: 18, fontFamily: T.sans, fontSize: 9.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <span>{REPORT_META.audience}</span><span>·</span><span>8 min read</span><span>·</span><span>Curated by the Brief desk</span>
+    </div>
+    <div style={{ position: "absolute", top: 370, left: 56, right: 56, bottom: 100 }}>
+      {EXECUTIVE_THEMES.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr 170px", gap: 24, alignItems: "start", padding: "18px 0", borderTop: "1px solid " + T.rule, borderBottom: i===EXECUTIVE_THEMES.length-1 ? "1px solid "+T.rule : "none" }}>
+          <div style={{ fontFamily: T.serif, fontSize: 34, lineHeight: 1, color: T.ink, fontWeight: 400 }}>{String(i+1).padStart(2,"0")}</div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.ink, marginBottom: 6 }}>{t.tag}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 14.5, lineHeight: 1.45, color: T.ink, maxWidth: 470 }}>{t.body}</div>
+          </div>
+          {t.stat && (
+            <div style={{ textAlign: "right", borderLeft: "1px solid " + T.rule, paddingLeft: 18 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.ink, lineHeight: 1 }}>{t.stat.v}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.4 }}>{t.stat.l}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <Footer page="02" />
+  </Page>
+);
+
+// ─── PAGE 03 — LEAD STORY ────────────────────────────────────────
+const LeadStoryPage = () => {
+  const s = TOP_STORIES[0];
+  return (
+    <Page>
+      <RunningHeader page="Page 03" />
+      <div style={{ position: "absolute", top: 110, left: 80, right: 80 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+          <span>Lead — {s.category}</span><span>{s.read}</span>
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontWeight: 400, fontSize: 44, lineHeight: 1.04, letterSpacing: "-0.02em", margin: "20px 0 0", color: T.ink, maxWidth: 600 }}>{s.headline}.</h1>
+        <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 17, lineHeight: 1.4, color: T.mid, marginTop: 20, maxWidth: 580 }}>{s.deck}</div>
+      </div>
+      <div style={{ position: "absolute", top: 460, left: 80, right: 80 }}><WhyItMatters text={s.matters} /></div>
+      <div style={{ position: "absolute", top: 640, left: 80, right: 80, bottom: 110, fontFamily: T.sans, fontSize: 11.5, lineHeight: 1.65, color: T.ink, maxWidth: 600 }}>
+        {s.body.map((p, i) => <p key={i} style={{ margin: "0 0 14px" }}>{p}</p>)}
+      </div>
+      <Footer page="03" />
+    </Page>
+  );
+};
+
+// ─── PAGE 04 — TOP STORIES ───────────────────────────────────────
+const TopStoriesPage = () => {
+  const more = TOP_STORIES.slice(1);
+  return (
+    <Page>
+      <RunningHeader page="Page 04" />
+      <PageTitle eyebrow="Section Two · More signals" title="Stories of the week." intro="Four more developments that warrant leadership attention this week." size="sm" />
+      <div style={{ position: "absolute", top: 300, left: 56, right: 56, bottom: 96, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+        {more.map((s, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "40px 1fr 250px", gap: 24, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+            <div style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1, color: T.ink }}>{s.rank}</div>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 8 }}>
+                <span>{s.category}</span><span>{s.read}</span>
+              </div>
+              <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.3, color: T.ink }}>{s.headline}.</div>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 12.5, color: T.mid, marginTop: 8, lineHeight: 1.5, maxWidth: 430 }}>{s.deck}</div>
+            </div>
+            <div><WhyItMatters text={s.matters} variant="inline" /></div>
+          </div>
+        ))}
+      </div>
+      <Footer page="04" />
+    </Page>
+  );
+};
+
+// ─── PAGE 05 — FRONTIER MODELS ───────────────────────────────────
+const FrontierModelsPage = () => (
+  <Page>
+    <RunningHeader page="Page 05" />
+    <PageTitle eyebrow="Section Three · Frontier models" title="Labs, in their own words." intro="Per-lab summary of the week's model and capability developments — the commercial map of the frontier." size="sm" />
+    <div style={{ position: "absolute", top: 268, left: 56, right: 56, bottom: 88, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+      {FRONTIER_LABS.map((l, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 28, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+          <div style={{ overflow: "hidden" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.ink, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.lab}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 5, lineHeight: 1.35 }}>{l.tag}</div>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", overflow: "hidden" }}>
+            {l.items.map((it, j) => (
+              <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 10, padding: "3px 0", fontFamily: T.sans, fontSize: 10.5, color: T.ink, lineHeight: 1.5 }}>
+                <span style={{ color: T.mid, fontFamily: T.mono, fontSize: 9, paddingTop: 2 }}>·</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <Footer page="05" />
+  </Page>
+);
+
+// ─── PAGE 06 — BENCHMARKS + DEV TOOLS ───────────────────────────
+const BenchmarksDevToolsPage = () => (
+  <Page>
+    <RunningHeader page="Page 06" />
+    <PageTitle eyebrow="Section Four · Benchmarks & developer tools" title="The frontier, head-to-head." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>{BENCHMARK_TABLE.caption}</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+            {BENCHMARK_TABLE.models.map((m, i) => <span key={i} style={{ textAlign: i===0 ? "left" : "right" }}>{m}</span>)}
+          </div>
+          {BENCHMARK_TABLE.rows.map((row, i) => {
+            const [name, a, b] = row;
+            const numA = parseFloat(a), numB = parseFloat(b);
+            const aBold = !isNaN(numA) && !isNaN(numB) && numA > numB;
+            const bBold = !isNaN(numA) && !isNaN(numB) && numB > numA;
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink }}>{name}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: aBold ? T.ink : T.mid, fontWeight: aBold ? 500 : 400 }}>{a}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: bBold ? T.ink : T.mid, fontWeight: bBold ? 500 : 400 }}>{b}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 8, fontFamily: T.serif, fontStyle: "italic", fontSize: 11, color: T.mid, lineHeight: 1.4 }}>{BENCHMARK_TABLE.footnote}</div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Developer tools — week-in-progress</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {DEV_TOOLS.map((tl, i) => (
+            <div key={i} style={{ padding: "10px 0", borderTop: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink }}>{tl.tool}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upd. {tl.updated}</span>
+              </div>
+              <ul style={{ margin: "5px 0 0", paddingLeft: 0, listStyle: "none" }}>
+                {tl.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 8, fontSize: 9.5, color: T.ink, lineHeight: 1.45, padding: "2px 0" }}>
+                    <span style={{ color: T.mid, fontFamily: T.mono, paddingTop: 1 }}>·</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="06" />
+  </Page>
+);
+
+// ─── PAGE 07 — RESEARCH ──────────────────────────────────────────
+const ResearchPage = () => (
+  <Page>
+    <RunningHeader page="Page 07" />
+    <PageTitle eyebrow="Section Five · Research" title="Papers and findings." intro="What the academic literature and the major AI indices added this week." size="sm" />
+    <div style={{ position: "absolute", top: 290, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Notable research</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {RESEARCH.map((r, i) => (
+            <div key={i} style={{ padding: "10px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 14, color: T.ink, lineHeight: 1.3 }}>{r.title}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{r.source}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, marginTop: 5, lineHeight: 1.5 }}>{r.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>AI Index — key findings this week</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {INDEX_FINDINGS.map((f, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 20, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.ink, letterSpacing: "0.12em", textTransform: "uppercase" }}>{f.metric}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 10, color: T.ink, lineHeight: 1.5 }}>{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="07" />
+  </Page>
+);
+
+// ─── PAGE 08 — FUNDING ───────────────────────────────────────────
+const FundingPage = () => (
+  <Page>
+    <RunningHeader page="Page 08" />
+    <PageTitle eyebrow="Section Six · Capital" title="The funding landscape." size="sm" />
+    <div style={{ position: "absolute", top: 240, left: 56, right: 56, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, padding: "20px 0" }}>
+      {FUNDING_HERO.map((h, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 18 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{h.l}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 36, color: T.ink, lineHeight: 1, marginTop: 8 }}>{h.v}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 10, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{h.n}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 410, left: 56, right: 56 }}>
+      <SectionHead>Mega rounds &amp; strategic bets</SectionHead>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+          <span>Company</span><span>Round</span><span>Amount</span><span>Lead</span><span>Valuation</span><span>Note</span>
+        </div>
+        {MEGA_ROUNDS.map((m, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "10px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.serif, fontSize: 13, color: T.ink }}>{m.co}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid }}>{m.round}</span>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink }}>{m.amount}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.4 }}>{m.lead}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.val}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer page="08" />
+  </Page>
+);
+
+// ─── PAGE 09 — ENTERPRISE · ROBOTICS · POLICY ───────────────────
+const EnterprisePolicyPage = () => (
+  <Page>
+    <RunningHeader page="Page 09" />
+    <PageTitle eyebrow="Section Seven · Industry · Robotics · Policy" title="Where the rules and runways meet." size="sm" />
+    <div style={{ position: "absolute", top: 260, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 14 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Enterprise &amp; industry moves</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ENTERPRISE_MOVES.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "7px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.25 }}>{c.co}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>{c.move}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Robotics &amp; science</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ROBOTICS_SCIENCE.map((r, i) => (
+            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 13, color: T.ink, lineHeight: 1.25 }}>{r.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{r.note}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Regulatory &amp; policy</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {REGULATORY.map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 100px", gap: 16, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "start" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{r.region}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.3 }}>{r.item}</div>
+                <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{r.summary}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Impact</div>
+                <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, marginTop: 2 }}>{r.impact}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="09" />
+  </Page>
+);
+
+// ─── PAGE 10 — VOICES · PULSE · WATCH ──────────────────────────
+const VoicesWatchPage = () => (
+  <Page>
+    <RunningHeader page="Page 10" />
+    <PageTitle eyebrow="Section Eight · Voices · Pulse · Watch" title="What the field is saying." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>Thought leader pulse</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {THOUGHT_LEADERS.map((q, i) => (
+            <div key={i} style={{ border: "1px solid " + T.rule, padding: "12px 14px 14px", background: T.bg, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 13, lineHeight: 1.4, color: T.ink }}>"{q.quote}"</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginTop: 8 }}>— {q.name} · {q.affiliation}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{q.context}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Community pulse</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {COMMUNITY_PULSE.map((p, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "6px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.08em", textTransform: "uppercase" }}>{p.source}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.5 }}>{p.theme}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>What to watch</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14, borderTop: "1.5px solid " + T.ink, paddingTop: 10, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {WHAT_TO_WATCH.map((w, i) => (
+            <div key={i} style={{ overflow: "hidden" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{w.when}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, lineHeight: 1.25, marginTop: 5 }}>{w.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 8.5, color: T.mid, marginTop: 5, lineHeight: 1.45 }}>{w.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="10" />
+  </Page>
+);
+
+// ─── PAGE 11 — SOURCES + GLOSSARY ───────────────────────────────
+const ClosingPage = () => (
+  <Page>
+    <RunningHeader page="Page 11" />
+    <PageTitle eyebrow="End matter" title={<>Sources &amp;<br />glossary.</>} intro="The reading list, the working vocabulary, and where this issue ends." />
+    <div style={{ position: "absolute", top: 430, left: 56, right: 56, bottom: 130, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Sources</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {SOURCES.map((s, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr", gap: 8, padding: "6px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: T.mono, color: T.mid }}>{String(i+1).padStart(2,"0")}</span>
+              <span>{s}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Glossary</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {GLOSSARY.map((g, i) => (
+            <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 11.5, color: T.ink }}>{g.term}.{" "}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.45 }}>{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div style={{ position: "absolute", bottom: 90, left: 56, right: 56, textAlign: "center", fontFamily: T.serif, fontStyle: "italic", fontSize: 13, color: T.mid }}>
+      ✦ End of {REPORT_META.issue} · {REPORT_META.date} ✦
+    </div>
+    <Footer page="11" />
+  </Page>
+);
+
+// ─── PAGE REGISTRY ───────────────────────────────────────────────
+const PAGES = [
+  { key: "cover",           label: "01 · Cover",                          Comp: CoverPage },
+  { key: "exec-summary",    label: "02 · Executive Summary",              Comp: ExecSummaryPage },
+  { key: "lead-story",      label: "03 · Lead Story",                     Comp: LeadStoryPage },
+  { key: "top-stories",     label: "04 · Top Stories",                    Comp: TopStoriesPage },
+  { key: "frontier-models", label: "05 · Frontier Models",                Comp: FrontierModelsPage },
+  { key: "benchmarks",      label: "06 · Benchmarks & Dev Tools",         Comp: BenchmarksDevToolsPage },
+  { key: "research",        label: "07 · Research",                       Comp: ResearchPage },
+  { key: "funding",         label: "08 · Funding",                        Comp: FundingPage },
+  { key: "enterprise",      label: "09 · Enterprise · Robotics · Policy", Comp: EnterprisePolicyPage },
+  { key: "voices",          label: "10 · Voices · Pulse · Watch",         Comp: VoicesWatchPage },
+  { key: "closing",         label: "11 · Sources · Glossary",             Comp: ClosingPage },
+];
+
+// ─── APP ROOT ────────────────────────────────────────────────────
+const { useState, useEffect } = React;
+
+function App() {
+  const [active, setActive] = useState("cover");
+
+  useEffect(() => {
+    const nav = document.getElementById("nav-bar");
+    if (!nav) return;
+    nav.innerHTML = "";
+    PAGES.forEach(p => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn" + (p.key === active ? " active" : "");
+      btn.textContent = p.label;
+      btn.onclick = () => {
+        setActive(p.key);
+        const el = document.getElementById("page-" + p.key);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(btn);
+    });
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 120;
+      let current = PAGES[0].key;
+      PAGES.forEach(p => {
+        const el = document.getElementById("page-" + p.key);
+        if (el && el.offsetTop <= scrollY) current = p.key;
+      });
+      if (current !== active) setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [active]);
+
+  return (
+    <div id="report-root">
+      {PAGES.map(p => (
+        <div id={"page-" + p.key} key={p.key}>
+          <p.Comp />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("report-root"));
+</script>
+</body>
+</html>

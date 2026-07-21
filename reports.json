@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 30",
+    "date": "2026-07-20",
+    "summary": "Moonshot AI releases Kimi K3 — a 2.8T open-weight model beating Fable 5 and GPT-5.6 Sol in Arena front-end coding at 40% lower cost, with weights releasing July 27 — while Gemini 3.5 Pro misses its third consecutive launch date, OpenAI proposes a 5% equity stake ($42.6B) for the US government, and TSMC raises its total US investment to $265B across 12 Arizona fabs.",
+    "filename": "AI-Report-2026-07-20.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 29",
     "date": "2026-07-13",
     "summary": "GPT-5.6 Sol, Terra, and Luna open to all users on July 9 alongside ChatGPT Work and GPT-Live voice — OpenAI's largest single-day release — while Grok 4.5 launches publicly at $2/$6 per million tokens, creating four competing frontier stacks at mid-tier pricing within 48 hours. Apple files a federal trade secret lawsuit against OpenAI alleging coordinated hardware-secret extraction via recruiting; Sysdig documents JADEPUFFER, the first fully autonomous AI ransomware requiring no human operator; and Google, Microsoft, Salesforce, Snowflake, and ServiceNow back a rival enterprise agent protocol to challenge Anthropic's MCP standard.",
