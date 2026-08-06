@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Asana product strategy analysis — competitive intelligence, PM critique, technology deep-dive, and mock strategy document by Mukul Dewangan.">
+<title>Asana: The Human-Agent Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 20px 0; }
+.comp-table { width: 100%; min-width: 560px; border-collapse: collapse; margin: 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* PAGE-SPECIFIC: SEGMENT TABLE ICON */
+.seg-table td strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · August 2026</div>
+  <h1>Asana:<br>The <em>Human-Agent</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Asana, Inc. — the work management incumbent rebuilding itself around AI Teammates while its core seat-based business shows the first cracks.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>San Francisco, CA</span></div>
+    <div>FOUNDED<span>2008</span></div>
+    <div>PAYING CUSTOMERS<span>131,000+</span></div>
+    <div>STATUS<span>Public (NYSE: ASAN)</span></div>
+    <div>COVERAGE<span>asana.com</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$790.8M</div><div class="stat-label">FY2026 Revenue</div></div>
+  <div class="stat-box"><div class="stat-num blue">9.5%</div><div class="stat-label">Q1 FY27 Rev. Growth YoY</div></div>
+  <div class="stat-box"><div class="stat-num accent">96%</div><div class="stat-label">Trailing 4Q Net Retention</div></div>
+  <div class="stat-box"><div class="stat-num">817</div><div class="stat-label">$100K+ Customers</div></div>
+  <div class="stat-box"><div class="stat-num blue">2x</div><div class="stat-label">AI Studio ARR, QoQ</div></div>
+  <div class="stat-box"><div class="stat-num accent">$75M</div><div class="stat-label">StackAI Acquisition</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Asana, Today?</h2>
+
+  <p>Asana was founded in December 2008 by Facebook alumni Dustin Moskovitz and Justin Rosenstein, who had built internal collaboration tooling at Facebook and Google, respectively, and set out to sell that "secret sauce" to every company. The product launched commercially in 2012 and the company went public via direct listing in September 2020 at a $5.5B valuation. For most of its life, Asana has been a founder-led, product-led, SMB-and-mid-market-heavy work management company that grew primarily through free-to-paid self-serve conversion and organic search.</p>
+
+  <p>That company no longer fully exists. Over an 18-month stretch from March 2025 to May 2026, Asana replaced its founder-CEO with an external enterprise-software operator, reframed its product identity around AI agents rather than task lists, and acquired an AI workflow-automation startup to fill a capability gap it could not build fast enough internally. This report treats FY2026–FY2027 as a distinct chapter: not the Asana of the 2020 direct listing, but a company mid-transition, betting its next decade on being the substrate — the "Work Graph" — that both humans and AI agents operate on.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Asana's technical asset (the Work Graph) is genuinely well-positioned for the agentic era — it is one of the few work management data models built as a graph rather than a flat list of tasks in containers. But its business model (per-seat licensing) is structurally exposed to the same AI agents it is now selling, and its historic growth engine (SMB self-serve via organic search) is exposed to AI-mediated discovery bypassing search entirely. The next 18 months will determine whether Asana out-runs its own disruption or gets caught by it.
+  </div>
+
+  <h3>Leadership & Corporate Structure</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Dan Rogers — Chief Executive Officer</h4><p>Became CEO July 21, 2025. Previously CEO of LaunchDarkly (2023–2025) and President at Rubrik; earlier ran marketing at ServiceNow and Symantec, with stints at AWS, Microsoft, and Salesforce. Harvard MBA. Installed specifically for enterprise go-to-market experience and AI-era repositioning.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Dustin Moskovitz — Co-Founder & Board Chair</h4><p>Announced retirement as CEO in March 2025 (stock fell 25% on the news); transitioned to non-employee director and Board Chair effective July 2025. Remains Asana's largest individual shareholder and its public voice on AI safety and the future of work.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Justin Rosenstein — Co-Founder</h4><p>Built early collaboration tools at Google and Facebook before co-founding Asana. Stepped back from day-to-day product leadership years ago but remains closely associated with the company's mission-driven, "work about work" framing.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Tony Rosinol & Bernard Aceituno — AI Leadership (via StackAI)</h4><p>Co-founders of StackAI (Y Combinator W23), acquired by Asana in May 2026 for $75M. Now leading cross-system AI agent execution — the technical piece Asana lacked to move from AI suggestions to AI actions.</p></div>
+  </div>
+  <p class="footnote">Asana reports roughly 1,700–2,300 employees depending on source and reporting date; the company does not break out AI/engineering headcount separately in public filings.</p>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2008</div><div class="tl-title">Founded by Dustin Moskovitz & Justin Rosenstein</div><div class="tl-desc">Ex-Facebook and ex-Google engineers set out to productize internal collaboration tooling for every company.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2012</div><div class="tl-title">Commercial launch</div><div class="tl-desc">Self-serve, freemium go-to-market becomes the primary growth engine for the next decade.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2020</div><div class="tl-title">Direct listing on NYSE</div><div class="tl-desc">Lists at a $5.5B valuation without a traditional IPO — an unusual, founder-preference-driven structure.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2023–2024</div><div class="tl-title">Asana Intelligence and Work Graph enterprise push</div><div class="tl-desc">First generation of AI features (smart fields, status summaries) layered onto the existing Work Graph data model; parallel investment in enterprise admin, security, and governance controls.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">March 2025</div><div class="tl-title">Moskovitz announces retirement as CEO</div><div class="tl-desc">Stock drops ~25% on the news — the market's clearest signal yet that it saw founder-led growth as running out of room.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">July 2025</div><div class="tl-title">Dan Rogers becomes CEO</div><div class="tl-desc">First outside CEO in company history. Enterprise GTM and AI-era product repositioning become the explicit mandate.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Winter–Spring 2026</div><div class="tl-title">AI Teammates and AI Studio ship broadly</div><div class="tl-desc">Prebuilt, role-specific AI agents ("Campaign Brief Writer," "Bug Investigator," "Sprint Coach," and 18 others) and a no-code workflow builder for inserting AI steps into existing processes.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">May 2026</div><div class="tl-title">Acquires StackAI for $75M</div><div class="tl-desc">No-code AI agent-builder (YC W23) adds cross-system execution — agents that can act in Salesforce, Slack, and other tools, not just inside Asana. Framed by the company as building "the operating system for human-agent teams."</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape & Competitive Positioning</h2>
+
+  <h3>Market Context — and a Caution About the Numbers</h3>
+  <p>Third-party sizing for "work management software" is genuinely inconsistent: figures from different research firms for adjacent categories (work management, workspace management, workforce management) range from roughly $3.5B to $17.5B depending on what is bundled in and which year is used as the base. These categories are frequently conflated in vendor marketing and SEO-driven research content, and none of the major analyst firms appear to publish a clean, singular "work management software TAM" figure that is safe to cite without caveats. Treat any single TAM number in this space — including ones Asana itself might cite in investor materials — as directionally useful, not precise.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>Category Crowding</h4><p>Asana competes simultaneously against dedicated work management tools (monday.com, ClickUp, Smartsheet, Wrike), dev-centric platforms (Atlassian/Jira), knowledge tools expanding into PM (Notion), and bundled incumbents (Microsoft Planner/Project inside Microsoft 365).</p></div>
+    <div class="card"><h4>Seat-Based Pricing Under Pressure</h4><p>Industry-wide, seat-based pricing adoption fell from roughly 21% to 15% of SaaS vendors in twelve months, while hybrid (seat + usage/agent-based) pricing rose from about 27% to 41% over the same period, as AI agents begin substituting for human seats.</p></div>
+    <div class="card"><h4>AI-Mediated Discovery</h4><p>A growing share of software discovery now happens via AI chat answers rather than search-engine result pages — the same zero-click dynamic reshaping SEO-dependent businesses across categories threatens Asana's historically strong organic/self-serve SMB funnel.</p></div>
+  </div>
+
+  <h3>Competitive Map</h3>
+  <div class="table-scroll">
+  <table class="comp-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Moat</th><th>Asana Overlap</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>monday.com</strong></td><td>Visual, flexible "Work OS"</td><td>Best-in-class onboarding UX, fastest time-to-value for non-technical teams</td><td>Mid-market cross-functional work management</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>ClickUp</strong></td><td>All-in-one, feature-maximalist suite</td><td>Aggressive pricing (~$7/user), 500+ AI agent "skills," power-user feature density</td><td>SMB and price-sensitive mid-market</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Atlassian (Jira + Rovo)</strong></td><td>Dev-centric PM + enterprise AI agent layer</td><td>Teamwork Graph, deep developer-tool integration, enterprise incumbency</td><td>Enterprise cross-functional and technical teams</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Microsoft Planner / Project</strong></td><td>Bundled into Microsoft 365</td><td>Effectively free at the margin for existing M365 seats; Teams/Outlook integration</td><td>SMB and mid-market cost-sensitive buyers</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Notion</strong></td><td>Flexible workspace / knowledge base expanding into PM</td><td>Beloved UX, strong in documentation-heavy teams and startups</td><td>Early-stage teams and knowledge-work overlap</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Smartsheet / Wrike</strong></td><td>Enterprise-grade reporting and resource management</td><td>Deeper analytics, portfolio, and resource-management depth than Asana</td><td>Enterprise ops and PMO buyers</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Zapier / OpenAI / Anthropic agent tooling</strong></td><td>Horizontal AI automation and agent-building platforms</td><td>Not tied to any single system of record; can automate around Asana entirely</td><td>The exact "cross-system agent execution" space StackAI was acquired to compete in</td><td><span class="tag gold">MEDIUM</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Industry Trends Shaping Asana's Fate</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Agentic AI Is Cannibalizing Seat-Based Revenue</h4>
+      <p>Across the SaaS sector, companies whose AI agents actually reduce headcount-per-workflow are starting to see net revenue retention fall below 100% as seat expansion turns negative even while logo retention holds. Atlassian has already shown this pattern. Asana is explicitly selling AI Teammates that do the work of a team member — the same pricing model it depends on for growth is the first thing its own product roadmap threatens.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <h4>SMB Discovery Is Moving Off Search</h4>
+      <p>Asana's SMB and self-serve motion has historically leaned on organic search and word-of-mouth. As buyers increasingly ask AI assistants "what's the best project management tool for my team" instead of Googling it, top-of-funnel becomes a function of being recommended by someone else's AI — a channel Asana does not yet control or measure.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏢</div>
+      <h4>Enterprise Buyers Want Governed Agents, Not Autonomous Ones</h4>
+      <p>Enterprise security and compliance teams are the gating factor on agent adoption, not capability. Asana's public AI framing — "context, checkpoints, and controls" — and its Asana Gov product for regulated buyers are a direct response to this, and are arguably better positioned for enterprise trust than more autonomy-forward competitors.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧩</div>
+      <h4>Consolidation of the "System of Record" Layer</h4>
+      <p>As AI agents need a shared, structured substrate to reason over, the value is shifting from "which app has the prettiest board view" to "whose data model is rich enough to give an agent real context." This favors companies with genuinely graph-structured data — Asana's Work Graph, Atlassian's Teamwork Graph — over flatter competitors.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <p>Companies winning the next phase of work management need to execute on four fronts simultaneously:</p>
+  <div class="card-grid">
+    <div class="card"><h4>Context-Rich Data Models</h4><p>Flat task lists don't give AI agents enough structure to act reliably. Graph-based models that capture relationships between work, goals, and people are the prerequisite for trustworthy agent behavior.</p></div>
+    <div class="card"><h4>Cross-System Execution</h4><p>Agents that can only read and suggest inside one app are demos, not products. Real value requires writing back into Salesforce, Slack, email, and other systems of action.</p></div>
+    <div class="card"><h4>Pricing Model Innovation</h4><p>Vendors that cling to pure per-seat pricing while marketing labor-replacing AI agents create an internal contradiction buyers will eventually notice and negotiate against.</p></div>
+    <div class="card"><h4>Distribution Beyond Search</h4><p>SMB growth engines built on SEO and self-serve conversion need a second channel — agent marketplaces, AI-assistant integrations, or partner ecosystems — as AI reshapes discovery.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What Asana Actually Sells — and How It's Built</h2>
+
+  <p>Asana's product is best understood in three layers: the <strong>work management core</strong> (the tiered SaaS product most customers buy), the <strong>Work Graph</strong> (the underlying data model that differentiates it technically), and the <strong>AI layer</strong> (AI Studio, AI Teammates, and the newly acquired StackAI execution layer) that the company is now betting its next chapter on.</p>
+
+  <h3>Layer 1 — The Work Management Core</h3>
+  <div class="table-scroll">
+  <table class="comp-table">
+    <thead><tr><th>Tier</th><th>Price</th><th>Who It's For</th><th>Key Capabilities</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Personal</strong></td><td>Free (up to 10 users)</td><td>Individuals, very small teams</td><td>Basic task and project tracking</td></tr>
+      <tr><td><strong>Starter</strong></td><td>$10.99/user/mo</td><td>Small teams needing structure</td><td>Timeline, custom fields, automation rules</td></tr>
+      <tr><td><strong>Advanced</strong></td><td>$24.99/user/mo</td><td>Mid-market and cross-functional ops teams</td><td>Portfolios, Goals, Workload management</td></tr>
+      <tr><td><strong>Enterprise / Enterprise+</strong></td><td>Custom (~$35+/user)</td><td>Large orgs, regulated industries</td><td>SSO, SCIM, advanced admin controls, Asana Gov</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Layer 2 — The Work Graph (Technology Deep-Dive)</h3>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Model</div>
+    <div class="tech-layer-content">
+      <strong>Graph-structured, not container-structured</strong>
+      <p>Unlike flat list/board tools where a task lives in exactly one project, Asana's Work Graph treats tasks, projects, goals, people, portfolios, conversations, and files as nodes that can be "multi-homed" — a single task can belong to multiple projects and roll up to multiple goals simultaneously. This is architecturally closer to a graph database or object-oriented model than a traditional relational task list, and it is the single most defensible technical asset in Asana's stack.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Access Model</div>
+    <div class="tech-layer-content">
+      <strong>Declarative, object-oriented permissioning</strong>
+      <p>Engineers reportedly define object properties and access-control rules in configuration files rather than imperative code, which lets Asana extend the graph (new object types, new relationship types) without re-architecting the permission system each time — relevant as AI agents become new "actors" that also need scoped, auditable access to the graph.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">AI Studio</div>
+    <div class="tech-layer-content">
+      <strong>No-code AI workflow builder</strong>
+      <p>Lets admins insert AI "nodes" into existing workflows — intake triage, compliance checks, prioritization — without writing code. This is the governance-forward, workflow-embedded counterpart to a general-purpose chatbot: AI that acts inside a process Asana already understands the structure of, rather than a standalone assistant bolted on top.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">AI Teammates</div>
+    <div class="tech-layer-content">
+      <strong>Prebuilt, role-specific agents you @mention</strong>
+      <p>A gallery of 20+ named agents — Campaign Brief Writer, Launch Planner, Copywriter, Competitive Market Researcher, Pricing Strategist, Status Reporter, Workflow Optimizer, Compliance Specialist, Bug Investigator, Sprint Coach, and others — scoped to specific functions (Marketing, Ops, IT) and buildable no-code for custom use cases. The framing is deliberately anthropomorphic: agents are "teammates," not features.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">StackAI (Acquired May 2026)</div>
+    <div class="tech-layer-content">
+      <strong>Cross-system execution layer</strong>
+      <p>StackAI's no-code agent-builder connects to external systems (Salesforce, Slack, Gsuite) and lets agents actually write back into them, not just read from them. This closes Asana's biggest previous gap: AI Teammates that could suggest and summarize but couldn't reliably act outside Asana's own walls. It also puts Asana in more direct competition with Zapier and the agent-tooling layers being built by OpenAI and Anthropic.</p>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>AI Strategy & Readiness Assessment</strong>
+    Asana's AI strategy is more coherent than most incumbents': it is grounded in a real technical differentiator (the Work Graph as agent context), backed by actual revenue traction (AI Studio ARR more than doubled quarter-over-quarter), and reinforced by an acquisition that fills a specific, named capability gap rather than a vague "AI-washing" purchase. The governance-first "context, checkpoints, controls" framing is also a credible enterprise-trust play. The open question is not whether the AI product is real — it is — but whether Asana can monetize it fast enough to offset the seat-pricing pressure that its own AI Teammates create, and whether "15% of net-new ARR from AI" (management's own target) is enough to matter at Asana's current growth rate.
+  </div>
+
+  <h3>Recent Performance</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📊</div><h4>$790.8M FY2026 Revenue</h4><p>Up roughly 9% year-over-year. Q1 FY2027 revenue of $205.1M grew 9.5% YoY, above the top end of guidance, with 88% gross margin.</p></div>
+    <div class="card"><div class="card-icon">📈</div><h4>Non-GAAP Operating Margin: 7% → 11.5%</h4><p>Improved from -6% in FY2025 to 7% for FY2026, then to 11.5% in Q1 FY2027 (+720bps YoY) — the clearest sign of Rogers-era operational discipline so far.</p></div>
+    <div class="card"><div class="card-icon">⚠️</div><h4>$100K+ Customer Cohort Flat Sequentially</h4><p>817 customers spending $100K+ annually, up 12% YoY but sequentially flat quarter-over-quarter — a yellow flag for the exact enterprise-expansion motion Rogers was hired to accelerate.</p></div>
+    <div class="card"><div class="card-icon">🔁</div><h4>96% Trailing Net Retention</h4><p>Below 100%, meaning the existing customer base is shrinking in dollar terms before new-logo growth is added back — improving (in-quarter NRR hit 97%, up for four straight quarters) but still a structural drag.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 4: CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments</div>
+  <h2>Who Asana Serves, and What It Solves for Them</h2>
+
+  <p>Asana's 131,000+ paying customers span three broad tiers, each with a distinct problem, solution shape, and monetization profile. The tension in Asana's current strategy is that its historic strength (SMB self-serve) is its most AI-search-exposed segment, while its growth mandate (enterprise) is the segment where its newest AI capabilities are least proven at scale.</p>
+
+  <div class="table-scroll">
+  <table class="comp-table seg-table">
+    <thead><tr><th>Segment</th><th>Plan</th><th>Problem Solved</th><th>Solution</th><th>Performance Signal</th></tr></thead>
+    <tbody>
+      <tr><td><strong>SMB / Individual</strong></td><td>Personal, Starter</td><td>Scattered tasks across email, chat, and spreadsheets; no shared source of truth for small teams</td><td>Free-to-low-cost task and project tracking with fast self-serve onboarding</td><td>Historic growth engine; now exposed to AI-mediated discovery bypassing organic search</td></tr>
+      <tr><td><strong>Mid-Market Ops & Marketing</strong></td><td>Advanced</td><td>Cross-functional visibility — who owns what, how it rolls up to goals, where bottlenecks are</td><td>Portfolios, Goals, Workload, automation rules; increasingly AI Teammates for campaign and ops workflows</td><td>Core customer revenue (customers spending $5K+/yr) is 76% of total revenue, up 10% YoY — the durable middle of the business</td></tr>
+      <tr><td><strong>Enterprise & Regulated</strong></td><td>Enterprise / Enterprise+, Asana Gov</td><td>Governance, security, and compliance requirements around who can see and act on sensitive work — now including AI agents as new "actors" needing scoped access</td><td>SSO, SCIM, admin controls, Asana Gov, AI Studio's governed workflow-embedded AI model</td><td>817 customers at $100K+ ARR, up 12% YoY but flat sequentially — the segment Rogers was hired to scale, still finding its footing</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout gold">
+    <strong>The Segment Asana Doesn't Talk About: Reviewer Sentiment</strong>
+    Across Capterra and G2 reviews, the most consistent complaints are a steep onboarding learning curve, feature and notification overload, automations that are "tough to use or stuck behind paywalls," and slow customer support response times. None of these are fatal, but they suggest the product's complexity — the same graph flexibility that makes it powerful — is also a real adoption tax, particularly for the SMB segment Asana most needs to defend.
+  </div>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>Asana has done something genuinely rare for an incumbent SaaS company: it identified its own disruption thesis (AI agents reduce demand for per-seat software) before being forced into it by a competitor, and it reorganized leadership and M&A around addressing it. The critique below is about execution risk and internal contradiction, not strategic direction — the direction is broadly right.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">Asana Is Selling the Product That Undermines Its Own Pricing Model</div>
+    <div class="critique-body">AI Teammates are explicitly marketed as doing the work a human team member would do. If they succeed, the natural outcome is fewer human seats per workflow — exactly the dynamic already visible in Atlassian's NRR trend. Asana still prices AI Teammates and AI Studio largely as add-ons layered on top of per-seat plans rather than as a genuine alternative pricing axis. Every quarter this isn't resolved, Asana is asking its own sales motion to sell a product that shrinks the thing it gets paid for.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">No Visible Answer to AI-Mediated SMB Discovery</div>
+    <div class="critique-body">Asana's SMB growth has leaned on organic search and self-serve conversion for over a decade. As more buyers ask an AI assistant to recommend a project management tool instead of searching for one, Asana has no publicly stated strategy for being the answer an external AI gives — no GEO (generative engine optimization) program, no agent-marketplace presence, no MCP-style integration that would put Asana inside the answer surface itself. This is the same structural exposure that defines SEO-dependent businesses across categories, and Asana has not yet named it as a risk in investor materials.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Execution Gap</div>
+    <div class="critique-title">Enterprise Expansion Is Stalling Right When It's Most Needed</div>
+    <div class="critique-body">Dan Rogers was hired specifically for enterprise go-to-market credibility. One year in, the $100K+ customer cohort grew 12% year-over-year but was flat sequentially quarter-over-quarter — a warning sign that the enterprise motion hasn't yet found traction, not proof of failure, but exactly the metric that should be under the most scrutiny over the next two to three quarters. If this doesn't inflect, the "enterprise CEO" hiring thesis itself comes into question.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Positioning Risk</div>
+    <div class="critique-title">"AI Teammates" Is a Crowded Claim, Not a Differentiated One</div>
+    <div class="critique-body">Atlassian Rovo, ClickUp Brain, monday Sidekick, and Notion AI all claim the same outcomes: agents that write status updates, summarize threads, and predict risks. Anthropomorphizing agents as "teammates" is a marketing choice every competitor in this space has independently made. Asana's actual differentiation has to be proven in outcome quality — grounded in the Work Graph's genuine structural advantage — not asserted through naming conventions that every rival uses identically.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">The Work Graph Is a Real, Underexploited Technical Moat</div>
+    <div class="critique-body">Most competitors (monday.com, ClickUp, Notion) are built on flatter, container-based data models. A graph structure where work, goals, and people are richly interconnected is precisely what makes an AI agent's context reliable rather than hallucinated. Asana talks about this in developer-facing content but does not yet market it aggressively as the reason its AI Teammates should be trusted more than a competitor's — this is a stronger, more defensible claim than "teammates," and it's underused.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">StackAI Closes the Right Gap, at the Right Time</div>
+    <div class="critique-body">Buying cross-system execution capability rather than building it from scratch was the correct call — it's a narrow, well-scoped acquisition (not a scattershot AI-washing purchase) that directly answers the most common critique of AI Teammates before StackAI: they could suggest but not act. The integration risk now is whether StackAI's founders and technology get fully absorbed into the Work Graph's permission and governance model, or remain a bolted-on layer that undermines the "checkpoints and controls" trust story.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Leadership Risk</div>
+    <div class="critique-title">A Brand-New CEO With an Ambiguous Track Record on Turnarounds</div>
+    <div class="critique-body">Rogers' enterprise GTM pedigree fits Asana's stated needs, but independent management analysts have flagged that his prior company brought back its own founder as CEO shortly after his departure — a pattern worth watching, not dismissing. Combined with a founder who moved to Chairman rather than exiting entirely, Asana now has two very engaged, very different voices (an operational enterprise-GTM CEO and a mission-driven founder-chair) that need to stay aligned through a genuinely difficult pricing and product transition.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Work Graph is a genuine structural differentiator vs. flat competitors</li>
+        <li>131,000+ paying customers; 76% of revenue from core ($5K+) customers</li>
+        <li>Operating margin improving sharply — 7% FY2026, 11.5% Q1 FY2027</li>
+        <li>AI Studio ARR more than doubled quarter-over-quarter</li>
+        <li>StackAI acquisition closes a real, specific capability gap</li>
+        <li>Enterprise-credible new CEO with relevant GTM background</li>
+        <li>Governance-first AI framing resonates with security-conscious buyers</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>96% trailing net retention — below 100%, still net-shrinking existing base</li>
+        <li>$100K+ customer cohort growth stalled sequentially</li>
+        <li>Per-seat pricing model in direct tension with AI Teammates' value prop</li>
+        <li>Steep learning curve and feature/notification overload per user reviews</li>
+        <li>Automations reportedly hard to use or paywalled behind higher tiers</li>
+        <li>Slow customer support response times cited repeatedly in reviews</li>
+        <li>Leadership transition still less than 18 months old — unproven under pressure</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Market Work Graph explicitly as "why our AI can be trusted"</li>
+        <li>Pioneer a genuine usage/outcome-based pricing tier ahead of forced adoption</li>
+        <li>Build GEO / agent-marketplace presence to defend SMB discovery</li>
+        <li>Fully integrate StackAI's cross-system execution into core governance model</li>
+        <li>Asana Gov as a wedge into regulated, high-trust enterprise buyers</li>
+        <li>Convert AI Studio's early ARR momentum into a durable second growth engine</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>AI agents compressing seat counts industry-wide — Asana especially exposed</li>
+        <li>AI-mediated discovery eroding the organic-search SMB funnel</li>
+        <li>Atlassian, monday.com, ClickUp all shipping comparable "AI teammate" claims</li>
+        <li>Microsoft Planner effectively free at the margin for M365 customers</li>
+        <li>Horizontal agent-building platforms (Zapier, OpenAI, Anthropic) could route around Asana entirely</li>
+        <li>Reported customer churn to competitors in some vendor data sets (directional, not confirmed at company level)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: MOCK PRODUCT STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2026–2028: From Task Manager to Trusted Agent Substrate</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM/CPO at Asana. It is directionally grounded in real company data but represents analytical recommendations, not Asana's actual internal roadmap.
+  </div>
+
+  <!-- VISION -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision & North Star</h3></div>
+    <p><strong>Vision:</strong> Asana becomes the trusted context layer every work-related AI agent — Asana's own, or a customer's, or a third party's — reasons over before taking action, because its Work Graph is the most reliable map of how work actually happens inside an organization.</p>
+    <p><strong>North Star Metric:</strong> <em>Agent-Verified Outcomes</em> — the number of AI Teammate or AI Studio actions per month that are completed, cross-system, without human correction. This reframes success away from seats and toward outcomes, which is the only metric that survives a shift to usage-based pricing.</p>
+    <p><strong>The Strategic Pivot:</strong> From "software you assign seats to" to "infrastructure you grant agents access to." This requires Asana to make peace with, and get ahead of, seat compression rather than treat it as a threat to be minimized in earnings calls.</p>
+  </div>
+
+  <!-- BETS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2026–2028)</h3></div>
+
+    <h4>Bet 1: Launch a Genuine Usage-Based Pricing Tier — Before It's Forced</h4>
+    <p>Rather than defend per-seat pricing until AI-driven seat contraction erodes it anyway, launch an opt-in "Agent Actions" pricing tier priced on verified AI Teammate task completions, sold alongside (not instead of) per-seat plans. This lets Asana capture revenue from customers who reduce headcount using AI Teammates, instead of losing that revenue outright.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      Every quarter Asana delays, a competitor or the customer's own procurement team is more likely to force a worse version of this change — a straight seat-count renegotiation with zero new revenue capture. Pilot on the top 20 AI Studio customers in Q4 2026.
+    </div>
+
+    <h4>Bet 2: Make the Work Graph Externally Queryable (Open the Substrate)</h4>
+    <p>Expose a governed, MCP-compatible API surface so that external AI agents — a customer's internal copilot, or a third-party agent from OpenAI or Anthropic's ecosystems — can query the Work Graph for context (with the same checkpoints-and-controls governance Asana already applies internally). This turns Asana from "an app that competes with agent platforms" into "the context layer agent platforms depend on," which is a far more durable position given how fast the agent-tooling layer itself is commoditizing.</p>
+
+    <h4>Bet 3: Defend SMB Discovery With an Explicit GEO and Agent-Distribution Program</h4>
+    <p>Stand up a dedicated function — mirroring the SEO discipline Asana already has — focused on being the recommended answer when a buyer asks ChatGPT, Claude, or Copilot "what project management tool should my team use." This includes structured content optimized for AI retrieval, and pursuing listing/integration in agent and assistant marketplaces as a first-class distribution channel, not an afterthought.</p>
+    <div class="callout green">
+      <strong>Why This Matters</strong>
+      SMB and self-serve customers are 24% of revenue but likely the majority of new-logo volume that feeds the mid-market and enterprise pipeline over time. Losing this funnel to AI-mediated discovery would compound quietly for years before showing up in quarterly numbers.
+    </div>
+  </div>
+
+  <!-- INITIATIVES -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent Actions Pricing Pilot</div><div class="initiative-desc">Usage-based tier for verified AI Teammate/AI Studio task completions, sold alongside seat plans.</div></div>
+      <div><span class="tag red">P0 · Q4 2026</span></div>
+      <div>20 pilot accounts; 15%+ incremental revenue vs. seat-only baseline</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">StackAI Governance Integration</div><div class="initiative-desc">Fully absorb StackAI's cross-system execution into Work Graph's permission model.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>100% of StackAI-powered actions logged and auditable in Work Graph</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">GEO & Agent Distribution Program</div><div class="initiative-desc">Dedicated function for AI-mediated discovery; marketplace listings for major AI assistants.</div></div>
+      <div><span class="tag gold">P1 · Q1 2027</span></div>
+      <div>Measurable share of new SMB signups attributed to AI-assistant referral</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Work Graph External API (MCP-Compatible)</div><div class="initiative-desc">Governed, queryable context layer for third-party agents.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>25+ verified third-party integrations consuming the API</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Enterprise Land-Expand Reset</div><div class="initiative-desc">Diagnose and fix the sequential stall in $100K+ customer growth.</div></div>
+      <div><span class="tag blue">P2 · Q2 2027</span></div>
+      <div>$100K+ cohort resumes sequential growth for two consecutive quarters</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Onboarding Simplification</div><div class="initiative-desc">Address the steep learning curve and feature-overload complaints from reviews.</div></div>
+      <div><span class="tag grey">P3 · 2027</span></div>
+      <div>Time-to-first-value cut by 30%; support ticket volume for onboarding down 25%</div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (2026–2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Prove Usage-Based Pricing Can Coexist With Seat-Based Revenue</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Agent Actions pricing live with 20+ paying accounts by Q1 2027</li>
+        <li>KR2: Blended revenue per account up 10%+ for pilot cohort vs. seat-only comparison group</li>
+        <li>KR3: Net retention on pilot accounts exceeds company-wide 96% baseline</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Establish the Work Graph as External Agent Infrastructure</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: MCP-compatible API in general availability by Q2 2027</li>
+        <li>KR2: 25+ third-party integrations consuming the API</li>
+        <li>KR3: Zero governance/security incidents from external agent access</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Defend and Measure AI-Mediated SMB Discovery</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Attribution system live for AI-assistant-referred signups by Q1 2027</li>
+        <li>KR2: Listed in top-tier marketplaces/plugins for at least 3 major AI assistants</li>
+        <li>KR3: SMB new-logo growth rate stabilizes or improves vs. FY2026 baseline</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Re-Accelerate Enterprise Expansion</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: $100K+ customer cohort grows sequentially for 2 consecutive quarters</li>
+        <li>KR2: Non-GAAP operating margin reaches 9.75%+ (FY2027 guidance) without sacrificing enterprise growth</li>
+        <li>KR3: Asana Gov reaches 10+ new regulated-industry logos</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks & Mitigations</h3></div>
+    <div class="table-scroll">
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>AI Teammates cannibalize seat revenue faster than usage-pricing can offset</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Move Agent Actions pricing from pilot to general availability quickly; track blended revenue per account, not seats, as the core health metric.</td></tr>
+        <tr><td>AI-mediated discovery erodes SMB funnel before GEO program matures</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Stand up attribution and marketplace presence in parallel, not sequentially; treat this with the same urgency as historic SEO investment.</td></tr>
+        <tr><td>Enterprise expansion stall persists past Q2 2027</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Root-cause the sequential flatness in $100K+ cohort now — pricing friction, competitive losses, or sales execution — before adding new enterprise initiatives on top of an unresolved base problem.</td></tr>
+        <tr><td>StackAI integration remains a bolted-on layer, undermining governance story</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Require all StackAI-powered actions to flow through Work Graph's existing permission and audit model before broad rollout, not after.</td></tr>
+        <tr><td>CEO/Chair alignment breaks down under pricing-transition pressure</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag grey">LOW</span></td><td>Formalize decision rights between CEO and founder-chair explicitly for pricing and AI-product calls, given the unusual dual-leadership structure.</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- WHAT NOT TO DO -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts (What to Stop or Avoid)</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't market "AI Teammates" as the differentiator</h4><p>Every competitor uses near-identical language. Lead with the Work Graph's structural advantage instead — it's a claim rivals with flatter data models genuinely cannot match.</p></div>
+      <div class="card"><h4>Don't defer the pricing-model question another year</h4><p>Waiting for AI-driven seat compression to show up clearly in NRR before acting means responding from a position of weakness instead of designing the transition on Asana's own terms.</p></div>
+      <div class="card"><h4>Don't chase enterprise logos at the expense of SMB defense</h4><p>Rogers' enterprise mandate is necessary but insufficient alone — if the SMB funnel that feeds the whole business erodes quietly, enterprise wins won't be enough to offset it.</p></div>
+      <div class="card"><h4>Don't ship AI features faster than governance can absorb them</h4><p>Asana's best current differentiation with enterprise buyers is trust and control, not raw agent capability. Outrunning that trust story with autonomy features would trade a real advantage for a commodity one.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>Asana enters its second act with a genuinely rare asset for an incumbent: a technical foundation, the Work Graph, that is well-suited to the exact shift — AI agents needing structured context to act reliably — reshaping its entire category. Combined with a real acquisition (StackAI) that closes a specific gap rather than papering over one, and margin discipline that has moved faster than most analysts expected, this is not a company drifting through disruption. It is a company that saw the disruption coming and is actively restructuring itself around it.</p>
+  <p>The risk is not strategic misjudgment — it's execution speed against two clocks running simultaneously. One clock is the seat-based pricing model, which Asana's own AI Teammates are quietly working against every quarter a usage-based alternative isn't live. The other is SMB discovery, which is shifting away from the organic search channel Asana has depended on for over a decade, with no publicly visible replacement strategy yet. Both clocks are patient for now — NRR at 96% and $100K+ cohort growth at 12% YoY are not crises — but neither improves by waiting.</p>
+  <p>Dan Rogers was hired to run toward exactly this problem. The next two to three quarters — whether the $100K+ cohort resumes sequential growth, whether AI Studio's ARR momentum turns into a genuine second pricing axis, and whether StackAI gets meaningfully integrated rather than bolted on — will show whether Asana becomes the trusted substrate the agentic era needs, or a well-architected task manager that modernized its marketing faster than its business model.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Asana's technology is ahead of its business model. The strategy to close that gap is clear: price for outcomes, not seats; open the Work Graph as infrastructure other agents can trust; and defend SMB discovery with the same discipline that built the organic-search engine in the first place. The window to do this on Asana's own terms, rather than a competitor's or the market's, is roughly 18–24 months.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Sources: Asana investor relations (Q2 FY2026, Q1 FY2027 earnings releases and call transcripts), TechCrunch, Business Wire, CNBC, Stratechery, Paragon Intel / ManagementTrack, SoftwareReviews, TechTarget, Capterra, stockanalysis.com, industry pricing surveys on seat-based vs. usage-based SaaS pricing. Analysis as of August 2026. Some third-party vendor-data figures (e.g., customer churn/switching rates) are directional and not independently verified against Asana's own disclosures.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
