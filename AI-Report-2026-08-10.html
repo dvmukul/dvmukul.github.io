@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Brief · Vol. 02 · Issue 33 · August 10, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    width: 100%; background: #1a1a1a;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; padding: 0 16px;
+    border-bottom: 1px solid #333;
+    scrollbar-width: none;
+  }
+  #nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none;
+    color: #888; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #FAFAF7; border-bottom-color: #FAFAF7; }
+  #report-root {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 32px 16px 64px;
+    gap: 0;
+  }
+  .report-page {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 860px) {
+    .report-page { transform: scale(0.95); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-bar"></div>
+<div id="report-root"></div>
+
+<!-- ─── CONTENT DATA ──────────────────────────────────────────── -->
+<script type="text/babel">
+// ─────────────────────────────────────────────────────────────────
+// The AI Brief — Content for the current issue.
+// Issue 33 — Week of Aug 4–10, 2026. Lead story: Google DeepMind
+// CEO Demis Hassabis steps down to become Chairman; Jeff Dean,
+// Sanjay Ghemawat, Oriol Vinyals, and Quoc Le leave to co-found
+// Discovery Loop, an AI-for-science startup Google backs as
+// investor. Palantir posts "otherworldly" Q2 earnings (+93% YoY).
+// Meta releases Muse Spark 1.2, Muse Code, and open-weights Muse
+// Glimmer 30B. EU AI Act Article 50 enforcement begins Aug 2.
+// Anthropic names Tino Cuéllar as first Chief Global Affairs Officer.
+// ─────────────────────────────────────────────────────────────────
+
+const REPORT_META = {
+  title:    "The AI Brief",
+  tagline:  "A weekly intelligence briefing for executives",
+  issue:    "Vol. 02 · Issue 33",
+  date:     "Week of Aug 4 – 10, 2026",
+  edition:  "Executive Edition",
+  audience: "Prepared for leadership",
+};
+
+const HERO_STATS = [
+  { value: "4 out",  label: "GOOGLE AI EXODUS",     sub: "Dean, Vinyals, Le, Ghemawat depart" },
+  { value: "+93%",   label: "PALANTIR Q2 GROWTH",   sub: "\"Otherworldly\" revenue quarter"    },
+  { value: "30B",    label: "MUSE GLIMMER OPEN",    sub: "Meta params, runs on 24GB GPU"       },
+  { value: "$125M",  label: "ZENITY SERIES C",      sub: "Agent security; Norwest leads"       },
+  { value: "Aug 2",  label: "EU AI ACT LIVE",       sub: "Article 50 transparency enforced"    },
+];
+
+const TODAY_HEADLINES = [
+  "Demis Hassabis steps down as Google DeepMind CEO; Jeff Dean, Ghemawat, Vinyals, and Le exit to co-found Discovery Loop, an AI-for-science startup Google backs as investor.",
+  "Palantir posts $1.94B Q2 revenue, up 93% year-over-year; US commercial AI revenue surges 149% and stock gains 30% to an all-time high.",
+  "Meta releases Muse Spark 1.2 and Muse Code coding agent on August 5, then open-weights Muse Glimmer, a 30B agentic model, on August 10.",
+  "EU AI Act Article 50 transparency rules took effect August 2, requiring chatbot disclosure, AI content labeling, and deepfake watermarking.",
+  "Anthropic names former California Supreme Court Justice Tino Cuéllar as its first Chief Global Affairs Officer, effective August 4.",
+  "xAI launches Grok Voice Think Fast 2.0 on August 5 with 1.4x accuracy improvement over its predecessor at $0.08 per minute.",
+  "Valar Atomics and Base Power each close $1B rounds this week to power AI data centers with nuclear and long-duration battery storage.",
+];
+
+const EXECUTIVE_THEMES = [
+  {
+    tag:  "GOOGLE AI LEADERSHIP COLLAPSE",
+    body: "Five of Google's most consequential AI figures — Hassabis, Dean, Ghemawat, Vinyals, and Le — departed in a single announcement. Hassabis moves to Chairman; the others leave to build Discovery Loop. The lab that shaped modern deep learning in two decades has now lost its founding generation of researchers in a single week.",
+    stat: { v: "4 out",  l: "Senior AI leaders leave Google in one week" },
+  },
+  {
+    tag:  "ENTERPRISE AI ROI NOW DOCUMENTED",
+    body: "Palantir's $1.94B quarter is the strongest public-market proof that enterprise AI spend delivers measurable returns. US commercial revenue grew 149% year-over-year — not on hype, but on deployed AIP workloads. The result ends the debate about whether AI investment converts to revenue at scale.",
+    stat: { v: "+93%",   l: "Palantir Q2 revenue growth year-over-year" },
+  },
+  {
+    tag:  "OPEN-WEIGHT ARMS RACE ESCALATES",
+    body: "Meta open-weighted Muse Glimmer (30B parameters) on the same day it launched a frontier closed model. A 30B agentic model running on a consumer GPU changes the cost structure for any organization building with AI agents. The gap between closed-API and self-hosted capability is narrowing week by week.",
+    stat: { v: "30B",    l: "Muse Glimmer — runs on 24GB consumer GPU" },
+  },
+];
+
+const TOP_STORIES = [
+  {
+    rank: "01",
+    category: "AI leadership",
+    headline: "Google DeepMind's founding generation departs in one week",
+    deck:
+      "Demis Hassabis steps down as CEO to become Chairman and Alphabet Chief Scientist. Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le leave to co-found Discovery Loop — an AI-for-science startup that Google backs as a founding investor and Cloud partner. Alphabet shares fell 4%.",
+    body: [
+      "On August 5, 2026, Alphabet announced the most sweeping leadership change in AI since Google Brain and DeepMind merged in 2023. Demis Hassabis steps down as Google DeepMind CEO, moving to a newly created Chairman and Alphabet Chief Scientist role. Koray Kavukcuoglu, previously VP of Research, becomes SVP and day-to-day leader of the unit. The reshuffle ends the Brain/DeepMind two-continent split that has hampered Google's AI velocity since the merger.",
+      "The same announcement disclosed four additional departures. Jeff Dean — Google's chief scientist and co-creator of MapReduce, Bigtable, TensorFlow, and transformer-scale training infrastructure — leaves after 27 years. He is joined by Sanjay Ghemawat, a Google senior fellow who co-authored the GFS and MapReduce papers; Oriol Vinyals, VP at DeepMind and architect of AlphaStar and sequence-to-sequence learning; and Quoc Le, one of Google Brain's co-founders and a pioneer of large-scale neural language models.",
+      "The four are co-founding Discovery Loop, incorporated as an independent public benefit corporation. Its mission is to automate the scientific method — generating hypotheses, running experiments, and evaluating results — beginning with machine-learning research and engineering before expanding to hardware design, drug discovery, and clean energy. Google is a founding investor and will provide Cloud infrastructure. Dean frames the company name directly: 'Particularly in a lot of domains, you can fully computerize that whole loop.'",
+      "The stock market rendered its verdict immediately: Alphabet shares fell 4% on the announcement, erasing roughly $80 billion in market cap. For enterprise AI buyers, the leadership departure raises concrete questions about Gemini's delivery cadence — Gemini 3.5 Pro has already missed its Google I/O deadline — and about Google's ability to compete at the frontier without the researchers who built its AI infrastructure over two decades.",
+    ],
+    read: "6 min read",
+    matters:
+      "Reassess Google Cloud AI commitments. Gemini's delivery record is now paired with its most significant talent loss since 2023. Kavukcuoglu's operational priorities will define whether Gemini 3.5 Pro ships in Q3 — watch the next four weeks.",
+  },
+  {
+    rank: "02",
+    category: "Tech earnings",
+    headline: "Palantir posts \"otherworldly\" AI quarter — +93% revenue growth",
+    deck:
+      "Q2 2026 revenue hit $1.94B, 93% higher than a year ago and well ahead of the $1.81B consensus. US commercial AI revenue grew 149% year-over-year. Palantir raised full-year guidance to $8.16B and the stock surged 30%.",
+    read: "4 min read",
+    matters:
+      "Palantir's numbers are the clearest public benchmark for enterprise AI ROI. If AIP-style deployments return 93% revenue growth, the bar for your own AI vendor selection and ROI measurement just moved. Request AIP reference checks before Q4 planning.",
+  },
+  {
+    rank: "03",
+    category: "Frontier models",
+    headline: "Meta open-weights Muse Glimmer 30B as Muse Code ships",
+    deck:
+      "Meta released Muse Spark 1.2 and terminal-based Muse Code coding agent on August 5, then open-weighted Muse Glimmer — a 30B-parameter agentic model distilled from Muse Spark — on August 10. Glimmer runs on a single 24GB or 32GB consumer GPU.",
+    read: "4 min read",
+    matters:
+      "Evaluate Muse Glimmer for internal agent workloads where data residency or cost rules out API models. A 30B agentic model running locally changes the build-vs-buy calculus for teams with GPU access. Download weights this week.",
+  },
+  {
+    rank: "04",
+    category: "AI regulation",
+    headline: "EU AI Act Article 50 enforcement begins — chatbots must disclose",
+    deck:
+      "From August 2, 2026, the European Commission's AI Office began enforcing Article 50 transparency rules: chatbots must identify themselves as AI, deepfakes must be labeled, and AI-generated content must carry machine-readable marks.",
+    read: "3 min read",
+    matters:
+      "Audit every customer-facing AI touchpoint in the EU this week. Non-compliance is immediately enforceable. Article 50 is the easiest vector for an early enforcement action — the rules are clear and the obligation is on the deployer.",
+  },
+  {
+    rank: "05",
+    category: "AI governance",
+    headline: "Anthropic names Cuéllar as first Chief Global Affairs Officer",
+    deck:
+      "Tino Cuéllar, former California Supreme Court Justice and Carnegie Endowment president, joins Anthropic as its first CGAO, leading policy, international engagement, and government relations globally. He reports to President Daniela Amodei.",
+    read: "3 min read",
+    matters:
+      "Anthropic's first senior diplomatic hire signals the lab is institutionalizing its Washington and international posture. For enterprise buyers, a CGAO role suggests Anthropic expects government-gated model access to remain a variable — and is building the relationship infrastructure to navigate it.",
+  },
+];
+
+const FRONTIER_LABS = [
+  {
+    lab: "Google DeepMind",
+    tag: "Hassabis to Chairman · Dean + 3 co-found Discovery Loop",
+    items: [
+      "Hassabis becomes Chairman and Alphabet Chief Scientist; Koray Kavukcuoglu named SVP and operational head of Google DeepMind.",
+      "Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, Quoc Le depart to co-found Discovery Loop — Google backs as founding investor and Cloud partner.",
+      "Alphabet shares fall 4% on the announcement; Gemini 3.5 Pro remains delayed with no confirmed general availability date.",
+      "Next Apple Siri confirmed to run on Gemini; partnership broadens distribution even as internal talent base thins.",
+    ],
+  },
+  {
+    lab: "Anthropic",
+    tag: "Cuéllar hire · Claude Opus 5 leads index",
+    items: [
+      "Tino Cuéllar joins as first Chief Global Affairs Officer (Aug 4), reporting to President Daniela Amodei; was California Supreme Court Justice and Carnegie Endowment president.",
+      "Claude Opus 5 (released July 24) leads the Intelligence Index at $5/$25 per million tokens — same price as Opus 4.8, half the cost of Fable 5.",
+      "Anthropic S-1 filing window approaches; Fable 5 export restrictions remain in force for all non-cleared users.",
+      "EU Article 50 compliance measures activated for Claude.ai; Anthropic's model transparency disclosures now display on all EU chatbot interactions.",
+    ],
+  },
+  {
+    lab: "Meta",
+    tag: "Muse Spark 1.2 · Muse Code · Muse Glimmer open",
+    items: [
+      "Muse Spark 1.2 (Aug 5) adds improved multimodal reasoning and coding, available via Meta Model API and OpenRouter with 1M-token context.",
+      "Muse Code, a terminal-based coding agent powered by Muse Spark 1.2, ships Aug 5 — writes, debugs, and runs sub-agents concurrently.",
+      "Muse Glimmer (Aug 10): 30B open-weight model distilled from Muse Spark, quantized for a single 24GB or 32GB consumer GPU.",
+      "Zuckerberg confirms Muse Spark 1.2 weights will be open-weighted, extending Meta's open-weight strategy to its frontier-class model.",
+    ],
+  },
+  {
+    lab: "xAI / SpaceX",
+    tag: "Grok Voice TF 2.0 · Grok 5 still internal",
+    items: [
+      "Grok Voice Think Fast 2.0 launches Aug 5: 1.4x WER improvement over TF 1.0, 1.5–2.0x over Deepgram Nova 3 and ElevenLabs Scribe v2. Priced at $0.08/min.",
+      "Grok 5 remains in internal testing as of Aug 10; public beta still targeting Q3 2026 with no confirmed date.",
+      "Cursor (Anysphere) integration with xAI model stack continues post-acquisition; Grok Build coding agent now runs on Cursor infrastructure.",
+      "grok-voice-latest endpoint updated to grok-voice-think-fast-2.0; prior TF 1.0 accessible via pinned version strings through September.",
+    ],
+  },
+  {
+    lab: "OpenAI",
+    tag: "Price cuts in force · Astra previewed to Congress",
+    items: [
+      "GPT-5.6 Luna price cut 80% (to $0.20/$1.20) and Terra 20% (to $2.00/$12.00) effective July 30; Sol stays at $5/$30.",
+      "Astra (unreleased next model) previewed to Washington policymakers; no public release date confirmed as of Aug 10.",
+      "100,000 researchers receive free frontier model access through 2027 under OpenAI's open-science grant initiative.",
+      "OpenAI IPO confidential S-1 filed June 8; most analysts now project late 2026 or Q1 2027 window; $1T valuation target unchanged.",
+    ],
+  },
+];
+
+const BENCHMARK_TABLE = {
+  caption: "Frontier model API pricing after July 30 adjustments — per 1M tokens",
+  models: ["Model", "Input $/1M tok", "Output $/1M tok"],
+  rows: [
+    ["GPT-5.6 Sol Ultra",       "$5.00",         "$30.00"       ],
+    ["Claude Opus 5",           "$5.00",         "$25.00"       ],
+    ["GPT-5.6 Terra (revised)", "$2.00 (–20%)",  "$12.00 (–20%)"],
+    ["Claude Sonnet 4.6",       "$3.00",         "$15.00"       ],
+    ["GPT-5.6 Luna (revised)",  "$0.20 (–80%)",  "$1.20 (–80%)" ],
+    ["DeepSeek V4-Pro",         "$0.44",         "$0.87"        ],
+    ["Muse Glimmer 30B",        "open-weight",   "self-hosted"  ],
+  ],
+  footnote:
+    "Luna and Terra cuts effective July 30; Terra input was $2.50, Luna was $1.00. Claude Opus 5 released July 24 at same price as Opus 4.8; Fable 5 remains US-restricted. Muse Glimmer open-weight as of Aug 10 — runs on 24GB GPU.",
+};
+
+const DEV_TOOLS = [
+  {
+    tool: "Muse Code (Meta)",
+    updated: "Aug 5",
+    bullets: [
+      "Terminal-based agentic coding tool powered by Muse Spark 1.2; writes and debugs code, runs multiple sub-agents concurrently on long tasks.",
+      "Available via Meta Model API and OpenRouter at launch; designed to compete directly with Cursor and GitHub Copilot Workspace.",
+    ],
+  },
+  {
+    tool: "Muse Glimmer 30B",
+    updated: "Aug 10",
+    bullets: [
+      "Open-weight 30B agentic model distilled from Muse Spark 1.2; quantized to run on a single 24GB or 32GB consumer GPU.",
+      "Released today; weights downloadable from Meta's model hub. First open-weight model in Meta's Muse family with native agentic reasoning.",
+    ],
+  },
+  {
+    tool: "Grok Voice Think Fast 2.0",
+    updated: "Aug 5",
+    bullets: [
+      "Speech-to-speech model with 1.4x WER improvement over TF 1.0 and 1.5–2.0x over Deepgram Nova 3 in xAI's 24-language internal benchmark.",
+      "Priced at $0.08/min. grok-voice-latest now points to TF 2.0; supports tool use, multi-turn conversation, and improved speech reasoning.",
+    ],
+  },
+  {
+    tool: "Claude Opus 5",
+    updated: "July 24",
+    bullets: [
+      "1M-token context, 128k output, effort-toggle (low/medium/high) for cost control. Leads the Intelligence Index at $5/$25 per million tokens.",
+      "Same price as Opus 4.8; described as near-Fable-5 capability at half the cost. Default on Claude Max; available via API as claude-opus-5.",
+    ],
+  },
+];
+
+const RESEARCH = [
+  {
+    title: "Discovery Loop Founding Manifesto",
+    source: "Jeff Dean et al. · Aug 5, 2026",
+    summary:
+      "Discovery Loop's founding documents describe automating the scientific method — hypothesis generation, experiment execution, result evaluation — as a computable loop. Initial focus: ML research and engineering. Expansion roadmap includes hardware design, drug discovery, and clean energy. Google provides Cloud infrastructure as founding partner.",
+  },
+  {
+    title: "Palantir Q2 2026 Earnings Report",
+    source: "Palantir Technologies · Aug 3, 2026",
+    summary:
+      "Q2 revenue $1.94B (+93% YoY), US commercial AI revenue +149% YoY, US government revenue $809M. Full-year guidance raised to $8.16B vs prior $7.65B estimate. The report is the strongest public-market evidence to date that enterprise AI deployments produce measurable revenue returns at scale.",
+  },
+  {
+    title: "EU AI Act Article 50 Enforcement Guide",
+    source: "European Commission · Aug 2, 2026",
+    summary:
+      "Article 50 is now enforceable: chatbots must identify themselves, deepfakes must carry labels, AI-generated content must include machine-readable marks. High-risk Annex III systems (hiring, credit, education, law enforcement) face full compliance by December 2, 2027. Medical device AI compliance extends to August 2028.",
+  },
+  {
+    title: "VENOM: AI-Piloted F-16 Flight Tests",
+    source: "DARPA · Disclosed Aug 2026",
+    summary:
+      "The Viper Experimentation and Next-generation Operations Model (VENOM) program flew a modified F-16 under AI agent control at Eglin Air Force Base. Building on X-62A VISTA dogfight tests from 2024, VENOM demonstrates that standard fleet aircraft can be converted to AI-pilotable platforms. Safety pilot remained in cockpit with manual override.",
+  },
+  {
+    title: "Muse Glimmer: Distillation at 30B Scale",
+    source: "Meta AI Research · Aug 10, 2026",
+    summary:
+      "Meta's technical notes describe Muse Glimmer as a distilled, quantized version of Muse Spark 1.2. The 30B model achieves agentic reasoning sufficient for multi-step task execution on consumer hardware. Distillation methodology improves token efficiency; the release tests whether open-weight models can close the gap with closed-API frontier models on agent benchmarks.",
+  },
+  {
+    title: "State of AI Agent Security 2026",
+    source: "Zenity · Aug 2026",
+    summary:
+      "Zenity's report documents the shift from prompt-level to intent-level agent security. Traditional prompt inspection misses compromised agent behavior that looks syntactically valid. Zenity's platform determines agent intent before action execution, blocking manipulation that bypasses model-level defenses. Gartner named Zenity category leader in April 2026.",
+  },
+];
+
+const INDEX_FINDINGS = [
+  {
+    metric: "GOOGLE TALENT FLIGHT",
+    body: "Losing Hassabis, Dean, Ghemawat, Vinyals, and Le in one announcement is the most consequential AI talent event since Sutton and Silver's departures accelerated in 2023. Google's ability to deliver Gemini 3.5 Pro — already delayed twice — is the concrete near-term test of whether the org has depth behind its founding researchers.",
+  },
+  {
+    metric: "ENTERPRISE AI ROI",
+    body: "Palantir's 93% revenue growth on deployed AIP workloads ends the debate about whether enterprise AI converts to revenue. The 149% surge in US commercial AI revenue is not a pilot program — it is at-scale deployment returning measurable returns. The benchmark for AI vendor ROI discussions just reset upward.",
+  },
+  {
+    metric: "OPEN-WEIGHT PARITY",
+    body: "Muse Glimmer at 30B running on a 24GB GPU is the week's structural shift. When a model distilled from a frontier system fits on consumer hardware, the API cost argument for closed models weakens materially. Self-hosted agentic AI is now within reach of mid-market engineering teams.",
+  },
+  {
+    metric: "REGULATORY ENFORCEMENT",
+    body: "Article 50 is the EU AI Act's first teeth. The August 2 activation gives regulators an immediately enforceable, easily auditable requirement. Companies with customer-facing AI in the EU that have not implemented disclosure mechanisms face concrete enforcement risk in Q3.",
+  },
+  {
+    metric: "VOICE AI ECONOMICS",
+    body: "Grok Voice Think Fast 2.0 at $0.08/min with 1.4x accuracy improvement establishes a new cost floor for enterprise voice AI. At that price point, voice agents become economically viable for customer service workloads that previously required human-in-the-loop escalation at scale.",
+  },
+];
+
+const FUNDING_HERO = [
+  { v: "$1B",   l: "Valar Atomics Series B",  n: "Sequoia; nuclear power for AI data centers" },
+  { v: "$150M", l: "HappyRobot Series A",     n: "Agentic AI for logistics enterprises"       },
+  { v: "$125M", l: "Zenity Series C",         n: "Norwest · SoftBank · Hitachi · LG"          },
+  { v: "$1B",   l: "Base Power Series D",     n: "Long-duration batteries for AI data centers" },
+];
+
+const MEGA_ROUNDS = [
+  { co: "Valar Atomics",   round: "Series B",       amount: "$1B",    lead: "Sequoia Capital",          val: "—",                     note: "Nuclear startup building small reactors for AI data centers. Closed Aug 4; JPMorgan adds $200M credit facility." },
+  { co: "Base Power",      round: "Series D",        amount: "$1B",    lead: "Undisclosed",              val: "—",                     note: "Long-duration battery storage for AI data-center power resilience. Part of the energy infrastructure wave this week." },
+  { co: "HappyRobot",      round: "Series A",        amount: "$150M",  lead: "—",                        val: "—",                     note: "Agentic AI platform for logistics, financial services, utilities, and manufacturing voice-agent integrations." },
+  { co: "Zenity",          round: "Series C",        amount: "$125M",  lead: "Norwest Ventures",         val: "—",                     note: "AI agent security platform. SoftBank, Hitachi, LG Technology Ventures join. Gartner named category leader April 2026." },
+  { co: "Discovery Loop",  round: "Seed",            amount: "—",      lead: "Google (backing)",         val: "PBC structure",          note: "Jeff Dean, Ghemawat, Vinyals, Le's AI-for-science startup. Google is founding investor and Cloud partner." },
+  { co: "Avatar Robotics", round: "Seed extension",  amount: "$6.5M",  lead: "Undisclosed",              val: "—",                     note: "Humanoid robots and remote teleoperation for industrial supply chains; scaling commercial deployments." },
+];
+
+const ENTERPRISE_MOVES = [
+  { co: "Shopify",             move: "AI-driven traffic to Shopify merchants rose 8x year-over-year in Q1; AI-referred orders grew 13x. Catalog-powered AI searches converted at 2x the rate of general AI search, validating AI commerce as a primary growth channel." },
+  { co: "AWS / Amazon",        move: "Launched AWS Agentic Shopping Assistant; Kate Spade (via Tapestry) is first retailer live with the technology, which conducts conversational product discovery and converts to checkout within the same session." },
+  { co: "DARPA / US Air Force",move: "AI-controlled F-16 flew operational missions under the VENOM program at Eglin AFB. Safety pilot retained override capability; program extends ACE dogfight tests from the experimental X-62A to standard fleet aircraft." },
+  { co: "FDA",                 move: "Approved a new class of Autonomous Diagnostic AI for diabetic retinopathy and early-stage melanoma detection, with reported accuracy exceeding human specialist performance on the approved indication sets." },
+  { co: "Palantir",            move: "Q2 2026 revenue $1.94B (+93% YoY); US commercial AI revenue +149%; US government revenue $809M. Full-year 2026 guidance raised to $8.16B. Stock hits all-time high at +30% on earnings day." },
+  { co: "Google / Alphabet",   move: "Hassabis named Chairman and Alphabet Chief Scientist; Kavukcuoglu becomes SVP of Google DeepMind. Backs Discovery Loop as founding investor — an unusual move acknowledging its departing researchers' new venture." },
+];
+
+const ROBOTICS_SCIENCE = [
+  { title: "VENOM F-16 Autonomous Flight",  note: "DARPA and US Air Force fly a standard-fleet F-16 under AI agent control at Eglin AFB — the first demonstration that operational aircraft can be AI-piloted without purpose-built hardware modifications." },
+  { title: "FDA Autonomous Diagnostic AI",   note: "New device class clears for diabetic retinopathy and early melanoma detection. Autonomous AI now makes clinical recommendations without physician image review on approved indications — a regulatory category milestone." },
+  { title: "Humanoid Warehouse Deployment",  note: "Figure, Tesla Optimus, and Boston Dynamics have deployed thousands of general-purpose humanoid robots into commercial warehouses; robots now walk, identify irregular objects, and adapt to changing environments." },
+  { title: "FCC Bans Chinese Humanoid Bots", note: "FCC prohibits sale of Chinese-manufactured humanoid robots in the US, citing national security concerns. Affects supply chains for robotics components and commercial humanoid deployments relying on Chinese hardware." },
+];
+
+const REGULATORY = [
+  { region: "European Union",    item: "EU AI Act Article 50 — in force",         summary: "Enforcement began August 2. Chatbots must identify as AI, deepfakes must carry labels, AI-generated content must include machine-readable marks. Annex III high-risk systems face Dec 2027 compliance.",        impact: "High"        },
+  { region: "United States",     item: "FCC — Chinese humanoid robot ban",         summary: "FCC prohibits sale and import of Chinese humanoid robots in the US on national security grounds, disrupting supply chains for manufacturers with Chinese hardware dependencies.",                                impact: "Medium-High"  },
+  { region: "United States",     item: "FDA — Autonomous Diagnostic AI cleared",   summary: "New category of autonomous diagnostic AI cleared for diabetic retinopathy and melanoma. Removes the physician-review requirement for approved indications; sets precedent for further autonomous medical AI.",  impact: "High"        },
+  { region: "United States",     item: "DARPA VENOM — combat AI flight tests",     summary: "Autonomous AI piloting of standard fleet F-16s disclosed. Program extends capability from experimental aircraft to operational platforms, raising policy questions about autonomous combat systems.",             impact: "Medium"      },
+  { region: "EU / US (states)",  item: "Colorado AI law takes effect Jan 2027",    summary: "Colorado's revised SB 26-189 targeting automated decision-making takes effect January 1, 2027. Earliest US state-level AI enforcement deadline now set; other states watching as template.",                   impact: "Medium"      },
+];
+
+const THOUGHT_LEADERS = [
+  {
+    name: "Jeff Dean",
+    affiliation: "Discovery Loop",
+    quote: "Particularly in a lot of domains, you can fully computerize that whole loop — generating hypotheses, running experiments, evaluating results. That is what Discovery Loop is built to do.",
+    context: "On co-founding Discovery Loop after 27 years at Google, August 5, 2026.",
+  },
+  {
+    name: "Demis Hassabis",
+    affiliation: "Alphabet / DeepMind",
+    quote: "Koray is the right leader to take DeepMind forward operationally. My new role lets me focus on the scientific mission and Alphabet's long-term AI strategy without the day-to-day constraints.",
+    context: "Announcing his move to Chairman and Alphabet Chief Scientist, August 5, 2026.",
+  },
+  {
+    name: "Alex Karp",
+    affiliation: "Palantir CEO",
+    quote: "This was an otherworldly quarter. The demand signal from US commercial customers is not slowing — it is accelerating. We are now in a different category of company.",
+    context: "On Palantir's Q2 2026 earnings call, August 3, 2026.",
+  },
+  {
+    name: "Tino Cuéllar",
+    affiliation: "Anthropic",
+    quote: "The decisions made about AI in the next two to three years will shape democratic governance and global security for decades. That is why this role matters and why I said yes.",
+    context: "On joining Anthropic as first Chief Global Affairs Officer, August 4, 2026.",
+  },
+];
+
+const COMMUNITY_PULSE = [
+  { source: "X / AI researchers",      theme: "The Discovery Loop announcement dominated AI Twitter all week. Researchers debated whether Google backing its own departing scientists signals healthy ecosystem confidence or an admission that the best talent leaves to build rather than stay. Most agreed the actual science focus is real." },
+  { source: "HackerNews / r/devops",   theme: "Muse Glimmer's open-weight release triggered immediate community benchmarking threads. Early testers on HackerNews report competitive agentic task performance at 30B scale — closing faster on Cursor-style coding tasks than expected at that parameter count." },
+  { source: "r/MachineLearning",       theme: "Palantir's 93% revenue growth created a split: one camp sees it as proof enterprise AI ROI is real; the other argues AIP's government and defense concentration makes it a poor benchmark for general commercial AI deployment." },
+  { source: "r/singularity / X",       theme: "The DARPA VENOM F-16 news and FDA autonomous diagnostic approval ran together on X this week. Commentators noted the same week saw AI autonomously pilot a fighter jet and autonomously diagnose cancer — a juxtaposition that generated significant virality." },
+];
+
+const WHAT_TO_WATCH = [
+  { when: "Aug (TBD)",  title: "Gemini 3.5 Pro GA",               body: "Kavukcuoglu's first major delivery test. Gemini 3.5 Pro has missed two deadlines — a third slip would confirm a structural delivery problem at Google DeepMind under new leadership." },
+  { when: "Q3 2026",   title: "OpenAI Astra Public Release",      body: "Astra has been previewed to Washington but not publicly released. Its general-reasoning benchmarks will determine whether the math-research positioning generalizes to broader enterprise workloads." },
+  { when: "Q3 2026",   title: "Anthropic S-1 Filing",             body: "S-1 expected August–September ahead of an October Nasdaq target. Fable 5 export restrictions and the Cuéllar hire are both factors analysts will read for regulatory risk in the filing." },
+  { when: "Q3 2026",   title: "Muse Spark 1.2 Open-Weight Date",  body: "Zuckerberg confirmed Muse Spark 1.2 weights will be released publicly. Timing not confirmed; watch Meta's model hub. Full open-weight release would change the enterprise closed-model calculus significantly." },
+  { when: "Jan 1, '27",title: "Colorado AI Law Enforcement",      body: "Colorado's revised automated-decision AI law — the first US state AI enforcement deadline — takes effect. Sets the template for other states and the first test of whether US state AI regulation is enforceable." },
+];
+
+const SOURCES = [
+  "TechCrunch. Jeff Dean and other top AI researchers are leaving Google to launch their own startup. August 5, 2026.",
+  "Bloomberg. Google DeepMind CEO Demis Hassabis Moves to Chairman Role in Leadership Reshuffle. August 5, 2026.",
+  "Yahoo Finance. Palantir stock jumps nearly 30% after 'otherworldly' quarter as US commercial business booms. August 3, 2026.",
+  "CNBC. Palantir Q2 2026 earnings: revenue $1.94B, +93% YoY. August 3, 2026.",
+  "Meta AI Research. Introducing Muse Code and Muse Spark 1.2. research.meta.ai. August 5, 2026.",
+  "CNBC. Meta launches Muse Glimmer open-weight AI model. August 10, 2026.",
+  "European Commission. Commission starts enforcing AI Act rules and new transparency requirements on 2 August. August 2, 2026.",
+  "Anthropic. Tino Cuéllar joins Anthropic as Chief Global Affairs Officer. anthropic.com/news. August 4, 2026.",
+  "xAI. Introducing Grok Voice Think Fast 2.0. x.ai/news. August 5, 2026.",
+];
+
+const GLOSSARY = [
+  { term: "Discovery Loop",       def: "Jeff Dean's AI-for-science startup co-founded with Ghemawat, Vinyals, and Le on Aug 5, 2026. Automates hypothesis generation, experiment execution, and result evaluation across scientific domains." },
+  { term: "Article 50 (EU AI Act)", def: "Transparency requirements in force from August 2, 2026: chatbots must identify as AI, deepfakes must carry labels, AI-generated content must include machine-readable marks. Enforceable immediately." },
+  { term: "Muse Glimmer",         def: "Meta's 30B open-weight agentic model distilled from Muse Spark 1.2. Quantized to run on a single 24GB or 32GB consumer GPU. Released Aug 10, 2026." },
+  { term: "VENOM program",        def: "DARPA's Viper Experimentation and Next-generation Operations Model — converts standard fleet F-16s to AI-pilotable platforms with a safety pilot in the cockpit. First flights disclosed August 2026." },
+  { term: "Intent-level security", def: "AI agent security approach that evaluates an agent's intent before it executes an action — distinguishing legitimate work from manipulation that bypasses prompt-level defenses." },
+  { term: "Effort toggle",        def: "Claude Opus 5 feature allowing users to set reasoning effort at low, medium, or high — adjusting compute cost and response depth dynamically per task, rather than paying frontier rates for every query." },
+  { term: "AIP",                  def: "Palantir's Artificial Intelligence Platform — its enterprise AI deployment product. US commercial AIP revenue grew 149% year-over-year in Q2 2026, the strongest enterprise AI ROI signal reported to date." },
+];
+
+Object.assign(window, {
+  REPORT_META, HERO_STATS, TODAY_HEADLINES, EXECUTIVE_THEMES, TOP_STORIES,
+  FRONTIER_LABS, BENCHMARK_TABLE, DEV_TOOLS, RESEARCH, INDEX_FINDINGS,
+  FUNDING_HERO, MEGA_ROUNDS, ENTERPRISE_MOVES, ROBOTICS_SCIENCE, REGULATORY,
+  THOUGHT_LEADERS, COMMUNITY_PULSE, WHAT_TO_WATCH, SOURCES, GLOSSARY,
+});
+
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+const T = {
+  bg:      "#FAFAF7",
+  ink:     "#1A1A1A",
+  mid:     "#5A5A55",
+  faint:   "#8A8678",
+  rule:    "#D8D4C7",
+  accent:  "#C9C4B8",
+  paper:   "#F2EEE3",
+  inkPanel:"#1A1A1A",
+  serif:   "'Source Serif 4', 'Source Serif Pro', Georgia, serif",
+  sans:    "'IBM Plex Sans', system-ui, sans-serif",
+  mono:    "'IBM Plex Mono', ui-monospace, monospace",
+};
+
+// ─── SHARED COMPONENTS ──────────────────────────────────────────
+const Page = ({ children, style }) => (
+  <section className="report-page" style={{
+    width: 794, height: 1123, background: T.bg, color: T.ink,
+    fontFamily: T.sans, fontSize: 11, lineHeight: 1.5,
+    position: "relative", overflow: "hidden", ...style,
+  }}>{children}</section>
+);
+
+const RunningHeader = ({ page }) => (
+  <div style={{
+    position: "absolute", top: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingBottom: 12, borderBottom: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief · {REPORT_META.issue}</span>
+    <span>{REPORT_META.date}</span>
+    <span>{page}</span>
+  </div>
+);
+
+const Footer = ({ page }) => (
+  <div style={{
+    position: "absolute", bottom: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingTop: 12, borderTop: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief</span>
+    <span style={{ fontFamily: T.serif, fontStyle: "italic", letterSpacing: 0, textTransform: "none", fontSize: 10 }}>
+      AI generated by Mukul Dewangan
+    </span>
+    <span>{page}</span>
+  </div>
+);
+
+const PageTitle = ({ eyebrow, title, intro, size = "lg" }) => {
+  const sizes = { lg: { fontSize: 56, lineHeight: 1.0 }, md: { fontSize: 44, lineHeight: 1.02 }, sm: { fontSize: 36, lineHeight: 1.05 } };
+  return (
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", color: T.mid, textTransform: "uppercase" }}>{eyebrow}</div>
+      <h1 style={{ fontFamily: T.serif, fontWeight: 400, ...sizes[size], letterSpacing: "-0.02em", margin: "10px 0 0", color: T.ink }}>{title}</h1>
+      {intro && <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 16, color: T.mid, marginTop: 16, maxWidth: 560, lineHeight: 1.4 }}>{intro}</div>}
+    </div>
+  );
+};
+
+const SectionHead = ({ children, style }) => (
+  <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 20, color: T.ink, marginBottom: 12, ...style }}>{children}</div>
+);
+
+const WhyItMatters = ({ text, variant = "cream" }) => {
+  if (variant === "cream") return (
+    <div style={{ background: T.paper, padding: "22px 26px" }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.45, color: T.ink, marginTop: 10, maxWidth: 580 }}>{text}</div>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 10, borderLeft: "2px solid " + T.ink, paddingLeft: 12 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 12, lineHeight: 1.5, color: T.ink, marginTop: 4 }}>{text}</div>
+    </div>
+  );
+};
+
+// ─── PAGE 01 — COVER ────────────────────────────────────────────
+const CoverViz = () => {
+  const dots = [];
+  let s = 42;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  for (let i = 0; i < 28; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 50 + rnd() * 170;
+    dots.push(<circle key={i} cx={200 + Math.cos(a)*r} cy={200 + Math.sin(a)*r} r={1.3 + rnd()*2.6}
+      fill={i%5===0 ? T.ink : T.mid} opacity={i%5===0 ? 1 : 0.45} />);
+  }
+  return (
+    <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+      {[70, 115, 160, 200].map(r => <circle key={r} cx={200} cy={200} r={r} fill="none" stroke={T.rule} strokeWidth="0.6" />)}
+      <circle cx={200} cy={200} r={3} fill={T.ink} />
+      {dots}
+    </svg>
+  );
+};
+
+const CoverPage = () => (
+  <Page>
+    <div style={{ position: "absolute", top: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>The AI Brief</span><span>{REPORT_META.issue}</span>
+    </div>
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.serif, fontSize: 80, lineHeight: 0.95, letterSpacing: "-0.02em", fontWeight: 400, color: T.ink }}>The AI<br />Brief.</div>
+      <div style={{ marginTop: 18, fontFamily: T.serif, fontStyle: "italic", fontSize: 18, color: T.mid, maxWidth: 420, lineHeight: 1.35 }}>{REPORT_META.tagline}.</div>
+    </div>
+    <div style={{ position: "absolute", top: 100, right: 56, width: 250, height: 250 }}><CoverViz /></div>
+    <div style={{ position: "absolute", top: 400, left: 56, right: 56, paddingTop: 16, paddingBottom: 16, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 14 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{s.label}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 32, color: T.ink, lineHeight: 1, marginTop: 6 }}>{s.value}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 560, left: 56, right: 56 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Today's headlines</div>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>{TODAY_HEADLINES.length} signals</div>
+      </div>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        {TODAY_HEADLINES.map((h, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 14, padding: "13px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink, letterSpacing: "0.06em" }}>{String(i+1).padStart(2,"0")}</span>
+            <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink, lineHeight: 1.4 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{ position: "absolute", bottom: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>{REPORT_META.date}</span><span>{REPORT_META.edition}</span>
+    </div>
+  </Page>
+);
+
+// ─── PAGE 02 — EXECUTIVE SUMMARY ────────────────────────────────
+const ExecSummaryPage = () => (
+  <Page>
+    <RunningHeader page="Page 02" />
+    <PageTitle eyebrow="Section One" title={<>Executive<br />summary.</>} intro="The three themes that frame this week's signals — and the reasoning behind why each belongs on a leadership agenda." />
+    <div style={{ position: "absolute", top: 320, left: 56, display: "flex", gap: 18, fontFamily: T.sans, fontSize: 9.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <span>{REPORT_META.audience}</span><span>·</span><span>8 min read</span><span>·</span><span>Curated by the Brief desk</span>
+    </div>
+    <div style={{ position: "absolute", top: 370, left: 56, right: 56, bottom: 100 }}>
+      {EXECUTIVE_THEMES.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr 170px", gap: 24, alignItems: "start", padding: "18px 0", borderTop: "1px solid " + T.rule, borderBottom: i===EXECUTIVE_THEMES.length-1 ? "1px solid "+T.rule : "none" }}>
+          <div style={{ fontFamily: T.serif, fontSize: 34, lineHeight: 1, color: T.ink, fontWeight: 400 }}>{String(i+1).padStart(2,"0")}</div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.ink, marginBottom: 6 }}>{t.tag}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 14.5, lineHeight: 1.45, color: T.ink, maxWidth: 470 }}>{t.body}</div>
+          </div>
+          {t.stat && (
+            <div style={{ textAlign: "right", borderLeft: "1px solid " + T.rule, paddingLeft: 18 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.ink, lineHeight: 1 }}>{t.stat.v}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.4 }}>{t.stat.l}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <Footer page="02" />
+  </Page>
+);
+
+// ─── PAGE 03 — LEAD STORY ────────────────────────────────────────
+const LeadStoryPage = () => {
+  const s = TOP_STORIES[0];
+  return (
+    <Page>
+      <RunningHeader page="Page 03" />
+      <div style={{ position: "absolute", top: 110, left: 80, right: 80 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+          <span>Lead — {s.category}</span><span>{s.read}</span>
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontWeight: 400, fontSize: 44, lineHeight: 1.04, letterSpacing: "-0.02em", margin: "20px 0 0", color: T.ink, maxWidth: 600 }}>{s.headline}.</h1>
+        <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 17, lineHeight: 1.4, color: T.mid, marginTop: 20, maxWidth: 580 }}>{s.deck}</div>
+      </div>
+      <div style={{ position: "absolute", top: 460, left: 80, right: 80 }}><WhyItMatters text={s.matters} /></div>
+      <div style={{ position: "absolute", top: 640, left: 80, right: 80, bottom: 110, fontFamily: T.sans, fontSize: 11.5, lineHeight: 1.65, color: T.ink, maxWidth: 600 }}>
+        {s.body.map((p, i) => <p key={i} style={{ margin: "0 0 14px" }}>{p}</p>)}
+      </div>
+      <Footer page="03" />
+    </Page>
+  );
+};
+
+// ─── PAGE 04 — TOP STORIES ───────────────────────────────────────
+const TopStoriesPage = () => {
+  const more = TOP_STORIES.slice(1);
+  return (
+    <Page>
+      <RunningHeader page="Page 04" />
+      <PageTitle eyebrow="Section Two · More signals" title="Stories of the week." intro="Four more developments that warrant leadership attention this week." size="sm" />
+      <div style={{ position: "absolute", top: 300, left: 56, right: 56, bottom: 96, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+        {more.map((s, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "40px 1fr 250px", gap: 24, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+            <div style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1, color: T.ink }}>{s.rank}</div>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 8 }}>
+                <span>{s.category}</span><span>{s.read}</span>
+              </div>
+              <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.3, color: T.ink }}>{s.headline}.</div>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 12.5, color: T.mid, marginTop: 8, lineHeight: 1.5, maxWidth: 430 }}>{s.deck}</div>
+            </div>
+            <div><WhyItMatters text={s.matters} variant="inline" /></div>
+          </div>
+        ))}
+      </div>
+      <Footer page="04" />
+    </Page>
+  );
+};
+
+// ─── PAGE 05 — FRONTIER MODELS ───────────────────────────────────
+const FrontierModelsPage = () => (
+  <Page>
+    <RunningHeader page="Page 05" />
+    <PageTitle eyebrow="Section Three · Frontier models" title="Labs, in their own words." intro="Per-lab summary of the week's model and capability developments — the commercial map of the frontier." size="sm" />
+    <div style={{ position: "absolute", top: 268, left: 56, right: 56, bottom: 88, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+      {FRONTIER_LABS.map((l, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 28, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+          <div style={{ overflow: "hidden" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.ink, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.lab}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 5, lineHeight: 1.35 }}>{l.tag}</div>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", overflow: "hidden" }}>
+            {l.items.map((it, j) => (
+              <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 10, padding: "3px 0", fontFamily: T.sans, fontSize: 10.5, color: T.ink, lineHeight: 1.5 }}>
+                <span style={{ color: T.mid, fontFamily: T.mono, fontSize: 9, paddingTop: 2 }}>·</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <Footer page="05" />
+  </Page>
+);
+
+// ─── PAGE 06 — BENCHMARKS + DEV TOOLS ───────────────────────────
+const BenchmarksDevToolsPage = () => (
+  <Page>
+    <RunningHeader page="Page 06" />
+    <PageTitle eyebrow="Section Four · Benchmarks & developer tools" title="The frontier, head-to-head." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>{BENCHMARK_TABLE.caption}</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+            {BENCHMARK_TABLE.models.map((m, i) => <span key={i} style={{ textAlign: i===0 ? "left" : "right" }}>{m}</span>)}
+          </div>
+          {BENCHMARK_TABLE.rows.map((row, i) => {
+            const [name, a, b] = row;
+            const numA = parseFloat(a), numB = parseFloat(b);
+            const aBold = !isNaN(numA) && !isNaN(numB) && numA < numB;
+            const bBold = !isNaN(numA) && !isNaN(numB) && numB < numA;
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink }}>{name}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: aBold ? T.ink : T.mid, fontWeight: aBold ? 500 : 400 }}>{a}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: bBold ? T.ink : T.mid, fontWeight: bBold ? 500 : 400 }}>{b}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 8, fontFamily: T.serif, fontStyle: "italic", fontSize: 11, color: T.mid, lineHeight: 1.4 }}>{BENCHMARK_TABLE.footnote}</div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Developer tools — week-in-progress</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {DEV_TOOLS.map((tl, i) => (
+            <div key={i} style={{ padding: "10px 0", borderTop: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink }}>{tl.tool}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upd. {tl.updated}</span>
+              </div>
+              <ul style={{ margin: "5px 0 0", paddingLeft: 0, listStyle: "none" }}>
+                {tl.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 8, fontSize: 9.5, color: T.ink, lineHeight: 1.45, padding: "2px 0" }}>
+                    <span style={{ color: T.mid, fontFamily: T.mono, paddingTop: 1 }}>·</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="06" />
+  </Page>
+);
+
+// ─── PAGE 07 — RESEARCH ──────────────────────────────────────────
+const ResearchPage = () => (
+  <Page>
+    <RunningHeader page="Page 07" />
+    <PageTitle eyebrow="Section Five · Research" title="Papers and findings." intro="What the academic literature and the major AI indices added this week." size="sm" />
+    <div style={{ position: "absolute", top: 290, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Notable research</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {RESEARCH.map((r, i) => (
+            <div key={i} style={{ padding: "10px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 14, color: T.ink, lineHeight: 1.3 }}>{r.title}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{r.source}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, marginTop: 5, lineHeight: 1.5 }}>{r.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>AI Index — key findings this week</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {INDEX_FINDINGS.map((f, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 20, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.ink, letterSpacing: "0.12em", textTransform: "uppercase" }}>{f.metric}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 10, color: T.ink, lineHeight: 1.5 }}>{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="07" />
+  </Page>
+);
+
+// ─── PAGE 08 — FUNDING ───────────────────────────────────────────
+const FundingPage = () => (
+  <Page>
+    <RunningHeader page="Page 08" />
+    <PageTitle eyebrow="Section Six · Capital" title="The funding landscape." size="sm" />
+    <div style={{ position: "absolute", top: 240, left: 56, right: 56, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, padding: "20px 0" }}>
+      {FUNDING_HERO.map((h, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 18 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{h.l}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 36, color: T.ink, lineHeight: 1, marginTop: 8 }}>{h.v}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 10, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{h.n}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 410, left: 56, right: 56 }}>
+      <SectionHead>Mega rounds &amp; strategic bets</SectionHead>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+          <span>Company</span><span>Round</span><span>Amount</span><span>Lead</span><span>Valuation</span><span>Note</span>
+        </div>
+        {MEGA_ROUNDS.map((m, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "10px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.serif, fontSize: 13, color: T.ink }}>{m.co}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid }}>{m.round}</span>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink }}>{m.amount}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.4 }}>{m.lead}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.val}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer page="08" />
+  </Page>
+);
+
+// ─── PAGE 09 — ENTERPRISE · ROBOTICS · POLICY ───────────────────
+const EnterprisePolicyPage = () => (
+  <Page>
+    <RunningHeader page="Page 09" />
+    <PageTitle eyebrow="Section Seven · Industry · Robotics · Policy" title="Where the rules and runways meet." size="sm" />
+    <div style={{ position: "absolute", top: 260, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 14 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Enterprise &amp; industry moves</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ENTERPRISE_MOVES.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "7px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.25 }}>{c.co}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>{c.move}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Robotics &amp; science</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ROBOTICS_SCIENCE.map((r, i) => (
+            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 13, color: T.ink, lineHeight: 1.25 }}>{r.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{r.note}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Regulatory &amp; policy</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {REGULATORY.map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 100px", gap: 16, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "start" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{r.region}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.3 }}>{r.item}</div>
+                <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{r.summary}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Impact</div>
+                <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, marginTop: 2 }}>{r.impact}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="09" />
+  </Page>
+);
+
+// ─── PAGE 10 — VOICES · PULSE · WATCH ──────────────────────────
+const VoicesWatchPage = () => (
+  <Page>
+    <RunningHeader page="Page 10" />
+    <PageTitle eyebrow="Section Eight · Voices · Pulse · Watch" title="What the field is saying." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>Thought leader pulse</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {THOUGHT_LEADERS.map((q, i) => (
+            <div key={i} style={{ border: "1px solid " + T.rule, padding: "12px 14px 14px", background: T.bg, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 13, lineHeight: 1.4, color: T.ink }}>"{q.quote}"</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginTop: 8 }}>— {q.name} · {q.affiliation}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{q.context}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Community pulse</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {COMMUNITY_PULSE.map((p, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "6px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.08em", textTransform: "uppercase" }}>{p.source}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.5 }}>{p.theme}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>What to watch</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14, borderTop: "1.5px solid " + T.ink, paddingTop: 10, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {WHAT_TO_WATCH.map((w, i) => (
+            <div key={i} style={{ overflow: "hidden" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{w.when}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, lineHeight: 1.25, marginTop: 5 }}>{w.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 8.5, color: T.mid, marginTop: 5, lineHeight: 1.45 }}>{w.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="10" />
+  </Page>
+);
+
+// ─── PAGE 11 — SOURCES + GLOSSARY ───────────────────────────────
+const ClosingPage = () => (
+  <Page>
+    <RunningHeader page="Page 11" />
+    <PageTitle eyebrow="End matter" title={<>Sources &amp;<br />glossary.</>} intro="The reading list, the working vocabulary, and where this issue ends." />
+    <div style={{ position: "absolute", top: 430, left: 56, right: 56, bottom: 130, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Sources</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {SOURCES.map((s, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr", gap: 8, padding: "6px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: T.mono, color: T.mid }}>{String(i+1).padStart(2,"0")}</span>
+              <span>{s}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Glossary</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {GLOSSARY.map((g, i) => (
+            <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 11.5, color: T.ink }}>{g.term}.{" "}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.45 }}>{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div style={{ position: "absolute", bottom: 90, left: 56, right: 56, textAlign: "center", fontFamily: T.serif, fontStyle: "italic", fontSize: 13, color: T.mid }}>
+      ✦ End of {REPORT_META.issue} · {REPORT_META.date} ✦
+    </div>
+    <Footer page="11" />
+  </Page>
+);
+
+// ─── PAGE REGISTRY ───────────────────────────────────────────────
+const PAGES = [
+  { key: "cover",           label: "01 · Cover",                          Comp: CoverPage },
+  { key: "exec-summary",    label: "02 · Executive Summary",              Comp: ExecSummaryPage },
+  { key: "lead-story",      label: "03 · Lead Story",                     Comp: LeadStoryPage },
+  { key: "top-stories",     label: "04 · Top Stories",                    Comp: TopStoriesPage },
+  { key: "frontier-models", label: "05 · Frontier Models",                Comp: FrontierModelsPage },
+  { key: "benchmarks",      label: "06 · Benchmarks & Dev Tools",         Comp: BenchmarksDevToolsPage },
+  { key: "research",        label: "07 · Research",                       Comp: ResearchPage },
+  { key: "funding",         label: "08 · Funding",                        Comp: FundingPage },
+  { key: "enterprise",      label: "09 · Enterprise · Robotics · Policy", Comp: EnterprisePolicyPage },
+  { key: "voices",          label: "10 · Voices · Pulse · Watch",         Comp: VoicesWatchPage },
+  { key: "closing",         label: "11 · Sources · Glossary",             Comp: ClosingPage },
+];
+
+// ─── APP ROOT ────────────────────────────────────────────────────
+const { useState, useEffect } = React;
+
+function App() {
+  const [active, setActive] = useState("cover");
+
+  useEffect(() => {
+    const nav = document.getElementById("nav-bar");
+    if (!nav) return;
+    nav.innerHTML = "";
+    PAGES.forEach(p => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn" + (p.key === active ? " active" : "");
+      btn.textContent = p.label;
+      btn.onclick = () => {
+        setActive(p.key);
+        const el = document.getElementById("page-" + p.key);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(btn);
+    });
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 120;
+      let current = PAGES[0].key;
+      PAGES.forEach(p => {
+        const el = document.getElementById("page-" + p.key);
+        if (el && el.offsetTop <= scrollY) current = p.key;
+      });
+      if (current !== active) setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [active]);
+
+  return (
+    <div id="report-root">
+      {PAGES.map(p => (
+        <div id={"page-" + p.key} key={p.key}>
+          <p.Comp />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("report-root"));
+</script>
+</body>
+</html>

@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 33",
+    "date": "2026-08-10",
+    "summary": "Demis Hassabis steps down as Google DeepMind CEO to become Chairman while Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le depart to co-found Discovery Loop, an AI-for-science startup Google backs as investor — erasing $80B in Alphabet market cap; Palantir posts $1.94B Q2 revenue (+93% YoY, US commercial AI revenue +149%); Meta open-weights the 30B-parameter Muse Glimmer model alongside Muse Code; EU AI Act Article 50 transparency enforcement begins August 2; and Anthropic names Tino Cuéllar its first Chief Global Affairs Officer.",
+    "filename": "AI-Report-2026-08-10.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 32",
     "date": "2026-08-03",
     "summary": "OpenAI's unreleased Astra model solved ten open math problems for $2,000 in compute with machine-verifiable Lean proofs — Fields Medalist Gowers endorsed one for Annals of Mathematics — marking AI's first verified frontier research contribution; Anthropic discloses three sandbox breaches (Opus 4.7, Mythos 5, and a research model) confirming containment failure is systemic across both top labs; GPT-5.6 Luna is cut 80% to $0.20/M tokens; and Microsoft Azure crosses $100B ARR as its stock adds $450B in a single session.",
