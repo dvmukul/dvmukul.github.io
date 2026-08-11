@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IDC Quanta competitive intelligence — market analysis, product audit, technology deep-dive, AI-readiness assessment, PM critique, and mock product strategy for IDC's embedded intelligence platform by Mukul Dewangan.">
+<title>IDC Quanta: The Provenance Bet — Competitive Intelligence · Mukul Dewangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · August 2026</div>
+  <h1>IDC Quanta:<br>The <em>Provenance</em> Bet</h1>
+  <p class="cover-sub">IDC is retrofitting six decades of proprietary market data into a cited, multi-agent-verified AI layer embedded in Claude and email — betting enterprises will trust a sourced answer over a faster, generic one. The open question is whether packaging, distribution, and a thinning analyst bench can keep pace with the promise.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Boston, MA</span></div>
+    <div>FOUNDED<span>1964 (Quanta: Jul 2026)</span></div>
+    <div>BETA CUSTOMERS<span>175+</span></div>
+    <div>STATUS<span>PE-backed (Blackstone), Private</span></div>
+    <div>COVERAGE<span>idc.com/quanta</span></div>
+  </div>
+</div>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">60</div><div class="stat-label">Years of IDC Research</div></div>
+  <div class="stat-box"><div class="stat-num blue">15B</div><div class="stat-label">Proprietary Data Points</div></div>
+  <div class="stat-box"><div class="stat-num">175+</div><div class="stat-label">Beta Customers</div></div>
+  <div class="stat-box"><div class="stat-num accent">$442M</div><div class="stat-label">Est. 2025 IDC Revenue*</div></div>
+  <div class="stat-box"><div class="stat-num blue">$6.5B</div><div class="stat-label">Gartner 2025 Revenue</div></div>
+  <div class="stat-box"><div class="stat-num">82.3</div><div class="stat-label">AI Citation Score (vs. Gartner 94.2)</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Behind IDC Quanta?</h2>
+
+  <p>IDC (International Data Corporation) is a 60-year-old technology market intelligence firm headquartered at One Beacon St, Boston, founded in 1964 by Patrick J. McGovern. It built its business on the products most vendor marketers cite without a second thought: the MarketScape competitive assessment, and the market-share Trackers that anchor "we're the #1 provider" press releases across the tech industry. IDC has not been an independent company for years — it is wholly owned by <strong>Blackstone Inc.</strong>, which acquired International Data Group from China Oceanwide Holdings for $1.3B in 2021. In March 2025, IDG sold its media arm (Foundry, formerly IDG Communications — Computerworld, InfoWorld, CIO) to Regent LP, leaving IDC as a pure-play B2B intelligence business for the first time in its history.</p>
+
+  <p><strong>IDC Quanta</strong> is IDC's answer to the same pressure every analyst firm is facing at once: enterprise buyers increasingly start their research inside ChatGPT, Claude, Gemini, or Perplexity rather than a paid research portal. Announced at IDC Directions 2026 in April and launched to general availability on July 7, 2026, Quanta embeds IDC's research, Trackers, and forecasts directly into Excel, email, and Claude — architected as an MCP server plus a Claude plugin, so every answer is source-cited rather than freely generated.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Quanta is not really a new product category — it is IDC converting a genuine, decades-old asset (structured, numeric market data) into an AI-native distribution format. The interesting story for this report is not whether the AI layer works — the architecture is unusually transparent about its sourcing for a 2026 "AI-powered" launch — but whether IDC's commercial engine, analyst bench, and 1/15th-of-Gartner revenue base can turn that architecture into enterprise-wide adoption before Gartner and Forrester's much larger AI investments close the gap.
+  </div>
+
+  <h3>Leadership</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Lorenzo Larini — Chief Executive Officer</h4><p>Appointed Feb 2, 2026 — barely two months before Quanta's public debut. Previously CEO of Mint.ai and CEO of Ipsos North America, with prior senior roles at Gartner. His predecessor, Genevieve Juillard, had only recently been profiled by the Boston Globe as steering IDC's "new chapter" weeks before Larini's appointment — a fast leadership turnover worth flagging, not just a smooth succession.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Joe Bradley — CTO (AI & Chief Scientist)</h4><p>The public face of Quanta's technical architecture — walked through the two-layer MCP + Claude-plugin design and a live forecast-validation demo at the launch webinar. Framed the pitch explicitly around "no black box": provenance you can check yourself, not a vendor's word to trust.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Ryan Smith — Director, Content Marketing</h4><p>Authored IDC's own launch and architecture blog posts — notable that IDC is doing its most technical AI credibility-building through owned content rather than third-party analyst validation, the same move every vendor IDC covers is asked to make.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Blackstone Inc. — Owner</h4><p>Private equity control since 2021. The CEO churn, the Foundry divestiture, the Quanta investment, and the concurrent analyst layoffs all read as a single multi-year PE repositioning: from "market research house" to what IDC's own materials now call "the technology intelligence layer of the AI economy."</p></div>
+  </div>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1964</div><div class="tl-title">IDC founded by Patrick J. McGovern</div><div class="tl-desc">Built the foundation of what became International Data Group, alongside Computerworld (1967) and later InfoWorld, PC World, and CIO.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2017</div><div class="tl-title">China Oceanwide acquires majority stake in IDG</div><div class="tl-desc">First of two ownership changes in under a decade — a signal of how liquid this "60-year institution" has actually been as an asset.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2021</div><div class="tl-title">Blackstone acquires IDG for $1.3B</div><div class="tl-desc">Private-equity ownership begins. Also the year IDC acquired Metri, a Netherlands-based IT benchmarking consultancy.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Mar 2025</div><div class="tl-title">Foundry (media arm) sold to Regent LP</div><div class="tl-desc">IDC simplifies to a pure-play data/research/advisory business — the commercial precondition for a platform bet like Quanta.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Dec 2025</div><div class="tl-title">AWS Quick Research distribution partnership</div><div class="tl-desc">Early test of "meet the buyer where they are" distribution — a precursor pattern to the Claude/email embedding strategy Quanta later formalizes.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Feb 2026</div><div class="tl-title">Lorenzo Larini appointed CEO</div><div class="tl-desc">Replaces Genevieve Juillard in a rapid succession. Larini's Gartner and AI-native (Mint.ai) background reads as a deliberate hire for exactly this platform pivot.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Apr 2026</div><div class="tl-title">IDC Quanta announced at Directions 2026</div><div class="tl-desc">Coincides with a targeted round of analyst layoffs across retail, telecom, and supply-chain coverage, framed internally as realignment toward AI-driven workflows.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jul 7, 2026</div><div class="tl-title">IDC Quanta reaches general availability</div><div class="tl-desc">Shaped by 175+ beta customers. Launched alongside a simplified subscription model consolidating "hundreds" of legacy IDC offerings into aligned bundles.</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape & Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>The industry analyst business — Gartner, Forrester, IDC, and a deep tier-two bench — has run the same model for decades: produce proprietary research, sell subscription access and advisory hours, and let vendor Magic Quadrants and Waves anchor multi-million-dollar enterprise purchase decisions. AI answer engines break the model at its foundation, because a growing share of B2B buyer research now starts inside ChatGPT, Claude, Gemini, or Perplexity — tools that synthesize analyst research, trade press, and vendor content into one answer before a buyer ever opens a paid portal. The brand an AI engine cites wins the shortlist; the firm that only exists behind a login increasingly does not.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>The Big Three, By Scale</h4><p>Gartner (NYSE: IT): ~$6.5B 2025 revenue. Forrester (NASDAQ: FORR): public, smaller. IDC: privately held, third-party estimates put 2025 revenue near $442M — roughly a fifteenth of Gartner's. Scale gap matters directly for AI R&D spend.</p></div>
+    <div class="card"><h4>Answer-Engine Mediation</h4><p>Analyst relations professionals now track "Citation Share" — which firms AI engines actually surface — as a metric alongside Magic Quadrant placement. Analyst research increasingly functions as training/citation fodder for engines the buyer trusts more than the portal.</p></div>
+    <div class="card"><h4>Commercial Model Under Strain</h4><p>Decades of accreted SKUs, service lines, and entitlement tiers across the analyst industry were built for vendor AR teams who treated navigating them as part of the job — not for enterprise buyers who just want an answer and won't do the SKU-reconciliation work.</p></div>
+  </div>
+
+  <h3>Competitive Map</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Moat</th><th>Quanta Overlap</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Gartner (AskGartner)</strong></td><td>AI Q&A over 500K+ executive interactions, phased rollout</td><td>$6.5B revenue, largest analyst brand, deepest advisory bench</td><td>Direct — embedded AI answers over proprietary research</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Forrester (AI Access / ex-Izola)</strong></td><td>Standalone AI research product</td><td>$10M+ Q1 2026 contract value, ~$20M run-rate by year-end — faster commercial traction than Quanta has disclosed</td><td>Direct — same "cited AI research" positioning</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>ChatGPT / Copilot / Gemini (Enterprise)</strong></td><td>General-purpose AI assistants with web/enterprise data grounding</td><td>Consumer default mindshare; buyers open these first, not a research portal</td><td>Upstream — mediates the very first query before any analyst firm is consulted</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>S&P Global / 451 Research</strong></td><td>Tier-2 research + data</td><td>Brand fragmented across S&P properties; still citation-relevant</td><td>Adjacent — quantitative/technology data overlap</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>HFS Research / ISG / Everest Group</strong></td><td>Services-analyst triangle (Provider Lens, PEAK Matrix)</td><td>Faster-cycle, more accessible than the Big Three</td><td>Adjacent — services/sourcing intelligence, not core IT market sizing</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Constellation Research / boutiques</strong></td><td>Named-analyst voice (Ray Wang, Holger Mueller, etc.)</td><td>Faster on emerging categories, cheaper per engagement</td><td>Low — different buyer motion, thought-leadership vs. quantitative</td><td><span class="tag grey">LOW</span></td></tr>
+      <tr><td><strong>McKinsey QuantumBlack / Big-4 advisory AI</strong></td><td>Custom strategy + proprietary AI tooling for large engagements</td><td>C-suite relationships, bespoke delivery</td><td>Low — different price point and delivery model</td><td><span class="tag grey">LOW</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Who Controls AI Citations Today</h3>
+  <p>A composite AI-visibility index published by analyst-relations research firm Everything-PR (its own proprietary methodology, worth treating as directional rather than definitive) scores how often each firm gets cited across five major AI engines: Gartner 94.2, Forrester 87.6, <strong>IDC 82.3</strong> — labeled, somewhat unflatteringly, "the tech analyst citation floor" — down to HFS Research (68.4), ISG (64.1), and S&P Global/451 (59.7). Whatever the precision of any single index, the direction is consistent with everything else in this report: IDC starts this AI transition as the smallest and least-cited of the Big Three, which is exactly the position Quanta needs to change.</p>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Citation Share, Not Just Quadrant Placement</h4><p>Winning now requires showing up inside the AI answer itself — body-text mentions in Waves/MarketScapes that engines extract from, not just a headline "Leader" label.</p></div>
+    <div class="card"><h4>Commercial Simplicity</h4><p>Firms that still require a buyer to reconcile hundreds of overlapping SKUs cannot sell at AI speed to end users, only to AR teams paid to absorb that complexity.</p></div>
+    <div class="card"><h4>Verifiable Provenance</h4><p>As generic AI answers get treated with default skepticism, the firm that can show its work — cited data cuts, live sources, confidence transparency — earns disproportionate trust.</p></div>
+    <div class="card"><h4>Distribution Partner Discipline</h4><p>Choosing where intelligence gets embedded (Claude specifically, not "an AI assistant" generically) signals intent — but also creates dependency on that partner's own enterprise momentum.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What IDC Quanta Actually Does</h2>
+
+  <p>Quanta is best understood as two things bundled together: an AI delivery layer for IDC's existing research entitlements, and a commercial packaging overhaul that consolidates what IDC itself has described as "hundreds of intelligence offerings" into simplified subscription bundles. IDC's launch materials name five product pillars — <strong>Embedded, Contextual, Secure, Aware, Rigorous</strong> — each mapping to a specific claim about how Quanta differs from a generic AI chat tool.</p>
+
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📥</div><h4>Embedded</h4><p>Delivered inside email, Claude (desktop, web, Cowork, Office add-ins, mobile), and idc.com — not a new portal requiring a separate login.</p></div>
+    <div class="card"><div class="card-icon">🎯</div><h4>Contextual</h4><p>Customers can upload their own data/documents to be synthesized against IDC's research; persistent session memory deepens over time.</p></div>
+    <div class="card"><div class="card-icon">🔒</div><h4>Secure</h4><p>AES-256 encryption, SOC 2 certification (Type I, per press materials), 90-day automatic deletion, zero model training on customer data.</p></div>
+    <div class="card"><div class="card-icon">⏰</div><h4>Aware</h4><p>Scheduled, proactive delivery — "insights you need before you ask" — plus anonymized peer-signal benchmarking across IDC's client base.</p></div>
+  </div>
+
+  <h3>Target Customer Segments</h3>
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Problem Solved</th><th>Named Reference</th></tr></thead>
+    <tbody>
+      <tr><td>FP&A / finance analysts</td><td>Validating internal forecasts against an external, defensible benchmark before a CFO review</td><td>Flagship launch demo (fictional "Vantix Security" scenario)</td></tr>
+      <tr><td>Analyst Relations teams</td><td>Faster access to IDC research and higher confidence in AI-assisted synthesis</td><td>Mark Terranova, Global Head of AR, Kyndryl</td></tr>
+      <tr><td>Corporate communications / competitive intel</td><td>Getting value from an existing IDC research relationship faster</td><td>Jolene Peixoto, VP Corporate Communications, Relex</td></tr>
+      <tr><td>CTOs / technical buyers</td><td>Confidence in AI answers because they're backed by a known research vendor, not a generic model</td><td>Phillip Langeberg, CTO, The Resorts Companies</td></tr>
+      <tr><td>CIOs</td><td>High-value, previously unimaginable access to structured intelligence</td><td>Ashley Spicer, CIO, Amarok</td></tr>
+      <tr><td>AI/data platform leaders at consultancies</td><td>Referenceable, source-backed insight for client-facing work</td><td>Eric Walk, VP AI & Data Platform Services, Perficient</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">All customer quotes are trust/confidence testimonials sourced from IDC's own launch materials. None disclose adoption volume, query counts, time-saved, or renewal-lift metrics — a meaningful gap for a launch built around "evidentiary rigor."</p>
+
+  <h3>Recent Performance Signals</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📊</div><h4>175+ Beta Customers</h4><p>The proof-point IDC leads with. More disclosure than most 2026 AI launches bother with, but still a beta cohort, not disclosed paid conversion.</p></div>
+    <div class="card"><div class="card-icon">🧩</div><h4>120+ Use Cases, 300+ Validation Dimensions</h4><p>Headline marketing figures from idc.com/quanta. The developer documentation separately describes a narrower "20 analyst-calibrated workflows" dispatcher inside the actual Claude Skill — worth noting the two figures describe different scopes.</p></div>
+    <div class="card"><div class="card-icon">💰</div><h4>Pricing: Undisclosed</h4><p>No public pricing. Positioned as bundled into existing/new IDC subscription entitlements — consistent with the concurrent packaging simplification, but opaque to a prospective buyer evaluating cost against AskGartner or Forrester AI Access.</p></div>
+    <div class="card"><div class="card-icon">🖥️</div><h4>Claude Enterprise/Teams Only</h4><p>Explicitly unavailable on Claude Pro or Free "for data security reasons" — ties Quanta's most visible surface to a specific Claude tier a prospect must already own or be willing to buy.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 4: TECHNOLOGY DEEP DIVE -->
+<div class="section">
+  <div class="section-label">§ 04 — Technology Deep Dive</div>
+  <h2>Core Technology Stack & Architecture</h2>
+
+  <p>IDC's own CTO, Joe Bradley, pitched Quanta's architecture as "no black box" — an unusually specific and inspectable claim for a 2026 AI product. The stack is genuinely two distinct layers, not a single wrapper around a chatbot.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">MCP Server</div>
+    <div class="tech-layer-content">
+      <strong>The data pipe — self-describing, conversational, identity-aware</strong>
+      <p>Built on Anthropic's Model Context Protocol (introduced late 2024, now broadly adopted across OpenAI, Microsoft, Google, and developer tools by mid-2026). Gives Claude direct, structured access to IDC's Trackers, forecasts, and market figures, plus instructions on how that data is structured and should be used. Entitlements are scoped and travel with every call via OAuth SSO.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">IDC Claude Plugin</div>
+    <div class="tech-layer-content">
+      <strong>The reasoning layer — shapes relevance, enforces sourcing</strong>
+      <p>Bundles the MCP connector with an "IDC Quanta Skill," invoked via <code>/idc-quanta</code>, whose dispatcher routes each query to one of ~20 analyst-calibrated workflows (market share analysis, vendor evaluation, TAM sizing, etc.), each with its own navigation, attribution, and brand-voice rules — designed so answers are structurally forced to carry a citation before being returned.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Multi-Agent Validation</div>
+    <div class="tech-layer-content">
+      <strong>Verification against IDC's proprietary corpus</strong>
+      <p>Every response is checked by a multi-agent system against IDC's data before being surfaced, with section-level citations and an expandable reasoning panel showing sources, scope, and assumptions. "300+ AI validation dimensions" per marketing copy — an unverifiable figure IDC has not further specified.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Corpus</div>
+    <div class="tech-layer-content">
+      <strong>60 years of research, ~15 billion data points</strong>
+      <p>IDC's genuine structural advantage: decades of quantitative Trackers and MarketScape data — exactly the kind of structured, numeric ground-truth that general-purpose LLMs are prone to hallucinate on. This is the most defensible technical asset in the stack, more than the AI orchestration itself.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Security & Tenancy</div>
+    <div class="tech-layer-content">
+      <strong>Tenant isolation, audit logs, encrypted, time-bounded storage</strong>
+      <p>AES-256 encryption, per-user private workspace, 90-day automatic deletion, zero training on customer data, SOC 2 certified (Type I per public materials — an attestation of control design at a point in time, not of sustained operating effectiveness, which is what Type II certifies).</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Admin Install Path</div>
+    <div class="tech-layer-content">
+      <strong>GitHub-mediated plugin distribution</strong>
+      <p>The recommended enterprise install requires an IT admin to create a GitHub account, get invited as a collaborator on IDC's private plugin repo, then connect that repo via Claude's org-level plugin sync. The fallback path (Custom MCP Connector) requires manual per-user Skill installation with no auto-updates. Neither path is the "no logins, no portals" simplicity the marketing promises for the admin who has to set it up.</p>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>Critical Technical Read</strong>
+    The architecture is more transparent about sourcing than most competing "AI-powered" analyst tools — that is a genuine differentiator. But two gaps matter: the trust chain depends entirely on Anthropic's Claude Enterprise/Teams tier (no parallel Copilot or ChatGPT Enterprise connector yet), and the admin onboarding path is meaningfully more complex than the "embedded, frictionless" positioning claims — a GitHub-collaborator workflow is an unusual ask inside a Fortune 500 IT security review.
+  </div>
+</div>
+
+<!-- SECTION 5: AI STRATEGY & READINESS -->
+<div class="section">
+  <div class="section-label">§ 05 — AI Strategy & Readiness</div>
+  <h2>Is IDC Actually Ready to Be an AI Company?</h2>
+
+  <p>Separate from whether Quanta works is whether IDC's AI strategy is coherent as a strategy — not just a single product launch. Three signals suggest genuine organizational commitment; three suggest the commitment is still shallower than the marketing implies.</p>
+
+  <h3>Signals of Real AI Readiness</h3>
+  <div class="card-grid three">
+    <div class="card"><h4>Standards-First Architecture</h4><p>Building on MCP — an open, industry-adopted protocol — rather than a proprietary integration shows IDC is betting on interoperability, not lock-in through obscurity. That is the right long-term bet even though it currently only reaches one partner's surface.</p></div>
+    <div class="card"><h4>A Named Technical Owner</h4><p>CTO Joe Bradley personally walking through architecture and a live (if scripted) demo, rather than leaving AI credibility entirely to marketing copy, is a stronger AI-readiness signal than most 2026 "AI-powered" launches offer.</p></div>
+    <div class="card"><h4>Restructuring Toward AI-Native Workflows</h4><p>The analyst reorganization, whatever its human cost, is explicitly framed around new skills and AI-driven workflows rather than treating AI as a bolt-on to an unchanged operating model — a harder, more credible path than most legacy research firms are taking.</p></div>
+  </div>
+
+  <h3>Signals AI Readiness Is Still Shallow</h3>
+  <div class="card-grid three">
+    <div class="card"><h4>AI Strategy Owned by Marketing Narrative</h4><p>The most detailed technical explanation of "how Quanta works" lives on IDC's own content-marketing blog, authored by the Director of Content Marketing — not an independent technical audit or third-party benchmark of citation accuracy.</p></div>
+    <div class="card"><h4>No Disclosed Accuracy Benchmark</h4><p>"300+ AI validation dimensions" and "multi-agent verification" are architecture claims, not measured outcomes. No hallucination rate, citation-accuracy rate, or independent evaluation has been published — a gap for a product whose entire value proposition is trustworthiness.</p></div>
+    <div class="card"><h4>Single-Model, Single-Partner AI Stack</h4><p>Everything currently runs through Claude. A mature AI strategy for a data company of IDC's ambitions would typically hedge model/partner risk rather than concentrate the entire flagship experience behind one lab's enterprise roadmap.</p></div>
+  </div>
+
+  <div class="callout gold">
+    <strong>AI Readiness Verdict</strong>
+    IDC is more AI-ready than most legacy analyst peers on architecture and intent, and meaningfully behind on independent proof. The gap between "we built it to be inspectable" and "an independent party has actually inspected it" is the single highest-leverage thing IDC could close next.
+  </div>
+</div>
+
+<!-- SECTION 6: CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 06 — Customer Segments</div>
+  <h2>Who Quanta Is Really Built For</h2>
+
+  <p>Reading the named references and demo scenario together, Quanta's real go-to-market wedge is narrower than "every enterprise team" — it is <strong>existing IDC subscribers</strong> (vendor AR teams, technology CIOs/CTOs, and FP&A/strategy functions already inside an IDC contract) who want faster access to research they already pay for, not net-new buyers choosing IDC over Gartner for the first time.</p>
+
+  <div class="card-grid">
+    <div class="card"><h4>Existing IDC Enterprise Clients</h4><p>The clearest, lowest-friction segment — Kyndryl, Perficient, Relex, Amarok, The Resorts Companies are all pre-existing IDC relationships getting a faster interface, not new logos won on Quanta alone.</p></div>
+    <div class="card"><h4>Vendor Analyst Relations Teams</h4><p>The segment most likely to feel the packaging simplification directly — less time reconciling which service line/entitlement tier covers a need, easier internal renewal justification.</p></div>
+    <div class="card"><h4>FP&A / Corporate Strategy</h4><p>The segment the flagship demo targets — forecast validation against an external, citable benchmark. A genuinely strong use case given IDC's quantitative-data moat.</p></div>
+    <div class="card"><h4>Net-New Enterprise IT/Business Buyers</h4><p>The segment IDC says it wants ("technology intelligence layer of the AI economy") but has the thinnest evidence for — no disclosed case study of a buyer choosing IDC over Gartner/Forrester because of Quanta specifically.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 6: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 07 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>Quanta is a well-engineered response to a real threat, with more evidentiary discipline in its architecture than most competing "AI-powered" launches this year. The critique below is aimed at the gap between that architecture and the commercial and organizational reality surrounding it.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Distribution Risk</div>
+    <div class="critique-title">Quanta's Flagship Surface Is Someone Else's Enterprise Motion</div>
+    <div class="critique-body">Quanta's most differentiated experience lives inside Claude — specifically Claude Enterprise or Teams, not Pro or Free. That ties IDC's most visible AI product to Anthropic's enterprise seat penetration, a market IDC does not control and did not build. If a prospect has standardized on Microsoft Copilot or ChatGPT Enterprise instead, IDC's most polished experience is simply invisible to them until a Copilot or ChatGPT connector ships — and none has been announced.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">The Install Path Contradicts the "No Portal, No Login" Pitch</div>
+    <div class="critique-body">The recommended enterprise deployment requires an IT admin to create a GitHub account, get manually invited as a collaborator to a private repo by IDC support, then wire that into Claude's org plugin settings. That is a multi-step IT procurement and security-review project — exactly the friction Quanta's marketing claims to eliminate. It will stall behind SSO and vendor-risk review at the large enterprises IDC most wants to land.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Trust Risk</div>
+    <div class="critique-title">"60 Years of Rigor" Is Launching Alongside Analyst Layoffs</div>
+    <div class="critique-body">Quanta's entire pitch rests on human-calibrated, sourced research. IDC trimmed its analyst bench in retail, telecom, and supply-chain coverage in the run-up to Directions 2026, with some analysts reportedly notified abruptly mid-process. IDC frames this as workflow realignment, not financial distress — but the product's core claim ("rigorous, sourced, defensible") is only as strong as the coverage still being maintained by a human analyst behind it. IDC has not published what coverage areas are protected versus thinned.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">The Packaging Fix Is the Real News — And It's Fragile</div>
+    <div class="critique-body">Independent analyst-relations coverage (Lusher Advisory) argues the subscription simplification launched alongside Quanta — consolidating "hundreds of intelligence offerings" into aligned bundles — may matter more than the AI layer itself, because IDC's fragmented SKU catalog made it structurally unsellable to direct enterprise buyers, as opposed to vendor AR teams paid to navigate it. That reframing is persuasive, but the same coverage flags the obvious risk: whether IDC can hold a simpler bundle structure under sales pressure to upsell, or whether "hundreds of offerings" quietly creeps back within eighteen months.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Proof Gap</div>
+    <div class="critique-title">The Best Public Demo Is Fictional</div>
+    <div class="critique-body">IDC's most compelling proof point — an FP&A analyst catching a 16% forecast against IDC's actual 12.1% figure — is a scripted demo featuring a named fictional company ("Vantix Security"), not an independently verified customer case study. The five real customer quotes IDC does share are trust/confidence testimonials, not usage or outcome data. For a launch built on the language of evidentiary rigor, the absence of a single disclosed adoption, retention, or time-saved metric stands out.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">The Quantitative-Data Wedge Is a Genuinely Smart Anchor</div>
+    <div class="critique-body">Leading the flagship demo with forecast validation, not generic Q&A, plays directly to IDC's real and defensible strength: Trackers and MarketScape data are the actual citation source behind most "we're the #1 provider" press releases in tech. That is a substantively different, harder-to-copy moat than Gartner's advisory breadth or Forrester's Wave methodology — numeric ground-truth is exactly where generic LLMs are weakest and where a structured proprietary dataset earns its keep.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Deliberate Partner Selection Signals Real Intent</div>
+    <div class="critique-body">Naming Claude specifically as the launch integration — not "an AI assistant" generically — and building a genuine MCP-plus-plugin architecture rather than a chatbot wrapper is a credible signal IDC is choosing distribution with intent, not building a defensive checkbox feature. If IDC extends the same MCP nucleus to additional surfaces on a realistic timeline, this discipline compounds instead of trapping IDC inside one partner's roadmap.</div>
+  </div>
+</div>
+
+<!-- SECTION 7: SWOT -->
+<div class="section">
+  <div class="section-label">§ 08 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>60 years of proprietary, structured quantitative data (Trackers, MarketScape) — a genuine hallucination-resistant moat</li>
+        <li>Two-layer MCP + plugin architecture with enforced, inspectable citations — unusually transparent for 2026</li>
+        <li>Deliberate, named distribution partner (Claude) rather than a generic chatbot bolt-on</li>
+        <li>175+ beta customers with named enterprise references (Kyndryl, Perficient, Amarok)</li>
+        <li>Subscription packaging simplification removes a decades-old, real commercial blocker</li>
+        <li>Blackstone ownership provides sustained capital for platform investment</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>~$442M estimated revenue vs. Gartner's $6.5B — roughly 1/15th the scale to fund AI R&D and advisory simultaneously</li>
+        <li>Flagship experience gated entirely behind Claude Enterprise/Teams, a partner-controlled dependency</li>
+        <li>Enterprise admin install requires a GitHub-collaborator workflow — friction that contradicts the "no portal" pitch</li>
+        <li>Concurrent analyst layoffs (retail, telecom, supply chain) create a credibility question for a "rigor" pitch</li>
+        <li>SOC 2 Type I only disclosed, not Type II — a lighter attestation than "enterprise-grade" framing implies</li>
+        <li>No public pricing; no disclosed adoption, retention, or outcome metrics beyond beta customer count</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Extend the MCP nucleus to Copilot, ChatGPT Enterprise, and developer IDEs to de-risk single-partner dependency</li>
+        <li>Lean harder into quantitative verification as the wedge — the hardest use case for generic AI to fake</li>
+        <li>New CEO with both Gartner and AI-native (Mint.ai) DNA is a credible bet on finally cracking the end-user market</li>
+        <li>Publish a real, metric-backed case study to replace the fictional demo as the flagship proof point</li>
+        <li>Pursue SOC 2 Type II as a published trust artifact ahead of competitors making the same claim</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Forrester's AI Access already showing faster disclosed commercial traction ($10M+ Q1 CV, ~$20M run-rate)</li>
+        <li>Gartner's AskGartner backed by roughly 15x IDC's revenue and the deepest advisory bench in the category</li>
+        <li>Generic AI answer engines increasingly mediate the buyer's very first query, upstream of any analyst firm</li>
+        <li>Two CEOs in six months signals continued PE-driven instability at the exact moment of platform launch</li>
+        <li>Further coverage-area cuts could hollow out the human research the AI layer depends on to stay defensible</li>
+        <li>Packaging simplification could quietly erode back toward SKU sprawl under normal sales incentives</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8 PART A: AI READINESS (folded into mock strategy per spec numbering below) -->
+<div class="section">
+  <div class="section-label">§ 09 — Mock Product Strategy</div>
+  <h2>Product Strategy 2026–2028: From Cited Answers to Decision Infrastructure</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM/CPO inside IDC's Quanta org. It is directionally grounded in real, publicly disclosed information but represents analytical recommendations, not IDC's actual internal roadmap.
+  </div>
+
+  <!-- VISION -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision & North Star</h3></div>
+    <p><strong>Vision:</strong> IDC Quanta becomes the default place an enterprise buyer verifies a number before it reaches a boardroom — not by out-chatting Gartner's AskGartner or ChatGPT, but by making IDC's quantitative ground-truth the one thing every other AI answer has to be checked against.</p>
+    <p><strong>North Star Metric:</strong> <em>Verified Decision Rate</em> — the percentage of Quanta-sourced answers a client marks as "used in a real decision" (board deck, budget line, vendor shortlist) within 30 days of the query. This is the proxy for whether Quanta is functioning as decision infrastructure rather than a novelty interface on top of an existing subscription. Current baseline: undisclosed/unmeasured. Target by end of 2027: instrumented and reported quarterly, with a 25%+ verified-use rate among enterprise seats.</p>
+    <p><strong>The Strategic Pivot:</strong> From "IDC research, now searchable inside Claude" to "the verification layer other AI answers get checked against." That requires Quanta to win the numeric ground-truth wedge decisively before competing on breadth of advisory Q&A, where Gartner's scale wins by default.</p>
+  </div>
+
+  <!-- BETS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2026–2028)</h3></div>
+
+    <h4>Bet 1: De-Risk the Single-Partner Dependency</h4>
+    <p>Extend the existing MCP nucleus — already built for Claude — to Microsoft Copilot and ChatGPT Enterprise. The architecture is portable by design; the constraint has been partner-relationship sequencing, not engineering. Every enterprise standardized on a different AI stack than Claude is currently unreachable by Quanta's best experience.</p>
+    <div class="callout blue">
+      <strong>Why This Matters</strong>
+      Quanta's differentiation is the citation architecture, not the choice of host model. Betting the entire flagship experience on one partner's enterprise seat growth caps Quanta's addressable market at Claude Enterprise/Teams penetration — a number IDC does not control.
+    </div>
+
+    <h4>Bet 2: Kill the Install Friction, Publish the Trust Artifacts</h4>
+    <p>Replace the GitHub-collaborator admin path with a self-serve listing the moment Claude's plugin ecosystem supports it, and pursue SOC 2 Type II certification within 12 months — publishing it, not just AES-256/Type I language, on the security one-pager. Both moves target the two credibility gaps most likely to stall a Fortune 500 security review.</p>
+
+    <h4>Bet 3: Make the Analyst Bench Visible, Not Assumed</h4>
+    <p>Publish a live coverage map showing which market/technology categories currently have active human-analyst ownership behind the Trackers Quanta cites, and surface a per-answer "freshness" indicator tied to when a human analyst last touched that dataset. This converts the layoff-driven credibility risk into a transparency feature — buyers can verify staffing behind an answer instead of assuming it.</p>
+    <div class="callout green">
+      <strong>Why This First, Not Last</strong>
+      Every other differentiator — citations, multi-agent validation, provenance panels — is only as trustworthy as the underlying research staying current. Making that visible is cheap relative to engineering and directly answers the most credible critique of the launch.
+    </div>
+  </div>
+
+  <!-- INITIATIVES -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Self-Serve Plugin Install (Kill GitHub Path)</div><div class="initiative-desc">One-click admin install once Claude's org plugin marketplace supports it, replacing the collaborator-invite workflow.</div></div>
+      <div><span class="tag red">P0 · Q4 2026</span></div>
+      <div>Median admin setup time under 15 minutes; IT security review cycle time cut 50%</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">SOC 2 Type II Certification</div><div class="initiative-desc">Move beyond point-in-time (Type I) attestation to sustained operating-effectiveness certification.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>Type II report published and referenced on trust.idc.com</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Published Coverage & Freshness Map</div><div class="initiative-desc">Public view of which Trackers/categories have active analyst ownership and last-updated dates.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>100% of cited Trackers show a freshness timestamp in-product</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">First Verified Customer Case Study</div><div class="initiative-desc">Replace the fictional "Vantix Security" demo with a named customer and disclosed usage/outcome metrics.</div></div>
+      <div><span class="tag gold">P1 · Q1 2027</span></div>
+      <div>Published case study with query volume, time-saved, and renewal-lift data</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Microsoft Copilot MCP Connector</div><div class="initiative-desc">Port the existing MCP server to Copilot's enterprise surface.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>GA connector live; 20%+ of new seats activate via Copilot rather than Claude</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Packaging Discipline Scorecard</div><div class="initiative-desc">Internal governance metric tracking SKU count and bundle simplicity against the 2026 baseline.</div></div>
+      <div><span class="tag blue">P2 · Ongoing</span></div>
+      <div>SKU count held flat or reduced quarter-over-quarter through 2027</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">ChatGPT Enterprise Connector</div><div class="initiative-desc">Extend MCP nucleus to OpenAI's enterprise surface.</div></div>
+      <div><span class="tag grey">P3 · Q4 2027</span></div>
+      <div>GA connector live; addressable enterprise AI-seat base roughly doubles</div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (2026–2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Prove Quanta Drives Real Decisions, Not Just Queries</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Instrument and report Verified Decision Rate across all enterprise seats by Q1 2027</li>
+        <li>KR2: Publish at least one named, metric-backed customer case study by Q1 2027</li>
+        <li>KR3: 25%+ of enterprise seats mark at least one Quanta answer "used in a decision" per quarter</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Remove Enterprise Adoption Friction</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Self-serve plugin install live, replacing the GitHub-collaborator path, by Q4 2026</li>
+        <li>KR2: SOC 2 Type II attestation published by Q1 2027</li>
+        <li>KR3: Median enterprise install-to-first-query time under 48 hours</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Diversify Beyond a Single AI Distribution Partner</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Microsoft Copilot MCP connector in GA by Q2 2027</li>
+        <li>KR2: 20%+ of new enterprise seat activations occur outside Claude by Q4 2027</li>
+        <li>KR3: ChatGPT Enterprise connector in beta by Q4 2027</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Protect the "Rigor" Claim Operationally</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Public coverage/freshness map live for 100% of cited Trackers by Q1 2027</li>
+        <li>KR2: No further unplanned analyst-coverage reductions in categories actively cited by Quanta</li>
+        <li>KR3: Independent, third-party accuracy audit of Quanta forecast citations published annually</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks & Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Single-partner (Claude) dependency caps addressable market</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Accelerate Copilot/ChatGPT MCP connectors on a disclosed public timeline, not an open-ended roadmap mention.</td></tr>
+        <tr><td>Analyst layoffs erode the research quality underneath the AI layer</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Publish the coverage/freshness map; commit publicly to no further cuts in actively-cited categories.</td></tr>
+        <tr><td>Gartner/Forrester outspend on AI R&D given 15x revenue scale</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Concentrate resources on the quantitative-verification wedge rather than competing on advisory Q&A breadth.</td></tr>
+        <tr><td>Packaging simplification erodes back to SKU sprawl under sales pressure</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Governance scorecard tracking SKU count quarterly; tie sales incentive structure to bundle adherence.</td></tr>
+        <tr><td>Continued CEO/leadership churn disrupts platform execution</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag grey">LOW</span></td><td>Protect Quanta's product org from reorg turbulence; document roadmap ownership outside any single executive.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT NOT TO DO -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts (What to Stop or Avoid)</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't lead marketing with the fictional demo indefinitely</h4><p>The "Vantix Security" forecast-validation scenario is a strong story, but it is scripted. Replace it with a real, named case study within two quarters or the "no black box" positioning starts to ring hollow.</p></div>
+      <div class="card"><h4>Don't compete with Gartner on advisory breadth</h4><p>IDC cannot out-analyst Gartner on headcount or subscription price. The numeric-verification wedge is defensible; a general-purpose "ask us anything" positioning is not, given the revenue gap.</p></div>
+      <div class="card"><h4>Don't let packaging simplification quietly reverse</h4><p>Sales teams under quota pressure will re-introduce custom bundles and add-ons unless bundle adherence is a governed, tracked metric — not just a launch-week press release line.</p></div>
+      <div class="card"><h4>Don't expand coverage cuts without public disclosure</h4><p>Further unannounced analyst reductions in categories Quanta actively cites will eventually surface publicly and undermine the entire "rigorous, sourced" positioning at once — better to get ahead of it with transparency.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 10 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>IDC Quanta is a more disciplined AI launch than most of its 2026 peers — the two-layer MCP-plus-plugin architecture, the enforced citations, and the deliberate choice of Claude as a named partner all reflect real product thinking, not a chatbot bolted onto a legacy research business for the sake of a press release. The quantitative-data wedge (Trackers, MarketScape, forecast validation) is a genuinely smart place to anchor the story, because it plays to IDC's actual, decades-old strength rather than a borrowed one.</p>
+  <p>But Quanta is arriving at a company that changed CEOs twice within six months, trimmed its analyst bench in the same window it launched a product built on "60 years of rigor," and operates at roughly a fifteenth of Gartner's revenue while trying to fund the same AI arms race. The subscription packaging simplification that shipped alongside Quanta may prove the more durable structural fix — removing a decades-old blocker to selling directly to enterprise buyers — but Lusher Advisory's own framing of the risk is apt: whether IDC can hold that simpler bundle structure under normal sales pressure is still an open question.</p>
+  <p>The next 12–18 months will show whether Quanta becomes the verification layer other AI answers get checked against, or whether IDC remains what one industry citation index currently calls it: the tech analyst citation floor, beneath Gartner and Forrester, now with a better-engineered app.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Quanta is a strong product built on a real data moat, launched by a company whose commercial and organizational fundamentals haven't yet caught up to the ambition. The architecture earns trust; the go-to-market still has to.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Sources: idc.com/quanta, idc.com/developer/quanta, IDC resource-center blog (launch recap, "No Black Box" architecture post), Wikipedia (International Data Corporation), Lusher Advisory: AR Intelligence Substack, Everything-PR Analyst Relations research and Analyst Visibility Index 2026, Boston Globe, Blackstone press releases. Analysis as of August 2026. Revenue and citation-index figures are third-party estimates for a privately held company; IDC does not publicly disclose financials.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
