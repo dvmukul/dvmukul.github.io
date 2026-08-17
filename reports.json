@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 34",
+    "date": "2026-08-17",
+    "summary": "Stripe finalizes a $7B+ acquisition of OpenRouter, folding 400-model routing for 8M developers into its payments infrastructure, while Google's Gemini 3.7 Flash halves pricing to $0.75/$3.75 with major coding gains, OpenAI's Cerebras-powered Ultrafast tier hits 750 tokens/sec, and DeepSeek raises V4 Pro peak pricing ~1,100% even as Alibaba's open-weight Qwen3.8-27B beats Muse Glimmer on every benchmark; Apple also clears Chinese AI regulators for an Alibaba-built China model while escalating its hardware trade-secrets suit against OpenAI toward an October 1 injunction hearing.",
+    "filename": "AI-Report-2026-08-17.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 33",
     "date": "2026-08-10",
     "summary": "Demis Hassabis steps down as Google DeepMind CEO to become Chairman while Jeff Dean, Sanjay Ghemawat, Oriol Vinyals, and Quoc Le depart to co-found Discovery Loop, an AI-for-science startup Google backs as investor — erasing $80B in Alphabet market cap; Palantir posts $1.94B Q2 revenue (+93% YoY, US commercial AI revenue +149%); Meta open-weights the 30B-parameter Muse Glimmer model alongside Muse Code; EU AI Act Article 50 transparency enforcement begins August 2; and Anthropic names Tino Cuéllar its first Chief Global Affairs Officer.",
