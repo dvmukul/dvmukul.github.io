@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 35",
+    "date": "2026-08-24",
+    "summary": "Google expands its Marvell chip partnership to $12.2B in warrants through 2033 — the deepest hyperscaler-semiconductor deal in AI history — as Anthropic's annualized revenue tops $65B (up 40% since May) on a confirmed late-2026 IPO track and OpenAI instead delays its own IPO to 2027 to defend a $1T valuation floor; Claude also designs protein binders at 22–35% wet-lab success (double the industry baseline) with Adaptyv Bio, and Las Vegas becomes the first major US city to open public streets to commercial robotaxis.",
+    "filename": "AI-Report-2026-08-24.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 34",
     "date": "2026-08-17",
     "summary": "Stripe finalizes a $7B+ acquisition of OpenRouter, folding 400-model routing for 8M developers into its payments infrastructure, while Google's Gemini 3.7 Flash halves pricing to $0.75/$3.75 with major coding gains, OpenAI's Cerebras-powered Ultrafast tier hits 750 tokens/sec, and DeepSeek raises V4 Pro peak pricing ~1,100% even as Alibaba's open-weight Qwen3.8-27B beats Muse Glimmer on every benchmark; Apple also clears Chinese AI regulators for an Alibaba-built China model while escalating its hardware trade-secrets suit against OpenAI toward an October 1 injunction hearing.",
