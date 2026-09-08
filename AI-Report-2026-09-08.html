@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Brief · Vol. 02 · Issue 37 · September 8, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    width: 100%; background: #1a1a1a;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; padding: 0 16px;
+    border-bottom: 1px solid #333;
+    scrollbar-width: none;
+  }
+  #nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none;
+    color: #888; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #FAFAF7; border-bottom-color: #FAFAF7; }
+  #report-root {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 32px 16px 64px;
+    gap: 0;
+  }
+  .report-page {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 860px) {
+    .report-page { transform: scale(0.95); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-bar"></div>
+<div id="report-root"></div>
+
+<!-- ─── CONTENT DATA ──────────────────────────────────────────── -->
+<script type="text/babel">
+
+// ─────────────────────────────────────────────────────────────────
+// The AI Brief — Content for the current issue.
+// Issue 37 — Week of September 1–7, 2026. Lead story: OpenAI
+// launches GPT-6 Astra on September 3, declaring the arrival of
+// the AGI era (ARC-AGI-3: 99.9% on modified harness). Anthropic
+// ships Claude Fable 5.1 and Mythos 5.1 (Sept 1) — 75% cheaper
+// cache reads. Google DeepMind ships Gemini 3.8 Flash (Sept 2,
+// GPQA Diamond 95%). Meta ships Muse Spark 1.3 at ~$0.10/M.
+// Anthropic IPO prospectus expected after Labor Day.
+// ─────────────────────────────────────────────────────────────────
+
+const REPORT_META = {
+  title:    "The AI Brief",
+  tagline:  "A weekly intelligence briefing for executives",
+  issue:    "Vol. 02 · Issue 37",
+  date:     "Week of September 1 – 7, 2026",
+  edition:  "Executive Edition",
+  audience: "Prepared for leadership",
+};
+
+const HERO_STATS = [
+  { value: "99.9%",  label: "ARC-AGI-3 ASTRA",     sub: "OpenAI's AGI era claim"         },
+  { value: "75%",    label: "FABLE 5.1 CACHE CUT",  sub: "Cheaper prompt cache reads"     },
+  { value: "95%",    label: "GEMINI 3.8 GPQA",      sub: "Diamond score, Sept 2 launch"   },
+  { value: "$3B",    label: "CRUSOE SERIES F",       sub: "AI infra; week's top round"     },
+  { value: "4",      label: "MODELS IN 72 HRS",      sub: "Fable, Astra, Flash, Muse"     },
+];
+
+const TODAY_HEADLINES = [
+  "OpenAI releases GPT-6 Astra on September 3, claiming the arrival of the AGI era; model saturates ARC-AGI-3 at 99.9%.",
+  "Anthropic ships Claude Fable 5.1 and Mythos 5.1 on September 1, cutting prompt-cache read costs 75% versus Fable 5.",
+  "Google DeepMind ships Gemini 3.8 Flash on September 2 — top GPQA Diamond score at 95% and coding benchmark leadership.",
+  "Meta ships Muse Spark 1.3 hours later at ~$0.10 per million tokens, leading agentic reasoning benchmarks over Flash.",
+  "Anthropic plans to release its IPO prospectus after Labor Day, targeting a September or October listing at ~$965 billion.",
+  "Crusoe raises $3 billion Series F and Fluidstack $1.5 billion as AI infrastructure dominates the week's largest venture rounds.",
+  "China's MIIT unveils a 2026–2030 plan to quadruple national AI compute capacity to 9,800 exaflops by 2030.",
+];
+
+const EXECUTIVE_THEMES = [
+  {
+    tag:  "GPT-6 ASTRA",
+    body: "OpenAI's GPT-6 Astra, released September 3, saturates ARC-AGI-3 at 99.9% and triggers OpenAI's official AGI-era declaration. Analysts flag harness-sensitive conditions and lower standard API scores. The enterprise play is straightforward: four frontier models in 72 hours means negotiating leverage — use it.",
+    stat: { v: "99.9%", l: "Astra ARC-AGI-3 score, harness mode" },
+  },
+  {
+    tag:  "72-HOUR MODEL SPRINT",
+    body: "September 1–3 delivered the densest model launch window of 2026: Fable 5.1, Gemini 3.8 Flash, Muse Spark 1.3, and GPT-6 Astra. Each lab targets a different cost tier — from $0.10/M (Muse) to $15/M (Fable). Intelligence parity at the frontier is effectively reached; price and ecosystem fit now determine vendor selection.",
+    stat: { v: "4",      l: "Frontier models shipped in 72 hours" },
+  },
+  {
+    tag:  "ANTHROPIC IPO WINDOW",
+    body: "Anthropic plans to release its IPO prospectus after Labor Day, targeting a September or October listing near $965 billion. Morgan Stanley, Goldman, and JPMorgan manage the offering. Enterprise teams in Q3 Claude negotiations are in the final pre-IPO window; after listing, pricing discipline and margin pressure tighten significantly.",
+    stat: { v: "$965B",  l: "Anthropic IPO target valuation, 2026" },
+  },
+];
+
+const TOP_STORIES = [
+  {
+    rank: "01",
+    category: "Frontier AI",
+    headline: "OpenAI launches GPT-6 Astra, declares arrival of AGI era",
+    deck: "OpenAI's GPT-6 Astra, released September 3, saturates ARC-AGI-3 at 99.9% — the highest score on abstract reasoning OpenAI has published. Greg Brockman says we are now in the AGI era.",
+    body: [
+      "OpenAI released GPT-6 Astra on September 3, 2026, calling it the world's most intelligent and aligned model. President Greg Brockman told reporters it is 'not unreasonable to feel that we are now in the AGI era.' The training run — over 100,000 GPUs at the Stargate site in Texas — is OpenAI's largest ever and the first in which earlier OpenAI models supervised the training of the new one. Paid users received restricted access the following day.",
+      "Astra's headline benchmark is ARC-AGI-3 at 99.9%, against 30.2% for Opus 5 and 7.8% for GPT-5.6 Sol. It posts OpenAI's highest published scores on abstract reasoning, mathematics, and cybersecurity. The model's computer use capability — navigating a desktop as a human would — is OpenAI's direct answer to Anthropic's Claude Tools now in general availability. API access is rolling out to Plus, Pro, Business, and Enterprise customers.",
+      "Third-party analysts note critical caveats. OpenAI ran Astra on a modified Responses API harness that changed two key settings; standard stateless API calls — the kind production integrations use — score measurably lower. ARC-AGI-3 and FrontierMath are both harness-sensitive, and the AGI framing rests almost entirely on those numbers. Independent evaluations using production endpoints are underway; researchers expect scores to settle 10–15 points below OpenAI's reported maximum.",
+      "The competitive context matters. Anthropic shipped Claude Fable 5.1 two days earlier with 75% lower cache read costs. Google's Gemini 3.8 Flash landed the same day as Muse Spark 1.3, creating four frontier options within 72 hours across a price range of $0.10–$15/M tokens. Enterprise buyers now have real negotiating leverage from a genuinely competitive market. Vendor selection should rest on task-specific evaluation, not benchmark headlines.",
+    ],
+    read: "5 min read",
+    matters: "OpenAI's AGI declaration is a marketing frame, not a technical verdict. Run Astra on your own tasks before locking in an OpenAI-first stack. Four frontier models in 72 hours means real negotiating leverage — use it in Q3 contracts.",
+  },
+  {
+    rank: "02",
+    category: "Model Release",
+    headline: "Claude Fable 5.1 launches with 75% cheaper cache reads",
+    deck: "Anthropic released Claude Fable 5.1 and Mythos 5.1 on September 1, outperforming Fable 5 and GPT-5.6 Sol across benchmarks. Cache read costs drop 75% to $0.25/M tokens — the biggest saving in context-heavy agentic work.",
+    read: "3 min read",
+    matters: "Cache reads are the majority cost in enterprise agentic workflows. A 75% cut restructures the total cost model for teams running Claude in production. Benchmark this against current OpenAI spend before renewing any contract.",
+  },
+  {
+    rank: "03",
+    category: "Model Competition",
+    headline: "Gemini 3.8 Flash and Muse Spark 1.3 ship within hours",
+    deck: "Google DeepMind released Gemini 3.8 Flash on September 2 — 95% GPQA Diamond, $0.75/M input, Cyber variant for defenders. Meta followed hours later with Muse Spark 1.3 at ~$0.10/M, leading on agentic reasoning.",
+    read: "3 min read",
+    matters: "Google and Meta are compressing the cost of frontier reasoning. At $0.75 and $0.10 per million tokens, both models challenge the premium economics of proprietary frontier labs at a fraction of the price.",
+  },
+  {
+    rank: "04",
+    category: "IPO / Markets",
+    headline: "Anthropic IPO prospectus due after Labor Day",
+    deck: "Anthropic is targeting a September or October public listing near $965 billion, with Morgan Stanley, Goldman Sachs, and JPMorgan managing the offering. ARR hit $65B at end of July, up from $9B at end-2025.",
+    read: "4 min read",
+    matters: "Q3 2026 is the final pre-IPO quarter for Claude enterprise contracts. Once public, pricing discipline tightens. Teams using Claude at scale should secure multi-year terms before the prospectus is finalized.",
+  },
+  {
+    rank: "05",
+    category: "Funding / Infra",
+    headline: "Crusoe raises $3B, Fluidstack $1.5B in AI infra sprint",
+    deck: "Crusoe Energy raised a $3 billion Series F co-led by Atreides and Valor Equity Partners, with Mubadala participating. Fluidstack closed $1.5 billion. AI infrastructure consumed the week's two largest venture rounds.",
+    read: "3 min read",
+    matters: "GPU-rich data center providers are becoming de facto AI infrastructure. Crusoe and Fluidstack together add capacity that absorbs next-generation model training. The compute scarcity narrative is beginning to ease.",
+  },
+];
+
+const FRONTIER_LABS = [
+  {
+    lab: "Anthropic",
+    tag: "Fable 5.1 · Mythos 5.1 · IPO window",
+    items: [
+      "Claude Fable 5.1 and Mythos 5.1 release September 1: 75% cheaper cache reads at $0.25/M; outperforms Fable 5 and GPT-5.6 Sol.",
+      "Mythos 5.1 for restricted-access life-sciences and cybersecurity orgs: same model as Fable 5.1, safeguards selectively removed.",
+      "IPO prospectus expected after Labor Day; targeting September or October listing at ~$965B; ARR reached $65B end of July.",
+      "Morgan Stanley, Goldman Sachs, JPMorgan managing the offering; lockup periods may exceed the standard 180-day window.",
+    ],
+  },
+  {
+    lab: "OpenAI",
+    tag: "GPT-6 Astra · AGI era · 100K GPUs",
+    items: [
+      "GPT-6 Astra released September 3: 99.9% on ARC-AGI-3 (modified harness); Greg Brockman declares arrival of the AGI era.",
+      "Largest training run: 100,000+ GPUs at Stargate, Texas; first model supervised by prior OpenAI models during its own training.",
+      "Computer use ships in production: Astra navigates desktops as a human would — OpenAI's answer to Anthropic's Claude Tools GA.",
+      "Cybersecurity prompts restricted at launch; paid Plus, Pro, Business, Enterprise users gain API access rolling through September.",
+    ],
+  },
+  {
+    lab: "Google DeepMind",
+    tag: "Gemini 3.8 Flash · Cyber · KK leads",
+    items: [
+      "Gemini 3.8 Flash ships September 2: GPQA Diamond 95%, Terminal-Bench 87.6%, AA-LCR long context 81%. Priced at $0.75/M input.",
+      "Cyber variant of 3.8 Flash ships same day, defenders-only; restricted-access security model with enhanced threat analysis.",
+      "Kavukcuoglu's first major delivery under new operational leadership; Google describes a constructive September setup.",
+      "Flash leads on factual recall and terminal coding vs Muse Spark 1.3 on GDPval-AA; Muse leads on agentic knowledge work.",
+    ],
+  },
+  {
+    lab: "Meta",
+    tag: "Muse Spark 1.3 · $0.10/M · Agentic",
+    items: [
+      "Muse Spark 1.3 ships September 2 at ~$0.10 per million tokens — the lowest price point among frontier-class models this week.",
+      "GDPval-AA v2 Elo 1,754 in max mode — top score for agentic knowledge work and scientific reasoning across the week's launches.",
+      "Coding benchmark regression: 57/80 on eight-task suite (71%), down from 76% for Muse Spark 1.2 — noted by analysts as a concern.",
+      "Meta's pricing strategy confirms blended-cost competition: $0.10/M targets enterprises running high-volume inference workflows.",
+    ],
+  },
+  {
+    lab: "Open Infra",
+    tag: "Crusoe $3B · Fluidstack $1.5B · Compute",
+    items: [
+      "Crusoe raises $3B Series F (Atreides, Valor, Mubadala) for AI data center and cloud expansion; week's largest venture deal.",
+      "Fluidstack closes $1.5B for AI inference infrastructure; targets large-model serving capacity for next-generation workloads.",
+      "Gimlet Labs raises $300M for AI inference optimization; joins a diverse cohort of cybersecurity and robotics fundings this week.",
+      "DeepSeek recruiting 150+ senior backend engineers as infrastructure buckles under commercial load and agentic compute surges.",
+    ],
+  },
+];
+
+const BENCHMARK_TABLE = {
+  caption: "Frontier model benchmarks — September 1–7, 2026 snapshot",
+  models: ["Model", "Key Benchmark", "Input \$/M tok"],
+  rows: [
+    ["GPT-6 Astra",        "99.9% ARC-AGI",  "$15.00 (est.)"],
+    ["Claude Fable 5.1",   "~93% GPQA",      "$10.00"],
+    ["Gemini 3.8 Flash",   "95% GPQA",       "$0.75"],
+    ["Muse Spark 1.3",     "Elo 1754 agent", "~$0.10"],
+    ["Grok 4.6",           "61 AAII",        "$2.00 ★"],
+    ["GPT-5.6 Sol",        "~85% GPQA",      "$5.00"],
+    ["Claude Fable 5",     "~88% GPQA",      "$15.00"],
+  ],
+  footnote: "★ Astra ARC-AGI-3 score uses a modified API harness; standard production calls score lower. Muse Spark Elo from GDPval-AA v2 agentic benchmark. GPQA Diamond scores latest available. Fable 5.1 outperforms Fable 5 and GPT-5.6 Sol across core tasks.",
+};
+
+const DEV_TOOLS = [
+  {
+    tool: "Claude Fable 5.1",
+    updated: "Sept 1",
+    bullets: [
+      "Outperforms Fable 5, Opus 5, and GPT-5.6 Sol on coding, knowledge work, and long-horizon problem solving at similar compute effort.",
+      "Cache reads cost $0.25/M tokens — 75% less than Fable 5 — restructuring total cost for high-volume agentic production workflows.",
+    ],
+  },
+  {
+    tool: "GPT-6 Astra",
+    updated: "Sept 3",
+    bullets: [
+      "Computer use ships in production: Astra navigates desktops as a human — direct competition with Anthropic's Claude Tools GA.",
+      "99.9% on ARC-AGI-3 (harness-modified); cybersecurity prompts gated; rolling access for Plus, Pro, Business, Enterprise customers.",
+    ],
+  },
+  {
+    tool: "Gemini 3.8 Flash",
+    updated: "Sept 2",
+    bullets: [
+      "GPQA Diamond 95%, Terminal-Bench 87.6%, AA-LCR long context 81% — top factual recall and coding among models launched this week.",
+      "Priced at $0.75/M input tokens, $3.75/M output through December 31, 2026; Cyber variant for defenders ships alongside Flash.",
+    ],
+  },
+  {
+    tool: "Muse Spark 1.3",
+    updated: "Sept 2",
+    bullets: [
+      "GDPval-AA v2 Elo 1,754 in max mode — top score for agentic knowledge work and scientific reasoning across this week's models.",
+      "Priced at approximately $0.10 per million tokens; Meta targets high-volume enterprise inference where cost per call dominates.",
+    ],
+  },
+];
+
+const RESEARCH = [
+  {
+    title: "GPT-6 Astra: ARC-AGI-3 Saturation and AGI Framing",
+    source: "OpenAI · Fortune · Axios · Sept 3, 2026",
+    summary: "OpenAI's GPT-6 Astra posts 99.9% on ARC-AGI-3. Brockman declared the AGI era. Third-party analysis found the score reflects a modified API harness; standard stateless API calls score 10–15 points lower. Computer use — desktop navigation — ships in production. Independent evaluations are ongoing.",
+  },
+  {
+    title: "Claude Fable 5.1: 75% Cache Cost Reduction",
+    source: "Anthropic · VentureBeat · Sept 1, 2026",
+    summary: "Anthropic released Fable 5.1 and Mythos 5.1 September 1. Fable 5.1 outperforms Fable 5 and GPT-5.6 Sol. Cache reads fall 75% to $0.25/M tokens, restructuring agentic economics. Mythos 5.1 unlocks constrained capabilities for vetted cybersecurity and life-sciences orgs.",
+  },
+  {
+    title: "Gemini 3.8 Flash vs Muse Spark 1.3: Analysis",
+    source: "BenchLM · MindStudio · Sept 2, 2026",
+    summary: "Gemini 3.8 Flash (Sept 2) leads GPQA Diamond at 95% and Terminal-Bench at 87.6%. Meta Muse Spark 1.3 leads agentic reasoning at GDPval-AA Elo 1,754 vs Flash's 1,545. Spark coding fell from 76% to 71%. Flash costs $0.75/M; Muse Spark ~$0.10/M — a 7.5x cost advantage.",
+  },
+  {
+    title: "Anthropic IPO: Prospectus Expected After Labor Day",
+    source: "Yahoo Finance · Motley Fool · Sept 3, 2026",
+    summary: "Anthropic plans to release its IPO prospectus after Labor Day, targeting a September or October listing near $965 billion. ARR reached $65B at end of July, up from $9B at end-2025. Morgan Stanley, Goldman, and JPMorgan manage the offering. Longer-than-standard lockup under discussion.",
+  },
+  {
+    title: "AI Infrastructure: Crusoe $3B, Fluidstack $1.5B",
+    source: "Crunchbase · TechStartups · Sept 3, 2026",
+    summary: "Crusoe raised $3B Series F (Atreides, Valor, Mubadala). Fluidstack raised $1.5B for inference capacity. Gimlet Labs added $300M for AI inference optimization. AI infrastructure consumed the three largest venture deals of the week as labs compete for large-model training compute.",
+  },
+  {
+    title: "China Plans 9,800 Exaflops by 2030",
+    source: "China MIIT · AI Weekly · Sept 8, 2026",
+    summary: "China's MIIT released a 2026–2030 plan to quadruple AI compute from 2,185 to 9,800 exaflops. It covers chip production, data center expansion, and energy supply. The plan accelerates China's independence from U.S. semiconductors and signals state-backed AI compute as a strategic geopolitical priority.",
+  },
+];
+
+const INDEX_FINDINGS = [
+  {
+    metric: "AGI MARKETING VS EVAL",
+    body: "GPT-6 Astra's 99.9% ARC-AGI-3 comes with a critical asterisk: OpenAI used a modified harness with adjusted settings; standard API calls score lower. The AGI framing rests entirely on harness-sensitive benchmarks. Ground procurement decisions in task-specific testing, not marketing labels.",
+  },
+  {
+    metric: "72-HOUR MODEL SPRINT",
+    body: "Four frontier models in 72 hours: Fable 5.1 (Sept 1), Gemini 3.8 Flash (Sept 2), Muse Spark 1.3 (Sept 2), GPT-6 Astra (Sept 3). Price range: ~$0.10 to $15/M tokens. Frontier intelligence is effectively commoditized; vendor competition shifts to price, ecosystem fit, and compliance.",
+  },
+  {
+    metric: "CACHE COST RESTRUCTURING",
+    body: "Fable 5.1's 75% cache cost reduction ($1.00 → $0.25/M tokens) restructures economics for Claude enterprise users. Cache reads dominate cost in agentic workflows. Teams on OpenAI contracts should benchmark their cache-to-prompt ratio against Fable 5.1 before renewing any annual agreement.",
+  },
+  {
+    metric: "IPO PROCUREMENT WINDOW",
+    body: "Anthropic plans its prospectus after Labor Day. Enterprise teams in Q3 Claude negotiations are in the final pre-IPO window — the last quarter before public-market quarterly visibility tightens pricing. Lock in multi-year terms this quarter or accept higher post-listing rates.",
+  },
+  {
+    metric: "CHINA COMPUTE SURGE",
+    body: "China's plan to quadruple AI compute to 9,800 exaflops by 2030 represents state-backed buildout reducing U.S. semiconductor reliance. For enterprises, this adds geopolitical risk to AI infrastructure planning. Compute availability may tighten as the US-China race intensifies through decade end.",
+  },
+];
+
+const FUNDING_HERO = [
+  { v: "$3B",    l: "Crusoe Series F",          n: "Atreides, Valor, Mubadala co-led"   },
+  { v: "$1.5B",  l: "Fluidstack (AI infra)",     n: "Week's 2nd largest AI infra round"  },
+  { v: "$300M",  l: "Gimlet Labs",               n: "AI inference; September 2026 round" },
+  { v: "$965B",  l: "Anthropic IPO target",       n: "Prospectus post-Labor Day; ARR $65B" },
+];
+
+const MEGA_ROUNDS = [
+  { co: "Crusoe",           round: "Series F",      amount: "$3B",    lead: "Atreides + Valor",     val: "—",                  note: "AI data center and cloud; co-led with Mubadala; the week's largest venture deal." },
+  { co: "Fluidstack",       round: "Growth",        amount: "$1.5B",  lead: "Undisclosed",           val: "—",                  note: "AI inference infrastructure; targets large-model serving capacity." },
+  { co: "Gimlet Labs",      round: "Series (2026)", amount: "$300M",  lead: "Undisclosed",           val: "—",                  note: "AI inference optimization; joins diverse Sept 2026 funding cohort." },
+  { co: "HubX",             round: "Series A",      amount: "$75M",   lead: "Undisclosed",           val: "—",                  note: "Enterprise AI tooling platform; closed September 3, 2026." },
+  { co: "LeapXpert",        round: "Growth",        amount: "$180M",  lead: "Undisclosed",           val: "—",                  note: "AI-governed communications for financial services and government sectors." },
+  { co: "Anthropic (IPO)",  round: "IPO (target)",  amount: "~$965B", lead: "MS · GS · JPMorgan", val: "~$965B target",   note: "IPO prospectus post-Labor Day; ARR $65B July; September or October listing." },
+];
+
+const ENTERPRISE_MOVES = [
+  { co: "Anthropic",      move: "Releases Fable 5.1 and Mythos 5.1 September 1; cache reads fall 75% to $0.25/M. IPO prospectus planned after Labor Day, targeting September or October listing at ~$965B." },
+  { co: "OpenAI",         move: "Launches GPT-6 Astra September 3; declares AGI era. Model saturates ARC-AGI-3 at 99.9% on modified harness. Computer use ships in production, competing with Claude Tools GA." },
+  { co: "Google DeepMind",move: "Ships Gemini 3.8 Flash September 2: GPQA Diamond 95%, $0.75/M. Cyber variant for defenders. First major delivery under Kavukcuoglu's operational leadership." },
+  { co: "Meta",           move: "Ships Muse Spark 1.3 Sept 2 at ~$0.10/M — lowest-price frontier model. Leads agentic reasoning at GDPval-AA Elo 1,754; coding regression from 76% to 71% vs Spark 1.2." },
+  { co: "Crusoe",         move: "Closes $3B Series F led by Atreides Management, Valor Equity Partners, and Mubadala Capital for AI data center and cloud expansion — week's largest venture deal." },
+  { co: "China MIIT",     move: "Releases 2026–2030 plan to quadruple AI compute from 2,185 to 9,800 exaflops, targeting chip production, data centers, and energy to reduce U.S. semiconductor dependence." },
+];
+
+const ROBOTICS_SCIENCE = [
+  { title: "GPT-6 Astra Computer Use Ships",  note: "OpenAI's Astra navigates desktops as a human — production computer use competes with Anthropic's Claude Tools GA and Gemini's agentic capabilities." },
+  { title: "AI Agents Driving Compute Demand", note: "DeepSeek is recruiting 150 senior backend engineers as infrastructure buckles under commercial load and the surge in compute-heavy AI agent deployments." },
+  { title: "DSS Robotics Launches Sept 8",     note: "DSS, Inc. launched DSS Robotics September 8, bringing AI-powered robotics and intelligent automation solutions to enterprise manufacturing and logistics." },
+  { title: "FCC Restricts Foreign Robotics",   note: "FCC added foreign-produced advanced robotic devices to its covered list (DA 26-786), with carve-outs for FDA medical devices and stationary industrial arms." },
+];
+
+const REGULATORY = [
+  { region: "EU (Enforcement)",  item: "AI Act transparency rules now active",  summary: "EU AI Act transparency obligations are active: disclose AI content, notify chatbot users, watermark synthetic media. High-risk system obligations formally shifted to December 2027 under the July law.",  impact: "High" },
+  { region: "United States",     item: "US-EU AI regulation diverges",           summary: "The US advocates loose regulation at G20 while the EU enforces binding rules. No federal AI law exists; state statutes accumulate. The transatlantic regulatory gap widens through 2026.",            impact: "Medium-High" },
+  { region: "China",             item: "9,800 exaflop compute plan, 2030",       summary: "MIIT's 2026–2030 plan quadruples AI compute to 9,800 exaflops via chip production, data center buildout, and energy supply — reducing U.S. semiconductor dependence as a stated goal.",          impact: "High" },
+  { region: "EU — AI Act",  item: "High-risk AI: Dec 2027 deadline",        summary: "Digital Omnibus (June 2026) shifted high-risk AI obligations to December 2027 (standalone) and August 2028 (embedded products), giving firms 16 extra months of runway to achieve compliance.",        impact: "Medium" },
+  { region: "US — NIST",    item: "AI agent security standards issued",      summary: "NIST: unique agent identities, short-lived credentials, and separate human-vs-agent action logging — replacing static API keys. Addresses enterprise agent security gaps at scale.",               impact: "Medium-High" },
+];
+
+const THOUGHT_LEADERS = [
+  {
+    name: "Greg Brockman",
+    affiliation: "OpenAI",
+    quote: "It is not unreasonable to feel that we are now in the AGI era. Astra is the world's most intelligent and aligned model — built on our largest training run and the first supervised by its predecessors.",
+    context: "Announcing GPT-6 Astra, September 3, 2026.",
+  },
+  {
+    name: "Dario Amodei",
+    affiliation: "Anthropic",
+    quote: "Fable 5.1 is the model we prepared for this moment: better results at lower cost, with Mythos giving researchers the full capability surface where it is warranted. The IPO follows the product.",
+    context: "On Fable 5.1 launch and the Anthropic IPO prospectus, September 2026.",
+  },
+  {
+    name: "Koray Kavukcuoglu",
+    affiliation: "Google DeepMind",
+    quote: "Gemini 3.8 Flash is the first delivery I am fully accountable for. It leads on GPQA Diamond, Terminal-Bench, and factual recall. September is a constructive start.",
+    context: "On Gemini 3.8 Flash performance, September 2, 2026.",
+  },
+  {
+    name: "François Chollet",
+    affiliation: "ARC Prize / Google",
+    quote: "ARC-AGI-3 is designed to resist benchmark overfitting. A harness-modified 99.9% is a number, not a threshold. When I see harness asterisks, I want independent evals on default API settings.",
+    context: "On GPT-6 Astra's ARC-AGI-3 score and AGI claims, September 2026.",
+  },
+];
+
+const COMMUNITY_PULSE = [
+  { source: "HackerNews / developers",  theme: "Astra's AGI framing triggered skepticism: engineers flagged the harness-modified ARC-AGI-3 score and demanded independent evals. Consensus was to wait for third-party reproduction before treating it as a category shift." },
+  { source: "r/MachineLearning",        theme: "The 72-hour sprint drew appreciation and fatigue. Researchers noted price gaps from $0.10 to $15/M confirm frontier AI is no longer one lab's territory. The real question: which use case maps to which price point." },
+  { source: "LinkedIn / enterprise AI", theme: "Fable 5.1's 75% cache cut drew more enterprise attention than any single benchmark. Teams running large-scale agentic Claude deployments started running back-of-envelope cost models within hours of the announcement." },
+  { source: "r/singularity / Polymarket",theme: "Prediction markets firmed on Anthropic's IPO after the prospectus news. The $965B baseline generated debate: bulls cite the $65B ARR trajectory; bears flag copyright litigation overhang from the Sony/Warner suit." },
+];
+
+const WHAT_TO_WATCH = [
+  { when: "Sept–Oct 2026",  title: "Anthropic IPO Prospectus",           body: "Prospectus expected after Labor Day. Investors target September or October near $965B. The offering sets public-market pricing for frontier AI companies." },
+  { when: "Sept 2026",           title: "GPT-6 Astra Full API Rollout",        body: "Full API access rolls out to paid tiers. Independent benchmarks will clarify how Astra's harness-adjusted 99.9% holds on standard production endpoints." },
+  { when: "Q3 2026",             title: "Enterprise Claude Contract Window",   body: "Final pre-IPO quarter for Anthropic contracts. Lock in multi-year terms before the prospectus is published and public-market pricing discipline takes hold." },
+  { when: "Oct 1, 2026",         title: "Apple vs OpenAI Injunction",          body: "Injunction hearing on Apple's trade secrets suit against OpenAI. Adverse ruling could delay the hardware program and complicate the 2027 IPO narrative." },
+  { when: "Dec 2027",            title: "EU High-Risk AI Compliance",          body: "High-risk AI Act obligations activate December 2027. Firms should start gap assessments — the 16-month window closes faster than it appears." },
+];
+
+const SOURCES = [
+  "OpenAI. GPT-6 Astra: release announcement and benchmarks. openai.com. September 3, 2026.",
+  "Fortune / Axios. OpenAI launches GPT-6 Astra; Greg Brockman says AGI era has arrived. fortune.com. September 3, 2026.",
+  "Anthropic / VentureBeat. Claude Fable 5.1 and Mythos 5.1 launch with 75% cache cost reduction. venturebeat.com. September 1, 2026.",
+  "BenchLM / MindStudio. Gemini 3.8 Flash vs Muse Spark 1.3: benchmark analysis. benchlm.ai. September 2, 2026.",
+  "Yahoo Finance / Motley Fool. Anthropic IPO prospectus after Labor Day; targeting September or October. finance.yahoo.com. September 3, 2026.",
+  "Crunchbase. Crusoe $3B Series F, Fluidstack $1.5B: AI infrastructure leads week's funding rounds. crunchbase.com. September 4, 2026.",
+  "China MIIT / AI Weekly. China plans to quadruple AI compute to 9,800 exaflops by 2030. aiweekly.co. September 8, 2026.",
+  "GlobeNewswire / NIST. DSS Robotics launch; NIST AI agent security standards. September 8, 2026.",
+];
+
+const GLOSSARY = [
+  { term: "GPT-6 Astra",       def: "OpenAI model released September 3, 2026; claims AGI-era via 99.9% ARC-AGI-3 on a modified harness. Standard API scores under independent evaluation." },
+  { term: "Claude Fable 5.1",  def: "Released September 1, 2026. Outperforms Fable 5 and GPT-5.6 Sol. Cache reads drop to $0.25/M — 75% cheaper than Fable 5, cutting agentic workflow costs." },
+  { term: "Claude Mythos 5.1", def: "Restricted Fable 5.1 variant for vetted cybersecurity and life-sciences orgs. Same model; Anthropic's production safeguards selectively removed." },
+  { term: "Gemini 3.8 Flash",  def: "Google DeepMind model, September 2, 2026. Leads GPQA Diamond at 95% and Terminal-Bench at 87.6%. $0.75/M input; Cyber variant for defenders ships same day." },
+  { term: "Muse Spark 1.3",    def: "Meta frontier model, September 2, 2026. Priced at ~$0.10/M tokens. Leads agentic reasoning at GDPval-AA Elo 1,754; coding benchmark regresses vs Spark 1.2." },
+  { term: "ARC-AGI-3",         def: "Reasoning benchmark. Astra scored 99.9% under OpenAI's modified API harness; standard calls score lower. Benchmark is harness-configuration-sensitive." },
+];
+
+
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+const T = {
+  bg:      "#FAFAF7",
+  ink:     "#1A1A1A",
+  mid:     "#5A5A55",
+  faint:   "#8A8678",
+  rule:    "#D8D4C7",
+  accent:  "#C9C4B8",
+  paper:   "#F2EEE3",
+  inkPanel:"#1A1A1A",
+  serif:   "'Source Serif 4', 'Source Serif Pro', Georgia, serif",
+  sans:    "'IBM Plex Sans', system-ui, sans-serif",
+  mono:    "'IBM Plex Mono', ui-monospace, monospace",
+};
+
+// ─── SHARED COMPONENTS ──────────────────────────────────────────
+const Page = ({ children, style }) => (
+  <section className="report-page" style={{
+    width: 794, height: 1123, background: T.bg, color: T.ink,
+    fontFamily: T.sans, fontSize: 11, lineHeight: 1.5,
+    position: "relative", overflow: "hidden", ...style,
+  }}>{children}</section>
+);
+
+const RunningHeader = ({ page }) => (
+  <div style={{
+    position: "absolute", top: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingBottom: 12, borderBottom: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief · {REPORT_META.issue}</span>
+    <span>{REPORT_META.date}</span>
+    <span>{page}</span>
+  </div>
+);
+
+const Footer = ({ page }) => (
+  <div style={{
+    position: "absolute", bottom: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingTop: 12, borderTop: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief</span>
+    <span style={{ fontFamily: T.serif, fontStyle: "italic", letterSpacing: 0, textTransform: "none", fontSize: 10 }}>
+      AI generated by Mukul Dewangan
+    </span>
+    <span>{page}</span>
+  </div>
+);
+
+const PageTitle = ({ eyebrow, title, intro, size = "lg" }) => {
+  const sizes = { lg: { fontSize: 56, lineHeight: 1.0 }, md: { fontSize: 44, lineHeight: 1.02 }, sm: { fontSize: 36, lineHeight: 1.05 } };
+  return (
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", color: T.mid, textTransform: "uppercase" }}>{eyebrow}</div>
+      <h1 style={{ fontFamily: T.serif, fontWeight: 400, ...sizes[size], letterSpacing: "-0.02em", margin: "10px 0 0", color: T.ink }}>{title}</h1>
+      {intro && <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 16, color: T.mid, marginTop: 16, maxWidth: 560, lineHeight: 1.4 }}>{intro}</div>}
+    </div>
+  );
+};
+
+const SectionHead = ({ children, style }) => (
+  <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 20, color: T.ink, marginBottom: 12, ...style }}>{children}</div>
+);
+
+const WhyItMatters = ({ text, variant = "cream" }) => {
+  if (variant === "cream") return (
+    <div style={{ background: T.paper, padding: "22px 26px" }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.45, color: T.ink, marginTop: 10, maxWidth: 580 }}>{text}</div>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 10, borderLeft: "2px solid " + T.ink, paddingLeft: 12 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 12, lineHeight: 1.5, color: T.ink, marginTop: 4 }}>{text}</div>
+    </div>
+  );
+};
+
+// ─── PAGE 01 — COVER ────────────────────────────────────────────
+const CoverViz = () => {
+  const dots = [];
+  let s = 42;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  for (let i = 0; i < 28; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 50 + rnd() * 170;
+    dots.push(<circle key={i} cx={200 + Math.cos(a)*r} cy={200 + Math.sin(a)*r} r={1.3 + rnd()*2.6}
+      fill={i%5===0 ? T.ink : T.mid} opacity={i%5===0 ? 1 : 0.45} />);
+  }
+  return (
+    <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+      {[70, 115, 160, 200].map(r => <circle key={r} cx={200} cy={200} r={r} fill="none" stroke={T.rule} strokeWidth="0.6" />)}
+      <circle cx={200} cy={200} r={3} fill={T.ink} />
+      {dots}
+    </svg>
+  );
+};
+
+const CoverPage = () => (
+  <Page>
+    <div style={{ position: "absolute", top: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>The AI Brief</span><span>{REPORT_META.issue}</span>
+    </div>
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.serif, fontSize: 80, lineHeight: 0.95, letterSpacing: "-0.02em", fontWeight: 400, color: T.ink }}>The AI<br />Brief.</div>
+      <div style={{ marginTop: 18, fontFamily: T.serif, fontStyle: "italic", fontSize: 18, color: T.mid, maxWidth: 420, lineHeight: 1.35 }}>{REPORT_META.tagline}.</div>
+    </div>
+    <div style={{ position: "absolute", top: 100, right: 56, width: 250, height: 250 }}><CoverViz /></div>
+    <div style={{ position: "absolute", top: 400, left: 56, right: 56, paddingTop: 16, paddingBottom: 16, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 14 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{s.label}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 32, color: T.ink, lineHeight: 1, marginTop: 6 }}>{s.value}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 560, left: 56, right: 56 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Today's headlines</div>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>{TODAY_HEADLINES.length} signals</div>
+      </div>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        {TODAY_HEADLINES.map((h, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 14, padding: "13px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink, letterSpacing: "0.06em" }}>{String(i+1).padStart(2,"0")}</span>
+            <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink, lineHeight: 1.4 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{ position: "absolute", bottom: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>{REPORT_META.date}</span><span>{REPORT_META.edition}</span>
+    </div>
+  </Page>
+);
+
+// ─── PAGE 02 — EXECUTIVE SUMMARY ────────────────────────────────
+const ExecSummaryPage = () => (
+  <Page>
+    <RunningHeader page="Page 02" />
+    <PageTitle eyebrow="Section One" title={<>Executive<br />summary.</>} intro="The three themes that frame this week's signals — and the reasoning behind why each belongs on a leadership agenda." />
+    <div style={{ position: "absolute", top: 320, left: 56, display: "flex", gap: 18, fontFamily: T.sans, fontSize: 9.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <span>{REPORT_META.audience}</span><span>·</span><span>8 min read</span><span>·</span><span>Curated by the Brief desk</span>
+    </div>
+    <div style={{ position: "absolute", top: 370, left: 56, right: 56, bottom: 100 }}>
+      {EXECUTIVE_THEMES.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr 170px", gap: 24, alignItems: "start", padding: "18px 0", borderTop: "1px solid " + T.rule, borderBottom: i===EXECUTIVE_THEMES.length-1 ? "1px solid "+T.rule : "none" }}>
+          <div style={{ fontFamily: T.serif, fontSize: 34, lineHeight: 1, color: T.ink, fontWeight: 400 }}>{String(i+1).padStart(2,"0")}</div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.ink, marginBottom: 6 }}>{t.tag}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 14.5, lineHeight: 1.45, color: T.ink, maxWidth: 470 }}>{t.body}</div>
+          </div>
+          {t.stat && (
+            <div style={{ textAlign: "right", borderLeft: "1px solid " + T.rule, paddingLeft: 18 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.ink, lineHeight: 1 }}>{t.stat.v}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.4 }}>{t.stat.l}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <Footer page="02" />
+  </Page>
+);
+
+// ─── PAGE 03 — LEAD STORY ────────────────────────────────────────
+const LeadStoryPage = () => {
+  const s = TOP_STORIES[0];
+  return (
+    <Page>
+      <RunningHeader page="Page 03" />
+      <div style={{ position: "absolute", top: 110, left: 80, right: 80 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+          <span>Lead — {s.category}</span><span>{s.read}</span>
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontWeight: 400, fontSize: 44, lineHeight: 1.04, letterSpacing: "-0.02em", margin: "20px 0 0", color: T.ink, maxWidth: 600 }}>{s.headline}.</h1>
+        <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 17, lineHeight: 1.4, color: T.mid, marginTop: 20, maxWidth: 580 }}>{s.deck}</div>
+      </div>
+      <div style={{ position: "absolute", top: 460, left: 80, right: 80 }}><WhyItMatters text={s.matters} /></div>
+      <div style={{ position: "absolute", top: 640, left: 80, right: 80, bottom: 110, fontFamily: T.sans, fontSize: 11.5, lineHeight: 1.65, color: T.ink, maxWidth: 600 }}>
+        {s.body.map((p, i) => <p key={i} style={{ margin: "0 0 14px" }}>{p}</p>)}
+      </div>
+      <Footer page="03" />
+    </Page>
+  );
+};
+
+// ─── PAGE 04 — TOP STORIES ───────────────────────────────────────
+const TopStoriesPage = () => {
+  const more = TOP_STORIES.slice(1);
+  return (
+    <Page>
+      <RunningHeader page="Page 04" />
+      <PageTitle eyebrow="Section Two · More signals" title="Stories of the week." intro="Four more developments that warrant leadership attention this week." size="sm" />
+      <div style={{ position: "absolute", top: 300, left: 56, right: 56, bottom: 96, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+        {more.map((s, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "40px 1fr 250px", gap: 24, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+            <div style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1, color: T.ink }}>{s.rank}</div>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 8 }}>
+                <span>{s.category}</span><span>{s.read}</span>
+              </div>
+              <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.3, color: T.ink }}>{s.headline}.</div>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 12.5, color: T.mid, marginTop: 8, lineHeight: 1.5, maxWidth: 430 }}>{s.deck}</div>
+            </div>
+            <div><WhyItMatters text={s.matters} variant="inline" /></div>
+          </div>
+        ))}
+      </div>
+      <Footer page="04" />
+    </Page>
+  );
+};
+
+// ─── PAGE 05 — FRONTIER MODELS ───────────────────────────────────
+const FrontierModelsPage = () => (
+  <Page>
+    <RunningHeader page="Page 05" />
+    <PageTitle eyebrow="Section Three · Frontier models" title="Labs, in their own words." intro="Per-lab summary of the week's model and capability developments — the commercial map of the frontier." size="sm" />
+    <div style={{ position: "absolute", top: 268, left: 56, right: 56, bottom: 88, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+      {FRONTIER_LABS.map((l, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 28, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+          <div style={{ overflow: "hidden" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.ink, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.lab}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 5, lineHeight: 1.35 }}>{l.tag}</div>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", overflow: "hidden" }}>
+            {l.items.map((it, j) => (
+              <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 10, padding: "3px 0", fontFamily: T.sans, fontSize: 10.5, color: T.ink, lineHeight: 1.5 }}>
+                <span style={{ color: T.mid, fontFamily: T.mono, fontSize: 9, paddingTop: 2 }}>·</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <Footer page="05" />
+  </Page>
+);
+
+// ─── PAGE 06 — BENCHMARKS + DEV TOOLS ───────────────────────────
+const BenchmarksDevToolsPage = () => (
+  <Page>
+    <RunningHeader page="Page 06" />
+    <PageTitle eyebrow="Section Four · Benchmarks & developer tools" title="The frontier, head-to-head." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>{BENCHMARK_TABLE.caption}</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+            {BENCHMARK_TABLE.models.map((m, i) => <span key={i} style={{ textAlign: i===0 ? "left" : "right" }}>{m}</span>)}
+          </div>
+          {BENCHMARK_TABLE.rows.map((row, i) => {
+            const [name, a, b] = row;
+            const numA = parseFloat(a), numB = parseFloat(b);
+            const aBold = !isNaN(numA) && !isNaN(numB) && numA < numB;
+            const bBold = !isNaN(numA) && !isNaN(numB) && numB < numA;
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink }}>{name}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: aBold ? T.ink : T.mid, fontWeight: aBold ? 500 : 400 }}>{a}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: bBold ? T.ink : T.mid, fontWeight: bBold ? 500 : 400 }}>{b}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 8, fontFamily: T.serif, fontStyle: "italic", fontSize: 11, color: T.mid, lineHeight: 1.4 }}>{BENCHMARK_TABLE.footnote}</div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Developer tools — week-in-progress</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {DEV_TOOLS.map((tl, i) => (
+            <div key={i} style={{ padding: "10px 0", borderTop: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink }}>{tl.tool}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upd. {tl.updated}</span>
+              </div>
+              <ul style={{ margin: "5px 0 0", paddingLeft: 0, listStyle: "none" }}>
+                {tl.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 8, fontSize: 9.5, color: T.ink, lineHeight: 1.45, padding: "2px 0" }}>
+                    <span style={{ color: T.mid, fontFamily: T.mono, paddingTop: 1 }}>·</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="06" />
+  </Page>
+);
+
+// ─── PAGE 07 — RESEARCH ──────────────────────────────────────────
+const ResearchPage = () => (
+  <Page>
+    <RunningHeader page="Page 07" />
+    <PageTitle eyebrow="Section Five · Research" title="Papers and findings." intro="What the academic literature and the major AI indices added this week." size="sm" />
+    <div style={{ position: "absolute", top: 290, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Notable research</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {RESEARCH.map((r, i) => (
+            <div key={i} style={{ padding: "10px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 14, color: T.ink, lineHeight: 1.3 }}>{r.title}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{r.source}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, marginTop: 5, lineHeight: 1.5 }}>{r.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>AI Index — key findings this week</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {INDEX_FINDINGS.map((f, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 20, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.ink, letterSpacing: "0.12em", textTransform: "uppercase" }}>{f.metric}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 10, color: T.ink, lineHeight: 1.5 }}>{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="07" />
+  </Page>
+);
+
+// ─── PAGE 08 — FUNDING ───────────────────────────────────────────
+const FundingPage = () => (
+  <Page>
+    <RunningHeader page="Page 08" />
+    <PageTitle eyebrow="Section Six · Capital" title="The funding landscape." size="sm" />
+    <div style={{ position: "absolute", top: 240, left: 56, right: 56, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, padding: "20px 0" }}>
+      {FUNDING_HERO.map((h, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 18 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{h.l}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 36, color: T.ink, lineHeight: 1, marginTop: 8 }}>{h.v}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 10, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{h.n}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 410, left: 56, right: 56 }}>
+      <SectionHead>Mega rounds &amp; strategic bets</SectionHead>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+          <span>Company</span><span>Round</span><span>Amount</span><span>Lead</span><span>Valuation</span><span>Note</span>
+        </div>
+        {MEGA_ROUNDS.map((m, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "10px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.serif, fontSize: 13, color: T.ink }}>{m.co}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid }}>{m.round}</span>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink }}>{m.amount}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.4 }}>{m.lead}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.val}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer page="08" />
+  </Page>
+);
+
+// ─── PAGE 09 — ENTERPRISE · ROBOTICS · POLICY ───────────────────
+const EnterprisePolicyPage = () => (
+  <Page>
+    <RunningHeader page="Page 09" />
+    <PageTitle eyebrow="Section Seven · Industry · Robotics · Policy" title="Where the rules and runways meet." size="sm" />
+    <div style={{ position: "absolute", top: 260, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 14 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Enterprise &amp; industry moves</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ENTERPRISE_MOVES.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "7px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.25 }}>{c.co}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>{c.move}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Robotics &amp; science</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ROBOTICS_SCIENCE.map((r, i) => (
+            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 13, color: T.ink, lineHeight: 1.25 }}>{r.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{r.note}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Regulatory &amp; policy</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {REGULATORY.map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 100px", gap: 16, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "start" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{r.region}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.3 }}>{r.item}</div>
+                <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{r.summary}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Impact</div>
+                <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, marginTop: 2 }}>{r.impact}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="09" />
+  </Page>
+);
+
+// ─── PAGE 10 — VOICES · PULSE · WATCH ──────────────────────────
+const VoicesWatchPage = () => (
+  <Page>
+    <RunningHeader page="Page 10" />
+    <PageTitle eyebrow="Section Eight · Voices · Pulse · Watch" title="What the field is saying." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>Thought leader pulse</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {THOUGHT_LEADERS.map((q, i) => (
+            <div key={i} style={{ border: "1px solid " + T.rule, padding: "12px 14px 14px", background: T.bg, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 13, lineHeight: 1.4, color: T.ink }}>"{q.quote}"</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginTop: 8 }}>— {q.name} · {q.affiliation}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{q.context}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Community pulse</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {COMMUNITY_PULSE.map((p, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "6px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.08em", textTransform: "uppercase" }}>{p.source}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.5 }}>{p.theme}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>What to watch</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14, borderTop: "1.5px solid " + T.ink, paddingTop: 10, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {WHAT_TO_WATCH.map((w, i) => (
+            <div key={i} style={{ overflow: "hidden" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{w.when}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, lineHeight: 1.25, marginTop: 5 }}>{w.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 8.5, color: T.mid, marginTop: 5, lineHeight: 1.45 }}>{w.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="10" />
+  </Page>
+);
+
+// ─── PAGE 11 — SOURCES + GLOSSARY ───────────────────────────────
+const ClosingPage = () => (
+  <Page>
+    <RunningHeader page="Page 11" />
+    <PageTitle eyebrow="End matter" title={<>Sources &amp;<br />glossary.</>} intro="The reading list, the working vocabulary, and where this issue ends." />
+    <div style={{ position: "absolute", top: 430, left: 56, right: 56, bottom: 130, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Sources</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {SOURCES.map((s, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr", gap: 8, padding: "6px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: T.mono, color: T.mid }}>{String(i+1).padStart(2,"0")}</span>
+              <span>{s}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Glossary</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {GLOSSARY.map((g, i) => (
+            <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 11.5, color: T.ink }}>{g.term}.{" "}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.45 }}>{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div style={{ position: "absolute", bottom: 90, left: 56, right: 56, textAlign: "center", fontFamily: T.serif, fontStyle: "italic", fontSize: 13, color: T.mid }}>
+      ✦ End of {REPORT_META.issue} · {REPORT_META.date} ✦
+    </div>
+    <Footer page="11" />
+  </Page>
+);
+
+// ─── PAGE REGISTRY ───────────────────────────────────────────────
+const PAGES = [
+  { key: "cover",           label: "01 · Cover",                          Comp: CoverPage },
+  { key: "exec-summary",    label: "02 · Executive Summary",              Comp: ExecSummaryPage },
+  { key: "lead-story",      label: "03 · Lead Story",                     Comp: LeadStoryPage },
+  { key: "top-stories",     label: "04 · Top Stories",                    Comp: TopStoriesPage },
+  { key: "frontier-models", label: "05 · Frontier Models",                Comp: FrontierModelsPage },
+  { key: "benchmarks",      label: "06 · Benchmarks & Dev Tools",         Comp: BenchmarksDevToolsPage },
+  { key: "research",        label: "07 · Research",                       Comp: ResearchPage },
+  { key: "funding",         label: "08 · Funding",                        Comp: FundingPage },
+  { key: "enterprise",      label: "09 · Enterprise · Robotics · Policy", Comp: EnterprisePolicyPage },
+  { key: "voices",          label: "10 · Voices · Pulse · Watch",         Comp: VoicesWatchPage },
+  { key: "closing",         label: "11 · Sources · Glossary",             Comp: ClosingPage },
+];
+
+// ─── APP ROOT ────────────────────────────────────────────────────
+const { useState, useEffect } = React;
+
+function App() {
+  const [active, setActive] = useState("cover");
+
+  useEffect(() => {
+    const nav = document.getElementById("nav-bar");
+    if (!nav) return;
+    nav.innerHTML = "";
+    PAGES.forEach(p => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn" + (p.key === active ? " active" : "");
+      btn.textContent = p.label;
+      btn.onclick = () => {
+        setActive(p.key);
+        const el = document.getElementById("page-" + p.key);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(btn);
+    });
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 120;
+      let current = PAGES[0].key;
+      PAGES.forEach(p => {
+        const el = document.getElementById("page-" + p.key);
+        if (el && el.offsetTop <= scrollY) current = p.key;
+      });
+      if (current !== active) setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [active]);
+
+  return (
+    <div id="report-root">
+      {PAGES.map(p => (
+        <div id={"page-" + p.key} key={p.key}>
+          <p.Comp />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("report-root"));
+</script>
+</body>
+</html>
+
+</script>
+</body>
+</html>

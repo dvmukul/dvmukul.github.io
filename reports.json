@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 37",
+    "date": "2026-09-08",
+    "summary": "OpenAI launches GPT-6 Astra on September 3, declaring the arrival of the AGI era on a harness-modified 99.9% ARC-AGI-3 score, while Anthropic ships Claude Fable 5.1 and Mythos 5.1 with 75% cheaper cache reads, Google DeepMind releases Gemini 3.8 Flash (95% GPQA Diamond), and Meta ships Muse Spark 1.3 at ~$0.10/M tokens — four frontier models in 72 hours; Anthropic also confirms its IPO prospectus is coming after Labor Day targeting a ~$965B valuation, and Crusoe and Fluidstack raise $3B and $1.5B respectively for AI infrastructure.",
+    "filename": "AI-Report-2026-09-08.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 36",
     "date": "2026-08-31",
     "summary": "Anthropic investors target a record $2 trillion October IPO on projected $100–120B year-end ARR, even as Sony Music Publishing and Warner Chappell file a multi-billion-dollar copyright suit over Claude's training data; OpenAI terminates Cursor's model access effective November 12 following SpaceX's acquisition of the coding editor, forcing Cursor onto Grok 4.6; and Google DeepMind resets leadership as Hassabis moves to chairman, Koray Kavukcuoglu takes operational control, and Jeff Dean departs after 27 years to co-found Discovery Loop.",
