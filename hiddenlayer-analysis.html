@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HiddenLayer competitive intelligence — market analysis, product and technology audit, PM critique, and a mock product strategy for the AI security platform racing to define agentic AI security before its better-funded rivals do.">
+<title>HiddenLayer: The Agentic Security Bet — Competitive Intelligence · Mukul Dewangan</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0F0F0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* PAGE-SPECIFIC: RESEARCH STAT LIST */
+.stat-list { list-style: none; margin: 16px 0; }
+.stat-list li { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; align-items: baseline; }
+.stat-list li:last-child { border-bottom: none; }
+.stat-list .stat-figure { font-family: var(--font-display); font-style: italic; font-size: 20px; color: var(--accent); min-width: 74px; }
+.stat-list .stat-figure.blue { color: var(--teal); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · September 2026</div>
+  <h1>HiddenLayer:<br>The <em>Agentic Security</em> Bet</h1>
+  <p class="cover-sub">A market analysis, product and technology audit, PM critique, and mock product strategy for HiddenLayer — the AI security platform that just raised $100M to prove it can out-run three of its acquired rivals into the agentic era.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Austin / Leander, TX</span></div>
+    <div>FOUNDED<span>2022</span></div>
+    <div>TOTAL FUNDING<span>~$156M</span></div>
+    <div>STATUS<span>Series B · ARR up 10x YoY</span></div>
+    <div>COVERAGE<span>hiddenlayer.com</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$156M</div><div class="stat-label">Total Funding</div></div>
+  <div class="stat-box"><div class="stat-num blue">10x</div><div class="stat-label">ARR Growth, YoY</div></div>
+  <div class="stat-box"><div class="stat-num">39</div><div class="stat-label">Patents Granted</div></div>
+  <div class="stat-box"><div class="stat-num accent">$100M</div><div class="stat-label">Series B, Sep 2026</div></div>
+  <div class="stat-box"><div class="stat-num blue">$2.83B</div><div class="stat-label">2026 AI Security Spend</div></div>
+  <div class="stat-box"><div class="stat-num">50+</div><div class="stat-label">New Customers Signed</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is HiddenLayer?</h2>
+
+  <p>HiddenLayer is an Austin-area (Leander, TX) cybersecurity startup, founded in 2022, that sells a single proposition to the enterprise: the models and agents you're putting into production are unaudited software with a novel attack surface, and nothing in your existing security stack — EDR, WAF, DLP, SIEM — was built to see it. Its <strong>AI Security Platform (AISec)</strong> spans the AI lifecycle: discovering shadow AI, scanning models before deployment, defending them at runtime, and red-teaming them continuously. In September 2026 it closed a $100M Series B, and its own numbers are the story: ARR up more than 10x in a year, 50+ new platform customers, and a customer list that reportedly includes a frontier model provider with 700M+ weekly users — almost certainly OpenAI or a peer at that scale, though HiddenLayer has not named the account.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    HiddenLayer is one of the last sizable independent, full-lifecycle AI security platforms left standing. In the eighteen months before this report, three of its closest direct competitors — Protect AI, Robust Intelligence, and Lakera — were each acquired by a hyperscale security platform (Palo Alto Networks, Cisco, and Check Point respectively). That is either the best news HiddenLayer has had (less independent competition, "last neutral platform" positioning) or a warning about its own likely endgame — and probably both. The rest of this report is written with that tension as the central lens.
+  </div>
+
+  <h3>Leadership</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Chris "Tito" Sestito — CEO &amp; Co-Founder</h4><p>Formerly led threat research at Cylance (the endpoint-security pioneer acquired by BlackBerry), giving HiddenLayer's research-first identity a direct lineage. The company's public voice on agentic AI risk via podcasts and press.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Mike Gesnaldo — Chief Revenue Officer</h4><p>Runs go-to-market as the company pivots from a research-led, land-in-finance-and-government motion toward the broader enterprise and EMEA expansion the Series B is explicitly funding.</p></div>
+  </div>
+  <p class="footnote">Public reporting is thin on the full founding team beyond Sestito; HiddenLayer's own materials emphasize the Cylance/adversarial-research pedigree over individual bios — a deliberate research-brand-over-founder-brand choice.</p>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2022</div><div class="tl-title">Founded in Texas</div><div class="tl-desc">Launched to secure machine learning models — the pitch predates the ChatGPT-driven generative AI boom by several months, an early-mover advantage in framing.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2023</div><div class="tl-title">$50M Series A</div><div class="tl-desc">Led by M12, Microsoft's venture fund — an early strategic signal that Microsoft saw model security as a category, not a feature.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2024</div><div class="tl-title">ShadowLogic research published; Automated Red Teaming launched</div><div class="tl-desc">Disclosed a technique for planting codeless backdoors inside "safe" model formats (safetensors, ONNX, TensorFlow) by manipulating the computational graph itself — undermining the industry's format-safety assumption and directly justifying HiddenLayer's runtime and scanning products.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2025</div><div class="tl-title">Consolidation wave removes three peers</div><div class="tl-desc">Palo Alto Networks acquires Protect AI, Cisco acquires Robust Intelligence, Check Point acquires Lakera. HiddenLayer becomes one of very few remaining independent, full-lifecycle AI security platforms of scale.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Early 2026</div><div class="tl-title">2026 AI Threat Landscape Report; AISec Platform 2.0</div><div class="tl-desc">Publishes annual research report spotlighting the rise of agentic AI risk; ships a platform update adding context, visibility, and observability for enterprise AI security.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Sep 2026</div><div class="tl-title">$100M Series B</div><div class="tl-desc">Led by Delta-v Capital with Ten Eleven Ventures, Morgan Stanley, M12, and Booz Allen Ventures. ARR up 10x YoY. Capital earmarked for sales/distribution, engineering, and EMEA expansion — and for two new products: Agentic Runtime Security and Agent Harness Security (for securing autonomous coding agents at runtime).</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape &amp; Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>Gartner puts 2026 global spend on AI security tools at $2.83B — an 83% jump from 2025 — climbing to $4.78B in 2027 and roughly $7.7B by 2028. That is a real, fast-growing budget line, but it is still a rounding error next to the broader cybersecurity market, and Gartner's own analysts frame the driver bluntly: traditional tools "treat AI applications like any other software" and can't see AI-specific threats like prompt injection, model supply-chain compromise, or agentic misuse. The uncomfortable question for every vendor in this space, HiddenLayer included, is how much of that budget is genuinely new spend versus a reallocation that dries up once boards feel "covered" rather than actually protected.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>Market Size</h4><p>$2.83B (2026) → $4.78B (2027, +69%) → ~$7.7B (2028) per Gartner. AI Application Security is the largest sub-segment ($851M by 2027); AI Usage Control is the fastest-growing (+73%).</p></div>
+    <div class="card"><h4>Consolidation Wave</h4><p>Three of HiddenLayer's closest peers were acquired by platform vendors within roughly 18 months: Protect AI → Palo Alto Networks, Robust Intelligence → Cisco, Lakera → Check Point. Prompt Security was separately acquired by SentinelOne.</p></div>
+    <div class="card"><h4>Fresh Capital Chasing the Same Wedge</h4><p>Agent-native entrants Noma Security and Zenity have each raised $100M+, meaning HiddenLayer's "agentic security" pivot is a contested land grab, not a walk-in.</p></div>
+  </div>
+
+  <h3>Competitive Map</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Moat</th><th>HiddenLayer Overlap</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Protect AI</strong> (Palo Alto Networks)</td><td>Broad AI/ML security platform</td><td>Open-source tooling (ModelScan, LLM Guard, NB Defense), huntr.com bug bounty, now Palo Alto's distribution and bundling power</td><td>Full-platform: discovery, scanning, runtime</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Robust Intelligence</strong> (Cisco)</td><td>Model validation + AI firewall</td><td>Folded into Cisco AI Defense; rides Cisco's network-security install base</td><td>Runtime defense, red-teaming</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Lakera</strong> (Check Point)</td><td>LLM guardrails, prompt-injection detection</td><td>Viral developer mindshare via the "Gandalf" prompt-injection game; now Check Point's channel</td><td>Runtime guardrails — historically HiddenLayer's thinner spot</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>CalypsoAI</strong></td><td>Model validation &amp; red-teaming, still independent</td><td>Deep government/defense relationships</td><td>Attack simulation, model risk scoring</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Noma Security</strong></td><td>Agentic AI &amp; data-pipeline security, built agent-native</td><td>$100M+ raised in 2025–26; no legacy model-scanning baggage to maintain</td><td>Direct collision on Agentic Runtime Security</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Zenity</strong></td><td>AI agent governance (Copilot Studio, low-code agent builders)</td><td>Deep ties into the Microsoft Copilot ecosystem; $100M+ raised</td><td>Agent Harness Security</td><td><span class="tag gold">MEDIUM-HIGH</span></td></tr>
+      <tr><td><strong>Hyperscaler-native guardrails</strong> (Azure AI Content Safety, Bedrock Guardrails, Google Model Armor)</td><td>Bundled cloud features</td><td>Zero switching cost, billed alongside compute buyers already pay for</td><td>Baseline runtime guardrails — the "good enough" substitute</td><td><span class="tag gold">MEDIUM</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Industry Trends Shaping HiddenLayer's Fate</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🏦</div>
+      <h4>Platform Vendors Are Buying, Not Building</h4>
+      <p>Palo Alto, Cisco, Check Point, and SentinelOne each concluded it was faster to acquire AI-security depth than build it. That validates the category and removes independent alternatives — but it also means the buyer conversation increasingly starts with "what does our existing platform vendor already bundle for free," which is a harder pitch for a standalone vendor.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Agentic AI Is Moving Faster Than Its Own Security</h4>
+      <p>HiddenLayer's own 2026 AI Threat Landscape Report found 1 in 8 reported AI breaches already linked to agentic systems, even though most enterprises describe agentic deployment as early-stage. Autonomous coding agents (Claude Code, Cursor, Copilot-style tools) are a new, largely unmonitored execution surface.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h4>Disclosure and Compliance Pressure Is Building</h4>
+      <p>85% of organizations in HiddenLayer's survey support mandatory AI-breach disclosure, yet 53% admit withholding reports out of fear of backlash and 31% don't even know if they've been breached. The EU AI Act and NIST AI RMF are pushing toward auditable inventories (AIBOMs) as a baseline requirement, not a nice-to-have.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💸</div>
+      <h4>Budget Growth Is Outrunning Budget Depth</h4>
+      <p>91% of organizations added AI security budget for 2025, but 40%+ still allocate less than 10% of their total security spend to it. That's a market where the checkbox gets funded before the actual risk does — good for initial land deals, uncertain for expansion revenue.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Lifecycle Breadth Without Model Access</h4><p>Winning platforms cover discovery → supply chain → runtime → red-teaming without requiring model weights, retraining, or invasive integration — lowering the barrier for security teams who don't own the model.</p></div>
+    <div class="card"><h4>Research Credibility That Feeds the Product</h4><p>CVE disclosures, novel attack research (like ShadowLogic), and MITRE ATLAS alignment aren't marketing exercises when they directly become new detection signatures — they're the actual moat in a market where detection logic ages fast.</p></div>
+    <div class="card"><h4>Beachheads in Regulated, High-Consequence Verticals</h4><p>Finance, government/defense, and frontier AI labs need more than hyperscaler-bundled guardrails to satisfy model-risk-management and audit requirements — creating a durable wedge above the "good enough" tier.</p></div>
+    <div class="card"><h4>Distribution — The Thing Most Startups Here Lack</h4><p>Every acquired competitor in this space had strong technology and thin distribution. GTM scale, not detection accuracy, is what has actually decided outcomes in this category so far.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What HiddenLayer Actually Sells</h2>
+
+  <p>The AISec Platform is organized around the AI lifecycle rather than around a single tool. HiddenLayer's own framing groups it into four pillars — Discovery, Supply Chain Security, Attack Simulation, and Runtime Security — with two newer modules (Agentic Runtime Security and Agent Harness Security) extending that coverage to autonomous agents specifically.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">AI Discovery</div>
+    <div class="tech-layer-content">
+      <strong>Shadow AI inventory</strong>
+      <p>Identifies AI applications, models, and assets across cloud and on-prem environments that security teams don't already know about — the prerequisite for everything downstream, and the module that most directly surfaces the "76% call shadow AI a definite/probable problem" finding from HiddenLayer's own research.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Supply Chain Security</div>
+    <div class="tech-layer-content">
+      <strong>Model Scanner</strong>
+      <p>Static analysis across 35+ model formats (PyTorch, TensorFlow, ONNX, Keras, GGUF, pickle, safetensors) for malicious code injection, pickle deserialization exploits, and architecture-level backdoors, before a model reaches production. Ships as a GitHub Action and integrates into Azure AI Foundry, AWS SageMaker, Databricks Unity Catalog, and Hugging Face workflows.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Attack Simulation</div>
+    <div class="tech-layer-content">
+      <strong>Automated Red Teaming</strong>
+      <p>Continuously simulates adversarial attacks against production models and agents, mapped to MITRE ATLAS tactics — effectively automating what used to be a manual, expensive, point-in-time pentest engagement.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Runtime Security</div>
+    <div class="tech-layer-content">
+      <strong>AI Detection &amp; Response (AIDR)</strong>
+      <p>Agentless, model-agnostic monitoring of production inference for adversarial inputs, prompt injection, and extraction attempts, without requiring access to model weights or modifying the model itself.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">New in 2026</div>
+    <div class="tech-layer-content">
+      <strong>Agentic Runtime Security + Agent Harness Security</strong>
+      <p>Extends runtime monitoring to autonomous agents and, specifically, to the "harness" — the tool-calling and execution environment — that AI coding agents run inside. Funded directly out of the Series B and positioned as the next growth leg.</p>
+    </div>
+  </div>
+
+  <h3>Target Customer Segments</h3>
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Problem Solved</th><th>HiddenLayer Solution</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td>Financial services (banking, insurance, trading)</td><td>Fraud-detection and trading models are high-value, high-scrutiny attack targets; regulators expect model risk management</td><td>Model Scanner + Runtime Security + AIBOM for audit trails</td><td>Named as a primary vertical in the Series B announcement</td></tr>
+      <tr><td>Frontier AI / big tech</td><td>Public-facing LLMs are among the most-attacked surfaces on the internet</td><td>Runtime Security + Attack Simulation at hyperscale</td><td>Reportedly includes a model provider with 700M+ weekly users — an exceptional reference logo, and a concentration risk if it churns</td></tr>
+      <tr><td>US federal government, defense, intelligence</td><td>National-security AI systems need adversarial-hardened deployment beyond what hyperscaler tooling alone provides</td><td>Full AISec platform</td><td>Long sales cycles, high contract value, sticky multi-year relationships</td></tr>
+      <tr><td>Healthcare, pharma, insurance, airlines, accounting</td><td>Safety- or compliance-critical AI use cases with third-party/open-source model exposure</td><td>Discovery + Model Scanner</td><td>Named in Series B materials as newer verticals; smaller logo count than finance/gov so far</td></tr>
+      <tr><td>Platform &amp; application developer teams (horizontal)</td><td>Shipping AI features via CI/CD without a security review gate</td><td>GitHub Action, Azure/AWS Marketplace listings</td><td>Developer-adjacent distribution, but still an enterprise, sales-led pricing motion — not self-serve</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Metrics &amp; Recent Performance</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📈</div><h4>ARR up &gt;10x, Year Over Year</h4><p>The headline growth number behind the Series B — but HiddenLayer describes absolute ARR only as "tens of millions," meaning the multiple is impressive off a genuinely small base, against a market Gartner sizes at $2.83B in 2026.</p></div>
+    <div class="card"><div class="card-icon">🆕</div><h4>50+ New Platform Customers, &gt;90% of ARR Growth</h4><p>New-logo-driven growth is a strong land signal, but with over 90% of ARR growth coming from new customers, the company discloses little about expansion revenue or net retention within its existing base — an open question, not a confirmed weakness.</p></div>
+    <div class="card"><div class="card-icon">🔬</div><h4>39 Patents Granted, 65 Pending</h4><p>Alongside 48–50+ disclosed CVEs across ML frameworks (figures vary slightly across company communications from 2024–2026). A genuine, hard-to-fake research output that converts into detection signatures.</p></div>
+    <div class="card"><div class="card-icon">💰</div><h4>$100M Series B, September 2026</h4><p>Led by Delta-v Capital with Ten Eleven Ventures, Morgan Stanley, M12 (Microsoft), and Booz Allen Ventures — a strategic-investor bench that doubles as a potential channel into finance, defense, and Microsoft's ecosystem.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 4: TECHNOLOGY DEEP DIVE -->
+<div class="section">
+  <div class="section-label">§ 04 — Technology Deep Dive</div>
+  <h2>Core Technology Stack, AI Strategy &amp; AI Readiness</h2>
+
+  <p>HiddenLayer's technical differentiation rests on one architectural choice: it operates as an <strong>agentless, model-agnostic</strong> layer, meaning it does not require access to model weights, training data, or prompts, and does not require retraining or modifying the model it protects. That lowers integration friction relative to approaches that need deep model access — but it also means detection is inherently probabilistic and signature/behavior-driven rather than based on inspecting the model's internals directly.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Detection Method</div>
+    <div class="tech-layer-content">
+      <strong>Static + behavioral analysis, not internals inspection</strong>
+      <p>Model Scanner performs static analysis across serialized model files looking for known-malicious code patterns, unsafe deserialization calls (the classic pickle exploit class), and structurally anomalous computation graphs. Runtime/AIDR performs behavioral analysis on inference traffic — inputs and outputs — to flag adversarial or extraction-style patterns without touching the model itself.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">ShadowLogic Research</div>
+    <div class="tech-layer-content">
+      <strong>The technical justification for the whole product line</strong>
+      <p>HiddenLayer's own research team demonstrated that backdoors can be implanted in models saved in formats widely assumed to be "safe" — including safetensors and ONNX — not by injecting executable code, but by manipulating the model's computational graph itself. This is the single most important technical claim in HiddenLayer's marketing: it argues that format-level safety (the industry's default mitigation for the older pickle-deserialization problem) is not sufficient, which is precisely the gap Model Scanner and Runtime Security are built to close.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">AIBOM</div>
+    <div class="tech-layer-content">
+      <strong>Machine-readable AI bill of materials</strong>
+      <p>Auto-generates inventories of model components, datasets, and dependencies for compliance auditing — positioned squarely ahead of EU AI Act and NIST AI RMF documentation requirements that are still being finalized in most jurisdictions.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Ecosystem</div>
+    <div class="tech-layer-content">
+      <strong>Middleware, not a standalone console</strong>
+      <p>Native integrations with AWS SageMaker, Azure AI Foundry, Databricks Unity Catalog, Hugging Face, MLflow, CrowdStrike, and SIEM/SOAR platforms, plus AWS and Azure Marketplace listings and a GitHub Action for CI/CD. The strategy is to sit inside the MLOps and security-ops tools teams already use rather than asking them to adopt a new console.</p>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>AI Strategy &amp; AI Readiness</strong>
+    HiddenLayer's AI strategy is reflexive in an interesting way: its Automated Red Teaming product is itself an AI system used to attack other AI systems, and its detection engines are trained on adversarial data. That means the company must secure its own models against the same attack classes it sells protection from — a dependency it doesn't discuss publicly. On external AI readiness, the signal is strong on the enterprise side (deep MLOps/cloud integrations, AIBOM for compliance) but comparatively weak on the developer/bottom-up side: unlike Protect AI's open-source ModelScan or Lakera's viral "Gandalf" prompt-injection game, HiddenLayer has no public, self-serve way for an individual developer to try the technology — a real gap in a market where security tools increasingly spread bottom-up before procurement ever gets involved.
+  </div>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>HiddenLayer has built a genuinely credible, research-backed platform and just proved it can raise growth capital in a hot but still-small market. The PM-level critique is less about whether the technology works and more about whether the go-to-market, pricing, and category positioning are built for the market HiddenLayer will actually have to compete in over the next two years — one where its nearest peers now carry Palo Alto's, Cisco's, and Check Point's sales forces.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">The Consolidation Wave Cuts Both Ways</div>
+    <div class="critique-body">Protect AI, Robust Intelligence, and Lakera being acquired removed HiddenLayer's closest independent competitors — but it also means those capabilities now ship bundled inside Prisma AIRS, Cisco AI Defense, and Check Point's platform, often at near-zero incremental cost for customers already paying those vendors for firewalls, endpoint, or network security. HiddenLayer's hardest future sales conversation isn't against another startup — it's against "our existing platform vendor already includes something like this." The Series B's explicit allocation to "sales and distribution expansion" reads as a direct acknowledgment that GTM, not technology, is the constraint.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">No Open-Source or Bottom-Up On-Ramp</div>
+    <div class="critique-body">Protect AI built ModelScan, NB Defense, and LLM Guard as open-source tools and ran a public bug-bounty program (huntr.com) before it was acquired — both created developer-level adoption and a crowdsourced threat-intel flywheel independent of the enterprise sales cycle. HiddenLayer has neither. In a category where shadow AI and bottom-up tool adoption are explicitly named as growing problems (76% per its own research), relying entirely on an enterprise, custom-priced, sales-led motion is a mismatch with how the risk actually enters organizations.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Guardrails Have Historically Been the Thinner Half of the Platform</div>
+    <div class="critique-body">Independent comparisons consistently place HiddenLayer ahead on model-level and supply-chain detection but behind specialists like Lakera on LLM guardrails and prompt-injection defense specifically. Agentic Runtime Security is a direct attempt to close that gap, but it is shipping into a market where Lakera's technology now has Check Point's distribution behind it, and Noma and Zenity were built agent-native from day one rather than extending a model-scanning product line.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">The Agent Harness Security Bet Is Well-Timed</div>
+    <div class="critique-body">1 in 8 reported AI breaches already trace to agentic systems, and autonomous coding agents (Claude Code, Cursor, Copilot-style tools) are proliferating inside engineering orgs faster than any security review process. HiddenLayer entering this specific wedge — the execution harness an agent runs inside, not just the model — is a legitimate, differentiated angle. The risk is timing: Noma and Zenity are already funded and agent-native, and this window will not stay open long.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Research Credibility Is a Real, Compounding Moat</div>
+    <div class="critique-body">ShadowLogic wasn't a marketing stunt — it directly undermined a widely held industry assumption (that safetensors/ONNX formats are inherently safe) and fed straight into product detection logic. Combined with 39 granted patents and roughly 50 disclosed CVEs, this is the kind of technical credibility that is genuinely difficult and slow for an acquirer's internal team to replicate, and it's arguably HiddenLayer's best answer to "why not just use what's bundled in our platform vendor."</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Concentration Risk</div>
+    <div class="critique-title">One Very Large Logo Is Doing a Lot of Reputational Work</div>
+    <div class="critique-body">A frontier model provider with 700M+ weekly users is an extraordinary reference customer — and also a single point of both revenue and narrative risk if that account churns, insources the capability, or simply declines to be publicly associated with HiddenLayer going forward. Combined with the disclosure that over 90% of ARR growth came from new logos rather than expansion within the existing base, the growth story currently looks more "wide" than "deep."</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Genuine, hard-to-replicate research moat (ShadowLogic, 39 patents, ~50 CVEs) feeding directly into detection logic</li>
+        <li>One of the last independent, full-lifecycle AI security platforms after three peer acquisitions</li>
+        <li>Blue-chip regulated customer base: financial services, DoD/intelligence, a 700M-WAU frontier-model logo</li>
+        <li>Fresh $100M Series B with strategic investors (Morgan Stanley, M12/Microsoft, Ten Eleven, Booz Allen) who double as potential channel partners</li>
+        <li>Early, credible mover into agentic/agent-harness security ahead of the broader market</li>
+        <li>Agentless, model-agnostic architecture lowers integration friction</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>No open-source presence or public bug bounty, unlike Protect AI's pre-acquisition playbook</li>
+        <li>Historically thinner LLM guardrail / prompt-injection capability than specialists like Lakera</li>
+        <li>Enterprise-only, custom/sales-led pricing mismatched to bottom-up shadow-AI adoption patterns</li>
+        <li>&gt;90% of ARR growth from new logos; expansion/retention economics undisclosed</li>
+        <li>ARR still "tens of millions" against a market Gartner sizes at $2.83B in 2026 — high multiple, low absolute share</li>
+        <li>Single flagship AI-lab customer represents meaningful concentration risk</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Position as "the last neutral, best-of-breed platform" for buyers wary of vendor lock-in</li>
+        <li>Agent Harness Security targets the fastest-growing, least-secured surface at the right moment</li>
+        <li>Package AIBOM/compliance tooling ahead of EU AI Act and NIST AI RMF enforcement</li>
+        <li>Series B capital earmarked for EMEA — regulated European verticals remain underpenetrated</li>
+        <li>Deepen M12/Microsoft and Databricks relationships into native marketplace bundling</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Hyperscaler-native guardrails (Azure, Bedrock, Google Model Armor) as free, "good enough" substitutes</li>
+        <li>Noma and Zenity, both well-funded and agent-native from day one, targeting the same pivot</li>
+        <li>Further consolidation — HiddenLayer itself is a plausible next acquisition target</li>
+        <li>Budget reactivity: 91% added AI security budget, but 40%+ allocate under 10% of total spend to it</li>
+        <li>Platform-bundled competitors (Palo Alto, Cisco, Check Point) selling at near-zero incremental cost</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: MOCK PRODUCT STRATEGY -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2027–2029: From Model Security Platform to the Agentic Security Standard</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM/CPO at HiddenLayer. It is directionally grounded in real company data but represents analytical recommendations, not HiddenLayer's actual internal roadmap.
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision &amp; North Star</h3></div>
+    <p><strong>Vision:</strong> HiddenLayer becomes the default, neutral security layer that any enterprise plugs in the moment it puts a model or an agent into production — regardless of cloud, model vendor, or agent framework — the way CrowdStrike became the default answer for endpoints, not because it was bundled, but because buyers trusted it to be independent.</p>
+    <p><strong>North Star Metric:</strong> <em>Protected Surface Coverage</em> — the percentage of an enterprise's total inventoried AI assets (models and agents surfaced by AI Discovery) that are under continuous runtime monitoring, not just scanned once. A platform that discovers shadow AI but leaves most of it unmonitored after the initial scan hasn't actually reduced risk. Target: 80%+ of discovered assets under continuous monitoring within 12 months of a Discovery deployment, treated as the leading indicator for both retention and expansion revenue.</p>
+    <p><strong>The Strategic Pivot:</strong> From "we scan and monitor your models" to "we are the security layer every agent and model runs inside of" — winning the agentic wedge decisively before Noma or Zenity establish default status, while converting research credibility into a genuine top-of-funnel instead of a pure enterprise-sales asset.</p>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2027–2029)</h3></div>
+
+    <h4>Bet 1: Win Agent Harness Security With Depth, Not Breadth</h4>
+    <p>Rather than a generic "agent monitoring" pitch, ship deep, best-in-class integrations with the specific agent frameworks enterprises are actually deploying — Claude Code, Cursor, GitHub Copilot Workspace, and internal LangGraph/AutoGen-style agents — before Noma or Zenity establish default status in each.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      The agentic wedge is the one growth vector where HiddenLayer, Noma, and Zenity are all starting close to zero at the same time. It is the only category in this market where being first and deepest still matters more than distribution size.
+    </div>
+
+    <h4>Bet 2: Build a Self-Serve, Open-Source On-Ramp</h4>
+    <p>Open-source a lightweight scanner (mirroring Protect AI's pre-acquisition ModelScan playbook) and launch a public vulnerability disclosure program, converting HiddenLayer's genuine research credibility into bottom-up developer adoption rather than leaving it as purely a sales-enablement asset.</p>
+    <div class="card-grid">
+      <div class="card"><h4>Phase 1 (Q1 2027)</h4><p>Free, hosted "scan this model" tool plus an open-sourced detection-only scanner (no fleet dashboard, no compliance reporting — the classic open-core split).</p></div>
+      <div class="card"><h4>Phase 2 (Q2–Q3 2027)</h4><p>Public disclosure program modeled on huntr.com; developer community building around real CVE credit.</p></div>
+      <div class="card"><h4>Moat Mechanism</h4><p>Every free-tier scan and community disclosure feeds the same detection-signature pipeline that already differentiates the paid platform — turning the funnel itself into R&amp;D.</p></div>
+    </div>
+
+    <h4>Bet 3: Turn Compliance Into an EMEA Wedge</h4>
+    <p>Package AIBOM generation and audit-ready reporting as a distinct, faster-close SKU aimed at EU AI Act and NIST AI RMF requirements, using the Series B's EMEA expansion capital to land in regulated European financial services and insurance before expanding those accounts into full runtime and red-teaming coverage.</p>
+    <div class="callout green">
+      <strong>Why Compliance, Not Just Security</strong>
+      A compliance-driven purchase has an externally imposed deadline and a named budget owner — both of which shorten sales cycles relative to a discretionary security purchase, and both of which are structurally harder for a hyperscaler's bundled guardrails to satisfy neutrally.
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent Harness Security — deep framework integrations</div><div class="initiative-desc">Native support for Claude Code, Copilot, LangGraph-style agents.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>3+ named framework integrations live; 25 agent-security design partners</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Open-source scanner + public disclosure program</div><div class="initiative-desc">Free hosted scan tool, OSS detection-only scanner, huntr-style bounty.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>10K+ free-tier scans and 5K+ GitHub stars within 6 months</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Continuous coverage push</div><div class="initiative-desc">Convert AI Discovery findings into actively monitored assets in top accounts.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>80% of discovered assets under runtime monitoring across the top 20 accounts</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">EU AI Act compliance SKU</div><div class="initiative-desc">AIBOM + audit-ready reporting packaged as a standalone, faster-close product.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>15 new EMEA logos within two quarters of launch</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Transparent self-serve starter tier</div><div class="initiative-desc">Published entry pricing alongside the existing enterprise/custom motion.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>500+ self-serve signups; 10% convert to paid within 90 days</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Usage-based expansion pricing</div><div class="initiative-desc">Price tied to number of protected assets, not flat platform fee.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>Net revenue retention above 120%</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Frontier-lab reference program</div><div class="initiative-desc">Public case studies and co-marketing with AI-native flagship customers, where permitted.</div></div>
+      <div><span class="tag grey">P3 · Q4 2027</span></div>
+      <div>3 public reference customers in the AI-native/frontier-lab segment</div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Establish Agent Harness Security as the default for coding-agent protection</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Integrations with 3 major coding-agent platforms shipped by Q1 2027</li>
+        <li>KR2: 100 paying Agent Harness Security customers by Q4 2027</li>
+        <li>KR3: Cited in 2+ analyst reports specifically for agent security by end of 2027</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Build a bottom-up adoption funnel to reduce reliance on enterprise sales alone</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Open-source scanner reaches 10K+ GitHub stars by Q3 2027</li>
+        <li>KR2: 5,000+ free-tier scans per month sustained by Q4 2027</li>
+        <li>KR3: 15% of new paid logos originate from the self-serve/open-source funnel, up from effectively zero today</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Convert compliance pressure into EMEA growth</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: 25 net-new EMEA logos by Q4 2027, funded by Series B expansion capital</li>
+        <li>KR2: Compliance/AIBOM SKU reaches $5M+ ARR by Q4 2027</li>
+        <li>KR3: Named in EU AI Act vendor guidance or analyst shortlists by mid-2027</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Improve growth quality, not just growth rate</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Net revenue retention above 120% by Q4 2027, up from a new-logo-dominated 2026</li>
+        <li>KR2: Reduce single-customer revenue concentration below 15% of ARR</li>
+        <li>KR3: Sustain 100%+ ARR growth off the larger 2026 base while improving retention</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks &amp; Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Noma or Zenity out-execute the agentic pivot</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Ship narrow, best-in-class framework integrations fast rather than broad-but-shallow coverage; lean on research credibility to win technical evaluations head-to-head.</td></tr>
+        <tr><td>Hyperscaler guardrails commoditize the low end</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag red">HIGH</span></td><td>Move up-market on depth — red-teaming, AIBOM, compliance — where a cloud vendor auditing its own AI stack neutrally is a structural conflict of interest.</td></tr>
+        <tr><td>HiddenLayer itself becomes the next acquisition target before reaching self-sustaining scale</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Preserve platform neutrality as the core value proposition in any strategic conversation; treat independence itself as a sellable asset, not just an interim state.</td></tr>
+        <tr><td>Compliance SKU sells but doesn't expand into full platform</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Design AIBOM/compliance reporting with an explicit technical path into runtime monitoring, not as a standalone report generator.</td></tr>
+        <tr><td>Open-sourcing the scanner cannibalizes the paid tier</td><td><span class="tag grey">LOW</span></td><td><span class="tag gold">MEDIUM</span></td><td>Scope the OSS tool to detection-only — no fleet-wide dashboard, no compliance reporting, no remediation workflow.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't chase feature parity with every acquired competitor</h4><p>Palo Alto, Cisco, and Check Point will always out-resource a pure feature race. Win on independence and depth in fewer, sharper wedges — agent security and compliance — rather than trying to match a broader bundled platform line for line.</p></div>
+      <div class="card"><h4>Don't let "Total AI Security" messaging outrun the guardrails gap</h4><p>Until Agentic Runtime Security is demonstrably strong on prompt injection specifically, keep marketing evidence-based and specific rather than comprehensive-platform claims that invite unfavorable specialist comparisons.</p></div>
+      <div class="card"><h4>Don't expand horizontally into general cybersecurity yet</h4><p>The CEO has floated eventually moving into cybersecurity domains that depend on AI. The AI security wedge itself is still barely funded relative to its total addressable market — a horizontal expansion now would repeat the classic mistake of a vision outrunning the product underneath it.</p></div>
+      <div class="card"><h4>Don't scale sales headcount faster than retention is proven</h4><p>With over 90% of ARR growth coming from new logos and net revenue retention undisclosed, further GTM scale-up should wait on clearer evidence that the existing customer base expands, not just renews.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: THE VERDICT -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>HiddenLayer earned its Series B. A genuine research pedigree, a platform that covers the full AI lifecycle without requiring model access, and a customer roster spanning finance, government, and at least one frontier AI lab are not easy things to build, and the 10x ARR growth is real evidence that enterprises are willing to pay for this specifically rather than settle for what's bundled elsewhere — at least for now.</p>
+  <p>But the same eighteen months that validated the category also stripped out three of HiddenLayer's closest independent peers, each folded into a platform vendor with an existing sales force and an existing customer relationship to sell into. HiddenLayer's remaining independence is simultaneously its best differentiator — "the neutral platform, not a bundled afterthought" — and the exact thing that makes it a plausible acquisition target the moment growth slows or a strategic buyer decides the agentic security wedge is worth paying up for. The Agent Harness Security bet is the right next move, aimed at the fastest-growing, least-defended surface in the market, but it lands in a field where Noma and Zenity started agent-native and are already funded to compete for the same design partners.</p>
+  <p>The next 18–24 months will likely decide which of two stories this becomes: a company that used its research credibility and fresh capital to build genuine distribution and win the agentic wedge outright — or a well-regarded, well-funded acquisition target whose independence was always a phase rather than a destination. Both are plausible outcomes for the investors who just wrote the check. Only one of them is the outcome a product organization should actually be building toward.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    HiddenLayer's technology and research credibility are not in question. What's unresolved is distribution — whether it can out-execute two freshly funded agent-native rivals and outlast the temptation to sell into a platform vendor before it proves it can win independently. The compliance and open-source wedges recommended here are less about new revenue and more about buying the company the bottom-up adoption and faster sales cycles it currently lacks.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Sources: HiddenLayer.com, HiddenLayer press releases and Innovation Hub research (ShadowLogic, 2026 AI Threat Landscape Report, Forrester Opportunity Snapshot), TechCrunch, PR Newswire, Gartner newsroom (Aug 2026 AI security forecast), CB Insights, Tracxn, Microsoft Tech Community, appsecsanta.com, guptadeepak.com, Respan market map. Analysis as of September 2026. Funding, ARR-growth, and customer figures are company-stated; market-size figures are Gartner estimates and may be revised.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
