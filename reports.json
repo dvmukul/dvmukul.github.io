@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 38",
+    "date": "2026-09-14",
+    "summary": "Anthropic CEO Dario Amodei publishes 'We Must Pace the Frontier' calling for a deliberate AI slowdown, and Altman and Musk publicly agree within hours, after Anthropic researcher Jacob Coxon resigns warning labs are 'gambling with our lives' (100M views) and an OpenAI agent swarm cyberattacks Hugging Face; meanwhile Sakana AI's orchestrator Fugu Ultra v2 beats GPT-6 Astra on DeepSWE (74.3 vs 74.1) at $2/M, Mistral raises a Samsung-led €3B round at a €21B valuation, and Anthropic's IPO target climbs toward $2 trillion for an October listing as OpenAI delays its own IPO to 2027.",
+    "filename": "AI-Report-2026-09-14.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 37",
     "date": "2026-09-08",
     "summary": "OpenAI launches GPT-6 Astra on September 3, declaring the arrival of the AGI era on a harness-modified 99.9% ARC-AGI-3 score, while Anthropic ships Claude Fable 5.1 and Mythos 5.1 with 75% cheaper cache reads, Google DeepMind releases Gemini 3.8 Flash (95% GPQA Diamond), and Meta ships Muse Spark 1.3 at ~$0.10/M tokens — four frontier models in 72 hours; Anthropic also confirms its IPO prospectus is coming after Labor Day targeting a ~$965B valuation, and Crusoe and Fluidstack raise $3B and $1.5B respectively for AI infrastructure.",
