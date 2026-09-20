@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SevenRooms competitive intelligence — market analysis, product and AI-readiness audit, PM critique, and mock product strategy by Mukul Dewangan.">
+<title>SevenRooms: The Guest Data Bet — Competitive Intelligence · Mukul Dewangan</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0F0F0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* ===== SEVENROOMS — page-specific components (appended below the TravelAI base block) ===== */
+.bar-chart { margin: 20px 0 8px; }
+.bar-row { display: grid; grid-template-columns: 170px 1fr 56px; gap: 14px; align-items: center; padding: 7px 0; font-size: 13px; }
+.bar-label { font-weight: 500; color: var(--text); }
+.bar-label small { display: block; font-weight: 300; font-size: 11px; color: var(--text-muted); }
+.bar-track { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); height: 14px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--teal); }
+.bar-fill.focus { background: var(--accent); }
+.bar-fill.mute { background: var(--text-light); }
+.bar-fill.gold { background: var(--gold); }
+.bar-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text-muted); text-align: right; }
+
+.pull-stat { display: flex; align-items: baseline; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.pull-stat:last-child { border-bottom: none; }
+.pull-stat .big { font-family: var(--font-display); font-style: italic; font-size: 30px; color: var(--accent); min-width: 110px; line-height: 1; }
+.pull-stat .txt { font-size: 13px; color: var(--text-muted); }
+.pull-stat .txt strong { color: var(--text); font-weight: 500; }
+
+.quote-block { border-left: 2px solid var(--teal); padding: 4px 0 4px 18px; margin: 18px 0; font-family: var(--font-display); font-size: 19px; line-height: 1.4; font-style: italic; }
+.quote-block cite { display: block; font-family: 'DM Mono', monospace; font-style: normal; font-size: 11px; letter-spacing: 1px; color: var(--text-muted); margin-top: 8px; }
+
+@media (max-width: 640px) {
+    .bar-row { grid-template-columns: 110px 1fr 46px; gap: 10px; }
+    .pull-stat { flex-direction: column; gap: 4px; }
+    .comp-table { display: block; overflow-x: auto; }
+    .stat-box { padding: 20px 8px; }
+    .stat-num { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · September 2026</div>
+  <h1>SevenRooms:<br>The <em>Guest Data</em> Bet</h1>
+  <p class="cover-sub">A market analysis, product and technology audit, AI-readiness review, PM critique, and mock product strategy for SevenRooms — the hospitality CRM and reservations platform that DoorDash bought to own the restaurant's front door.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>New York, NY</span></div>
+    <div>FOUNDED<span>2011</span></div>
+    <div>ACQUIRED BY<span>DoorDash · $1.2B cash (Jun 2025)</span></div>
+    <div>STATUS<span>DoorDash subsidiary · ARR undisclosed</span></div>
+    <div>COVERAGE<span>Restaurant &amp; hotel reservations + CRM · sevenrooms.com</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">$1.2B</div><div class="stat-label">DoorDash Deal · Jun 2025</div></div>
+  <div class="stat-box"><div class="stat-num blue">13,000+</div><div class="stat-label">Venues at Signing</div></div>
+  <div class="stat-box"><div class="stat-num">~3%</div><div class="stat-label">US Reservation Share · 2024 est.</div></div>
+  <div class="stat-box"><div class="stat-num accent">+100%</div><div class="stat-label">New Venues Signed · Q2 '26 YoY</div></div>
+  <div class="stat-box"><div class="stat-num blue">400K+</div><div class="stat-label">Voice AI Calls Handled</div></div>
+  <div class="stat-box"><div class="stat-num">4.7 / 1.7</div><div class="stat-label">G2 vs Trustpilot Rating</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is SevenRooms?</h2>
+
+  <p>SevenRooms is a New York–founded hospitality software company. It sells reservations, table management, a guest CRM, marketing automation, payments, review management and, since 2025, voice AI to restaurants, hotel food-and-beverage teams, nightclubs, membership clubs, and entertainment venues. Its customer list skews premium and multi-venue: Marriott, MGM Resorts, Mandarin Oriental, Wynn, Nobu, Wolfgang Puck, and Dishoom appear in company and DoorDash materials.</p>
+
+  <p>Since 13 June 2025 it has been a <strong>DoorDash company</strong>, folded into DoorDash's Commerce Platform next to online ordering and storefront tools. For most of its history the pitch was the mirror image of a marketplace: the restaurant owns the guest relationship and the data, pays a software fee, and does not pay a per-cover commission. The acquisition changed who is standing behind that promise.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    SevenRooms is a system of record for guest relationships that was just handed the largest consumer identity graph in local commerce. The bet is that the restaurant that recognizes its guests wins, and that DoorDash and Deliveroo data can make recognition automatic. The risk is that "you own your data" is a harder claim to make when your parent is the marketplace operators have spent a decade trying to route around.
+  </div>
+
+  <h3>Leadership &amp; Corporate Structure</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Joel Montaniel — Co-Founder &amp; CEO</h4><p>Runs SevenRooms inside DoorDash. Fronts the operator narrative ("more tables for diners, one book for restaurants") and the Channel Connect launch.</p></div>
+    <div class="card"><h4>Allison Page — Co-Founder &amp; CPO</h4><p>Owns the guest-intelligence roadmap: Client Insights, Global Guest Search, and the AI feature set. Quoted on the July 2026 launch.</p></div>
+    <div class="card"><h4>Kinesh Patel — Co-Founder &amp; CTO</h4><p>Named as a co-founder in DoorDash's announcement; listed as CTO in company history. His current role is not confirmed in 2026 coverage, and some data aggregators mislabel him as CEO.</p></div>
+    <div class="card"><h4>Parisa Sadrzadeh — DoorDash VP</h4><p>The DoorDash executive who fronted the deal and the "Going Out" consumer launch. She is the clearest signal that SevenRooms is now a component of DoorDash's in-store strategy.</p></div>
+  </div>
+  <p class="footnote">Early investors included BoxGroup, Thomas Keller, and the Nathan's Famous family. Later backers: Comcast Ventures, Amazon's Alexa Fund, Providence Strategic Growth, and Enlightened Hospitality Investments.</p>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2011</div><div class="tl-title">Founded in New York</div><div class="tl-desc">Montaniel, Page, and Patel start a guest-data-first reservation platform. The name comes from Graydon Carter's "seven rooms" idea of undiscovered places.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Dec 2017 – Oct 2018</div><div class="tl-title">$8M Series A (Comcast Ventures), then Alexa Fund</div><div class="tl-desc">First institutional money, then Amazon's Alexa Fund. Google Search, Maps, and Assistant integration ships in 2018, the start of the channel-aggregation strategy.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jun 2020</div><div class="tl-title">$50M Series B (Providence Strategic Growth)</div><div class="tl-desc">Raised in the middle of the pandemic, when reservations, ordering, and contactless tooling were being rebuilt from scratch.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Mar 2023</div><div class="tl-title">Enlightened Hospitality Investments joins</div><div class="tl-desc">The growth-equity firm co-founded by Danny Meyer invests (amount undisclosed). SevenRooms cites 75+ countries and roughly 1 billion guests seated since 2011.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">May 6, 2025</div><div class="tl-title">DoorDash announces $1.2B all-cash deal</div><div class="tl-desc">DoorDash's first software acquisition since Bbot (2022). SevenRooms cited at 13,000+ venues. No revenue figures disclosed by either side.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jun 13, 2025</div><div class="tl-title">Deal closes</div><div class="tl-desc">DoorDash's filings record $1,152M of acquisition-date fair value. Deliveroo (about $3.7B, closed Oct 2, 2025) follows, which gives the SevenRooms graph a second continent.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Sep 30, 2025</div><div class="tl-title">DoorDash "Going Out" launches with SevenRooms reservations</div><div class="tl-desc">Reservations in Miami and New York, credits toward future delivery orders, zero cover fees for restaurants, and Voice AI for phone calls.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Apr 2026</div><div class="tl-title">OpenTable's "system of record" terms; Google AI Mode adds SevenRooms in 8 markets</div><div class="tl-desc">OpenTable asks partner restaurants to make it their primary table-management system. The same month Google's AI Mode restaurant booking expands internationally with SevenRooms among eight named partners.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jun – Jul 2026</div><div class="tl-title">Channel Connect (free), Global Guest Search, Voice AI proof points</div><div class="tl-desc">A free, open reservation aggregator on Jun 16. On Jul 21: Global Guest Search over DoorDash and Deliveroo consumer records, Client Insights, Smart Boost, and Voice AI results.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Aug 2026</div><div class="tl-title">DoorDash Q2: new signed venues +100% YoY; ChatGPT reservations launch without SevenRooms</div><div class="tl-desc">Good news on the merchant side (Aug 5). Then ChatGPT's in-chat booking (Aug 10) launches with Yelp, Resy, and OpenTable, and SevenRooms is not named in coverage.</div></div>
+  </div>
+
+  <div class="callout blue">
+    <strong>What Did DoorDash Actually Buy?</strong>
+    Neither company has disclosed SevenRooms revenue. The one widely quoted estimate, $43M ARR for 2024 (Latka), implies roughly 28x ARR; a bottom-up ceiling of 13,000 venues at a third-party list price of ~$500/month (about $78M a year) still implies ~15x. Both are far above typical SaaS multiples. My read: DoorDash did not pay for SaaS revenue. It paid for premium and hotel-venue relationships, guest profiles that carry POS spend history, and a way to attach in-store demand to its consumer app. Treat the price as a data-and-distribution purchase.
+  </div>
+
+  <h3>Data-Confidence Ledger</h3>
+  <p>Several widely repeated numbers about SevenRooms do not survive a second look. Here is how I weighted them.</p>
+  <table class="comp-table">
+    <thead><tr><th>Claim</th><th>Source</th><th>Problem</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td>$43M ARR (2024), ~1,000 customers, $43K ACV</td><td>Latka (estimate)</td><td>Circular: 1,000 × $43K = $43M. Cannot be reconciled with 13,000+ venues. Also mislabels the CEO.</td><td><span class="tag red">LOW</span></td></tr>
+      <tr><td>13,000+ venues (May 2025) vs 15,000+ restaurants (site, 2026) vs ~2,100 US restaurants (mid-2024)</td><td>DoorDash IR / sevenrooms.com / BistroChat</td><td>Three different units (venues, restaurants, US-only) and three dates. The gap suggests a footprint weighted to hotels, nightlife, and international.</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td>Deal price and close date</td><td>DoorDash IR, 10-K</td><td>Some secondary write-ups misdate the deal to 2024. Primary filings confirm May 2025 announcement and Jun 13, 2025 close.</td><td><span class="tag green">HIGH</span></td></tr>
+      <tr><td>Voice AI: "25% more reservations captured"</td><td>SevenRooms / ElevenLabs</td><td>Adopters' Q1–Q3 2026 versus the same months of 2025. No control group. Vendor-reported, and 600+ restaurants is small next to 13,000+ venues.</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td>Reservations via DoorDash marketplaces "+150% QoQ"</td><td>DoorDash Q2 2026 release</td><td>No base number. Going Out launched in two cities in Sept 2025, so a large percentage from a small base is expected.</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td>Trustpilot 1.7 / 5 (80 reviews) vs G2 4.7 / 5 (76 reviews)</td><td>Trustpilot, G2</td><td>Trustpilot is diner-heavy and about deposits and booking failures. G2 skews toward vendor-solicited operator reviews. Neither is a clean NPS.</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td>"~100+ sales reps laid off post-acquisition"</td><td>One anonymous Glassdoor review</td><td>Single source, uncorroborated in press. Recorded as a watch item, not a finding.</td><td><span class="tag red">LOW</span></td></tr>
+      <tr><td>75% of consumers comfortable with AI reservations</td><td>DoorDash / SevenRooms trends report</td><td>The same survey is cited as 74% and 75% in different places. It is also vendor-commissioned (3,001 consumers, 509 operators).</td><td><span class="tag gold">MEDIUM</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape &amp; Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>Restaurant reservations used to be a software category. It is turning into a fight over who owns the diner relationship, with card issuers, delivery apps, POS vendors, and AI assistants all entering at once. Software fees matter less each quarter. Guest identity and payment-linked perks matter more.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>Adoption Headroom</h4><p>Only about 19% of US sit-down restaurants used an online reservation or waitlist system by mid-2024, up from 13% in 2022 (BistroChat, citing a LinkedIn market analysis). The category is still early in the US even though the incumbents are famous.</p></div>
+    <div class="card"><h4>Fragmented Stacks</h4><p>SevenRooms' own research: 40% of US operators run four or five separate systems, 83% think connecting them would improve profitability, and one in five cannot recognize the same guest across on- and off-premise. It is vendor research, but the pain is real.</p></div>
+    <div class="card"><h4>Demand-Side Consolidation</h4><p>American Express is merging Resy and Tock (about 25,000 venues, Tock brand retired, restaurant tech combined in 2027). Chase and Visa lean on OpenTable. DoorDash ties reservations to DashPass. Each has a payments or loyalty program behind it.</p></div>
+  </div>
+
+  <h3>US Reservation Share (Mid-2024 Estimate)</h3>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-label">OpenTable<small>~28,500 US restaurants</small></div><div class="bar-track"><div class="bar-fill mute" style="width:92%"></div></div><div class="bar-val">46%</div></div>
+    <div class="bar-row"><div class="bar-label">Yelp Guest Manager<small>~4,400 on reservations</small></div><div class="bar-track"><div class="bar-fill mute" style="width:28%"></div></div><div class="bar-val">14%</div></div>
+    <div class="bar-row"><div class="bar-label">Resy<small>~7,500</small></div><div class="bar-track"><div class="bar-fill" style="width:24%"></div></div><div class="bar-val">12%</div></div>
+    <div class="bar-row"><div class="bar-label">Tock<small>~4,400</small></div><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><div class="bar-val">7%</div></div>
+    <div class="bar-row"><div class="bar-label">Wisely (Olo)<small>~4,300</small></div><div class="bar-track"><div class="bar-fill mute" style="width:14%"></div></div><div class="bar-val">7%</div></div>
+    <div class="bar-row"><div class="bar-label">Toast Tables<small>~3,000+</small></div><div class="bar-track"><div class="bar-fill mute" style="width:10%"></div></div><div class="bar-val">5%</div></div>
+    <div class="bar-row"><div class="bar-label"><strong>SevenRooms</strong><small>~2,100</small></div><div class="bar-track"><div class="bar-fill focus" style="width:6%"></div></div><div class="bar-val">3%</div></div>
+  </div>
+  <p class="footnote">Single-source estimate (a mid-2024 LinkedIn analysis relayed by BistroChat), US only, before the Amex merger and before DoorDash's sales push. Platforms define "active restaurant" differently. Resy and Tock together would be about 19%. Use as a rough shape, not a ranking to quote.</p>
+
+  <div class="callout">
+    <strong>The Share Number Misleads in Both Directions</strong>
+    A ~3% US share next to a "13,000+ venue" global claim says SevenRooms wins on <em>where</em> and <em>what kind</em> of venue, not on count: hotels, nightlife, multi-venue groups, and international markets. DoorDash's $1.2B check was written for the high-value slice. The strategic question is whether that slice can be extended down-market without the pricing and product complaints that follow it there.
+  </div>
+
+  <h3>Competitive Map</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Moat</th><th>SevenRooms Overlap</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>OpenTable</strong> (Booking Holdings)</td><td>Marketplace + SaaS. Public plans of $149 / $299 / $499 a month plus $1.00–$1.50 per network cover and a 2% fee on deposits and no-show charges (vendor-blog figures)</td><td>Diner network, ~65,000 restaurants globally, Chase/Visa perks, ChatGPT integration</td><td>Core reservations and table management; direct head-to-head in premium dining</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Resy + Tock</strong> (American Express)</td><td>Flat membership fees; Amex card benefits; Toast POS partnership</td><td>Card-member demand, a $400 Platinum dining credit, six- and seven-figure signing incentives reported by restaurateurs</td><td>Fine dining and destination restaurants, the same customers SevenRooms courts</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Toast Tables / Square</strong></td><td>POS-bundled reservations</td><td>Already in the restaurant's hands; "one bill, one vendor"</td><td>Independent and small-group restaurants below SevenRooms' price line</td><td><span class="tag gold">MEDIUM–HIGH</span></td></tr>
+      <tr><td><strong>Yelp Reservations / Guest Manager</strong></td><td>Discovery-linked waitlist and reservations</td><td>Diner traffic; Google and ChatGPT integrations</td><td>Casual and mid-market dining</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Google AI Mode / ChatGPT</strong></td><td>Agentic booking front doors</td><td>Distribution monopoly; they choose which platforms are bookable</td><td>SevenRooms is a named Google partner in 8 international markets; not named in ChatGPT's Aug 2026 launch coverage</td><td><span class="tag red">GATEKEEPER</span></td></tr>
+      <tr><td><strong>TheFork / Eat App / regional</strong></td><td>Regional marketplaces and SaaS</td><td>Local diner traffic (TheFork lists ~80,000 partner restaurants)</td><td>Partners in some markets and rivals in others</td><td><span class="tag grey">LOW–MEDIUM</span></td></tr>
+      <tr><td><strong>Voice-AI point solutions</strong></td><td>Answering-service AI built on the same voice infrastructure as Retell-class platforms</td><td>Fast to deploy; no need to replace the reservation system</td><td>SevenRooms Voice AI, which is built on ElevenLabs' agent platform</td><td><span class="tag blue">EMERGING</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Industry Trends Shaping SevenRooms' Fate</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>The "System of Record" War</h4>
+      <p>OpenTable's April 2026 client terms ask restaurants to make it their primary table-management system and share inventory across the marketplace, along with a shift from month-to-month to annual contracts. Operators such as Altamarea Group publicly pushed back ("we want to have multiple partners"). SevenRooms answered with Channel Connect, a free aggregator that syncs across platforms. Counter-positioning is now a product line.</p>
+    </div>
+    <div class="card">
+      <h4>Agents Become the Front Door</h4>
+      <p>Google AI Mode reached 75 million daily users by January 2026 and now books tables across partners; ChatGPT added in-chat reservations on Aug 10, 2026. In both cases the platform loses the diner's direct relationship, because bookings flow through an assistant. Being a listed partner is now a distribution question, not a technical one.</p>
+    </div>
+    <div class="card">
+      <h4>Payments and Perks Buy Diner Loyalty</h4>
+      <p>The reservation slot is becoming a payment-linked benefit: Amex dining credits, Chase and Visa perks, DoorDash credits worth an average $9 per redemption. Restaurants report being paid to switch platforms. Guest data is the real prize, as one Boston operator put it: "It's less about the reservations … all about the data."</p>
+    </div>
+    <div class="card">
+      <h4>Front-of-House Voice AI</h4>
+      <p>SevenRooms' research says 64% of diners still call to book and 40% of those calls go unanswered during service, yet only 28% of operators use AI for calls. Vendor numbers, but consistent with the pitch of every voice-AI startup pointed at restaurants.</p>
+    </div>
+    <div class="card">
+      <h4>Delivery and Dine-In Blur</h4>
+      <p>In the DoorDash survey, 74% of diners say dining in led them to order delivery later, and 62% say delivery led them to dine in. That is the empirical case for one guest profile across channels, and the reason DoorDash wanted a CRM.</p>
+    </div>
+    <div class="card">
+      <h4>Privacy and Data Portability</h4>
+      <p>The moment a marketplace's consumer records appear in an operator's CRM, consent rules under GDPR (UK/EU via Deliveroo) and US state privacy laws matter. Coverage of Global Guest Search describes no consent framework, so this is an open item rather than a solved one.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Guest Data Depth</h4><p>Profiles that merge reservation history, POS spend, notes, and cross-channel identity. Recognition at the door is the visible payoff.</p></div>
+    <div class="card"><h4>Neutral Distribution</h4><p>Being bookable wherever the diner starts: Google, agents, marketplaces, the restaurant's own site. Lock-in fights are being fought at the channel layer.</p></div>
+    <div class="card"><h4>Reliability During Service</h4><p>The product is used by a host stand at 7 p.m. with a line at the door. Sync errors, app freezes, and double bookings destroy trust faster than any feature gains it.</p></div>
+    <div class="card"><h4>Operator Economics</h4><p>Zero cover fees versus $1.00–$1.50 per cover changes the math for restaurants that already have demand. It changes it the other way for restaurants that need the marketplace to fill seats.</p></div>
+  </div>
+
+  <h3>Recent Performance &amp; Areas of Struggle</h3>
+  <div class="pull-stat"><div class="big">+100%</div><div class="txt"><strong>New signed venues, Q2 2026, year over year</strong> (DoorDash release). A signing metric, not revenue or retention, and the base is not disclosed.</div></div>
+  <div class="pull-stat"><div class="big">400K+</div><div class="txt"><strong>Voice AI calls across 600+ restaurants</strong>, one in five after hours (SevenRooms, Jul 2026). A named customer, Casper Hospitality, reports 3,800+ calls and $28K+ in booked GMV in its example window.</div></div>
+  <div class="pull-stat"><div class="big">$0</div><div class="txt"><strong>Channel Connect price</strong>. Free under an open license to any restaurant, whether or not it uses SevenRooms. A product built to be adopted, not sold.</div></div>
+  <div class="pull-stat"><div class="big">~3%</div><div class="txt"><strong>Estimated US reservation share</strong> (mid-2024). The struggle is breadth, not quality of the premium product.</div></div>
+
+  <div class="card-grid">
+    <div class="card"><h4>Small-Restaurant Fit</h4><p>Quote-based pricing (third-party estimate ~$499 a month per location, add-ons extra), no free trial, and repeated "expensive for smaller establishments" reviews. Toast and Yelp bundle their way in below this line.</p></div>
+    <div class="card"><h4>Product Debt Behind the AI Headlines</h4><p>Reviewers cite an Android/mobile gap ("impossible to use"), Oracle Micros POS friction, thin reporting filters, "bare bones" waitlist tools, and freezing during seating. The same reviewers praise the core CRM.</p></div>
+    <div class="card"><h4>Diner-Side Trust</h4><p>Trustpilot is dominated by diners reporting failed bookings and unexpected deposit charges (one reports $167). Restaurants set those deposit rules, but the SevenRooms name is on the checkout page.</p></div>
+    <div class="card"><h4>Parent-Brand Tension</h4><p>Eater reports restaurateurs declining to comment on record over "fear of DoorDash retaliation." Whether or not that fear is justified, it is a perception a data-ownership brand cannot ignore.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>Product, Technology &amp; AI: What SevenRooms Actually Sells</h2>
+
+  <p>SevenRooms organizes its platform into three hubs, Marketing, Guest Experience, and Operations, on top of a single guest profile. The product is easiest to understand as five layers: how bookings arrive, what the system knows about the guest, how the floor is run, how money and experiences are sold, and what AI now does across all of them.</p>
+
+  <h3>The Product Stack</h3>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Channels &amp; Booking</div>
+    <div class="tech-layer-content">
+      <strong>Reservations, waitlist, and channel aggregation</strong>
+      <p>Own-website booking widget, Google (Search, Maps, Assistant), Instagram and Facebook, Tripadvisor, TheFork, and regional marketplaces (Chope, OpenRice, Reserveout, The Chefz), plus DoorDash and Deliveroo. Channel Connect (Jun 2026) is a desktop app that syncs inventory across channels in real time and is free to any restaurant. Its stated proof point: Chelsea Living Room reports 90% less time on manual inventory management and 99% fewer double bookings.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Guest CRM</div>
+    <div class="tech-layer-content">
+      <strong>Unified guest profiles, segmentation, and marketing automation</strong>
+      <p>Profiles merge reservation history, POS spend, staff notes, tags, and feedback. Email, SMS, and WhatsApp campaigns run off segments. New in July 2026: <em>Global Guest Search</em>, which lets staff search hundreds of millions of DoorDash and Deliveroo consumer records, and <em>Client Insights</em>, which summarizes a guest's history for pre-shift briefings.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Floor Operations</div>
+    <div class="tech-layer-content">
+      <strong>Table management, pacing, and revenue management</strong>
+      <p>Seating and pacing controls, cover forecasting, an auto-seating algorithm the company says evaluates 10,000+ table combinations per second, and newly announced Flexible Table Capacities and Slot Mode. <em>Smart Boost</em> flags busy and slow periods for targeted incentives.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Payments &amp; Experiences</div>
+    <div class="tech-layer-content">
+      <strong>Deposits, prepaid experiences, add-ons, events, and private-dining tools</strong>
+      <p>Prepaid bookings through Stripe, Adyen, CyberSource, FreedomPay, and Network International. The redesigned first-party booking flow claims a 25% average lift in premium-experience sales. This layer is also where diner complaints concentrate (unexpected deposit charges on Trustpilot).</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">DoorDash-Connected</div>
+    <div class="tech-layer-content">
+      <strong>Going Out reservations, zero-cover-fee marketplace access, delivery data in the guest profile</strong>
+      <p>Diners book inside the DoorDash app and earn credits toward delivery orders; restaurants receive the booking without a per-cover fee and a 360-degree view that includes delivery and pickup history. In DoorDash's own data, 80% of customers using Going Out visited restaurants they had not tried before.</p>
+    </div>
+  </div>
+
+  <h3>Pricing &amp; Packaging</h3>
+  <p>SevenRooms does not publish prices. Third-party reviews describe three quote-based tiers (Starter, Growth, Premium), roughly $499 a month for a single location, and separate add-ons for email marketing, Voice AI, and WhatsApp/text. There is no free trial. The commercial differentiator is <strong>no per-cover fee</strong>, which matters most for restaurants that already have demand. The counter-position is OpenTable's marketplace model, where the restaurant pays $1.00–$1.50 per network cover and gets discovery in return.</p>
+
+  <h3>Technology Deep Dive</h3>
+  <p>SevenRooms is secretive about its architecture, so this section separates <strong>confirmed</strong> facts from <strong>inference</strong>.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Application Core</div>
+    <div class="tech-layer-content">
+      <strong>Python and Django backend <span class="tag green">CONFIRMED</span></strong>
+      <p>Job postings for backend roles ask specifically for Python and Django experience on a "hospitality-focused SaaS platform." The cloud provider is not named. A Django monolith with service extraction around the hot paths (availability search, booking widget) is the most probable shape, given a 2011 origin and the pace of feature addition. <span class="tag gold">INFERRED</span></p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">API &amp; Integrations</div>
+    <div class="tech-layer-content">
+      <strong>OAuth 2.0 REST API, gated and paid <span class="tag green">CONFIRMED</span></strong>
+      <p>Credentials are scoped to a venue group. Endpoints cover reservations (create, modify, cancel), shift-level availability, guest profiles and feedback, and venue data. Developer documentation is restricted to approved operators and integration partners. The platform advertises 100+ integrations, including 30+ POS systems (Toast, Square, MICROS Simphony, Lightspeed, NCR Aloha, Revel, SpotOn), delivery and ordering (DoorDash Drive, Olo, Deliverect, ItsaCheckmate), and hotel systems (Revinate, Journey).</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Data Layer</div>
+    <div class="tech-layer-content">
+      <strong>Identity resolution across bookings, POS, and now delivery <span class="tag gold">INFERRED</span></strong>
+      <p>The guest profile is the core asset: entity resolution across email, phone, and name variants, POS check-level spend joined to reservations, and free-text staff notes. Global Guest Search implies a query path into DoorDash and Deliveroo's identity graphs. Nothing public explains how matching, consent, and data separation are enforced, which is the most important technical unknown in this report.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">AI &amp; Optimization</div>
+    <div class="tech-layer-content">
+      <strong>Bought voice, built optimization, undisclosed LLM vendor <span class="tag green">CONFIRMED</span> <span class="tag gold">INFERRED</span></strong>
+      <p>Voice AI runs on ElevenLabs' agent platform, natively connected to SevenRooms guest profiles, availability, and venue rules. AI Notes, AI Responses, Feedback Summaries, and Client Insights are LLM-based text features whose model provider is not disclosed. The seating engine's "10,000+ combinations per second" is a combinatorial search claim, which says nothing about whether a learned model is involved. Treat it as optimization software with an AI label until shown otherwise.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Client Apps</div>
+    <div class="tech-layer-content">
+      <strong>Tablet and web host stand, desktop Channel Connect, diner widget <span class="tag gold">INFERRED</span></strong>
+      <p>G2 and Capterra reviewers describe a host-stand app that can freeze during seating, a missing Android experience, and a mobile app called "impossible to use." Channel Connect being a desktop app suggests operators want a back-office control surface, not another tablet.</p>
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>Critical Technical Gap</strong>
+    The agent era needs a public, self-serve, well-documented booking interface with venue-controlled policies. SevenRooms' API is permissioned per venue group, documentation is gated, and and a third-party API directory describes access as paid and approval-based. That works for POS partners. It does not work for an AI assistant that needs to check availability across thousands of restaurants in one query. Google's AI Mode already lists SevenRooms abroad, so the plumbing exists in places. It has to become a product.
+  </div>
+
+  <h3>AI Strategy &amp; Readiness</h3>
+  <p>SevenRooms' AI strategy is unusually coherent for a company its age: put AI where staff already work (the reservation screen, the pre-shift brief, the phone), fed by the guest profile that only SevenRooms has. The company describes it as "agentic AI" that can "access your reservation platform, CRM and guest data" rather than operate in isolation. That is a credible design principle. The open questions are ownership, proof, and reach.</p>
+
+  <table class="comp-table">
+    <thead><tr><th>AI Feature</th><th>What It Does</th><th>Type</th><th>Evidence</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Voice AI</strong></td><td>Answers calls 24/7; books, modifies, and cancels; recognizes repeat guests; collects deposits; escalates to staff</td><td>Bought platform, native integration</td><td>400K+ calls, 600+ restaurants, up to 25% more reservations captured, 1 in 5 calls after hours</td><td><span class="tag green">REAL</span></td></tr>
+      <tr><td><strong>AI Table Management</strong></td><td>Seating optimization using party size, pacing, and demand; feeds revenue management</td><td>Optimization algorithm</td><td>"10,000+ combinations per second" (a speed claim, not an outcome claim)</td><td><span class="tag gold">REAL, LABEL STRETCHED</span></td></tr>
+      <tr><td><strong>Client Insights</strong></td><td>Summarizes preferences, spend, and staff notes for hosts and servers</td><td>LLM summarization over the CRM</td><td>Maître d' testimonial; no metric</td><td><span class="tag green">REAL</span></td></tr>
+      <tr><td><strong>AI Notes</strong></td><td>Cleans and standardizes hurried guest notes into CRM fields</td><td>LLM extraction with human review</td><td>None published; a data-quality play</td><td><span class="tag green">REAL, QUIET</span></td></tr>
+      <tr><td><strong>AI Responses</strong></td><td>Drafts replies to emails, SMS, and review-site comments</td><td>LLM drafting</td><td>898% more reviews responded to; 85% faster response time (customer-selected)</td><td><span class="tag gold">REAL, WEAK PROOF</span></td></tr>
+      <tr><td><strong>Feedback Summaries</strong></td><td>Weekly digest of reviews and survey responses</td><td>LLM summarization</td><td>None published</td><td><span class="tag gold">COMMODITY</span></td></tr>
+      <tr><td><strong>Global Guest Search</strong></td><td>Searches DoorDash and Deliveroo consumer records to recognize new guests</td><td>Cross-platform identity lookup</td><td>Announced Jul 21, 2026; no consent framework described</td><td><span class="tag red">HIGH VALUE, HIGH RISK</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="quote-block">
+    "These tools turn fragmented guest information into something a host or server can actually use."
+    <cite>ALLISON PAGE, CPO, SEVENROOMS · JUL 21, 2026</cite>
+  </div>
+
+  <h4>AI-Readiness Scorecard (My Assessment, 0–10)</h4>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-label">Proprietary data foundation<small>Profiles, POS spend, DoorDash graph</small></div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="bar-val">8 / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Workflow embedding<small>AI inside host stand, phone, CRM</small></div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><div class="bar-val">8 / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Proof of impact<small>Controlled, published results</small></div><div class="bar-track"><div class="bar-fill gold" style="width:50%"></div></div><div class="bar-val">5 / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Model &amp; infra ownership<small>Voice on ElevenLabs; LLM vendor undisclosed</small></div><div class="bar-track"><div class="bar-fill gold" style="width:40%"></div></div><div class="bar-val">4 / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Agent-era distribution<small>Open API, agent listings</small></div><div class="bar-track"><div class="bar-fill focus" style="width:40%"></div></div><div class="bar-val">4 / 10</div></div>
+    <div class="bar-row"><div class="bar-label">Data governance &amp; consent<small>Cross-platform identity</small></div><div class="bar-track"><div class="bar-fill focus" style="width:30%"></div></div><div class="bar-val">3 / 10</div></div>
+  </div>
+  <p class="footnote">Scores are my judgment from public evidence, not a benchmark. Composite: roughly 5.5 / 10. Strong on the ingredients that are hard to copy (data, workflow), weak on the ones a rival can copy in a quarter (open interfaces, published methodology, consent design).</p>
+</div>
+
+<!-- SECTION 4: CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments &amp; Performance</div>
+  <h2>Who Buys It, What It Solves, and What They Say</h2>
+
+  <h3>Target Segments</h3>
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Proof Points</th><th>Problem Solved</th><th>Fit Today</th></tr></thead>
+    <tbody>
+      <tr><td>Multi-venue restaurant groups &amp; fine dining</td><td>Nobu, Wolfgang Puck, Union Square Hospitality, Dishoom, Ethan Stowell (14 locations), Brotzeit (12)</td><td>Recognize VIPs across venues, own the email and SMS list, avoid per-cover commissions</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>Hotels &amp; resorts (F&amp;B)</td><td>Marriott, MGM Resorts, Mandarin Oriental, Wynn, Jumeirah; 14 Harrods outlets (2021)</td><td>Merge F&amp;B guest data with hotel guest profiles; concierge and in-room booking</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>Nightlife, clubs &amp; entertainment</td><td>Live Nation, Topgolf, NoHo Hospitality, Madera Group</td><td>Table minimums, guest lists, events, prepaid experiences, VIP tracking</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>International hospitality</td><td>75+ countries cited; channel ties to TheFork, Chope, OpenRice, Reserveout, The Chefz</td><td>Local marketplace access plus one guest database across markets</td><td><span class="tag gold">MEDIUM–STRONG</span></td></tr>
+      <tr><td>Breweries, wineries &amp; ticketed experiences</td><td>Listed as a segment on sevenrooms.com; Tock has 1,200 wineries</td><td>Ticketed tastings and add-ons</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td>Independent single-unit restaurants</td><td>Reviewers describe it as "expensive and could be more flexible for smaller establishments"</td><td>Little pain that Toast, Yelp, or OpenTable Basic do not already cover at a lower price</td><td><span class="tag red">WEAK</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Customer-Reported Outcomes (Vendor-Selected)</h3>
+  <table class="comp-table">
+    <thead><tr><th>Customer</th><th>Claimed Result</th><th>How to Read It</th></tr></thead>
+    <tbody>
+      <tr><td>Nobu London</td><td>$4M commission savings over 7.5 years; $203K revenue in two years; 349K emails added to CRM</td><td>Savings assume guests would have booked through a paid marketplace anyway</td></tr>
+      <tr><td>IGC Hospitality</td><td>A$1.6M savings over 2.5 years; A$500K first-year revenue</td><td>Same counterfactual problem; revenue attribution method not shown</td></tr>
+      <tr><td>The Apollo</td><td>10% cover increase; $6K a month in commission savings</td><td>Single-venue result; time window unstated</td></tr>
+      <tr><td>Brotzeit (12 locations)</td><td>$2M revenue and 350K+ guest relationships created</td><td>"Relationships" are contact records, not repeat visitors</td></tr>
+      <tr><td>Chelsea Living Room</td><td>90% less manual inventory work; 99% fewer double bookings (via Channel Connect)</td><td>Strong operational claim, single customer, launch-day quote</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">All figures are from sevenrooms.com and company press releases. Ethan Stowell figures on the site mix currencies and are omitted. "Commission savings" compares against a marketplace fee the venue may never have paid, which flatters the number.</p>
+
+  <h3>Customer Sentiment</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Operators Like</h4><p>An interface floor staff can learn quickly, guest data "front and center," commission-free reservations, reporting some call "second to none," and customer service Capterra reviewers rate 4.3 / 5. G2: 4.7 / 5 across 76 reviews. Capterra: 4.4 / 5 across 24.</p></div>
+    <div class="card"><h4>Operators Dislike</h4><p>Price for smaller venues, a mobile and Android gap, Oracle Micros and other POS integration snags, "bare bones" waitlist and guest-list tools, missing features versus OpenTable, and a steep learning curve. One Capterra reviewer cites "poor security governance."</p></div>
+    <div class="card"><h4>Diners (Trustpilot)</h4><p>1.7 / 5 across 80 reviews, 75% one-star. Themes: booking flows that time out or fail at the last step, unexpected deposit charges, and, from a few restaurant owners, contract terms they felt trapped by. Many of these are venue policy problems that diners attribute to the platform.</p></div>
+    <div class="card"><h4>Employees (Glassdoor)</h4><p>3.9 / 5, 66% would recommend. Praise for accessible leaders and remote flexibility. One detailed negative review alleges post-acquisition instability. Uncorroborated; logged as a watch item.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>SevenRooms has the best-fitted product for premium, multi-venue hospitality and a parent that can give it a consumer front door. The critique is not about whether the product is good. It is about three tensions the acquisition created and the product has not yet resolved: <strong>ownership</strong> (whose data is it?), <strong>reach</strong> (who can book through it?), and <strong>proof</strong> (who has verified the numbers?).</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">"You Own Your Data" Now Depends on How Your Parent Behaves</div>
+    <div class="critique-body">The founding promise was that the restaurant owns the guest relationship. Global Guest Search puts hundreds of millions of DoorDash and Deliveroo consumer records inside the operator's CRM, which is a powerful feature and also an unprecedented data flow. Public coverage describes no consent design, no data-separation guarantee, and no statement that operator-owned records are walled off from marketplace ranking or pricing. Eater reports restaurateurs declining to speak on record for fear of retaliation. Deliveroo puts UK and EU privacy law in play. The product-level fix is not a legal page. It is a visible, auditable guest-data charter built into the product, with consent as a first-class field on every cross-platform profile, and it should ship before the feature scales.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">The Agent Front Door Is Being Built, and SevenRooms Is Partly Outside It</div>
+    <div class="critique-body">Google's AI Mode names SevenRooms among eight booking partners in its April 2026 international expansion. ChatGPT's August launch covered Yelp, Resy, and OpenTable, and SevenRooms is not named in coverage. Meanwhile the SevenRooms API is gated to approved venue groups and partners, and Channel Connect lists "AI agents" as a channel without a public interface that an agent developer can use. In a market where 22% of consumers already use AI to choose restaurants (DoorDash survey), reservations that agents cannot see are reservations that go to Resy or OpenTable. This gap is fixable in a quarter or two, which is what makes it urgent.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Positioning Risk</div>
+    <div class="critique-title">"No Gatekeeper" and "DoorDash Company" Are Hard to Say in the Same Breath</div>
+    <div class="critique-body">Channel Connect is smart counter-positioning against OpenTable's system-of-record terms: free, open, works with any platform, and the CEO's line is "more tables for diners, one book for restaurants." But DoorDash is building its own diner demand (DashPass perks, Going Out credits, some restaurants offering DoorDash-exclusive reservations). A restaurant that trusts SevenRooms to prevent a single platform from becoming the gatekeeper can reasonably ask whether its parent is the next candidate. The neutral position has to be made credible with specifics: published rules on how DoorDash inventory is prioritized, whether SevenRooms venues get ranking advantages in Going Out, and what happens to operator data if they leave.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">There Is No Down-Market Ladder</div>
+    <div class="critique-body">The premium segment is well served. Below it, the story is thin: quote-based pricing, no free trial, third-party price estimates near $499 a month per location, and G2 reviewers calling it expensive for small operators. OpenTable's entry plan is publicly $149 a month, Toast bundles reservations with the POS, and Yelp bundles them with discovery. DoorDash already reaches 150,000+ merchants with its digital ordering service. SevenRooms has the parent that could deliver a lightweight, zero-cover-fee entry tier at scale and has not shipped one. With 2,100 estimated US restaurants against a 46% incumbent, breadth is the constraint on growth, not product quality.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Execution Risk</div>
+    <div class="critique-title">The AI Surface Area Is Growing Faster Than Service-Grade Reliability</div>
+    <div class="critique-body">Seven named AI or AI-adjacent features now sit on the product pages, several of them announced in 2026, alongside a redesigned booking flow, Slot Mode, Flexible Table Capacities, Smart Boost, and Channel Connect. In the same period reviewers describe freezing during seating, an Android gap, Oracle Micros POS friction, and thin reporting filters, and diners report timeouts at checkout and surprise deposits. A host stand at 7 p.m. does not reward a clever summary if the seating screen hangs. The roadmap needs a visible reliability budget: service-hour SLOs, certified POS connectors for the largest hotel chains, and diner-side checkout completion rates reported like a metric, not fixed like a bug.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Voice AI Is the Best-Evidenced Bet. It Is Also About 5% Deployed</div>
+    <div class="critique-body">400,000+ calls across 600+ restaurants, one in five after hours, and a named customer that "practically retired our phones at all four locations" is real proof of demand. Two cautions. First, the "up to 25% more reservations captured" comparison is adopters against their own prior year with no control group, so a holdout test would turn a marketing claim into evidence. Second, 600 restaurants against 13,000+ venues is under 5% penetration, and the platform is ElevenLabs', so per-minute costs are someone else's margin. The larger prize is phone <em>orders</em>: DoorDash already has the ordering stack. A voice agent that takes a takeout order and books a table on the same call is a product no reservation-only rival can offer.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Closed-Loop Guest Value Is the Feature Only DoorDash and SevenRooms Can Build Together</div>
+    <div class="critique-body">DoorDash's own survey finds 74% of diners say dining in led them to order delivery and 62% say delivery led them to dine in. Nobody else can show an operator what a guest is worth across dine-in, pickup, and delivery on one profile. Today that is a demo. With consent built in, it becomes a lifetime-value report, a "win back the guest who stopped visiting" campaign, and a defensible reason to choose SevenRooms over a reservation tool that cannot see delivery behavior. It is also the clearest way to justify the $1.2B price to operators rather than to investors.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Measurement Gap</div>
+    <div class="critique-title">The Proof Is Vendor-Selected, and the Best Numbers Rest on Counterfactuals</div>
+    <div class="critique-body">"$4M in commission savings" assumes Nobu London's guests would otherwise have booked through a paid marketplace, and "350K guest relationships" counts contact records rather than repeat visitors. DoorDash's Q2 statement of "new signed venues +100% YoY" measures signing, not activation or retention, with no base disclosed. Reservations "up 150% QoQ" comes from a launch a few quarters old in a couple of cities. A company selling on data should publish its methodology: holdout-based incrementality for Voice AI and email revenue, cohort retention for signed venues, and a plain definition of "venue."</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Watch Item</div>
+    <div class="critique-title">Integration Stress Is Plausible, but Not Proven</div>
+    <div class="critique-body">One detailed Glassdoor review alleges post-acquisition layoffs of 100+ sales reps and duplicated systems. It is a single anonymous source and no press report corroborates it, so it is excluded from the findings. It belongs on the watch list for a different reason: DoorDash's Q2 message that new signed venues doubled implies a sales machine that is being rebuilt at speed, and speed is when trust in an existing customer base is most easily damaged.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Deep guest-profile product with a loyal premium and hotel base</li>
+        <li>Zero-cover-fee model, a sharp contrast to $1.00–$1.50 per cover</li>
+        <li>DoorDash and Deliveroo identity graphs and consumer distribution</li>
+        <li>Channel Connect: free, open, and timed to OpenTable's terms change</li>
+        <li>Voice AI with measurable early traction (400K+ calls)</li>
+        <li>100+ integrations, 30+ POS systems, hotel and payment coverage</li>
+        <li>Co-founder CEO and CPO still leading; strong operator reviews on G2</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>~3% estimated US reservation share; small vs OpenTable's ~46%</li>
+        <li>No public pricing, no trial, no clear entry tier for small venues</li>
+        <li>Gated, approval-based API: hard for AI agents and developers to use</li>
+        <li>Voice AI depends on a third-party platform (ElevenLabs)</li>
+        <li>Mobile, Android, and POS integration complaints in reviews</li>
+        <li>Undisclosed revenue; proof rests on vendor-selected cases</li>
+        <li>No public consent framework for cross-platform guest data</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Become the open booking layer for AI agents (self-serve API, MCP)</li>
+        <li>Down-market tier through DoorDash's merchant footprint (150K+ ordering merchants)</li>
+        <li>Voice ordering plus reservations on one call</li>
+        <li>Consent-based delivery-to-dine-in guest lifetime value</li>
+        <li>Restaurants pushing back on OpenTable's system-of-record terms</li>
+        <li>Publish independent benchmarks and turn proof into a trust moat</li>
+        <li>Adoption headroom: ~19% of US sit-down restaurants online, mid-2024</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Amex's combined Resy and Tock: card credits, signing incentives, 2027 platform merge</li>
+        <li>OpenTable's network scale, Chase/Visa perks, and agent listings</li>
+        <li>AI assistants choosing which platforms are bookable (ChatGPT launch omitted SevenRooms)</li>
+        <li>POS bundling: Toast Tables and Square erode the small-venue base</li>
+        <li>Privacy regulation on cross-platform guest data (GDPR, US state laws)</li>
+        <li>Operator distrust of DoorDash's motives; "retaliation" fear</li>
+        <li>Voice-AI point solutions that do not require replacing the system</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: PRODUCT STRATEGY DOC -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2026–2028: From Restaurant CRM to the Trusted, Open Guest Platform</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy written from the perspective of a Senior PM or CPO at SevenRooms. It is grounded in public data, but the targets, tiers, and timelines are analytical recommendations, not SevenRooms' internal roadmap. Baselines the company does not publish are marked as "to be measured."
+  </div>
+
+  <!-- VISION -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision &amp; North Star</h3></div>
+    <p><strong>Vision:</strong> Every restaurant, hotel, and venue on SevenRooms knows its guests before they arrive, on any channel they arrive from, with data the venue can prove it owns. SevenRooms becomes the booking and guest platform that every marketplace, assistant, and agent has to work with, not the one they try to replace.</p>
+    <p><strong>North Star Metric:</strong> <em>Recognized Cover Rate</em>, the share of seated covers where a guest profile with at least one prior interaction on any channel was in front of the host before seating. It rewards the outcome that only SevenRooms can deliver (recognition), rewards data breadth (delivery, dine-in, phone, agent), and cannot be gamed by signing more venues. Baseline: to be measured in Q4 2026. Target: 60% for venues on the full stack by end of 2027.</p>
+    <p><strong>Guardrail Metric:</strong> <em>Consent-Logged Enrichment Rate</em>. Every profile enrichment from outside the venue's own data (including DoorDash and Deliveroo) has a recorded consent basis. Target 100%. If the north star rises while the guardrail falls, the strategy has failed.</p>
+    <p><strong>The Strategic Pivot:</strong> From "the best CRM for premium restaurants, owned by DoorDash" to "the open, verifiably operator-first guest platform that DoorDash's scale makes stronger." The first half of that sentence is what SevenRooms is. The second half is what has to be earned.</p>
+  </div>
+
+  <!-- BETS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2026–2028)</h3></div>
+
+    <h4>Bet 1: The Guest Data Charter (Trust as a Product)</h4>
+    <p>Turn the biggest risk into the most defensible feature. Ship a region-aware consent and purpose model for Global Guest Search, a data-separation guarantee for operator-owned records, full data export, and a public Trust Center with third-party audit. Recognition improves because guests opt in, not because they were matched silently.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      Every other bet depends on operators believing their data is theirs. It is also the only bet whose absence can cause a regulatory or press incident, and the UK/EU footprint via Deliveroo makes that a near-term risk. It should ship before Global Guest Search is broadened.
+    </div>
+
+    <h4>Bet 2: The Open Agent Interface (Be Bookable Everywhere)</h4>
+    <p>A self-serve REST API, an official MCP server, and venue-controlled agent policies, so any assistant can find and book a SevenRooms venue on the venue's terms.</p>
+    <div class="card-grid">
+      <div class="card"><h4>Phase 1 (Q1 2027): Read &amp; Hold</h4><p>Public documentation, sandbox, and an MCP server for availability search and short holds. Source tagging so every agent-originated booking is attributable. Free for venues.</p></div>
+      <div class="card"><h4>Phase 2 (Q2–Q3 2027): Book &amp; Manage</h4><p>Booking, modification, and cancellation with venue rules: party-size caps, deposit requirements, blackout windows, per-agent rate limits, and no-show protection for agent bookings.</p></div>
+      <div class="card"><h4>Phase 3 (Q4 2027): Listed Everywhere</h4><p>Named listings in the major assistants in every market SevenRooms serves, starting with the US gap. Channel Connect becomes the venue's single control panel for all agent and marketplace inventory.</p></div>
+      <div class="card"><h4>Moat Mechanism</h4><p>An agent that finds a venue on SevenRooms sees a live guest-aware experience (preferences, recognized returning guest, upsell rules) that a marketplace listing cannot offer. Openness feeds the guest graph rather than diluting it.</p></div>
+    </div>
+
+    <h4>Bet 3: SevenRooms Essentials (The Down-Market Ladder)</h4>
+    <p>A lighter tier delivered through DoorDash's merchant surfaces: publicly priced, zero cover fees, guided setup, pre-built connectors for the largest small-venue POS systems, and Voice AI on usage-based pricing. Priced against OpenTable Basic ($149 a month) as the visible anchor. Feature fences protect the premium tier: multi-venue CRM, revenue management, hotel integrations, and advanced segmentation stay above the line.</p>
+    <div class="callout green">
+      <strong>Sizing Logic (Illustrative)</strong>
+      If Essentials reached 5,000 venues within 12 months of launch at an average of $149 a month, that is about $8.9M in annualized recurring revenue: modest next to the $1.2B purchase price, but it multiplies the number of profiles, the Voice AI volume, and the data density that make the premium tier better. The value is in the graph, not the tier.
+    </div>
+
+    <h4>Foundation: The Service-Grade Reliability Program</h4>
+    <p>Not a bet, a prerequisite: diner-side checkout completion SLO, itemized deposit receipts, a native tablet and Android experience, certified connectors for MICROS Simphony and other hotel-grade POS systems, and reporting filters operators have asked for. Reviewers say the CRM is excellent. They also say the app freezes.</p>
+  </div>
+
+  <!-- INITIATIVES -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Guest Data Charter + consent model</div><div class="initiative-desc">Region-aware consent for cross-platform enrichment, data-separation statement, export, Trust Center.</div></div>
+      <div><span class="tag red">P0 · Q4 2026</span></div>
+      <div>100% of cross-platform enrichments consent-logged; charter published; zero unresolved regulator inquiries</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Service-Grade Reliability sprint</div><div class="initiative-desc">Diner checkout SLO, deposit receipts, Android and tablet parity, MICROS certification.</div></div>
+      <div><span class="tag red">P0 · Q4 2026 – Q1 2027</span></div>
+      <div>Booking completion at or above 99%; app-freeze tickets down 50%; diner-side rating at or above 3.0 within 12 months</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Open Agent Interface v1 (API + MCP, read and hold)</div><div class="initiative-desc">Public docs, sandbox, source tagging, free for venues.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>500 venues enabled; 3+ agent platforms integrated; agent-tagged bookings measured for the first time</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Proof Standard: holdout tests and published method</div><div class="initiative-desc">Incrementality for Voice AI and campaign revenue; plain definition of "venue"; cohort retention.</div></div>
+      <div><span class="tag gold">P1 · Q1 2027</span></div>
+      <div>Voice AI uplift measured against a control group at 100+ venues; methodology page live</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">SevenRooms Essentials pilot</div><div class="initiative-desc">Public price, guided setup, small-venue POS connectors, usage-based Voice AI.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>1,000 venues; time to first booking under 24 hours; 60-day retention above 85%</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent booking v2 (book, manage, policies, deposits)</div><div class="initiative-desc">Venue-controlled rules and no-show protection for agent bookings.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>5% of covers agent-sourced at enabled venues; agent no-show rate at or below direct-booking rate</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Voice AI for phone orders + reservations</div><div class="initiative-desc">One call books the table and takes the takeout order via DoorDash's ordering stack.</div></div>
+      <div><span class="tag blue">P2 · Q4 2027</span></div>
+      <div>Voice AI live at 3,000+ venues; 15% of handled calls include an order</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Consent-based Guest Lifetime Value (dine-in + delivery)</div><div class="initiative-desc">Cross-channel value report, lapsed-guest win-back, unified 360 view.</div></div>
+      <div><span class="tag grey">P3 · 2028</span></div>
+      <div>Recognized Cover Rate 60%+; measurable win-back revenue at 1,000+ venues</div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (Q4 2026 – Q4 2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Make "Operator-Owned" a Verifiable Claim</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Guest Data Charter and Trust Center published by end of Q4 2026</li>
+        <li>KR2: 100% of cross-platform profile enrichments carry a logged consent basis</li>
+        <li>KR3: Independent third-party audit of data separation completed by Q2 2027</li>
+        <li>KR4: Operator trust (survey, top 200 groups) at or above 80% "confident my data is mine"</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Be Bookable in Every Major Assistant</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Public API, sandbox, and MCP server live by end of Q1 2027</li>
+        <li>KR2: SevenRooms venues bookable through at least three major assistants, including the US launch gap</li>
+        <li>KR3: Agent-tagged bookings reach 5% of covers at enabled venues by Q4 2027</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Open a Down-Market Front Without Cheapening the Premium Product</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Essentials pilot with 1,000 venues by Q2 2027; 5,000 by Q4 2027</li>
+        <li>KR2: Premium-tier churn unchanged (no cannibalization signal) across the pilot</li>
+        <li>KR3: 25% of Essentials venues add Voice AI within 90 days</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Earn Service-Grade Trust</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Diner booking completion at or above 99%; deposit disputes down 50%</li>
+        <li>KR2: MICROS Simphony and two other hotel-grade POS connectors certified</li>
+        <li>KR3: Voice AI uplift measured against controls at 100+ venues and published</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks &amp; Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Data-trust incident or regulator action on cross-platform guest data</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Consent-first design, region gating (UK/EU first), data-protection impact assessments, third-party audit, and a public incident process.</td></tr>
+        <tr><td>Major assistants keep SevenRooms out of their listings</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Open interface with no-cost venue participation; route through Channel Connect's installed base; use DoorDash's platform relationships without making listing contingent on them.</td></tr>
+        <tr><td>Amex and OpenTable incentives pull premium venues away</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Compete on data ownership and cross-channel value, not on signing bonuses. Sell the guest lifetime value report to the top 200 groups directly.</td></tr>
+        <tr><td>Essentials cannibalizes premium plans</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Hard feature fences (multi-venue CRM, revenue management, hotel integrations), separate packaging, and premium-churn monitoring as an OKR.</td></tr>
+        <tr><td>Voice AI vendor dependency: cost, quality, or terms change</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Abstraction layer over the voice provider, cost-per-handled-call tracking, and a second-vendor evaluation each year.</td></tr>
+        <tr><td>Post-acquisition talent or sales-organization disruption (unverified)</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag grey">LOW–MEDIUM</span></td><td>Retention tied to Charter and Agent Interface milestones; protect customer-facing continuity for top accounts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT NOT TO DO -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts (What to Stop or Avoid)</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't sell "operator-owned data" without evidence</h4><p>The claim is the brand. Until the charter, audit, and export are live, marketing it invites the exact scrutiny a parent-company narrative attracts. Prove it first, then say it louder.</p></div>
+      <div class="card"><h4>Don't make DoorDash exclusivity a term</h4><p>Some restaurants already offer DoorDash-exclusive reservations by choice. Making it a condition of better ranking or pricing would confirm the retaliation story and end the neutrality pitch.</p></div>
+      <div class="card"><h4>Don't ship AI features faster than reliability improves</h4><p>Two more summaries and a redesigned workflow are worth less than one fewer freeze during a Friday-night seating. Put reliability on the roadmap as a first-class line, not a background task.</p></div>
+      <div class="card"><h4>Don't build a consumer discovery app</h4><p>DoorDash owns the diner front door and the assistants own the rest. SevenRooms' advantage is behind the host stand. Consumer surfaces compete with the parent and the partners that Channel Connect needs.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>SevenRooms is a good product attached to a large idea. The product is the best-fit guest CRM and reservation system for premium, multi-venue hospitality, with reviews to match, a growing set of well-placed AI features, and one shrewd piece of counter-positioning in Channel Connect. The idea is that a restaurant that recognizes its guests, on any channel, wins, and that DoorDash's consumer graph can make recognition automatic.</p>
+  <p>Three facts qualify the optimism. Its estimated US share is around 3% and the price paid implied roughly 15–28x revenue, so growth has to come from somewhere new. The AI front door is being built by Google, OpenAI, Amex, and OpenTable, and SevenRooms' interfaces are still permissioned. And the sentence that built the brand, "you own your data," is now printed on the product of a marketplace.</p>
+  <p>None of these is fatal, and all three have product answers: a consent-first data charter, an open agent interface, a down-market tier, and a published method for the numbers. The window is roughly 18 months. It closes as the Amex merger completes in 2027, as assistants finish choosing their partners, and as OpenTable's annual contracts lock in the venues that accept its new terms.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    SevenRooms is a strategic asset with a credibility and distribution gap. If it makes "operator-owned" provable, opens its booking interface to every assistant, and gives the small restaurant a way in, DoorDash bought a platform. If it does not, DoorDash bought a very good premium CRM in a market that is being rebuilt around it.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Sources: sevenrooms.com (product, AI, integrations, press releases of Jun 16 and Jul 21, 2026); DoorDash IR (deal announcement, Q2 2026 results, Going Out launch, 2026 Restaurant Industry Trends report); DoorDash 2025 annual report amendment (acquisition fair value); ElevenLabs (Voice AI case study, Jul 2026); Restaurant Dive; Restaurant Business; Boston Globe (Aug 2026); Fast Company (Amex, Resy, Tock); Eater NY; Expedite; Food On Demand; BistroChat (mid-2024 market share, single source); Eat App and other vendor blogs (OpenTable pricing); Winbuzzer and explainx.ai (Google AI Mode and ChatGPT reservations); G2, Capterra, Trustpilot, Glassdoor; Wikipedia; Latka and Tracxn (estimates; low confidence). Analysis as of September 2026. Revenue, share, and outcome figures are estimates or company-stated unless noted.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
