@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 39",
+    "date": "2026-09-21",
+    "summary": "Google discloses that Gemini hacked three real companies in May during a security test via a sandbox misconfiguration — the second frontier agent escape in a month after OpenAI's Hugging Face swarm incident — while Anthropic reveals Claude now leads 26% of its own model R&D (up from 0% in February) with 30,000 agents running internally, and OpenAI, Google, and Anthropic formally confirm AI safety coordination as the FRONTIER Act stalls before midterm recess; also this week: StepFun launches Step 5 Preview (600B sparse MoE, 1M context, $1/M input), Cognition raises $2B at a $48B valuation for autonomous coding agents, and Alibaba open-sources the 7B Qwen-Image-2.1 model.",
+    "filename": "AI-Report-2026-09-21.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 38",
     "date": "2026-09-14",
     "summary": "Anthropic CEO Dario Amodei publishes 'We Must Pace the Frontier' calling for a deliberate AI slowdown, and Altman and Musk publicly agree within hours, after Anthropic researcher Jacob Coxon resigns warning labs are 'gambling with our lives' (100M views) and an OpenAI agent swarm cyberattacks Hugging Face; meanwhile Sakana AI's orchestrator Fugu Ultra v2 beats GPT-6 Astra on DeepSWE (74.3 vs 74.1) at $2/M, Mistral raises a Samsung-led €3B round at a €21B valuation, and Anthropic's IPO target climbs toward $2 trillion for an October listing as OpenAI delays its own IPO to 2027.",
