@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Superhuman (formerly Grammarly) competitive intelligence — a data-platform teardown, AI readiness assessment, PM critique, and mock product strategy for the company betting that permissioned context, not model quality, is the moat. By Mukul Dewangan.">
+<title>Superhuman: The Context Bet — Competitive Intelligence · Mukul Dewangan</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0F0F0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* ===== PAGE-SPECIFIC ADDITIONS (Superhuman) ===== */
+.strat-list { font-size: 13px; color: var(--text-muted); padding-left: 20px; margin: 12px 0; }
+.strat-list li { margin-top: 4px; }
+.footnote a, .src-list a { color: var(--teal); text-decoration: none; border-bottom: 1px solid var(--border); }
+.footnote a:hover, .src-list a:hover { border-bottom-color: var(--teal); }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 14px 0 6px; font-size: 12px; color: var(--text-muted); }
+.legend .tag { margin-right: 6px; }
+.math-table td:first-child { font-family: 'DM Mono', monospace; font-size: 12px; }
+.src-list { font-size: 12px; color: var(--text-muted); padding-left: 18px; margin-top: 10px; }
+.src-list li { margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · October 2026</div>
+  <h1>Superhuman:<br>The <em>Context</em> Bet</h1>
+  <p class="cover-sub">A data-platform teardown of the company formerly known as Grammarly — what its stack really looks like, where the public evidence runs out, and whether a permissioned context layer can be assembled by acquisition faster than Microsoft and Google can ship theirs.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>San Francisco, CA</span></div>
+    <div>FOUNDED<span>2009 (renamed 2025)</span></div>
+    <div>DAILY USERS<span>40M+ (stated)</span></div>
+    <div>STATUS<span>Private · $700M+ rev.</span></div>
+    <div>COVERAGE<span>Data platform</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">40M+</div><div class="stat-label">Daily Users (Stated)</div></div>
+  <div class="stat-box"><div class="stat-num blue">$700M+</div><div class="stat-label">Revenue, May 2025</div></div>
+  <div class="stat-box"><div class="stat-num">200K+</div><div class="stat-label">Peak QPS, Writing Model</div></div>
+  <div class="stat-box"><div class="stat-num accent">6,000+</div><div class="stat-label">Event Types (2023)</div></div>
+  <div class="stat-box"><div class="stat-num blue">~100B</div><div class="stat-label">LLM Calls / Week (Reported)</div></div>
+  <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Acquisitions Since Dec 2024</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Superhuman?</h2>
+
+  <p>Superhuman Platform Inc. is the company that used to be <strong>Grammarly Inc.</strong> In October 2025 it took the name of the email client it had bought three months earlier, and now sells a four-product suite — <strong>Grammarly</strong> (writing), <strong>Superhuman Mail</strong> (email), <strong>Superhuman Docs</strong> (the successor to Coda) and <strong>Superhuman Go</strong> (a cross-app assistant and agent runtime). Its pitch is that most AI tools work in isolation, which creates a "context gap" where users re-explain their work in every app. Everything in this report is a test of whether the company can actually close that gap with data, not slides.</p>
+
+  <p>The reason to study it through a data-platform lens: Superhuman is simultaneously (a) one of the few consumer AI companies running a custom model at <strong>200K+ queries per second</strong>, (b) a Databricks lakehouse customer for roughly five years, and (c) a serial acquirer of products that each ship with their own datastore, identity model and permission scheme. The interesting question is not whether the pieces are good. It is whether they are one platform.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Superhuman has built a world-class platform for <em>observing and serving one model</em> (the writing assistant) and is now trying to build a second, very different platform for <em>grounding agents in customers' own work</em> — mostly by acquisition (Coda Brain, Mail, Rows, Fathom, GPTZero). The first is proven and publicly documented. The second is where the business case lives, and the public evidence for it is thin: agent evals, trace ingestion and a unified permission graph appear on a <em>roadmap</em>, not in production, in the company's own partner write-up.
+  </div>
+
+  <h4>How to read the confidence tags in this report</h4>
+  <div class="legend">
+    <span><span class="tag green">CONFIRMED</span>Company or customer-story primary source</span>
+    <span><span class="tag gold">VENDOR / REPORTED</span>Partner marketing, press, or analyst estimate</span>
+    <span><span class="tag grey">INFERRED</span>My reasoning from public signals</span>
+    <span><span class="tag red">UNKNOWN</span>No public evidence found</span>
+  </div>
+  <p class="footnote">Superhuman is private. Nothing below is audited. Where a number came from a secondary aggregator, it is labelled as such and, where it conflicts with another source, the conflict is shown.</p>
+
+  <h3>Leadership &amp; Data-Relevant Roles</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Shishir Mehrotra — CEO</h4><p>Former Coda CEO; took over from Rahul Roy-Chowdhury when the Coda deal closed (announced Dec 2024). Frames AI as a "job expander" and has said everyone is about to get "100 new employees" in the form of agents. The context bet is his thesis.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Noam Lovinsky — Chief Product Officer</h4><p>Owns Go. Stated product principle: "AI should reduce friction, not create it," with Go adapting to users rather than the reverse.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Luke Behnke — VP Enterprise Product</h4><p>Public voice on enterprise positioning: Superhuman is "AI-native" and combines Grammarly's infrastructure with Coda's permission-based AI work. Acknowledges deep workflows will stay in systems of record.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Data platform alumni &amp; voices</h4><p>Chris Locklin (Eng. Manager, Data Platforms) and Sergey Blanket (Head of BI) fronted the 2022 Databricks case study; Christian Acuna (tech lead manager) presented the 2023 event-store migration. <span class="tag red">Roles as of 2022–23; current org unknown</span></p></div>
+  </div>
+  <p class="footnote">Rahul Vohra (Superhuman Mail founder) joined with 100+ employees at the July 2025 deal. His current role was not confirmed in sources reviewed.</p>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2009 – 2015</div><div class="tl-title">Launched in Ukraine; freemium + browser extension</div><div class="tl-desc">Founded by Alex Shevchenko, Max Lytvyn and Dmytro Lider. Built "Gnar," a bespoke data lake (S3 Parquet, MySQL metadata, custom query DSL) that ran analytics until the 2020s.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2021 – 2022</div><div class="tl-title">$200M round at $13B; analytics rebuilt on Databricks</div><div class="tl-desc">Legacy EMR clusters and the in-house DSL replaced by a Delta Lake lakehouse with Unity Catalog. Snowflake was evaluated and rejected. About 5B events/day at the time.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Apr 2023 – Feb 2024</div><div class="tl-title">Generative AI features; event store rebuilt; 230 layoffs</div><div class="tl-desc">GPT-based features launched Apr 2023. Event store re-platformed on a medallion architecture (6,000+ event types). Feb 2024: 230 roles cut (~23% of staff) to shift the skill mix toward AI.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Dec 2024</div><div class="tl-title">Announces Coda acquisition</div><div class="tl-desc">Brings Coda Brain (RAG over 500+ Packs), a permissions-aware integration model, and Mehrotra as CEO.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">May – Jul 2025</div><div class="tl-title">$1B non-dilutive financing; Superhuman Mail acquired</div><div class="tl-desc">General Catalyst "Customer Value Fund" repaid from a capped share of revenue. Mail (est. ~$35M ARR, Sacra) adds the highest-signal work context: the inbox.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Oct 29, 2025</div><div class="tl-title">Rebrand to Superhuman; Go launches</div><div class="tl-desc">Go is built on Coda Brain, ships with 100+ agents, a Store, a closed-beta Agents SDK and the Alliance partner program. Free through Feb 1, 2026.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Feb – Mar 2026</div><div class="tl-title">Rows deal; Expert Review lawsuit</div><div class="tl-desc">Feb 23: agrees to acquire Rows (live integrations + AI analyst, for Coda/Docs). Mar 11: class action over the Expert Review feature; feature disabled the same day.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">May – Jul 2026</div><div class="tl-title">200K QPS inference story; GPTZero; Docs launch</div><div class="tl-desc">May 8: Databricks co-publishes the inference platform write-up. Jun 23: GPTZero deal announced. Early Jul: Docs launches; Coda AI credits paused Jul 6.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Aug – Sep 2026</div><div class="tl-title">$320M Form D; Fathom acquisition</div><div class="tl-desc">SEC Form D shows $320M equity sold to 45 investors (first sale Aug 7) with the "business combination" box checked. Fathom deal reported mid-September to give agents meeting context.</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape &amp; Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>The AI productivity market has stopped being a feature race and become a <strong>context race</strong>. The assistant that knows what you wrote, who you met and what is permitted to be shared wins the workflow. Three forces define 2026: platform owners are shipping the data layer themselves (Microsoft's "Work IQ" grounds Copilot in mail, files, meetings and chats); connector standards like MCP are commoditising integrations; and pricing is moving from seats to usage, which exposes anyone who cannot meter cost per agent action.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>The Incumbent Benchmark</h4><p>Microsoft 365 Copilot reached 15M paid seats on the FQ2 2026 call (Jan 28, 2026), about 3.3% of a 450M+ commercial base. Even with default distribution, paid agentic adoption is early. <span class="tag gold">REPORTED</span></p></div>
+    <div class="card"><h4>The Context-Native Peers</h4><p>Glean reported $200M ARR in Dec 2025 (doubled in nine months; $7.2B valuation). Notion is estimated at $865M ARR in July 2026, +82% YoY, now positioned around agents rather than apps. <span class="tag gold">ESTIMATES</span></p></div>
+    <div class="card"><h4>Superhuman's Own Number</h4><p>The last public revenue figure — "$700M+" — dates from May 2025, about 17 months ago. There is no 2026 update. Treat growth claims as unverified. <span class="tag red">STALE</span></p></div>
+  </div>
+
+  <h3>Competitive Map</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Competitor</th><th>Model</th><th>Data / context moat</th><th>Overlap with Superhuman</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Microsoft 365 Copilot</strong></td><td>Seat add-on to the dominant suite ($21–$30/user/mo)</td><td>Work IQ grounding across mail, files, meetings, chat; tenant-level identity and compliance already in place</td><td>Writing, mail, docs, meeting notes — every Superhuman surface</td><td><span class="tag red">EXISTENTIAL</span></td></tr>
+      <tr><td><strong>Google (Gemini in Workspace / Gmail)</strong></td><td>Bundled into Workspace</td><td>Owns the inbox and doc graph Superhuman Mail and Go sit on top of; can change API terms</td><td>Mail, docs, calendar, writing assist</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Notion</strong></td><td>Workspace plus agents, usage-based pricing since May 2026</td><td>Pages/databases as agent context; Custom Agents and Agents SDK across third-party apps</td><td>Docs/Databases, agents, MCP</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Glean</strong></td><td>Enterprise search and agents</td><td>Cross-app index with permission mirroring; CIO-level procurement</td><td>Go's "company context" pitch</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>ChatGPT / Claude with connectors &amp; MCP</strong></td><td>Horizontal assistants</td><td>Model quality and user mindshare; connect to the same SaaS apps via MCP</td><td>Go as assistant. Also a partner: Docs MCP lets them reach into Superhuman</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Shortwave, Front, Spark</strong></td><td>AI-first email clients</td><td>Thin: depend on Gmail/Outlook APIs</td><td>Superhuman Mail</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Granola, Fireflies, Otter</strong></td><td>AI notetakers</td><td>Meeting transcripts; capture-level moat only</td><td>Fathom</td><td><span class="tag grey">LOW</span></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Competitor rows are my qualitative assessment; dollar and seat figures are from the cited reports. A Sacra AI-generated summary says Notion Mail is being shut down in September 2026 — worth verifying before relying on it.</p>
+
+  <h3>Industry Trends Shaping Superhuman's Fate</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <h4>Context Becomes the Moat</h4>
+      <p>Model quality is converging; what differs is what the assistant is allowed to see and remember. That makes permission-aware retrieval and durable memory the core engineering problem, not a feature.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔌</div>
+      <h4>MCP Commoditises Connectors</h4>
+      <p>Docs and Mail both expose MCP servers so ChatGPT, Claude and Cursor can reach in. Good for distribution; bad for lock-in. A Metrigy analyst's read: the challenge is giving customers enough value that they prefer Superhuman's own UI.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💳</div>
+      <h4>Seats Give Way to Usage</h4>
+      <p>Notion went usage-based in May 2026. Coda AI credits were paused Jul 6, 2026 and slated to return around August. Metering per agent action is now a data-platform requirement.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">✍️</div>
+      <h4>Writing Assistance Is Commoditised</h4>
+      <p>Grammarly's original wedge (grammar) is now a baseline LLM capability. Its remaining edge is distribution (a "1M+ apps and websites" footprint) and 15+ years of accept/reject telemetry.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Permissioned Context at Scale</h4><p>Answer only from what this user may see, with citations, at low latency. The hard part is staleness: access revoked after indexing.</p></div>
+    <div class="card"><h4>Distribution at the Point of Work</h4><p>Being in the text box beats being in a destination app. Superhuman's extension footprint is its real asset.</p></div>
+    <div class="card"><h4>Cost-to-Serve Discipline</h4><p>Inference spend must be attributable per tenant and per agent action, or usage pricing becomes guesswork.</p></div>
+    <div class="card"><h4>Trust &amp; Rights Governance</h4><p>Provenance, consent and opt-out for any person, persona or content the system touches. The Expert Review suit shows the price of getting this wrong.</p></div>
+  </div>
+
+  <h3>Where Superhuman Is Struggling</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Rights governance failure</h4><p>Expert Review attributed AI-generated feedback to named real experts (some deceased) without consent. Class action filed Mar 11, 2026 alleging damages above $5M; feature pulled the same day. CEO: "The feature was not a good feature." Company calls the claims meritless.</p></div>
+    <div class="card"><h4>Pricing trust</h4><p>A June 30, 2026 email told some free Coda users "your free plan is about to feel smaller" with a Jul 6 upgrade deadline. Staff later said no existing limits were being cut, and that the email "may not have come across as we hoped."</p></div>
+    <div class="card"><h4>Disclosure gap</h4><p>No revenue update in 17 months; a $320M Form D with the business-combination box ticked but no named deal; 5 acquisitions in ~21 months. Investors and customers are being asked to trust integration they cannot see.</p></div>
+    <div class="card"><h4>Evidence limits</h4><p>I found no usable Reddit threads on Go or Docs. Customer sentiment here comes from the company's own community forum, which skews toward existing Coda users. Treat sentiment as thin.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What Superhuman Sells — and What Runs Underneath</h2>
+
+  <p>This section has three parts: the product surface (what a customer buys), the <strong>data platform teardown</strong> (the main subject of this report), and an AI readiness assessment that follows directly from what the data platform can and cannot do.</p>
+
+  <h3>Part A — The Product Surface</h3>
+  <table class="comp-table">
+    <thead><tr><th>Product</th><th>What it is</th><th>Data it touches</th><th>Maturity signal</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Grammarly</strong></td><td>Writing assistant across extensions, desktop and editors; writing agents (Aug 2025) for originality checks and reader-reaction prediction</td><td>Text being typed; accept / reject / ignore telemetry</td><td><span class="tag green">MATURE</span> 15+ years</td></tr>
+      <tr><td><strong>Superhuman Mail</strong></td><td>Premium email client (Gmail/Outlook); Auto Drafts, Auto Labels, Split Inbox, Mail MCP</td><td>Full mailbox, calendar, contacts</td><td><span class="tag green">MATURE</span> est. ~$35M ARR (Sacra)</td></tr>
+      <tr><td><strong>Superhuman Docs</strong></td><td>AI-native successor to Coda: tables, formulas, automations, live connections; Docs AI and MCP in beta; Databases and AI views in private beta</td><td>Customer docs and structured tables; Pack-synced SaaS rows</td><td><span class="tag gold">TRANSITION</span> launched early Jul 2026</td></tr>
+      <tr><td><strong>Superhuman Go</strong></td><td>Cross-app assistant and agent runtime in the browser; Daily Briefs, scheduling, 100+ agents, no-code agent builder, Agent Store, closed-beta SDK</td><td>On-screen context, connected app data, remembered user context</td><td><span class="tag gold">EARLY</span> free through Feb 1, 2026; paid usage unreported</td></tr>
+      <tr><td><strong>Acquired capabilities</strong></td><td>Rows (live integrations + AI analyst), GPTZero (authenticity layer; 20M+ registered users, $30M ARR reported), Fathom (meeting capture)</td><td>Spreadsheets; student/educator submissions; meeting transcripts</td><td><span class="tag grey">INTEGRATING</span> no timelines given</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Marketing Claims I Would Not Repeat</strong>
+    <em>"4+ hours saved each week"</em> (Mail) has no stated methodology. <em>"100+ agents"</em> counts connector and partner agents, not Superhuman-built ones. And the homepage's <em>"1M+ apps and websites"</em> is text-box <em>reach</em> of the extension, while Go's data <em>connectors</em> number about <em>100+</em>. That gap — three to four orders of magnitude between where Superhuman can write and where it can read — is the real shape of the context bet.
+  </div>
+
+  <h3>Part B — The Data Platform Teardown</h3>
+  <p>Superhuman's data estate, reconstructed from a customer case study, a conference-style engineering write-up, a partner blog, a trust center, product launch posts and press. It is best read as <strong>seven layers</strong>. The first three are mature and well-documented; the last four are where the story gets harder to see.</p>
+
+  <div class="brand-grid">
+    <span class="brand-pill flagship">Databricks</span>
+    <span class="brand-pill flagship">Delta Lake</span>
+    <span class="brand-pill flagship">Unity Catalog</span>
+    <span class="brand-pill flagship">Spark Structured Streaming</span>
+    <span class="brand-pill flagship">Databricks Model Serving</span>
+    <span class="brand-pill flagship">vLLM</span>
+    <span class="brand-pill">Databricks SQL</span>
+    <span class="brand-pill">Tableau</span>
+    <span class="brand-pill">AWS</span>
+    <span class="brand-pill">Kubernetes</span>
+    <span class="brand-pill">NVIDIA H100 / L40S</span>
+    <span class="brand-pill">Snowflake Cortex (Coda Brain)</span>
+    <span class="brand-pill">Turbopuffer</span>
+    <span class="brand-pill">Fivetran</span>
+    <span class="brand-pill">Google Cloud</span>
+    <span class="brand-pill">OpenAI</span>
+    <span class="brand-pill">Iterable</span>
+  </div>
+  <p class="footnote">Red pills = documented as core to a named workload. Gray pills = named in a source but with an unstated or inferred role. Absence from this list is not evidence of absence.</p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">1 · Analytics Lakehouse</div>
+    <div class="tech-layer-content">
+      <strong>Databricks on AWS, Delta Lake at the core, Unity Catalog for governance <span class="tag green">CONFIRMED</span></strong>
+      <p>A 2022 customer story describes replacing a homegrown analytics system (an in-house SQL-like DSL, always-on Amazon EMR clusters, spreadsheet copy-paste for ad-spend data, no BI support) with a single lakehouse serving ETL, analytics and ML. Tableau sits on top for executive reporting; Databricks SQL serves marketing, product and BI. Unity Catalog supplies role-based access, lineage and data-quality monitoring. Reported outcomes: daily events available in under 15 minutes versus 4 hours; ingestion at about 10% of the prior warehouse cost; ~5 billion app events per day. Snowflake was evaluated and rejected for weak data-science/ML support, unpredictable cost at scale, and less control over data ownership. The page was modified as late as Sept 16, 2026 and now carries an "Agent Bricks" product tag, but the text does not describe its use.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">2 · Event Store</div>
+    <div class="tech-layer-content">
+      <strong>6,000+ event types, one Delta table each, medallion layers <span class="tag green">CONFIRMED (2023)</span></strong>
+      <p>The replacement for the bespoke "Gnar" lake ingests events from 40 internal and external clients; a Spark Structured Streaming job routes each event type to its own table. Bronze holds raw history, silver the conformed view for self-service and ML, gold the read-optimised models. Schema enforcement was introduced deliberately; data-delivery time fell about 94%. <span class="tag grey">MY READ</span> One table per event type keeps typed telemetry clean, but it means 6,000+ objects to govern, and every new agent action type adds more. It also says nothing about how agent <em>traces</em> (multi-step, nested, content-bearing) are stored. That is a different data shape.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">3 · Model Training &amp; Serving</div>
+    <div class="tech-layer-content">
+      <strong>Custom writing LLM at 200K+ QPS on Databricks Model Serving <span class="tag gold">VENDOR-REPORTED (May 8, 2026)</span></strong>
+      <p>A custom grammatical-error-correction LLM serves real-time suggestions at peak above 200K QPS (~50 input and ~50 output tokens per request) on 250+ GPUs, against SLOs of p99 under 1 second and 99.99% availability, with zero quality regression on Superhuman's evaluation harnesses. It replaced a self-managed vLLM stack on L40S GPUs that needed months of manual tuning per model iteration. Databricks engineering added power-of-two-choices load balancing via a custom endpoint-discovery service, concurrency-based autoscaling (aggressive up, conservative down), lazy-loading container images (startup from minutes to seconds), FP8 quantisation (up to ~30% per-pod gain), a multiprocessing RPC server (~20%), and C++/async scheduling work. Target: 750–1,200 QPS per H100 pod, a 60% gain. Superhuman keeps ownership of training, quantisation and quality bars.</p>
+      <p><strong>What is conspicuously absent:</strong> the write-up does not name Unity Catalog, MLflow or Delta for this workload. Its "future direction" lists experiment tracking, evaluation across classical ML and GenAI/agents, a model and LLM-judge registry, and agent-trace ingestion — i.e., the lifecycle and observability layer is still to be moved onto the platform.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">4 · Context &amp; Retrieval</div>
+    <div class="tech-layer-content">
+      <strong>Coda Brain: Packs → retrieval stage → generation stage, on Snowflake Cortex <span class="tag green">CONFIRMED (Coda's own post)</span></strong>
+      <p>Coda's description: data syncs in via Packs (500+ public, plus custom; 30% of active docs used Packs; 4B+ rows synced in a year). Each prompt is split into a retrieval stage that determines what the user may access and a generation stage that writes the answer. Per-user authentication mirrors source-system permissions. The post names Snowflake Cortex Search (indexing), Cortex Analyst (natural language to SQL) and Cortex LLMs, and exposes the backend to developers via API and SQL as a "pre-configured data warehouse." Go is described as built on Coda Brain.</p>
+      <p><span class="tag grey">MY READ</span> This is the sharpest tension in the stack. Superhuman's data team chose Databricks over Snowflake in 2022 for ML support, cost predictability and ownership. Its flagship context product ran on Snowflake. Whether Coda Brain has been re-platformed since the merger is <span class="tag red">UNKNOWN</span>, as are retrieval latency, index freshness, chunking and embedding choices, and how access revocation propagates to already-indexed content.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">5 · Agent Runtime &amp; Connectors</div>
+    <div class="tech-layer-content">
+      <strong>Go + Agent Store + SDK + MCP <span class="tag green">CONFIRMED</span></strong>
+      <p>Go connects to 100+ apps, orchestrates first- and third-party agents (Google Workspace, Outlook, Jira, Confluence, Salesforce connectors; partners such as Common Room, Fireflies, Quizlet), keeps memory of user context and past actions, asks for approval before acting, and refuses to operate in password managers or sensitive fields. Docs and Mail expose MCP servers (beta) so external assistants can read and write Superhuman data. Rows (live integrations, AI analyst) and Fathom (meeting capture, already a Go connector) are being folded in to deepen the structured and conversational context. The Agents SDK is in closed beta.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">6 · Infra &amp; Subprocessors</div>
+    <div class="tech-layer-content">
+      <strong>Multi-cloud, multi-vendor footprint <span class="tag grey">INFERRED</span></strong>
+      <p>The lakehouse story is explicitly AWS. The trust center I retrieved lists Turbopuffer, OpenAI, Iterable, Fivetran and Google Cloud as subprocessors without labelling roles. A reasonable reading: Google Cloud hosts at least the Mail product, Fivetran moves SaaS data into a warehouse, Turbopuffer provides vector search, OpenAI supplies third-party LLM calls. The list names neither Databricks, AWS nor Snowflake, so it cannot be the group-wide inventory — it is likely product-scoped. The sensible conclusion: a hybrid model strategy (a proprietary small model on the high-volume writing path, third-party frontier models for generation) over at least two clouds.</p>
+    </div>
+  </div>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">7 · Governance &amp; Identity</div>
+    <div class="tech-layer-content">
+      <strong>Strong compliance posture, two permission models, gaps on residency <span class="tag green">CONFIRMED</span> <span class="tag red">UNKNOWN</span></strong>
+      <p>Certifications: SOC 2 Type 2, ISO/IEC 27001, 27017, 27018 and (trust center) 27701, with a SecurityScorecard "A". Stated principles: user content is not sold or monetised; users own what they write; third-party providers may not train on user content; one sign-in across the suite. Internally, access to analytics data is governed by Unity Catalog roles. Externally, agent retrieval is governed by replicating each source system's permissions through per-user auth. Those are two different permission paradigms with no published bridge. <span class="tag red">Not stated:</span> data residency, retention periods, MCP security model, and whether Go's persistent memory is purged when access is revoked. Historical note: a 2018 extension flaw (CVE-2018-6654) exposed authentication tokens; it was hot-fixed within hours.</p>
+    </div>
+  </div>
+
+  <h4>What Is Confirmed vs. What Is Missing</h4>
+  <table class="comp-table">
+    <thead><tr><th>Capability</th><th>Public evidence</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Behavioural telemetry at scale</td><td>~5B events/day (2022); 6,000+ event types; medallion lakehouse</td><td><span class="tag green">CONFIRMED</span></td></tr>
+      <tr><td>High-QPS model serving</td><td>200K+ QPS, p99 &lt; 1s, 99.99% target</td><td><span class="tag gold">VENDOR-REPORTED</span></td></tr>
+      <tr><td>Permission-aware retrieval</td><td>Architecture described; scale and freshness not published</td><td><span class="tag gold">PARTIAL</span></td></tr>
+      <tr><td>Unified data model across Grammarly / Mail / Docs / Fathom</td><td>"Single identity" claimed; Fathom keeps its own login; no entity model published</td><td><span class="tag red">UNKNOWN</span></td></tr>
+      <tr><td>Agent evals, LLM-judge registry, trace ingestion</td><td>Listed as future work in the Databricks write-up</td><td><span class="tag red">NOT YET</span></td></tr>
+      <tr><td>Per-tenant / per-agent cost metering</td><td>Credits paused Jul 6, 2026; relaunch status unreported</td><td><span class="tag red">UNKNOWN</span></td></tr>
+      <tr><td>Rights &amp; consent ledger for people, personas and content</td><td>Expert Review withdrawn; a persona library with revenue share is "planned"</td><td><span class="tag red">NOT YET</span></td></tr>
+      <tr><td>Data residency and retention</td><td>Not stated on the trust center</td><td><span class="tag red">UNKNOWN</span></td></tr>
+    </tbody>
+  </table>
+
+  <h4>Sanity Checks: Do the Numbers Reconcile?</h4>
+  <table class="comp-table math-table">
+    <thead><tr><th>Check</th><th>Arithmetic</th><th>Result</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Weekly calls vs. peak QPS</td><td>100B ÷ 604,800 s</td><td>≈ 165K QPS average</td><td>Against a 200K+ peak that implies a peak-to-average of ~1.2×, which is flat for a global, diurnal product. Either the "100B/week" figure (reported, not confirmed) covers more than this one model, or it is rounded. They are not obviously the same workload.</td></tr>
+      <tr><td>Tokens per second at peak</td><td>200K × (50 + 50)</td><td>≈ 20M tokens/s</td><td>Short requests: this is a latency and fan-out problem, not a throughput-per-request problem. Explains the focus on load balancing and cold-start.</td></tr>
+      <tr><td>Per-GPU throughput</td><td>200K ÷ 250 GPUs</td><td>≈ 800 QPS per GPU</td><td>Inside the stated 750–1,200 QPS/pod target (if one pod ≈ one GPU). "Over 250" makes 800 an upper bound. Consistent.</td></tr>
+      <tr><td>Event freshness</td><td>(240 − 15) ÷ 240 min</td><td>93.75%</td><td>Matches the "94% faster delivery" figure from the separate 2023 write-up. Consistent.</td></tr>
+      <tr><td>Reported acquired ARR</td><td>($35M Mail + $30M GPTZero) ÷ $700M</td><td>≈ 9%</td><td>Revenue reported for acquired products is small relative to the base. The deals are about data, distribution and capability, not revenue. Coda, Rows and Fathom figures are undisclosed.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Numbers I Rejected or Flagged</h4>
+  <table class="comp-table">
+    <thead><tr><th>Claim</th><th>Problem</th><th>Treatment</th></tr></thead>
+    <tbody>
+      <tr><td>"1B words/day and 14T words/year" (aggregator)</td><td>1B × 365 ≈ 365B, not 14T. Internally inconsistent.</td><td>Excluded</td></tr>
+      <tr><td>"2024 GAAP revenue ≈ $250M" vs. "≈ $650M ARR" at end-2024 (Sacra via aggregator)</td><td>A 2.6× gap with no explanation; revenue and ARR used interchangeably across sources.</td><td>Use only the company's "$700M+" with its May 2025 date</td></tr>
+      <tr><td>"110% faster than a data warehouse"</td><td>Ambiguous: 110% faster means 2.1× speed, which is not what vendors usually intend.</td><td>Quoted as vendor language, not used in analysis</td></tr>
+      <tr><td>Mail "acquired Oct 2025" (Sacra)</td><td>Conflicts with the Jul 1, 2025 announcement; likely a closing or rebrand date.</td><td>Use Jul 2025</td></tr>
+      <tr><td>Fathom deal date</td><td>Sept 14 (Reworked) vs. Sept 21 (Pulse 2).</td><td>"Mid-September 2026"</td></tr>
+      <tr><td>$13B valuation</td><td>Set in 2021; an anonymous investor told TechCrunch the market value is "significantly below" it.</td><td>Not used as a current valuation</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout blue">
+    <strong>Critical Technical Gap</strong>
+    Superhuman has the two things that are hard to buy — behavioural telemetry at planetary scale and the inference engineering to serve a model at 200K QPS. What it has not shown is the thing that is hard to <em>build</em>: a single, auditable system that answers "what did this agent know, who allowed it, what did it cost, and was the answer good?" across Grammarly, Mail, Docs and Fathom. Agent trace ingestion and an LLM-judge registry sit on the company's own future-work list.
+  </div>
+
+  <h3>Part C — AI Strategy &amp; Readiness</h3>
+  <p><strong>Strategy, as stated:</strong> be the horizontal layer (Go) that follows the user into any app; fill it with first- and third-party agents (Store, SDK, Alliance partner program); buy the missing context sources and trust primitives (Mail for inbox, Fathom for meetings, Rows for live data, GPTZero for authenticity); and keep proprietary models only where scale makes it pay (the writing path). Mehrotra's framing is "100 digital employees per person."</p>
+
+  <table class="comp-table">
+    <thead><tr><th>Readiness dimension</th><th>Evidence</th><th>Rating</th></tr></thead>
+    <tbody>
+      <tr><td>Telemetry &amp; feedback data</td><td>Accept/reject/ignore events at ~5B/day (2022); 6,000+ typed event streams</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>Inference infrastructure</td><td>200K+ QPS, FP8, autoscaling, sub-second p99 (vendor-reported)</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>Distribution at point of work</td><td>Extension footprint across 1M+ apps and sites; 40M+ daily users (stated)</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td>Security &amp; compliance baseline</td><td>SOC 2 Type 2; ISO 27001/17/18/701; no-selling and no-third-party-training commitments</td><td><span class="tag blue">SOLID</span></td></tr>
+      <tr><td>Permissioned retrieval</td><td>Sound design; unpublished latency, freshness and revocation behaviour; Snowflake dependency</td><td><span class="tag gold">PARTIAL</span></td></tr>
+      <tr><td>Unified identity &amp; entity graph</td><td>Single sign-in claimed; acquired products keep separate logins</td><td><span class="tag gold">PARTIAL</span></td></tr>
+      <tr><td>Agent evaluation &amp; observability</td><td>Experiment tracking, LLM-judge registry, trace ingestion listed as future</td><td><span class="tag red">GAP</span></td></tr>
+      <tr><td>Rights, consent &amp; provenance</td><td>Expert Review suit; persona library planned</td><td><span class="tag red">GAP</span></td></tr>
+      <tr><td>Cost metering &amp; unit economics</td><td>Credit system paused and relaunched within weeks; no cost-per-action disclosure</td><td><span class="tag red">GAP</span></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Overall: strong on the inputs to AI (data, compute, reach), weaker on the controls around AI (evals, rights, metering). That ordering is the usual one for a company whose first AI product was a single well-bounded model, and the usual one that breaks first when agents start taking actions.</p>
+</div>
+
+<!-- SECTION 4: CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments</div>
+  <h2>Who Buys, What They Generate, and How It's Doing</h2>
+
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Entry product</th><th>Problem solved</th><th>Data they generate</th><th>Monetisation</th></tr></thead>
+    <tbody>
+      <tr><td>Students &amp; individual writers</td><td>Grammarly free / Pro</td><td>Correctness, clarity, tone; AI detection and citations</td><td>Highest-volume suggestion telemetry</td><td>Freemium; Pro from ~$12/mo annual (secondary source)</td></tr>
+      <tr><td>Education institutions</td><td>Grammarly for Education, GPTZero</td><td>Authorship, integrity, writing support</td><td>Submissions and authenticity signals</td><td>Institutional licences; 3,000+ institutions (stated)</td></tr>
+      <tr><td>Founders, sales &amp; execs</td><td>Superhuman Mail</td><td>Inbox speed, triage, scheduling</td><td>Mailbox, contacts, calendar — the richest work context</td><td>~$30–40/mo per user (Sacra, historical); est. ~$35M ARR</td></tr>
+      <tr><td>Ops, PM &amp; project teams</td><td>Docs (Coda), Databases</td><td>Docs as lightweight apps; live SaaS data in tables</td><td>Structured tables, automations, Pack-synced rows</td><td>Seats; AI credits paused Jul 6, 2026; relaunch unclear</td></tr>
+      <tr><td>Mid-market &amp; enterprise teams</td><td>Suite + Go</td><td>One assistant across email, docs, CRM, tickets</td><td>Cross-app actions, approvals, memory</td><td>Suite Business tier reported at ~$33/mo; legacy Business ~$15/seat</td></tr>
+      <tr><td>Partners &amp; builders</td><td>Agents SDK, Store, Alliance</td><td>Distribution for third-party agents</td><td>Agent usage and trace data</td><td>Not yet disclosed; SDK in closed beta</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">The superhuman.com homepage shows no prices. Pricing figures above are from secondary sources and should be re-checked before use.</p>
+
+  <h3>Recent Performance</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📊</div><h4>40M+ daily users, 50,000+ orgs, 3,000+ schools</h4><p>Company-stated on the rebrand page. A 2021 figure of ~30M "users" and the later "daily users" are different units; the growth rate between them cannot be inferred.</p></div>
+    <div class="card"><div class="card-icon">💰</div><h4>$700M+ revenue (May 2025)</h4><p>From the financing announcement. No later figure. A secondary aggregator calls the same number ARR and pairs it with a ~$250M GAAP figure it never reconciles. Use with caution.</p></div>
+    <div class="card"><div class="card-icon">🏦</div><h4>$1B facility + $320M equity</h4><p>The 2025 General Catalyst facility is non-dilutive and repaid from a capped share of revenue. The Aug–Sep 2026 Form D shows $320M in 45 investor sales, fully subscribed, tied to an unnamed business combination. No valuation disclosed.</p></div>
+    <div class="card"><div class="card-icon">👥</div><h4>~1,500 employees</h4><p>Self-published on a job board. About 1,000 before the Feb 2024 cuts (230 people). Net headcount up roughly half since, much of it via acquisition.</p></div>
+  </div>
+
+  <div class="callout gold">
+    <strong>Customer Proof Is Thin</strong>
+    The homepage names OpenAI, Figma, Cursor, Retool, Zapier and DoorDash as logos and shows a single testimonial. Logos are not seat counts, and none of them is quoted on measured outcomes. For a platform whose pitch is "agents act on your behalf," I could find no public case study with before/after metrics on Go. That is the single largest evidence gap in the commercial story.
+  </div>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>Superhuman has executed well on what it can already do: it keeps a very large writing product fast, cheap and reliable, and it has assembled a credible set of context sources in 21 months. The critique below is about the distance between that and the claim on its homepage — that an assistant can safely act across your work. Nearly every gap is a <em>data platform</em> gap, which is why this report is organised around it.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">Three Data Estates, One Story</div>
+    <div class="critique-body">The public record shows a Databricks lakehouse on AWS for product analytics and ML serving, a Snowflake Cortex-based retrieval layer inside Coda Brain (which Go is built on), and a Google Cloud/Fivetran footprint for Mail. Superhuman's own data team rejected Snowflake in 2022 on ML support, cost predictability and ownership. If Coda Brain still runs on it, the company carries two warehouse engines, two permission models and two cost curves under a single "Go" brand, and every acquisition adds a third or fourth. This is manageable if deliberate. The risk is that it is accidental, and that nobody can currently answer "what did this agent know?" without querying three systems. A deliberate decision (consolidate or formalise) should be made now and published internally with a cost model.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Agents Are Shipping Before the Instruments to Judge Them</div>
+    <div class="critique-body">The Databricks write-up lists experiment tracking, an LLM-judge registry and agent-trace ingestion as <em>future</em> work. Meanwhile Go launched with 100+ agents, including third-party agents from a Store, with an SDK in beta. For the writing model there is a mature eval harness ("zero quality regression"). For multi-step agents that read email and write to calendars there is no public equivalent. The first serious agent failure — a wrong send, a leaked draft — will have no trace to explain it. Evals and traces must precede, not follow, third-party distribution.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">Permission-Aware Retrieval Breaks at the Edges</div>
+    <div class="critique-body">Coda Brain's design — per-user auth and a retrieval stage that checks access — is the right shape. It is robust for live pulls. It is much harder for <em>already-indexed</em> content (access revoked after vectorisation) and for <em>derived</em> content: Go advertises persistent memory of user context and past actions. If an employee loses access to a Jira project, does Go's memory forget what it learned there? Nothing public says so. <span class="tag grey">INFERRED</span> This is where enterprise security reviews will focus, and "SOC 2" will not answer it.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Rights and Provenance Are a Data Problem, Not a Policy Problem</div>
+    <div class="critique-body">Expert Review attributed AI-generated critiques to real, named experts (some deceased) with an easy-to-miss footer disclaimer. It drew a class action alleging damages above $5M and was disabled the same day. The CEO's reaction — "not a good feature" — and the stated plan for a persona library where experts are paid is the right instinct, but a persona marketplace needs a rights ledger: who consented, to what, with what attribution and payout, and which outputs used it. That is a data model with audit requirements. Without it, the next persona or "authenticity" feature (GPTZero joins the suite) repeats the same failure mode.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Execution Gap</div>
+    <div class="critique-title">Pricing Moves Faster Than Cost Visibility</div>
+    <div class="critique-body">Go was free through Feb 1, 2026; Coda AI credits were paused on Jul 6, 2026 and slated to return around August; a free-tier email created confusion that staff had to correct. These are symptoms of a company still discovering its cost-to-serve per agent action. At ~100B LLM calls per week (reported), small per-call misestimates compound. Usage pricing needs per-tenant, per-agent metering as a first-class dataset, and a rule that finance and product read the same table.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Positioning Risk</div>
+    <div class="critique-title">The Moat Is Connector Count — and Connectors Are Being Commoditised</div>
+    <div class="critique-body">Superhuman can <em>write</em> in 1M+ places but <em>read</em> from about 100. MCP is collapsing that connector advantage for everyone: Superhuman itself exposes Docs and Mail via MCP so ChatGPT, Claude and Cursor can reach in. That helps distribution and hurts lock-in. The defensible position is not "we have connectors" but "we hold the permissioned, high-quality, <em>cross-source</em> context that others do not" — inbox plus meetings plus docs plus writing history. That is exactly the layer Microsoft's Work IQ targets.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Execution Risk</div>
+    <div class="critique-title">Integration Debt From Five Acquisitions in ~21 Months</div>
+    <div class="critique-body">Coda (Dec 2024), Mail (Jul 2025), Rows (Feb 2026), GPTZero (Jun 2026), Fathom (Sep 2026). Each brings its own datastore, identity, tenancy and data terms: workspaces, mailboxes, spreadsheets, student and educator submissions, meeting transcripts. Fathom customers "keep the same app, login and user experience," which is kind to customers and a signal that the identity layer is not yet unified. The $320M Form D (business combination box ticked) suggests more deals are coming. Reported revenue for the two acquisitions with figures (Mail, GPTZero) is about 9% of the base; the real value is data and capability, which makes data integration the actual deal thesis.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">The Accept / Reject Corpus Is the Most Underused Asset</div>
+    <div class="critique-body">Superhuman has more than a decade of labelled preference signals — which suggestions people accepted, rejected or ignored, ~5B events/day at the 2022 snapshot. The custom writing model and its evaluation harnesses already use this kind of feedback. The unexploited step is applying the same loop to <em>agent actions</em>: every Go proposal that a user approves, edits or rejects is a reward signal for agent quality. Few competitors have both a mature feedback pipeline and a surface where the user is already deciding. Handled with strict content-free event design, it is a durable evaluation advantage.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Use the Databricks Relationship as a Governance Accelerator</div>
+    <div class="critique-body">Databricks and Superhuman co-engineered the serving platform (eight Databricks authors on the write-up), and the vendor's own list of next steps matches Superhuman's gaps: experiment tracking, evaluation, a judge registry, trace ingestion. The customer page was updated in September 2026 with an Agent Bricks tag. Pulling those pieces forward and making Unity Catalog the governance plane for <em>all</em> internal data, including acquired products, is the fastest path to a single answer to "what did this agent know?" The trade-off is deeper vendor concentration, which should be a conscious choice with an exit plan.</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>Behavioural telemetry at planetary scale (~5B events/day in 2022; 6,000+ event types)</li>
+        <li>Serving 200K+ QPS with sub-second p99 on a custom model (vendor-reported)</li>
+        <li>Distribution inside the text box: 40M+ daily users, 1M+ app and site footprint (stated)</li>
+        <li>Mature governance basics: SOC 2 Type 2, ISO 27001/17/18/701; no-selling and no-training commitments</li>
+        <li>Context sources in hand: inbox (Mail), docs (Docs), meetings (Fathom), live data (Rows)</li>
+        <li>Capital: $1B non-dilutive facility plus $320M equity sold in 2026</li>
+        <li>Deep, co-engineering relationship with Databricks</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>Multiple data estates (AWS/Databricks, Snowflake Cortex, Google Cloud) without a published unification plan</li>
+        <li>Agent evals, LLM-judge registry and trace ingestion are still on the roadmap</li>
+        <li>Rights and provenance governance failed publicly (Expert Review)</li>
+        <li>No per-agent cost metering visible; pricing and credits changed repeatedly in 2026</li>
+        <li>Last public revenue figure is 17 months old</li>
+        <li>Thin public customer proof for Go; homepage shows no pricing</li>
+        <li>Unpublished data residency, retention and memory-purge behaviour</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Extend the accept/reject feedback loop to agent actions as an evaluation moat</li>
+        <li>Become the permissioned, cross-source context broker that MCP clients call into</li>
+        <li>Ship a rights-and-consent ledger and sell it as an enterprise trust tier</li>
+        <li>Use GPTZero and Fathom data to offer verifiable provenance and meeting-grounded answers</li>
+        <li>Agent scorecards for Store partners (quality, latency, cost) to curate a trusted marketplace</li>
+        <li>Rows and Databases as a structured-data on-ramp for analyst and finance workflows</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>Microsoft Work IQ and Google can ground assistants in data they already host</li>
+        <li>MCP lets external assistants use Superhuman data without Superhuman's UI or metering</li>
+        <li>Notion and Glean are scaling context-native agent products quickly</li>
+        <li>Class-action and consent exposure around personas and authenticity features</li>
+        <li>Platform API terms (Gmail, Outlook) can change under Mail's feet</li>
+        <li>Acquisition integration debt compounds with each new data-bearing product</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: PRODUCT STRATEGY DOC -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2026–2028: From Writing Telemetry to a Governed Context Platform</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM for the data platform at Superhuman. It is grounded in public information but represents analytical recommendations, not Superhuman's internal roadmap. All targets are illustrative hypotheses.
+  </div>
+
+  <!-- VISION -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision &amp; North Star</h3></div>
+    <p><strong>Vision:</strong> Every action a Superhuman agent takes can answer four questions — <em>what did you know, who allowed it, what did it cost, and was it good?</em> — in seconds, for the user, the admin and the auditor.</p>
+    <p><strong>North Star Metric:</strong> <em>Governed Action Rate</em> — the share of agent actions (a sent draft, a booked meeting, an updated doc) that (a) cite at least one permission-checked source, (b) have a complete trace in the evaluation store, and (c) are accepted without edit. Current baseline: <strong>not measurable from public evidence</strong>, and probably not measurable internally either, which is the point. Target by end of 2027: 60%.</p>
+    <p><strong>The Strategic Pivot:</strong> From "an assistant that is in every app" to "the assistant whose actions are explainable and billable." Reach is already won; trust and unit economics are not.</p>
+  </div>
+
+  <!-- BETS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2026–2028)</h3></div>
+
+    <h4>Bet 1: One Context Plane</h4>
+    <p>Create a single identity, entity and permission service used by Go, Docs, Mail, Fathom and GPTZero. Every agent read goes through a policy check that returns <em>allowed / denied, evidence and expiry</em>. Internally, make Unity Catalog the governance plane for all analytical data, including that of acquired products. Make an explicit, costed decision on the retrieval engine: re-platform Coda Brain off Snowflake Cortex or formalise a dual-engine design.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      Everything else — evals, metering, rights, enterprise sales — depends on being able to say who a user is across products and what they may see. It is also the only bet that gets harder with every acquisition.
+    </div>
+
+    <h4>Bet 2: Agent Evaluation &amp; Observability Fabric</h4>
+    <p>Pull forward the items Superhuman's own partner post listed as future: trace ingestion, experiment tracking, an LLM-judge registry and offline replay. Add per-tenant, per-agent cost metering as a first-class dataset.</p>
+    <div class="card-grid">
+      <div class="card"><h4>Phase 1 (Q4 2026): Trace Everything</h4><p>Every Go agent step logged with inputs referenced (not copied), policy decisions, latency and token cost. Content-free by default; content access requires a flagged debug path.</p></div>
+      <div class="card"><h4>Phase 2 (Q1–Q2 2027): Judge &amp; Replay</h4><p>LLM-judge registry with versioned rubrics; replay any trace against a new model or prompt; regression gates for agent releases, mirroring the writing model's "zero regression" bar.</p></div>
+      <div class="card"><h4>Phase 3 (Q3 2027): Scorecards</h4><p>Publish quality, latency and cost scorecards to Store and SDK partners; rank agents on them; make badges a condition of enterprise visibility.</p></div>
+      <div class="card"><h4>Moat Mechanism</h4><p>Every approve / edit / reject on an agent action becomes labelled data, the same loop that built the writing product, now applied to agents.</p></div>
+    </div>
+
+    <h4>Bet 3: Rights &amp; Provenance Ledger</h4>
+    <p>A consent, attribution and payout system for any real person, persona or third-party content the product uses, including the planned expert persona library. It doubles as an enterprise audit export ("what was used in this output and under what terms") and underpins GPTZero-style authenticity features.</p>
+    <div class="callout green">
+      <strong>Commercial Angle</strong>
+      Package the ledger, audit exports and published residency/retention options as an enterprise "Trust" tier. Illustrative: if 5% of the 50,000 stated organisations adopt a $5/seat/month uplift at 100 seats each, that is about $15M annually (2,500 orgs × 100 seats × $5 × 12). Small against $700M, but it is a sales unlock for regulated buyers, not primarily a revenue line.
+    </div>
+  </div>
+
+  <!-- INITIATIVES -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Revocation &amp; Memory-Purge Audit</div><div class="initiative-desc">Measure what Go retrieves and remembers after access is revoked, across all connectors.</div></div>
+      <div><span class="tag red">P0 · Q4 2026</span></div>
+      <div>Baseline published internally; revocation reflected in retrieval within 5 min (p95); memory purge within 24 h</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent Trace Ingestion</div><div class="initiative-desc">Content-free traces for every Go agent step into the lakehouse.</div></div>
+      <div><span class="tag red">P0 · Q4 2026</span></div>
+      <div>100% of Go agent steps traced; trace lookup under 10 s for support</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Cost-per-Action Metering</div><div class="initiative-desc">Per-tenant, per-agent unit cost visible to product and finance from the same table.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>Gross margin by SKU and by agent; credit relaunch priced from measured cost</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Retrieval Engine Decision</div><div class="initiative-desc">Costed memo: migrate Coda Brain off Snowflake Cortex, or formalise dual-engine with shared governance.</div></div>
+      <div><span class="tag gold">P1 · Q1 2027</span></div>
+      <div>Decision signed; unit cost per 1K retrievals compared; shadow-run parity within 2 pts on answer quality</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Context Plane v1 (Identity + Permission Service)</div><div class="initiative-desc">One user/org ID and one policy-check API across Go, Docs, Mail, Fathom.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>≥4 products on the shared service; zero separate-login flows for suite customers</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">LLM-Judge Registry &amp; Replay</div><div class="initiative-desc">Versioned rubrics and regression gates for agent releases.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>All first-party agents gated; regression escapes down 50%</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Rights &amp; Consent Ledger</div><div class="initiative-desc">Consent, attribution and payout records for personas and third-party content.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>100% of persona features backed by explicit consent; opt-out SLA of 48 h</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Agent Scorecards for Store &amp; SDK</div><div class="initiative-desc">Quality, latency, cost badges for partner agents.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>Top 50 agents scored; scorecard-qualified agents drive majority of Store usage</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Trust Tier: Residency, Retention &amp; Audit Export</div><div class="initiative-desc">Published options and exports for regulated buyers.</div></div>
+      <div><span class="tag grey">P3 · 2028</span></div>
+      <div>Residency options live in ≥2 regions; audit export used by ≥100 enterprise customers</div>
+    </div>
+  </div>
+
+  <!-- OKRs -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (Q4 2026 – Q3 2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Make every agent action traceable and explainable</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: 100% of Go agent steps traced, content-free by default, by end of Q4 2026</li>
+        <li>KR2: Median time for support to answer "what did the agent know?" under 2 minutes</li>
+        <li>KR3: Governed Action Rate measured for the first time and above 40%</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Operate one context plane</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Retrieval engine decision signed with cost model by end of Q1 2027</li>
+        <li>KR2: At least four products using the shared identity and permission service</li>
+        <li>KR3: Revocation propagates to retrieval in under 5 minutes (p95) and to memory in under 24 hours</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Know the cost of every action</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Per-tenant, per-agent unit cost live by end of Q1 2027</li>
+        <li>KR2: Credit system relaunched with prices derived from measured cost; no change reversed within 90 days</li>
+        <li>KR3: Gross margin reported by SKU and agent to the leadership team monthly</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Earn the right to the data</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Zero persona or expert features live without recorded consent</li>
+        <li>KR2: Published retention and data-residency statements on the trust center</li>
+        <li>KR3: Data terms harmonised across Coda, Mail, Fathom and GPTZero</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- RISKS -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks &amp; Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Re-platforming Coda Brain degrades answer quality or latency for Docs customers</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Shadow-run old and new retrieval on live traffic (the same joint shadow-testing discipline used for the writing model); promote only on parity.</td></tr>
+        <tr><td>Central permission service becomes a latency bottleneck</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Short-TTL caches plus event-driven revocation; set a hard p99 budget before onboarding products.</td></tr>
+        <tr><td>MCP clients bypass Superhuman's UI and its metering</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Meter and authorise at the MCP edge using the same policy service; price for read/write volume, not seats alone.</td></tr>
+        <tr><td>Persona and authenticity features create further legal exposure</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>No persona without recorded consent; legal sign-off gated by the ledger; honour opt-outs within 48 h.</td></tr>
+        <tr><td>Acquired products' data terms conflict with suite promises</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag red">HIGH</span></td><td>Data-terms harmonisation audit before each integration milestone; no cross-product memory without explicit opt-in.</td></tr>
+        <tr><td>Partners resist public scorecards</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Private beta first; share improvement tooling alongside scores; tie badges to visibility, not penalties.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WHAT NOT TO DO -->
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts (What to Stop or Avoid)</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Don't acquire another data-bearing product before Context Plane v1</h4><p>Five deals in 21 months is already a lot of integration debt. A sixth with its own identity and datastore makes the unification project harder than it is today.</p></div>
+      <div class="card"><h4>Don't relaunch usage credits without cost data</h4><p>A second reversal costs more trust than the first. Price from measured cost per action, then publish the logic.</p></div>
+      <div class="card"><h4>Don't ship named-person features without a consent ledger</h4><p>The Expert Review lawsuit exists because the feature came before the rights model. Reverse the order.</p></div>
+      <div class="card"><h4>Don't market "1M+ apps" as the context moat</h4><p>It measures where Superhuman can write, not what it can read. Lead with the number of permissioned read sources and the quality of answers drawn from them.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: VERDICT -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>Superhuman has the rare combination of what is hard to buy: telemetry at planetary scale, inference engineering that holds up at 200K+ QPS, and distribution inside the text box. Its analytics lakehouse is a decisive 2022 call that has aged well. On that evidence, the company is better prepared for AI than almost any other software business of its size.</p>
+  <p>But the bet it has made — that permissioned, cross-source <em>context</em> is the moat — depends on a layer that the public record does not show. The context layer descends from an acquisition, runs (at least as described) on an engine its own data team rejected, and is surrounded by controls that are still on a roadmap: agent evals, trace ingestion, a rights ledger, cost metering, a unified permission model. The recent evidence of strain — the Expert Review suit, the pricing reversals, five integrations in under two years, a 17-month-old revenue disclosure — is what a company looks like when its product ambition has outrun its governance data model.</p>
+  <p>None of that is fatal. All of it is fixable with the same discipline the company applied to its writing model: shadow-test, set SLOs, require zero regression. The next 12 months will show whether Superhuman applies that discipline to agents before the first serious failure applies it for them.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Superhuman is a data-rich company with a data-governance gap exactly where its strategy needs strength. The fix is not more connectors or more acquisitions; it is one context plane, one trace store, one cost ledger and one rights ledger. The window to build them is the time it takes Microsoft and Google to make their own context layers good enough that no one needs a third.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Analysis as of October 9, 2026. Superhuman is private and its figures are unaudited. Items marked REPORTED or INFERRED are secondary or my reasoning. No Reddit or social threads on Go or Docs were retrievable; sentiment comes from the company's own community forum. Figures for competitors are third-party estimates.</p>
+  <p class="footnote"><strong>Sources:</strong></p>
+  <ul class="src-list">
+    <li><a href="https://superhuman.com/">superhuman.com</a> (product and claims); <a href="https://grammarly.com/blog/company/announcing-company-rebrand-to-superhuman">Rebrand announcement</a>; <a href="https://www.reworked.co/collaboration-productivity/grammarly-rebrands-as-superhuman-introduces-unified-ai-suite/">Reworked on the rebrand</a></li>
+    <li><a href="https://www.databricks.com/customers/grammarly">Databricks: Grammarly customer story</a>; <a href="https://www.databricks.com/blog/how-superhuman-and-databricks-built-200k-qps-inference-platform-together">Databricks: 200K QPS inference platform (May 2026)</a>; <a href="https://www.infoq.com/news/2023/07/grammarly-medallion-architecture">InfoQ: Grammarly medallion architecture (Jul 2023)</a></li>
+    <li><a href="https://coda.io/blog/about-coda/introducing-coda-brain">Coda: Introducing Coda Brain</a>; <a href="https://nojitter.com/digital-workplace/superhuman-launches-docs-for-ai-powered-collaboration">No Jitter: Superhuman Docs launch</a>; <a href="https://connect.superhuman.com/t/superhuman-docs-new-plans-update/60914">Superhuman community: Docs plan changes</a>; <a href="https://trust.superhuman.com">Superhuman trust center</a>; <a href="https://releases.sh/superhuman">Superhuman release notes</a></li>
+    <li><a href="https://blog.superhuman.com/superhuman-to-acquire-rows/">Rows acquisition</a>; <a href="https://cryptobriefing.com/superhuman-acquires-gptzero-ai-detector/">GPTZero acquisition</a>; <a href="https://www.reworked.co/collaboration-productivity/superhuman-buys-ai-notetaker-fathom-to-bring-meeting-insights-into-work/">Fathom (Reworked)</a>; <a href="https://pulse2.com/superhuman-acquires-fathom-to-add-ai-meeting-intelligence-across-email-docs-and-agents/">Fathom (Pulse 2)</a>; <a href="https://www.implicator.ai/grammarly-acquires-superhuman-to-anchor-its-ai-productivity-ambitions/">Mail acquisition (Implicator)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Grammarly">Wikipedia: Grammarly</a>; <a href="https://sqmagazine.co.uk/grammarly-ai-statistics/">SQ Magazine statistics (secondary)</a>; <a href="https://sacra.com/c/superhuman/">Sacra: Superhuman Mail</a>; <a href="https://superpowerdaily.com/posts/superhuman-files-sec-notice-showing-320-million-equity-sale-tied-to-a-business-combination">Form D report</a>; <a href="https://www.builtinaustin.com/company/superhuman-1/faq/stability-growth">Built In (self-published)</a></li>
+    <li><a href="https://www.plagiarismtoday.com/2026/03/12/grammarly-sued-over-expert-review-feature/">Plagiarism Today: Expert Review suit</a>; <a href="https://www.techradar.com/ai-platforms-assistants/the-feature-was-not-a-good-feature-grammarly-ceo-admits-experts-review-didnt-work-but-you-may-not-like-what-replaces-it">TechRadar: CEO on Expert Review</a>; <a href="https://finance.yahoo.com/news/superhuman-ceo-says-ai-isnt-taking-jobs-its-giving-every-human-100-digital-agents-182106329.html">Yahoo Finance: CEO interview</a></li>
+    <li><a href="https://www.nojitter.com/ai-automation/microsoft-365-copilot-hits-15-million-paid-seats">No Jitter: Microsoft 365 Copilot seats</a>; <a href="https://sacra.com/research/notion-at-865m-year-growing-82-yoy/">Sacra: Notion</a>; <a href="https://fortune.com/2025/12/08/exclusive-glean-hits-200-million-arr-up-from-100-million-nine-months-back">Fortune: Glean ARR</a></li>
+  </ul>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
