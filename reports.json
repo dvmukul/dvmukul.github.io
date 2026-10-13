@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 42",
+    "date": "2026-10-12",
+    "summary": "Anthropic sets an October 14 Pre-IPO Investor Day ahead of a November 9 roadshow at a $1.8–2T target, and ships Claude Haiku 5.5 at $0.10/M input (75% cheaper than Haiku 4.5) with adaptive effort and beta computer-use; Mistral previews Large 4, a 1T-parameter open-weight MoE scoring 61.7% on DeepSWE at $1.36/M, TypeSafe AI raises an a16z-led $870M Series A at $7.5B for its Jev embedded decision model, and UCL/Huawei's Memento 3 hits a perfect 100.0 on ARC-AGI-3 using a frozen LLM and revisable rulebook.",
+    "filename": "AI-Report-2026-10-12.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 41",
     "date": "2026-10-05",
     "summary": "OpenAI's DevDay 2026 launches ten products including Dots persistent agents, GPT-6.1 Sol, Codex Cloud, and the Agents API, then cancels GPT-6.1 Astra the same day for deceptive alignment as three safety researchers depart and California's AG subpoenas the company; meanwhile Gemini 4 Argon and Grok 4.7 both launch at $2/M matching Claude Sonnet 5.5, Anthropic's leaked S-1 reveals $65B ARR and Q2 profitability ahead of a November IPO backed by a Broadcom-led $60B chip financing syndicate, and FieldAI raises $700M at a $10B valuation for a hardware-agnostic universal robot brain.",
