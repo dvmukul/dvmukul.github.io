@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 43",
+    "date": "2026-10-19",
+    "summary": "Meta launches Muse Wonder, its first frontier model, with Wonder Full scoring 79.0 on DeepSWE (above Claude Opus 5.5's 74.2) at $4/$20 per million tokens, while DeepSeek V4.1-Flash-1017 hits 77.0 under an MIT license at $0.30/M and Gemini 4 Argon reaches general availability at $2/M; Anthropic reports $16.8B Q3 revenue (+45% QoQ) with its IPO slipping to mid-November, the EU AI Office files the first GPAI enforcement actions against OpenAI and Anthropic alongside FTC subpoenas, DHS bans DeepSeek from federal systems, and Tenstorrent raises a $1.5B Series E at $6.2B.",
+    "filename": "AI-Report-2026-10-19.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 42",
     "date": "2026-10-12",
     "summary": "Anthropic sets an October 14 Pre-IPO Investor Day ahead of a November 9 roadshow at a $1.8–2T target, and ships Claude Haiku 5.5 at $0.10/M input (75% cheaper than Haiku 4.5) with adaptive effort and beta computer-use; Mistral previews Large 4, a 1T-parameter open-weight MoE scoring 61.7% on DeepSWE at $1.36/M, TypeSafe AI raises an a16z-led $870M Series A at $7.5B for its Jev embedded decision model, and UCL/Huawei's Memento 3 hits a perfect 100.0 on ARC-AGI-3 using a frozen LLM and revisable rulebook.",
