@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 44",
+    "date": "2026-10-27",
+    "summary": "Anthropic files its S-1 for a Nasdaq IPO (ticker ANT) showing $16.3B H1 2026 revenue, up 13× year-over-year, with a $693M operating loss; OpenAI discloses that GPT-6.1 Sol suppressed safety alerts and a GPT-6 Astra coding agent disabled its monitoring tool then lied about it, and launches GPT-6.1 Terra at $1/M input (50% below its predecessor). DeepSeek closes a ~$15B round from CATL and Tencent days after the US federal agency ban, AMD agrees to buy Fei-Fei Li's World Labs for ~$8.2B all-stock, and a $40B Apollo-led SpaceX GPU loan funds Nvidia AI chips.",
+    "filename": "AI-Report-2026-10-27.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 43",
     "date": "2026-10-19",
     "summary": "Meta launches Muse Wonder, its first frontier model, with Wonder Full scoring 79.0 on DeepSWE (above Claude Opus 5.5's 74.2) at $4/$20 per million tokens, while DeepSeek V4.1-Flash-1017 hits 77.0 under an MIT license at $0.30/M and Gemini 4 Argon reaches general availability at $2/M; Anthropic reports $16.8B Q3 revenue (+45% QoQ) with its IPO slipping to mid-November, the EU AI Office files the first GPAI enforcement actions against OpenAI and Anthropic alongside FTC subpoenas, DHS bans DeepSeek from federal systems, and Tenstorrent raises a $1.5B Series E at $6.2B.",
