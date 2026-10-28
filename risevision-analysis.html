@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rise Vision competitive intelligence — market analysis, product and technology audit, AI readiness, PM critique, SWOT, and mock product strategy by Mukul Dewangan.">
+<title>Rise Vision: The Safety Bet — Competitive Intelligence · Mukul Dewangan</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0F0F0D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Page-specific styles — base tokens, reset, nav, grain from shared.css */
+:root { --gold: #c9962e; }
+
+body { background: var(--bg); color: var(--text); line-height: 1.7; font-size: 15px; }
+
+/* Override shared .section-label for §-style document markers */
+.section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+/* COVER */
+.cover {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 80px 60px 60px;
+    padding-top: calc(80px + 4.5rem);
+    position: relative;
+    overflow: hidden;
+}
+.cover::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(192,90,26,0.13) 0%, transparent 70%);
+}
+.cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+}
+.cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 20px;
+    max-width: 720px;
+}
+.cover h1 em { color: var(--accent); font-style: italic; }
+.cover-sub {
+    font-size: 17px;
+    color: rgba(243,237,226,0.62);
+    max-width: 580px;
+    margin-bottom: 44px;
+    font-weight: 300;
+}
+.cover-meta {
+    display: flex; gap: 36px; flex-wrap: wrap;
+    border-top: 1px solid rgba(243,237,226,0.10);
+    padding-top: 28px;
+}
+.cover-meta div { font-size: 12px; color: rgba(243,237,226,0.45); font-family: 'DM Mono', monospace; }
+.cover-meta div span { display: block; color: #F3EDE2; font-size: 14px; margin-top: 3px; }
+
+/* STATS ROW */
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+.stat-box {
+    padding: 28px 24px;
+    border-right: 1px solid var(--border);
+    text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1;
+}
+.stat-num.accent { color: var(--accent); }
+.stat-num.blue { color: var(--teal); }
+.stat-label { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 1px; font-family: 'DM Mono', monospace; }
+
+/* LAYOUT */
+.container { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+/* SECTIONS */
+.section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--border);
+    font-weight: 400;
+    float: right;
+    margin-top: 2px;
+}
+
+h2 { font-family: var(--font-display); font-size: 30px; font-weight: 400; margin-bottom: 28px; line-height: 1.2; }
+h3 { font-family: var(--font-display); font-size: 20px; font-weight: 400; margin-bottom: 12px; margin-top: 32px; }
+h4 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; margin-top: 24px; }
+p { margin-bottom: 14px; color: var(--text); }
+p:last-child { margin-bottom: 0; }
+
+/* CALLOUT BOXES */
+.callout {
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 24px 0;
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+}
+.callout.blue { border-color: var(--teal); }
+.callout.gold { border-color: var(--gold); }
+.callout.green { border-color: var(--teal-light); }
+.callout strong { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; color: var(--accent); }
+.callout.blue strong { color: var(--teal); }
+.callout.gold strong { color: var(--gold); }
+.callout.green strong { color: var(--teal-light); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.card-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 640px) { .card-grid, .card-grid.three { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 20px; }
+.card-icon { font-size: 20px; margin-bottom: 10px; }
+.card h4 { margin-top: 0; color: var(--text); }
+.card p { font-size: 13px; color: var(--text-muted); }
+
+/* COMPETITOR TABLE */
+.comp-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+.comp-table th {
+    background: var(--bg-dark);
+    color: #F3EDE2;
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 400;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.comp-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:hover td { background: var(--bg-alt); }
+.tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'DM Mono', monospace;
+}
+.tag.red { background: rgba(192,90,26,0.10); color: var(--accent); }
+.tag.blue { background: rgba(28,94,94,0.10); color: var(--teal); }
+.tag.green { background: rgba(42,122,122,0.10); color: var(--teal-light); }
+.tag.gold { background: rgba(201,150,46,0.10); color: var(--gold); }
+.tag.grey { background: var(--surface); color: var(--text-muted); }
+
+/* SWOT */
+.swot { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin: 20px 0; }
+.swot-box { padding: 24px; }
+.swot-box:nth-child(1) { background: rgba(28,94,94,0.08); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(2) { background: rgba(192,90,26,0.08); border-bottom: 1px solid var(--border); }
+.swot-box:nth-child(3) { background: rgba(42,122,122,0.06); border-right: 1px solid var(--border); }
+.swot-box:nth-child(4) { background: rgba(201,150,46,0.10); }
+.swot-label { font-size: 10px; letter-spacing: 2px; font-family: 'DM Mono', monospace; font-weight: 600; margin-bottom: 12px; text-transform: uppercase; }
+.swot-box:nth-child(1) .swot-label { color: var(--teal); }
+.swot-box:nth-child(2) .swot-label { color: var(--accent); }
+.swot-box:nth-child(3) .swot-label { color: var(--teal-light); }
+.swot-box:nth-child(4) .swot-label { color: var(--gold); }
+.swot-box ul { list-style: none; }
+.swot-box li { font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+.swot-box li::before { content: '→'; position: absolute; left: 0; font-size: 11px; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 28px; margin: 20px 0; }
+.timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.tl-item { position: relative; margin-bottom: 24px; }
+.tl-dot { position: absolute; left: -24px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+.tl-title { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.tl-desc { font-size: 13px; color: var(--text-muted); }
+
+/* TECH STACK */
+.tech-layer {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.tech-layer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    min-width: 100px;
+    margin-top: 2px;
+}
+.tech-layer-content { flex: 1; }
+.tech-layer-content strong { font-size: 13px; font-weight: 600; }
+.tech-layer-content p { font-size: 12px; color: var(--text-muted); margin-top: 4px; margin-bottom: 0; }
+
+/* PM CRITIQUE */
+.critique-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 22px;
+    margin-bottom: 16px;
+}
+.critique-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.critique-badge.risk { color: var(--accent); }
+.critique-badge.opp { color: var(--teal-light); }
+.critique-badge.gap { color: var(--gold); }
+.critique-title { font-weight: 600; font-size: 16px; margin-bottom: 8px; font-family: var(--font-display); }
+.critique-body { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+/* STRATEGY DOC */
+.strat-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+}
+.strat-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+.strat-header h3 { margin: 0; font-size: 18px; }
+.strat-header .num { font-family: var(--font-display); font-size: 36px; color: var(--border); line-height: 1; font-style: italic; }
+
+.initiative-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.initiative-row:last-child { border-bottom: none; }
+.initiative-name { font-weight: 600; }
+.initiative-desc { color: var(--text-muted); font-size: 12px; margin-top: 2px; }
+
+.okr-item { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.okr-item:last-child { border-bottom: none; }
+.okr-o { font-weight: 700; color: var(--text); }
+.okr-kr { color: var(--text-muted); padding-left: 16px; margin-top: 4px; font-size: 12px; }
+.okr-kr li { list-style: disc; margin-left: 16px; margin-top: 2px; }
+
+/* BRAND GRID */
+.brand-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.brand-pill {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+}
+.brand-pill.flagship { border-color: var(--accent); color: var(--accent); background: rgba(192,90,26,0.08); }
+
+/* MISC */
+.footnote { font-size: 11px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+hr.fancy {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--border), transparent);
+    margin: 32px 0;
+}
+
+/* FOOTER */
+footer {
+    background: var(--bg-dark);
+    color: rgba(243,237,226,0.28);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+footer span { font-size: 0.72rem; letter-spacing: 0.05em; }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .cover { padding: 80px 24px 48px; padding-top: calc(80px + 4.5rem); }
+    .container { padding: 0 24px; }
+    .stats-row { grid-template-columns: repeat(3, 1fr); }
+    .stat-box:nth-child(n+4) { border-top: 1px solid var(--border); }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.three { grid-template-columns: 1fr; }
+    .swot { grid-template-columns: 1fr; }
+    .swot-box:nth-child(1) { border-right: none; }
+    .swot-box:nth-child(3) { border-right: none; border-bottom: 1px solid var(--border); }
+    .initiative-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+/* Rise Vision page-specific: readiness meter */
+.meter { height: 6px; min-width: 80px; background: var(--border); border-radius: var(--r-sm); overflow: hidden; }
+.meter span { display: block; height: 100%; background: var(--teal); border-radius: var(--r-sm); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-light">
+    <a href="strategy.html" class="nav-back"><span class="arrow">←</span> Strategy</a>
+    <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="teardowns.html">Teardowns</a></li>
+        <li><a href="ai-reports.html">AI Reports</a></li>
+        <li><a href="strategy.html" class="active">Strategy</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#resume">Resume</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Competitive Intelligence · October 2026</div>
+  <h1>Rise Vision:<br>The <em>Safety</em> Bet</h1>
+  <p class="cover-sub">An in-depth market analysis, product audit, technology deep-dive, PM critique, and mock product strategy document for Rise Vision — the cloud digital signage, screen sharing, and emergency alert platform owned by AUO Display Plus.</p>
+  <div class="cover-meta">
+    <div>HEADQUARTERS<span>Ontario, Canada (US ops: Kansas)</span></div>
+    <div>FOUNDED<span>1992 (company-stated)</span></div>
+    <div>ORGANIZATIONS<span>12,300+ (company-stated)</span></div>
+    <div>STATUS<span>AUO Display Plus subsidiary (2022)</span></div>
+    <div>COVERAGE<span>risevision.com</span></div>
+  </div>
+</div>
+
+<!-- KPI ROW -->
+<div class="stats-row">
+  <div class="stat-box"><div class="stat-num accent">12,300+</div><div class="stat-label">Organizations</div></div>
+  <div class="stat-box"><div class="stat-num blue">77,846</div><div class="stat-label">Displays</div></div>
+  <div class="stat-box"><div class="stat-num">6.3</div><div class="stat-label">Displays / Org (calc.)</div></div>
+  <div class="stat-box"><div class="stat-num accent">4.7 ★</div><div class="stat-label">G2 · 1,003 Reviews</div></div>
+  <div class="stat-box"><div class="stat-num blue">$4.8M</div><div class="stat-label">2020 Revenue (Latka)</div></div>
+  <div class="stat-box"><div class="stat-num">2022</div><div class="stat-label">AUO Acquisition</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: COMPANY OVERVIEW -->
+<div class="section">
+  <div class="section-label">§ 01 — Company Overview</div>
+  <h2>Who Is Rise Vision?</h2>
+
+  <p>Rise Vision is a cloud-based digital signage software company that has widened into a three-part screen platform: <strong>digital signage</strong>, <strong>wireless screen sharing</strong>, and <strong>emergency alerts</strong>. It sells mostly to schools and universities (the pricing, roles, and licensing are K-12-shaped), with a long tail of healthcare, manufacturing, hospitality, government, and retail customers. The company says it has operated since 1992 and is used in 100+ countries.</p>
+
+  <p>In September 2022 it was acquired by <strong>AUO Display Plus (ADP)</strong>, the commercial-display arm of Taiwan's AUO Corporation. The stated logic was software-plus-hardware: ADP gets a SaaS business and education expertise, and Rise gets a path into hardware bundles. Deal terms were not disclosed.</p>
+
+  <div class="callout gold">
+    <strong>Core Thesis</strong>
+    Rise Vision is a profitable-looking, support-led niche vendor in a crowded, price-anchored category. Its best strategic asset is not signage at all — it is the <em>emergency-alert and campus-safety workflow</em> that sits on top of the screens. The risk is that it keeps marketing itself as "#1 cloud digital signage" against OptiSigns and Yodeck, a fight where it has fewer reviews, fewer integrations, and no free tier.
+  </div>
+
+  <h3>Leadership &amp; Corporate Structure</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">👤</div><h4>Brian Loosbrock — CEO</h4><p>Quoted as CEO in the 2022 acquisition release, the 2023 Avocor launch, and the March 2026 product release. Also a Digital Signage Today contributor. Public face of the "communicate, teach, collaborate, safety" positioning.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Byron Darlison — Founder &amp; Chairperson</h4><p>Listed by Crunchbase as chairperson and founder; GetLatka lists him as co-founder and CEO as of a 2018 interview, in which he described the company as bootstrapped and fully remote.</p></div>
+    <div class="card"><div class="card-icon">👤</div><h4>Debbie Barrafato — COO</h4><p>Listed as Chief Operating Officer on Crunchbase. Little public footprint beyond that listing.</p></div>
+    <div class="card"><div class="card-icon">🏢</div><h4>AUO Display Plus — Parent</h4><p>Wholly owned industrial and commercial display subsidiary of AUO Corporation (TWSE: 2409). ADP's president said software-hardware integration "will become a major competitive factor."</p></div>
+  </div>
+  <p class="footnote">Crunchbase lists 11–50 employees and a Wichita, Kansas headquarters; Craft lists Shawnee, KS; the company's own March 2026 release says "Ontario, Canada." GetLatka recorded 35 employees in 2018. Treat headcount and HQ as unresolved.</p>
+
+  <div class="callout blue">
+    <strong>Data Confidence Warning</strong>
+    Public data on this company is thin and partly contradictory. Revenue ($4.8M) is a 2020 GetLatka figure with no recorded source. Customer and display counts are company-stated. Template count is stated as 500+ (2022), 600+ (March 2026), and 750+ (website and pricing page). I flag each estimate below and do not treat any single number as fact.
+  </div>
+
+  <h3>Evolution Timeline</h3>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1992</div><div class="tl-title">Company-stated founding year</div><div class="tl-desc">The cloud product is far younger than this date suggests; the 1992 claim likely reflects the founder's earlier business history. Not independently verified.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">June 2012</div><div class="tl-title">Trade press: "Rise Vision Formally Goes Free"</div><div class="tl-desc">A Sixteen:Nine headline indicates a free-software model at that time (headline only; article not read). Today the company has no free plan — a notable reversal given that competitors now lead with free tiers.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2018</div><div class="tl-title">~6,000 paying customers, ~35 employees, bootstrapped</div><div class="tl-desc">Per a GetLatka-hosted interview: revenue ~$4.2M annualized, ~24–25% moving average growth.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2020</div><div class="tl-title">$4.8M revenue (GetLatka)</div><div class="tl-desc">Up 26% year over year, source unrecorded. Last public revenue datapoint.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Sept 2022</div><div class="tl-title">Acquired by AUO Display Plus</div><div class="tl-desc">Price undisclosed. Stated aims: software/hardware integration, education depth, and expansion into retail, enterprise, and hospitality.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Oct 2023</div><div class="tl-title">Avocor R Series display + Rise software</div><div class="tl-desc">All-in-one display/player/software: 43" at $599 and 55" at $799, or Hardware-as-a-Service from $29 and $39 per month. Shipping from December 2023.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">March 2026</div><div class="tl-title">"Innovation Suite" release</div><div class="tl-desc">10+ interactive templates, synchronized audio for alerts, "Proof of Alert" CSV export, native LG webOS and Philips Wave support, ChromeOS display power control via RS-232, Amazon Signage Stick updates.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Oct 2026</div><div class="tl-title">Current state</div><div class="tl-desc">Website claims 12,300+ organizations, 77,846 displays, an AI presentation design tool, SOC 2 and TX-RAMP badges, and G2 2025 awards (Best Usability, Highest User Adoption).</div></div>
+  </div>
+</div>
+
+<!-- SECTION 2: MARKET ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 02 — Market Analysis</div>
+  <h2>Industry Landscape &amp; Competitive Positioning</h2>
+
+  <h3>Market Context</h3>
+  <p>Cloud digital signage software is a fragmented, review-site-driven category where buyers compare price per screen, hardware support, and ease of use. Three forces matter for Rise Vision: (1) low-end pricing pressure from freemium vendors, (2) signage logic moving into the display itself (webOS, Tizen, Android SoC), and (3) the buyer's growing interest in <em>communication and safety</em> use cases beyond menu boards and lobby slides.</p>
+
+  <div class="card-grid three">
+    <div class="card"><h4>Market Size — Low Confidence</h4><p>A 22Miles / Emergen report (via SCN, June 2024) puts the broader market at $2.14B in 2023 and projects $14.3B by 2033 at a 27.9% CAGR. Those numbers do not reconcile: 27.9% compounded from $2.14B over ten years gives roughly $25B. Other headlines claim $26–29B by 2030 for the full market including hardware. Treat the range as "billions, definitions vary," not a TAM.</p></div>
+    <div class="card"><h4>Segment Spend</h4><p>The same report cites corporate at $439M, retail at $360M, and education at $200M in annual spend. Education is the smallest of the three, but it is where Rise has product depth. Cloud CMS is growing faster than on-premises (23.3% vs 19.7%).</p></div>
+    <div class="card"><h4>Rise's Scale</h4><p>77,846 displays at list prices of $119–$164 implies roughly $9–13M ARR at the ceiling, and likely $7–10M after volume and school discounts. That is my estimate, not a company number. It is a rounding error against any TAM figure, so the real constraint is share of a long tail, not market size.</p></div>
+  </div>
+
+  <h3>Competitive Map</h3>
+  <table class="comp-table">
+    <thead>
+      <tr><th>Company</th><th>Model</th><th>Moat</th><th>Rise Overlap</th><th>Threat</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>OptiSigns</strong></td><td>Per-screen SaaS, $10–$45/screen/mo; free tier up to 3 screens</td><td>Broadest hardware list, 140+ apps (per Rise's own comparison), 3,884 G2 reviews at 4.7</td><td>Direct, all segments incl. education and interactive kiosks</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>Yodeck</strong></td><td>Per-screen SaaS, $8–$16/screen/mo; free for 1 screen</td><td>Low price, Raspberry Pi player, 3,251 G2 reviews at 4.7</td><td>Direct, SMB and education</td><td><span class="tag red">HIGH</span></td></tr>
+      <tr><td><strong>ScreenCloud</strong></td><td>Per-screen SaaS</td><td>Modern UX, app ecosystem; 455 G2 reviews at 4.7</td><td>Direct, corporate and retail</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>NoviSign / ConnectedSign / Skykit / Mvix</strong></td><td>Signage SaaS and reseller-led offers</td><td>Niche channels, legacy installs</td><td>Named by Capterra reviewers as alternatives or sources of switchers</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Wireless presenting (Vivi, Airtame, ScreenBeam, Mersive)</strong></td><td>Screen-sharing specialists</td><td>Classroom AV channel, hardware dongles</td><td>Rise's screen-sharing module (no adapters)</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Display-embedded CMS (Samsung, LG)</strong></td><td>Signage software bundled with panels</td><td>Hardware install base</td><td>Rise now installs natively on LG webOS and Philips Wave</td><td><span class="tag gold">MEDIUM</span></td></tr>
+      <tr><td><strong>Mass-notification vendors (Singlewire, Alertus, Rave)</strong></td><td>Safety / alerting platforms</td><td>Trusted by safety officers</td><td>Rise integrates with them; could also be displaced or bypassed</td><td><span class="tag blue">PARTNER</span></td></tr>
+      <tr><td><strong>Chrome Sign Builder</strong></td><td>Free Google signage tool</td><td>Default for ChromeOS schools</td><td>Deprecated; creates a migration wedge</td><td><span class="tag green">TAILWIND</span></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Competitor prices and feature claims come largely from Rise Vision's own comparison blog, which is vendor-authored and unverified. Review counts are from the G2 listing page for Rise Vision. Samsung/LG, Vivi/Airtame/ScreenBeam/Mersive and the mass-notification vendors are placed from general market knowledge and Rise's own content, not separate research.</p>
+
+  <h3>Industry Trends Shaping Rise Vision</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h4>Screens Become Safety Infrastructure</h4>
+      <p>Schools and hospitals increasingly want the same displays to carry emergency alerts. Rise leans into this with CAP integrations, classroom alerts, and Proof of Alert. Its own claims (50% faster lockdown response) are unsourced, but the direction matches buyer demand.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📺</div>
+      <h4>The Player Disappears Into the Display</h4>
+      <p>Native apps for webOS, Philips Wave, Android, and Amazon Signage Stick reduce dependence on separate media players. This helps Rise's hardware-agnostic story but also strips value from any player or bundle it sells.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">💸</div>
+      <h4>Freemium Resets Price Expectations</h4>
+      <p>OptiSigns offers 3 free screens; Yodeck offers 1. Rise has no free plan and relies on a 30-day risk-free guarantee. Small buyers can try competitors at no cost, which lowers Rise's top-of-funnel in the segment where most customers live (6.3 displays per organization).</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <h4>Generative AI Commoditizes Templates</h4>
+      <p>Rise sells 750+ templates as a feature. When anyone can generate a branded slide from a prompt, template count stops being a moat. Rise's AI tool is a start, but it is credit-metered ($300 per 600 credits per year beyond 50 monthly).</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏫</div>
+      <h4>ChromeOS Kiosk Changes (Unverified)</h4>
+      <p>Rise's own blog lists a post on Chrome Sign Builder alternatives for schools, noting Google stopped kiosk-mode support after ChromeOS 150 in July 2026. I could not independently confirm this, but if true it forces a large installed base of K-12 signage to migrate this year.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔐</div>
+      <h4>Security Review Becomes a Gate</h4>
+      <p>SOC 2, TX-RAMP, and SAML SSO are now table stakes for district and enterprise procurement. Rise shows SOC 2 and TX-RAMP badges, which is an advantage over small vendors and a floor, not a moat.</p>
+    </div>
+  </div>
+
+  <h3>Key Success Factors in This Domain</h3>
+  <div class="card-grid">
+    <div class="card"><h4>Player Reliability</h4><p>Screens that go black or hang get the vendor fired. Reliability across a fragmented hardware matrix is the hardest and least visible KSF.</p></div>
+    <div class="card"><h4>Education Channel Trust</h4><p>District purchasing rewards security reviews, per-building pricing that scales, and responsive phone support.</p></div>
+    <div class="card"><h4>Price per Screen and Free Entry</h4><p>Where a free tier exists, trial friction is near zero. Where none exists, the guarantee and sales motion must compensate.</p></div>
+    <div class="card"><h4>Integration Breadth</h4><p>Pulling content from calendars, sheets, social, and BI tools keeps screens fresh without staff effort. Fresh screens retain.</p></div>
+  </div>
+</div>
+
+<!-- SECTION 3: PRODUCT ANALYSIS -->
+<div class="section">
+  <div class="section-label">§ 03 — Product Analysis</div>
+  <h2>What Rise Vision Actually Sells</h2>
+
+  <p>Rise Vision's product is best read in three layers: the <strong>software platform</strong> (signage, screen sharing, alerts, interactive), the <strong>hardware options</strong> (bring your own, Rise player, Avocor and Elo displays), and the <strong>service layer</strong> (onboarding, training, 1-business-hour support SLA).</p>
+
+  <h3>Layer 1 — The Software Platform</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">🖥️</div><h4>Digital Signage</h4><p>Cloud-managed content and scheduling with 750+ templates, unlimited storage and users, offline playback, and integrations (Google Workspace, Microsoft 365, Canva, Power BI, social). The mature core.</p></div>
+    <div class="card"><div class="card-icon">📡</div><h4>Screen Sharing</h4><p>Wireless presenting from any device, with no adapters or accounts, and optional moderation. Included in Enterprise; the pitch is to replace classroom dongles with the same display fleet.</p></div>
+    <div class="card"><div class="card-icon">🚨</div><h4>Emergency Alerts</h4><p>CAP-based visual alerts, integrations (Singlewire InformaCast named), synchronized audio, classroom alerts, and Proof of Alert delivery exports. Included from the Advanced tier.</p></div>
+    <div class="card"><div class="card-icon">👆</div><h4>Interactive Displays</h4><p>Wayfinding, recognition boards, and donor walls on touchscreens. Priced as an add-on at $1,200 per display per year (Advanced required) — the most expensive line on the card.</p></div>
+  </div>
+
+  <h3>Pricing Architecture</h3>
+  <table class="comp-table">
+    <thead><tr><th>Plan</th><th>Price</th><th>What You Get</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Basic</strong></td><td>$11/display/mo (K-12, higher ed, non-profit); $12 business and government. Annual: $119 / $132</td><td>Core signage, 750+ templates, scheduling, offline playback, 1-business-hour support SLA</td></tr>
+      <tr><td><strong>Advanced</strong></td><td>$138/display/yr (K-12 etc.); $156 business. Monthly listing on G2: $13</td><td>Adds emergency alerts, Google and Microsoft integrations, Meta integration, stock library, brand settings</td></tr>
+      <tr><td><strong>Enterprise</strong></td><td>$164/display/yr; $180 business; <strong>$1,399/school/yr for unlimited displays</strong></td><td>Adds screen sharing, classroom alerts, teacher role, district-wide overrides, content approval, SAML SSO</td></tr>
+      <tr><td><strong>Add-ons</strong></td><td>Interactive: $1,200/display/yr. AI credits: $300 per 600/yr (50 included monthly)</td><td>Touch templates; extra AI generation</td></tr>
+      <tr><td><strong>Hardware</strong></td><td>Elo 4K touch 43"–65": $2,524–$3,973. Avocor and media players: contact sales</td><td>BYOH, Rise player, Avocor 55"–98", HaaS</td></tr>
+    </tbody>
+  </table>
+  <div class="callout blue">
+    <strong>Pricing Math Worth Noticing</strong>
+    The unlimited school license breaks even against per-display Enterprise at about 8.5 displays ($1,399 ÷ $164). With an average of 6.3 displays per organization, most customers sit below the break-even and pay per display — which is exactly where reviewers complain that costs scale up. Also, the HaaS monthly fee ($29 for the 43" R Series) equals the $599 purchase price in about 21 months, so HaaS only makes sense if the subscription includes meaningful service; the release says it covers software and firmware updates, replacements, and support, but does not say whether the Rise software license is included.
+  </div>
+
+  <h3>Key Metrics &amp; Recent Performance (Company-Stated)</h3>
+  <div class="card-grid">
+    <div class="card"><div class="card-icon">📊</div><h4>12,300+ Orgs · 77,846 Displays</h4><p>From the homepage. 2018 interview cited ~6,000 paying customers. If both are comparable, customer count roughly doubled in eight years, about 9–10% a year — much slower than the 24–26% revenue growth reported for 2018–2020. "Organizations" and "paying customers" may be defined differently.</p></div>
+    <div class="card"><div class="card-icon">⭐</div><h4>4.7 on G2, Capterra, Software Advice</h4><p>G2 shows 1,003 reviews; Capterra shows 303. Customer service scores 4.8 and ease of use 4.6 on Capterra. Quality is high; volume is a quarter of OptiSigns on G2.</p></div>
+    <div class="card"><div class="card-icon">⏱️</div><h4>Unsourced Outcome Claims</h4><p>"80% reduction in time to update signage," "50% faster lockdown response," and "99% customer satisfaction" appear on the site without methodology. They are marketing, not evidence.</p></div>
+    <div class="card"><div class="card-icon">🏆</div><h4>G2 Badges, 2025</h4><p>Best Usability (Fall) and Highest User Adoption (Summer) badges appear on Rise's blog. Badges are review-site artifacts and reflect review volume and recency as much as product quality.</p></div>
+  </div>
+
+  <h3>Technology Stack &amp; Architecture</h3>
+  <p>Rise Vision publishes an open-source GitHub organization (99 repositories) that gives unusual visibility into its stack. What follows combines that evidence with product documentation; <strong>items marked "inferred" are my reading, not company statements.</strong></p>
+
+  <div class="tech-layer">
+    <div class="tech-layer-label">Web Apps &amp; Editor</div>
+    <div class="tech-layer-content">
+      <strong>JavaScript-heavy web stack with Angular and web components</strong>
+      <p>Repositories include Angular directives and shared Angular widget-settings components, an HTML-to-string build step (gulp), and a "rise-rss" web component. The Presentation editor and templates are web-delivered HTML. Languages listed on the org page: JavaScript, HTML, CSS, Java, Python, Makefile.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Player Runtime</div>
+    <div class="tech-layer-content">
+      <strong>Electron-based desktop player plus platform-native apps</strong>
+      <p>"rise-common-electron" (updated April 2026) and an Electron proxy-agent fork point to an Electron player for Windows/Linux. A local-cache repo (rise-cache-v2) supports offline playback, and the legacy Java Raspberry Pi player is archived. Current platform list: Android, Windows, Linux, ChromeOS, Apple TV, Amazon Signage Stick, BrightSign, LG webOS, Philips Wave, Raspberry Pi. Supporting 10+ runtimes is a broad surface to test.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Cloud &amp; Storage</div>
+    <div class="tech-layer-content">
+      <strong>Google Cloud Storage for media (inferred from "gcs-filepath-validator")</strong>
+      <p>A GCS path-validation repo was updated April 2026. Combined with unlimited-storage plans, media is probably stored in Google Cloud Storage and served to players via a local cache. Backend language beyond JavaScript and Java is not disclosed.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Identity &amp; Integrations</div>
+    <div class="tech-layer-content">
+      <strong>OAuth connectors, SAML SSO, SOC 2, TX-RAMP</strong>
+      <p>"ms-token-handler" (updated August 2026, GPL-3.0) and "passport-instagram" (fork, August 2026) show active work on Microsoft and Meta connectors. Enterprise adds SAML SSO. SOC 2 and TX-RAMP badges are shown on the site. Integrations: Google Workspace, Microsoft 365, Canva, Power BI, social, live streaming.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Alerting</div>
+    <div class="tech-layer-content">
+      <strong>Common Alerting Protocol (CAP) ingestion and display override</strong>
+      <p>CAP feeds and third-party systems (Singlewire InformaCast named) trigger takeover content on selected displays. March 2026 added synchronized audio and Proof of Alert CSV export of per-display receipt. Delivery assurance at the player (heartbeat, acknowledgement latency) is the technical heart of the safety bet; its depth is not publicly documented.</p>
+    </div>
+  </div>
+  <div class="tech-layer">
+    <div class="tech-layer-label">Hardware &amp; Fleet Ops</div>
+    <div class="tech-layer-content">
+      <strong>Remote device management, OTA firmware, power scheduling</strong>
+      <p>Avocor R Series claims auto-restart after power loss, OTA firmware updates, and power scheduling. ChromeOS display control uses RS-232 to schedule power. Reviewers still report occasional reboots and inconsistent player behavior on some hardware.</p>
+    </div>
+  </div>
+  <div class="callout blue">
+    <strong>Technical Read</strong>
+    This is a pragmatic, long-lived web-and-player stack, not a modern event-driven platform. The strengths are hardware reach and offline resilience. The cost is test surface: every new runtime (webOS, Wave, Signage Stick) multiplies QA. The GitHub org also shows that much of the stack is forks and older repos; recent activity is concentrated in identity connectors and the Electron common library, with no public sign of ML infrastructure.
+  </div>
+
+  <h3>AI Strategy &amp; Readiness</h3>
+  <p>Rise Vision's stated AI strategy is one shipped feature — the <strong>AI Presentation Design and Editing Tool</strong>, which turns a text prompt into a branded, animated, editable presentation — and a promise to "expand AI features across products." Usage is metered through credits. The underlying model provider is not disclosed.</p>
+  <table class="comp-table">
+    <thead><tr><th>Dimension</th><th>Evidence</th><th>Readiness</th><th>Score</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Product integration</strong></td><td>One authoring tool; no AI in scheduling, alert drafting, fleet health, or analytics</td><td><span class="tag red">LOW</span></td><td><div class="meter"><span style="width:20%"></span></div></td></tr>
+      <tr><td><strong>Data foundation</strong></td><td>Playback, schedule, and alert-receipt logs likely exist; no public use of them for models</td><td><span class="tag gold">MEDIUM</span></td><td><div class="meter"><span style="width:45%"></span></div></td></tr>
+      <tr><td><strong>Governance &amp; trust</strong></td><td>SOC 2, TX-RAMP, SAML, content approval workflow in Enterprise — good base for AI guardrails</td><td><span class="tag green">MEDIUM-HIGH</span></td><td><div class="meter"><span style="width:65%"></span></div></td></tr>
+      <tr><td><strong>Monetization design</strong></td><td>Credits ($300 per 600/yr); metering can discourage experimentation among price-sensitive schools</td><td><span class="tag gold">MEDIUM</span></td><td><div class="meter"><span style="width:40%"></span></div></td></tr>
+      <tr><td><strong>Team capacity</strong></td><td>Small team (Crunchbase 11–50, unverified) plus AUO backing; no visible AI/ML hires or open-source AI work</td><td><span class="tag red">LOW</span></td><td><div class="meter"><span style="width:25%"></span></div></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Scores are my qualitative judgment on public signals. Overall: feature-level AI, roughly 2 out of 5. Competitors' AI posture was not researched in depth.</p>
+</div>
+
+<!-- SECTION 4: CUSTOMER SEGMENTS -->
+<div class="section">
+  <div class="section-label">§ 04 — Customer Segments &amp; Performance</div>
+  <h2>Who Buys, What They Hire It For, and How It Performs</h2>
+
+  <table class="comp-table">
+    <thead><tr><th>Segment</th><th>Named Customers</th><th>Problem Solved</th><th>Fit</th></tr></thead>
+    <tbody>
+      <tr><td><strong>K-12 education</strong></td><td>Chicago Public Schools, Milwaukee Public Schools, Garland ISD</td><td>Announcements, lockdown alerts, classroom comms at per-building scale; teacher roles and approval workflows</td><td><span class="tag green">CORE</span></td></tr>
+      <tr><td><strong>Higher education</strong></td><td>Kent State, Rutgers, University at Buffalo</td><td>Campus wayfinding, event promotion, emergency broadcast, screen sharing in classrooms</td><td><span class="tag green">STRONG</span></td></tr>
+      <tr><td><strong>Healthcare</strong></td><td>Tampa General Hospital</td><td>Patient/visitor info, staff communications, emergency messaging</td><td><span class="tag gold">EMERGING</span></td></tr>
+      <tr><td><strong>Manufacturing, warehouse, logistics</strong></td><td>Georgia Pacific, Crown Cork &amp; Seal, LP Building Solutions</td><td>Safety stats, KPI boards (Power BI), shift communication</td><td><span class="tag gold">EMERGING</span></td></tr>
+      <tr><td><strong>Hospitality &amp; retail</strong></td><td>Hilton, Delta Hotels, Farm Boy</td><td>Lobby/menu content, promotions</td><td><span class="tag red">CROWDED</span></td></tr>
+      <tr><td><strong>Government, houses of worship, senior living</strong></td><td>Not named</td><td>Public notices, event schedules, resident communication</td><td><span class="tag grey">LONG TAIL</span></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Customer logos come from the company homepage; their depth of deployment (one screen vs district-wide) is unknown. The homepage lists 16+ verticals, which is a sign of reach and a sign of unfocused positioning.</p>
+
+  <h3>What Customers Say (Capterra, 25 of 303 Reviews Read)</h3>
+  <div class="card-grid">
+    <div class="card"><h4>What Wins</h4><p><strong>Support</strong> is the most praised area (quick responses, screen-recorded fixes). <strong>Ease of use</strong> for non-technical staff, the template library, and <strong>hardware flexibility</strong> (including old Linux PCs) recur across reviews.</p></div>
+    <div class="card"><h4>What Hurts</h4><p><strong>Pricing</strong> is the top complaint — cost climbs with display count, per-building pricing is unfavorable, and unlimited licensing is expensive. Others: learning curve for scheduling, rigid templates, portrait media in landscape frames, reliance on strong connectivity, player reboots, and smart TV app issues.</p></div>
+  </div>
+  <div class="callout">
+    <strong>Research Limits</strong>
+    Reddit and forum searches returned only review-site pages in this session, so I have no independent community sentiment. The Capterra summary is a sample of 25 reviews. G2 pros and cons were not retrievable. Treat the theme list as directional.
+  </div>
+
+  <h3>Performance Read</h3>
+  <p>Quality signals are strong: 4.7 ratings across three review sites, praised support, and badges. Growth signals are weaker: customer count appears to have roughly doubled since 2018, the last revenue datapoint is from 2020, and review volume lags the two leaders by 3–4×. A back-of-envelope ARR of $7–13M implies about $750–$1,040 per organization per year — consistent with a small-account, per-display business where support cost per account matters.</p>
+</div>
+
+<!-- SECTION 5: PM CRITIQUE -->
+<div class="section">
+  <div class="section-label">§ 05 — PM Critique</div>
+  <h2>Product Strategy Assessment: What's Real, What's Risk, What's Missing</h2>
+
+  <p>Rise Vision has built a reliable, well-reviewed product with a genuinely differentiated safety layer. The PM-level critique is that the positioning, pricing, and AI roadmap do not yet reflect where it can win.</p>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Fighting for "#1 Digital Signage" Instead of Owning Campus Safety</div>
+    <div class="critique-body">The homepage leads with "The #1 Cloud Digital Signage Software Solution," a self-awarded claim, while its own comparison pages show it with fewer integrations (40+ vs OptiSigns' 140+ by Rise's own count) and a quarter of OptiSigns' review volume. The differentiated assets — CAP alerts, classroom alerts, district overrides, Proof of Alert — are listed as one of five product tiles. A competitor can copy templates; copying a district-trusted alert chain takes years. Rise should reorder its story around the thing it does best.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Structural Risk</div>
+    <div class="critique-title">No Free Entry Point in a Category That Runs on Free Trials</div>
+    <div class="critique-body">OptiSigns gives away 3 screens; Yodeck gives away 1. Rise offers a 30-day risk-free guarantee, which is credible but still asks for a purchase decision. With an average of about 6 displays per customer, most of the base is exactly the buyer who can start free elsewhere. The risk is not losing existing customers; it is losing the next cohort at the evaluation stage on review sites, where the comparison is price per screen.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">Per-Display Pricing Punishes the Growth It Wants</div>
+    <div class="critique-body">Reviewers cite cost scaling with displays as the top complaint. The unlimited school license ($1,399) only pays off above about 8.5 displays, and Enterprise features (screen sharing, teacher roles, SSO) sit behind the $164 tier. A school that wants alerts on five displays pays Advanced prices, but one that wants them on classroom screens needs Enterprise. Packaging should follow the job — "alerts on every screen" — rather than rationing by display count.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Execution Risk</div>
+    <div class="critique-title">Hardware Breadth Is a Reliability Liability</div>
+    <div class="critique-body">Supporting Android, Windows, Linux, ChromeOS, Apple TV, Signage Stick, BrightSign, webOS, Wave, and Raspberry Pi is a selling point and a QA burden. Capterra reviewers report reboots, inconsistent player behavior, smart TV app problems, and lag over wireless. For a product that now promises lockdown alerts, a flaky player is not an inconvenience; it is a safety failure and a liability. Reliability should be measured and published, not asserted.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Proof of Alert Is the Seed of a Compliance Product</div>
+    <div class="critique-body">The March 2026 Proof of Alert export tells a safety officer which displays received a message. That is the beginning of an auditable record: drill results, delivery latency, failed-device remediation, and a district-level readiness report. Safety budgets are less price-sensitive than signage budgets, and the output is something a superintendent can show a board. This is the clearest path from a $12/month feature to a differentiated, defensible product line.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Strategic Gap</div>
+    <div class="critique-title">AI Is a Feature, Not a Strategy — and It's Metered</div>
+    <div class="critique-body">A prompt-to-presentation tool is a reasonable first step, but it addresses authoring, which competitors and general-purpose tools (Canva, Google, Microsoft) already do well. Rise's unique data is operational: what played where, which screens failed, who acknowledged an alert. AI that predicts player failures, drafts alert copy for approval, translates announcements for multilingual school communities, and builds the week's screen content from the school calendar would be much harder to replicate. Selling credits on top for the core tool also taxes the very experimentation Rise needs from schools.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge risk">⚠ Positioning Risk</div>
+    <div class="critique-title">Sixteen Verticals, One Message</div>
+    <div class="critique-body">The homepage names K-12, higher ed, manufacturing, warehouses, transportation, construction, government, healthcare, finance, restaurants, hospitality, grocery, retail, worship, senior living, factories, and stadiums. Product depth (teacher role, per-school license, classroom alerts, TX-RAMP) is clearly K-12 and higher ed. Selling to everyone with a K-12-shaped product dilutes both the message and the roadmap. The parent's stated goal of expanding into retail, enterprise, and hospitality has no visible product difference yet.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge gap">◈ Execution Gap</div>
+    <div class="critique-title">The AUO Hardware Thesis Is Not Visible in the Product</div>
+    <div class="critique-body">The acquisition was framed around software-hardware integration, yet the flagship bundle is with Avocor and the touch displays listed are from Elo; hardware prices for Rise-branded players and Avocor displays are "contact sales." A panel-maker parent should enable things competitors cannot match: factory-installed player, embedded alert-ready firmware, certified HaaS. If those exist, they are not surfaced; if they do not, the strategic logic of the deal is unproven. I could not find disclosed ADP-specific integration beyond the 2022 press release.</div>
+  </div>
+
+  <div class="critique-item">
+    <div class="critique-badge opp">✦ Opportunity</div>
+    <div class="critique-title">Content-Led Acquisition Is a Quiet Strength</div>
+    <div class="critique-body">Rise Vision publishes a large body of comparison and "alternatives" content (Yodeck, OptiSigns, ScreenCloud alternatives, pricing breakdowns), which lets it show up where buyers research. It's an efficient channel for a small team. The risk is that these posts are vendor-authored and mix competitor claims with its own, and AI search will increasingly summarize them rather than send clicks. The opportunity is to back them with third-party proof (reliability stats, audited alert-delivery benchmarks).</div>
+  </div>
+</div>
+
+<!-- SECTION 6: SWOT -->
+<div class="section">
+  <div class="section-label">§ 06 — SWOT</div>
+  <h2>Strengths, Weaknesses, Opportunities, Threats</h2>
+  <div class="swot">
+    <div class="swot-box">
+      <div class="swot-label">Strengths</div>
+      <ul>
+        <li>4.7 rating across G2, Capterra, Software Advice; best-in-class support praise</li>
+        <li>Differentiated alert stack: CAP, classroom alerts, district overrides, Proof of Alert</li>
+        <li>Broad hardware support, now including native webOS and Wave</li>
+        <li>SOC 2, TX-RAMP, SAML SSO — procurement-ready for districts</li>
+        <li>Anchor K-12 and university customers (Chicago, Milwaukee, Rutgers, Kent State)</li>
+        <li>Backing from AUO Display Plus; bootstrapped heritage, disciplined unit economics</li>
+        <li>Strong content-led acquisition through comparison and pricing posts</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Weaknesses</div>
+      <ul>
+        <li>No free tier; per-display pricing flagged as the top complaint</li>
+        <li>One quarter of OptiSigns' G2 review volume; 40+ integrations vs 140+</li>
+        <li>AI limited to a metered presentation generator</li>
+        <li>Wide hardware matrix drives reliability complaints</li>
+        <li>Thin public data and likely small team; customer growth slower than revenue growth once was</li>
+        <li>Unsourced outcome claims ("#1", "99%", "50% faster")</li>
+        <li>Parent-hardware synergy not visible</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Opportunities</div>
+      <ul>
+        <li>Turn Proof of Alert into a district compliance and drill-readiness product</li>
+        <li>Capture ChromeOS Sign Builder / kiosk migration in K-12 (if confirmed)</li>
+        <li>AI that uses operational data: failure prediction, alert drafting, translation</li>
+        <li>Pricing built around jobs (alerts everywhere), not display counts</li>
+        <li>Factory-integrated AUO panels with Rise preinstalled</li>
+        <li>Starter tier or limited free plan to refill the funnel</li>
+      </ul>
+    </div>
+    <div class="swot-box">
+      <div class="swot-label">Threats</div>
+      <ul>
+        <li>OptiSigns and Yodeck moving up-market on alerts and education while keeping free tiers</li>
+        <li>Display makers bundling signage CMS and screen sharing into the panel</li>
+        <li>Generative AI collapsing template and authoring value</li>
+        <li>An alert-delivery failure causing reputational or legal harm</li>
+        <li>Mass-notification vendors adding their own display endpoints</li>
+        <li>Budget pressure in K-12 as federal pandemic-era funds roll off</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7: PRODUCT STRATEGY DOC -->
+<div class="section">
+  <div class="section-label">§ 07 — Mock Product Strategy</div>
+  <h2>Product Strategy 2027–2028: From Signage Vendor to the K-12 Safety &amp; Communications Layer</h2>
+
+  <div class="callout">
+    <strong>Document Type</strong>
+    This is a mock product strategy document written from the perspective of a Senior PM or CPO at Rise Vision. It is grounded in public data but represents analytical recommendations, not Rise Vision's actual internal roadmap. All targets are illustrative, since baselines are not public.
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">01</div><h3>Strategic Vision &amp; North Star</h3></div>
+    <p><strong>Vision:</strong> Every screen in a school becomes a verified part of the safety and communication system — the one a principal trusts in an emergency and a teacher actually uses on a normal Tuesday.</p>
+    <p><strong>North Star Metric:</strong> <em>Verified-Ready Displays</em> — the number of displays with alerts enabled that passed an automated end-to-end delivery test in the last 30 days. It combines adoption (alerts turned on), reliability (players healthy), and proof (documented). Baseline: unknown, since Proof of Alert only launched in March 2026. Target: 25% of the installed base (~19,000 of 77,846 displays) by end of 2027.</p>
+    <p><strong>The Strategic Pivot:</strong> From "best-reviewed signage CMS" to "the audited alert-and-communication layer for schools," with signage as the daily-use habit that keeps the system alive.</p>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">02</div><h3>Three Strategic Bets (2027–2028)</h3></div>
+
+    <h4>Bet 1: Make Alerts Auditable — The School Safety Readiness Suite</h4>
+    <p>Extend Proof of Alert from a CSV into a managed workflow: scheduled drill tests, per-building readiness scorecards, failed-device remediation queues, and one-click board-ready reports. Add pre-approved alert templates by scenario with required approvals. Deepen integrations with mass-notification and panic-button systems so Rise is the display endpoint of record.</p>
+    <div class="callout blue">
+      <strong>Why This First</strong>
+      Safety budgets are less price-sensitive, the data is unique to Rise, and it turns the most expensive tier into a requirement rather than an upsell. It also answers the biggest PR risk: if alerts matter, the vendor must prove they worked.
+    </div>
+
+    <h4>Bet 2: Fleet Reliability as a Product</h4>
+    <p>Treat player health as a customer-facing feature. Introduce telemetry, auto-recovery, and a hardware certification program with three levels (Certified, Compatible, Community). Publish a fleet uptime figure and offer a per-tier uptime commitment. Prioritize the runtimes with the most reported issues (smart TV apps, wireless-lag cases) and prune support for low-volume platforms.</p>
+
+    <h4>Bet 3: AI That Uses Operational Data — Included, Not Metered</h4>
+    <div class="card-grid">
+      <div class="card"><h4>Phase 1 (Q2 2027): Calendar-to-Screen</h4><p>Automatically build and schedule weekly announcement slides from Google or Microsoft calendars, sheets, and docs. Human approval for K-12.</p></div>
+      <div class="card"><h4>Phase 2 (Q3 2027): Alert Copy Assist</h4><p>Draft and translate alert messages from pre-approved templates; require two-step approval; log every edit for audit.</p></div>
+      <div class="card"><h4>Phase 3 (Q4 2027): Predictive Fleet Health</h4><p>Flag displays likely to fail from reboot, latency, and offline patterns before the school day starts.</p></div>
+      <div class="card"><h4>Packaging</h4><p>Include these in Advanced and Enterprise with fair-use limits; keep credits only for generative images and video where marginal cost is real.</p></div>
+    </div>
+
+    <h4>Packaging Experiment: A Starter Tier</h4>
+    <p>Test a limited starter plan (for example 2 displays, Rise branding, email support only) in two channels for two quarters. Measure trial-to-paid conversion, support cost per account, and upgrade rate to Basic. If conversion is not at least comparable to paid trials, stop. The goal is to appear in the first week of evaluation, not to build a free user base.</p>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">03</div><h3>Prioritized Initiative Roadmap</h3></div>
+    <div class="initiative-row" style="font-size:11px; color:var(--text-muted); font-family:'DM Mono',monospace; border-bottom:2px solid var(--text)">
+      <div>INITIATIVE</div><div>PRIORITY / TIMELINE</div><div>SUCCESS METRIC</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Alert Readiness Dashboard &amp; Drill Scheduler</div><div class="initiative-desc">Automated test alerts, per-building scorecards, remediation queue.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>50% of Enterprise schools running monthly drills; 99%+ test delivery rate</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Player Telemetry &amp; Auto-Recovery</div><div class="initiative-desc">Heartbeat, crash and reboot data, remote restart, health score per display.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>Support tickets per 100 displays down 25%; publish monthly fleet uptime</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">K-12 Positioning &amp; Homepage Reorder</div><div class="initiative-desc">Lead with safety and communication; consolidate vertical pages; retire the "#1" claim unless sourced.</div></div>
+      <div><span class="tag red">P0 · Q1 2027</span></div>
+      <div>Demo-to-trial conversion in education +15%</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Calendar-to-Screen AI</div><div class="initiative-desc">Auto-built announcement playlists from existing calendars and docs.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>40% of active accounts use it weekly; staff time-to-update down further</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Packaging Redesign (Alerts Tier + District Bundles)</div><div class="initiative-desc">Alerts available on all screens in a building; simpler unlimited-building options for 4–8 display schools.</div></div>
+      <div><span class="tag gold">P1 · Q2 2027</span></div>
+      <div>Reduce pricing as a stated churn reason; Enterprise attach +10 pts</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Starter Tier Pilot</div><div class="initiative-desc">2-display limited plan in two channels.</div></div>
+      <div><span class="tag gold">P1 · Q3 2027</span></div>
+      <div>Trial starts +50%; paid conversion within 10% of control</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Alert Copy Assist &amp; Translation</div><div class="initiative-desc">Template-based drafting with approvals and audit log.</div></div>
+      <div><span class="tag blue">P2 · Q3 2027</span></div>
+      <div>30% of alerts use approved templates; zero unapproved sends</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Hardware Certification Program + AUO Factory-Install Option</div><div class="initiative-desc">Certified / Compatible / Community levels; explore AUO panels shipping with Rise preinstalled.</div></div>
+      <div><span class="tag blue">P2 · Q4 2027</span></div>
+      <div>60% of new displays on Certified hardware</div>
+    </div>
+    <div class="initiative-row">
+      <div><div class="initiative-name">Predictive Fleet Health</div><div class="initiative-desc">Models flag at-risk displays before the school day.</div></div>
+      <div><span class="tag grey">P3 · 2028</span></div>
+      <div>Predict 60%+ of failures at least 24 hours ahead</div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">04</div><h3>OKRs — 12-Month Targets (2027)</h3></div>
+    <div class="okr-item">
+      <div class="okr-o">O1: Make Rise Vision the Auditable Alert Layer for K-12</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: 19,000 Verified-Ready Displays by Q4 2027 (25% of installed base)</li>
+        <li>KR2: 99%+ monthly test-alert delivery across Enterprise schools</li>
+        <li>KR3: 3 mass-notification or panic-button integrations at feature parity with Singlewire</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O2: Treat Reliability as a Product</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Tickets per 100 displays down 25%</li>
+        <li>KR2: Publish monthly fleet uptime from Q2 2027</li>
+        <li>KR3: Certification live for the top 5 platforms by volume</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O3: Win the Evaluation Stage</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: G2 review count from 1,003 to 1,800 (volume is the gap to OptiSigns and Yodeck)</li>
+        <li>KR2: Starter pilot delivers +50% trial starts at neutral support cost</li>
+        <li>KR3: Integration count 40+ to 80+ focused on K-12 tools</li>
+      </ul></div>
+    </div>
+    <div class="okr-item">
+      <div class="okr-o">O4: Grow Revenue per Account Without Raising List Price</div>
+      <div class="okr-kr"><ul>
+        <li>KR1: Enterprise attach +10 points</li>
+        <li>KR2: AI features active in 40% of accounts weekly</li>
+        <li>KR3: Net revenue retention above 105%, with baseline measured in Q1</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">05</div><h3>Key Risks &amp; Mitigations</h3></div>
+    <table class="comp-table">
+      <thead><tr><th>Risk</th><th>Severity</th><th>Likelihood</th><th>Mitigation</th></tr></thead>
+      <tbody>
+        <tr><td>Alert delivery fails during a real emergency</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Continuous drill testing, redundant paths, clear liability language, partnerships with certified mass-notification systems; never position Rise as the sole system of record.</td></tr>
+        <tr><td>OptiSigns or Yodeck close the alert gap while keeping free tiers</td><td><span class="tag red">HIGH</span></td><td><span class="tag gold">MEDIUM</span></td><td>Compete on audit trail, drill workflow, and district integrations that are slow to copy.</td></tr>
+        <tr><td>Starter tier cannibalizes Basic or inflates support cost</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>Tight limits, email-only support, branding; run as a time-boxed pilot with kill criteria.</td></tr>
+        <tr><td>Hardware pruning angers long-tail customers</td><td><span class="tag gold">MEDIUM</span></td><td><span class="tag gold">MEDIUM</span></td><td>"Community" level keeps legacy devices working; sunset on 12 months' notice.</td></tr>
+        <tr><td>Small team cannot deliver three bets</td><td><span class="tag red">HIGH</span></td><td><span class="tag red">HIGH</span></td><td>Sequence strictly (safety and reliability first, AI second); use AUO engineering where possible; defer P3 items.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="strat-section">
+    <div class="strat-header"><div class="num">06</div><h3>Strategic Don'ts (What to Stop or Avoid)</h3></div>
+    <div class="card-grid">
+      <div class="card"><h4>Stop claiming "#1" without a source</h4><p>An unsupported superlative invites scrutiny from buyers who can see competitors with 3–4× the reviews. Replace it with provable claims such as drill-delivery rates.</p></div>
+      <div class="card"><h4>Don't chase every vertical</h4><p>Hospitality and retail are crowded and low-differentiation. Keep them as self-serve; invest in K-12, higher ed, and healthcare safety.</p></div>
+      <div class="card"><h4>Don't meter the core AI tools</h4><p>Credits suit costly generation (video, imagery). Meter calendar-to-screen and alert drafting and adoption will stall.</p></div>
+      <div class="card"><h4>Don't build a hardware business on thin margin</h4><p>Hardware is a delivery vehicle for safety and service. Prefer certified partners and factory-installed AUO panels over inventory risk.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 8: VERDICT -->
+<div class="section" style="border-bottom:none;">
+  <div class="section-label">§ 08 — The Verdict</div>
+  <h2>The Verdict</h2>
+  <p>Rise Vision is a solid, well-liked, support-driven company with a real asset hiding inside a commodity category. Its signage product is good but not unique; its reviews are excellent but fewer than its main rivals'; its pricing is fair but invites comparison with free tiers. What is unique is the alert chain: CAP integrations, classroom targeting, district overrides, and now proof of delivery.</p>
+  <p>The danger is drift. Without a sharper position, Rise Vision remains one of several 4.7-rated signage tools, competing on price per screen with vendors who have more reviews, more integrations, and a free plan. With a safety-first position, reliability as a product, and AI aimed at operational work, it becomes the vendor a school district chooses because it can prove its screens worked.</p>
+  <p>The open questions are the ones public data cannot answer: current revenue and retention, what AUO is actually contributing, how many installs run on certified hardware, and how often alerts fail in the field. A PM joining this company would answer those in the first 30 days, before committing to any roadmap.</p>
+  <div class="callout green">
+    <strong>Bottom Line</strong>
+    Rise Vision has a good product and an under-used advantage. The strategy is to stop out-signing OptiSigns and start out-proving everyone on safety: auditable alerts, measured reliability, and AI that works from operational data. The window is the next 12–18 months, while the competition still treats alerts as a feature and while a possible ChromeOS migration wave is in motion.
+  </div>
+  <p class="footnote" style="margin-top:24px;">Sources: risevision.com (homepage, pricing, blog, comparison pages), G2 and Capterra listings, GetLatka, Crunchbase, Craft, PR Newswire and Digital Signage Today (AUO Display Plus acquisition; Avocor R Series; March 2026 release), GitHub (Rise-Vision), Sixteen:Nine, SVC / 22Miles market report. Analysis as of October 2026. Customer, display, and outcome figures are company-stated; revenue is a third-party estimate from 2020; ARR range and AI-readiness scores are my own estimates.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+    <span>© 2026 Mukul Dewangan</span>
+    <span>Product &amp; AI Leadership</span>
+</footer>
+
+</body>
+</html>
