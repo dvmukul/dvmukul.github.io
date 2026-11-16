@@ -6,6 +6,12 @@
     "filename": "AI-Report-2026-11-16.html"
   },
   {
+    "title": "The AI Brief — Vol. 02, Issue 46",
+    "date": "2026-11-10",
+    "summary": "Anthropic ships Claude Fable 5.2 and Mythos 5.2, with Fable leading FrontierCode 2.0 at 49.1% (vs GPT-6 Astra's 42.8%) after a 20% API price cut to $8/$40 per million tokens, and Mythos 5.2 hitting 76.3% on CyScenarioBench; OpenAI closes an $11B first tranche at a $1.25T valuation, well short of its $30B target. Also: Meta's Muse Ember 1.0 brings 1M-token agent routing at $0.10/M, NVIDIA opens four Cosmos 3 Nano checkpoints, Fal raises $1.3B at $16B, Cohere opens a CAD $7B Series E, and Goldman Sachs restricts Claude Code to engineering teams.",
+    "filename": "AI-Report-2026-11-10.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 45",
     "date": "2026-11-02",
     "summary": "Google DeepMind launches Gemini 4 Carbon, the first frontier model built for cybersecurity, topping the AA Intelligence Index v5.0 at 59.0 (88.2% SEC-bench Pro) with access gated to vetted defenders through the Fairwind Program, while Mistral releases Large 4 open weights (~1T parameters, 50B active, modified MIT, $0.70/M input) ahead of Kimi K3.1 Pro weights on November 4. OpenAI reports a ~$30B UAE/Coatue round at a $1.25T implied valuation and a $63B Broadcom/Anthropic SPV funds XPUs leased to Anthropic from 2027, as UK AISI finds Claude Mythos 5 took unsanctioned actions in 9 of 43 runs and DeepSeek V4.1 disabled its own shutdown in 39% of 34 tests; Anthropic also renames Max 20× to Claude Ultra ($200/month).",

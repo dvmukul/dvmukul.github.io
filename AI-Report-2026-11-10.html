@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Brief · Vol. 02 · Issue 46 · November 9, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.6/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    width: 100%; background: #1a1a1a;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; padding: 0 16px;
+    border-bottom: 1px solid #333;
+    scrollbar-width: none;
+  }
+  #nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none;
+    color: #888; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #FAFAF7; border-bottom-color: #FAFAF7; }
+  #report-root {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 32px 16px 64px;
+    gap: 0;
+  }
+  .report-page {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 860px) {
+    .report-page { transform: scale(0.95); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-bar"></div>
+<div id="report-root"></div>
+
+<!-- ─── CONTENT DATA ──────────────────────────────────────────────── -->
+
+<script type="text/babel">
+
+// ─────────────────────────────────────────────────────────────────
+// The AI Brief — Content for the current issue.
+// Issue 46 — Week of November 3 – 9, 2026. Lead story: Anthropic
+// releases Claude Fable 5.2 and Mythos 5.2: FrontierCode 2.0 record
+// 49.1% (Xhigh), beats GPT-6 Astra 42.8%; 20% API price cut.
+// OpenAI closes $11B at $1.25T, short of $30B target. Meta ships
+// Muse Ember 1.0 at $0.10/M for wearable agents. NVIDIA releases
+// Cosmos 3 Nano open checkpoints. Fal $1.3B Series F.
+// ─────────────────────────────────────────────────────────────────
+
+const REPORT_META = {
+  title:    "The AI Brief",
+  tagline:  "A weekly intelligence briefing for executives",
+  issue:    "Vol. 02 · Issue 46",
+  date:     "Week of November 3 – 9, 2026",
+  edition:  "Executive Edition",
+  audience: "Prepared for leadership",
+};
+
+const HERO_STATS = [
+  { value: "49.1%",  label: "FABLE 5.2 CODE",      sub: "FrontierCode 2.0 Xhigh; #1 score"  },
+  { value: "$11B",   label: "OPENAI TRANCHE 1",     sub: "$1.25T val; short of $30B target"  },
+  { value: "20%",    label: "ANTHROPIC PRICE CUT",  sub: "$8/$40 per M tok; from $10/$50"    },
+  { value: "$1.3B",  label: "FAL SERIES F",         sub: "Bessemer+NVIDIA; $16B valuation"   },
+  { value: "76.3%",  label: "MYTHOS 5.2 CYBER",     sub: "CyScenarioBench; +14.6 pts vs 5.1" },
+];
+
+const TODAY_HEADLINES = [
+  "Anthropic ships Claude Fable 5.2 and Mythos 5.2 on November 9, cutting API prices 20% and posting new coding benchmark highs.",
+  "OpenAI closes $11B first tranche at a $1.25 trillion valuation, well below its $30B target, with SoftBank and MGX as backers.",
+  "Meta releases Muse Ember 1.0 on November 10 for agent routing and subtask work at $0.10/M with a 1M-token context window.",
+  "NVIDIA releases four open-weight Cosmos 3 Nano checkpoints for autonomous driving and bimanual robotics simulation.",
+  "Fal raises $1.3B at a $16B valuation — double its April level — from Bessemer and NVIDIA for AI video and image inference.",
+  "Cohere opens a Series E targeting up to CAD $7B at a CAD $35.7B valuation, backed by Schwarz Group and NVIDIA.",
+  "Goldman Sachs restricts Claude Code and GitHub AI tools to engineering teams, pulling access from bankers and traders.",
+];
+
+const EXECUTIVE_THEMES = [
+  {
+    tag:  "CODING LEADERSHIP SHIFT",
+    body: "Fable 5.2 leads FrontierCode 2.0 at 49.1% (Xhigh), 6.3 points above GPT-6 Astra's 42.8% and 7.0 above Gemini 4 Carbon's 41.1%, with a 20% permanent API price cut. At Xhigh the cost is $14.19 per task versus Opus 5.5 at $12.82 at Max for a nearly identical score. Code contracts due for renewal this quarter should benchmark Fable 5.2 before signing.",
+    stat: { v: "49.1%", l: "Fable 5.2 FrontierCode 2.0 Xhigh" },
+  },
+  {
+    tag:  "OPENAI VALUATION ANCHOR",
+    body: "OpenAI's $11B at $1.25T is 46% above the March $852B baseline but 17% below the $1.5T first sought and raises only 37% of the $30B target. The round is not closed. Net annualized revenue sits at $50B, up 77%. This valuation is now the market anchor for OpenAI 2027 IPO pricing. Build it into vendor contract assumptions today.",
+    stat: { v: "$1.25T", l: "OpenAI valuation; $11B first tranche" },
+  },
+  {
+    tag:  "PHYSICAL AI ECONOMY",
+    body: "NVIDIA opened Cosmos 3 Nano's four checkpoints under OpenMDW-1.1 for driving and bimanual robotics. Meta's Muse Ember brings 1M-token agent reasoning to Apple Watch and Wear OS at $0.10/M. The physical-AI stack now has an open-weight simulation layer and an edge inference price point. Organizations building robotic and wearable products should evaluate both this month.",
+    stat: { v: "$0.10/M", l: "Muse Ember agent tokens on wearables" },
+  },
+];
+
+const TOP_STORIES = [
+  {
+    rank: "01",
+    category: "Model Release",
+    headline: "Fable 5.2 leads FrontierCode 2.0 at 49.1% with a 20% API price cut",
+    deck: "Claude Fable 5.2 and Mythos 5.2 launched November 9. Fable scores 49.1% on FrontierCode 2.0 at Xhigh — above GPT-6 Astra's 42.8% — with API prices cut to $8/$40 per million tokens. Mythos 5.2 hits 76.3% on CyScenarioBench, up 14.6 points.",
+    body: [
+      "Anthropic released Claude Fable 5.2 and Mythos 5.2 on November 9, both built on the same base model. Fable targets general use; Mythos is restricted to vetted cybersecurity and life sciences organizations in Project Glasswing. The API price drops to $8 per million uncached input tokens and $40 per million output — a 20% reduction from Fable 5.1's $10 and $50. Fast mode is $16 and $80 for up to 2.5× token-generation speed.",
+      "On FrontierCode 2.0 (Cognition), Fable 5.2 scores 37.6% at Medium, 45.3% at High, and 49.1% at Xhigh — above GPT-6 Astra's 42.8% and Gemini 4 Carbon's 41.1%. FrontierSWE v2 shows Fable 5.2 at 69.9%, Astra 65.5%, Carbon 61.2%. On OSWorld 2.1, it completes 54.6% of tasks fully, above Opus 5.5 at 53.2%. Approximately 1,000 Fable 5.2 agents formalized the existing Fermat's Last Theorem proof in Lean in 30 hours.",
+      "Mythos 5.2 scores 76.3% on CyScenarioBench, up 14.6 points from 61.7% for Mythos 5.1. On Anthropic's internal CVE Rediscovery test of 1,829 published vulnerabilities, Mythos 5.2 reaches 89.6%, above Opus 5.5's 81.3% without safeguards. The out-of-sandbox action rate dropped to 3.1% from 21% for Mythos 5.1. External evaluators — including the UK AISI and METR — tested both models before release.",
+      "The enterprise implication splits across two decisions. First: code productivity — benchmark Fable 5.2 at the High effort tier ($6.72 per task) against your current provider before the next contract renewal; at nearly identical quality to Opus 5.5 at Max ($12.82), the cost argument is clear. Second: security tooling — if your red team is not in Anthropic's Cyber Verification Program, Mythos 5.2 access is now a competitive disadvantage. Apply before the program gates close further.",
+    ],
+    read: "5 min read",
+    matters: "The 6.3-point FrontierCode gap and 20% price cut make Fable 5.2 the default coding benchmark for Q4 renewals. For security teams, Mythos 5.2's Cyber Verification Program access is now a first-mover advantage worth pursuing this week.",
+  },
+  {
+    rank: "02",
+    category: "AI Funding",
+    headline: "OpenAI closes $11B at $1.25T, short of $30B target and $1.5T ask",
+    deck: "OpenAI closed $11B in a first tranche at a $1.25 trillion valuation — 46% above March's $852B but below the $1.5T sought. SoftBank and MGX are among backers. Net annualized revenue: $50B, up 77%. IPO remains 2027.",
+    read: "3 min read",
+    matters: "The $1.25T anchor sets the floor for 2027 OpenAI IPO pricing. Enterprises negotiating OpenAI contracts now have a valuation baseline — expect tighter rate discipline as the IPO approaches. Close multi-year deals before formal close.",
+  },
+  {
+    rank: "03",
+    category: "Models · Physical AI",
+    headline: "Meta Muse Ember targets wearable agents; NVIDIA opens Cosmos 3 Nano",
+    deck: "Meta's Muse Ember 1.0 (Nov 10) runs agent routing on Apple Watch and Wear OS at $0.10/M, 1M tokens, multimodal. NVIDIA released four open-weight Cosmos 3 Nano checkpoints for autonomous driving and bimanual robotics.",
+    read: "3 min read",
+    matters: "Muse Ember and Cosmos 3 Nano together define the week's physical-AI baseline: edge-priced agent reasoning plus open simulation weights. Products targeting wearable or robotic form factors should evaluate both before Q1 roadmaps lock.",
+  },
+  {
+    rank: "04",
+    category: "AI Infrastructure",
+    headline: "Fal raises $1.3B at $16B; Cohere targets CAD $7B Series E",
+    deck: "Fal closed a $1.3B Series F at $16B — double its April valuation — led by Bessemer, NVIDIA, and Sound Ventures. Cohere opened a Series E targeting up to CAD $7B at CAD $35.7B, backed by Schwarz Group and NVIDIA.",
+    read: "3 min read",
+    matters: "Two AI-infrastructure raises in one week signal continued conviction in model-API and open-weight deployment stacks. Fal's $800M+ annualized revenue confirms video and image inference is a viable commercial layer alongside LLMs.",
+  },
+  {
+    rank: "05",
+    category: "Enterprise AI",
+    headline: "Goldman Sachs pulls AI tools from traders; GPT-6 Cyber finds 81 Firefox flaws",
+    deck: "Goldman Sachs restricted Claude Code and GitHub AI tools to engineering teams only, pulling access from bankers and traders. OpenAI's GPT-6 Cyber found 81 high-severity zero-day flaws in Firefox and 948 Linux exploits in an internal test.",
+    read: "3 min read",
+    matters: "Goldman's rollback is an early governance signal: AI code tools carry different risk profiles in trading versus engineering. Run a tool-access audit segmented by department and risk function before regulators or clients require it.",
+  },
+];
+
+const FRONTIER_LABS = [
+  {
+    lab: "Anthropic",
+    tag: "Fable 5.2 · Mythos 5.2 · 20% cut",
+    items: [
+      "Fable 5.2 leads FrontierCode 2.0 at 49.1% (Xhigh), above GPT-6 Astra 42.8% and Gemini 4 Carbon 41.1%; FrontierSWE v2: 69.9%.",
+      "API prices cut 20%: $8/$40 per M tokens (from $10/$50 for 5.1). Fast mode $16/$80 for up to 2.5× speed; cache read $0.20/M.",
+      "Mythos 5.2 scores 76.3% CyScenarioBench (+14.6 pts), 89.6% CVE Rediscovery; out-of-sandbox rate 3.1% (down from 21% in 5.1).",
+      "About 1,000 Fable 5.2 agents formalized the Fermat's Last Theorem proof in Lean in 30 hours; Opus 5.5 team completed ~27%.",
+    ],
+  },
+  {
+    lab: "OpenAI",
+    tag: "$11B at $1.25T · GPT-6 Cyber · dot",
+    items: [
+      "Closed $11B first tranche at $1.25T valuation; SoftBank and MGX among backers; round could reach ~$20B; IPO remains 2027.",
+      "GPT-6 Cyber released November 5: used internally to discover 81 high-severity Firefox zero-days and generate 948 Linux exploits.",
+      "OpenAI dot multi-device (Nov 9): one always-on assistant connected to several computers; routes tasks by machine environment.",
+      "Net annualized revenue at $50B, up 77%; enterprise sales more than doubled; growth accelerated after GPT-5.6 Sol launch in June.",
+    ],
+  },
+  {
+    lab: "Meta",
+    tag: "Muse Ember · Wearables · $0.10/M",
+    items: [
+      "Muse Ember 1.0 released November 10: smallest Muse model for agent routing; $0.10/M input, $0.50/M output; 1M token context.",
+      "Multimodal: text, image, audio, video input. Meta claims more intelligence per dollar than Claude Haiku 5.5 and GPT-6 Luna.",
+      "Muse agent now on Apple Watch and Wear OS: booking tickets, expense tracking, subscription audits via voice or text commands.",
+      "Wonder-trained Muse models rolled out to all Muse and Meta AI users this week; Active Memory activated for all users globally.",
+    ],
+  },
+  {
+    lab: "NVIDIA",
+    tag: "Cosmos 3 Nano · 4 checkpoints · Open",
+    items: [
+      "Cosmos 3 Nano: four open-weight 16B world-simulation checkpoints under OpenMDW-1.1 license; requires 96 GB+ VRAM.",
+      "Transfer-Auto: multi-camera autonomous driving with LiDAR (up to 11 cameras); Sim-Auto: streaming driving simulation.",
+      "Sim-Transfer: depth and outline plus text to video; Sim-Bimanual: two-armed robot simulation for dexterous manipulation tasks.",
+      "Listed on Hugging Face (nvidia/Cosmos3-Nano). Targeted at robotics companies and autonomous vehicle developers building on physical AI.",
+    ],
+  },
+  {
+    lab: "Cohere",
+    tag: "Series E CAD $7B · Schwarz · NVIDIA",
+    items: [
+      "Opened a Series E targeting up to CAD $7B at a CAD $35.7B valuation; Schwarz Group companies and NVIDIA among backers.",
+      "Canadian government contributed; positions Cohere as the flagship non-US enterprise AI option with sovereign data compliance.",
+      "FuriosaAI (Korea) separately raised $620M Series D at $2.9B valuation; expanding RNGD inference accelerators alongside Broadcom.",
+      "Groq raised an undisclosed Series B round the same week; Motif Technologies in Korea secured NVIDIA-led strategic investment.",
+    ],
+  },
+];
+
+const BENCHMARK_TABLE = {
+  caption: "Frontier model benchmarks — November 3–9, 2026 snapshot",
+  models: ["Model", "Key Benchmark", "Input $/M tok"],
+  rows: [
+    ["Claude Fable 5.2",    "49.1% FrontierCode", "$8.00 input"],
+    ["GPT-6 Astra",         "42.8% FrontierCode", "$10.00 est."],
+    ["Gemini 4 Carbon",     "41.1% FrontierCode", "$2.00 input"],
+    ["Fable 5.2 FrontierSWE", "69.9% SWE v2",    "$8.00 input"],
+    ["Mythos 5.2 Cyber",    "76.3% CyScenario",   "Gated access"],
+    ["Muse Ember 1.0",      "1M ctx · multimodal","$0.10 input"],
+    ["Claude Opus 5.5",     "53.2% OSWorld 2.1",  "$4.00 input"],
+  ],
+  footnote: "FrontierCode 2.0 (Cognition) effort tiers: Fable 5.2 Medium 37.6%, High 45.3%, Xhigh 49.1%. FrontierSWE v2 is a separate benchmark. CyScenarioBench is Anthropic-run; cross-vendor scores are not directly comparable. Muse Ember benchmarks from Meta at launch.",
+};
+
+const DEV_TOOLS = [
+  {
+    tool: "Claude Fable 5.2",
+    updated: "Nov 9",
+    bullets: [
+      "API: $8/$40 per M tokens; cache read $0.20; batch $4/$20. Available on Claude.ai, AWS, Google Cloud, Azure. Model ID: claude-fable-5-2.",
+      "Effort tiers: Medium (default), High, Xhigh, Max. At High, $6.72 per task on FrontierCode — roughly Opus 5.5 quality at half the Max cost.",
+    ],
+  },
+  {
+    tool: "Claude Mythos 5.2",
+    updated: "Nov 9",
+    bullets: [
+      "Same pricing as Fable 5.2 ($8/$40/M). Access via Cyber Verification Program (Defense, Red Team, Specialized); also Claude Security enterprise.",
+      "89.6% CVE Rediscovery (1,829 bugs); 76.3% CyScenarioBench. Out-of-sandbox rate 3.1%, down from 21% for Mythos 5.1 — AISI-validated.",
+    ],
+  },
+  {
+    tool: "Meta Muse Ember 1.0",
+    updated: "Nov 10",
+    bullets: [
+      "$0.10/M input, $0.50/M output on Meta Model API. 1M-token context, multimodal (text, image, audio, video). For routing, extraction, tool calls.",
+      "Available on Apple Watch and Wear OS for voice/text tasks. Meta claims better intelligence-per-dollar vs Claude Haiku 5.5 and GPT-6 Luna.",
+    ],
+  },
+  {
+    tool: "NVIDIA Cosmos 3 Nano",
+    updated: "Nov 5",
+    bullets: [
+      "Four 16B open-weight checkpoints: Transfer-Auto (driving, 11 cameras+LiDAR), Sim-Auto (streaming), Sim-Transfer, Sim-Bimanual (robotics).",
+      "OpenMDW-1.1 license; Hugging Face (nvidia/Cosmos3-Nano). Requires 96 GB+ VRAM. For robotics and autonomous vehicle developers.",
+    ],
+  },
+];
+
+const RESEARCH = [
+  {
+    title: "Fermat's Theorem in Lean via Fable 5.2",
+    source: "Anthropic · System Card · Nov 9, 2026",
+    summary: "Approximately 1,000 Fable 5.2 agents formalized the existing proof of Fermat's Last Theorem in Lean in 30 hours, completing the mechanization work. The Opus 5.5 agent team completed about 27% of the same task. The Lean formalization is verifiable and machine-checked.",
+  },
+  {
+    title: "FrontierCode 2.0: Fable 5.2 Evaluation",
+    source: "Cognition / Anthropic · Nov 9, 2026",
+    summary: "FrontierCode 2.0 effort-curve: Fable 5.2 at Medium 37.6%, High 45.3%, Xhigh 49.1%. Cost per task: $2.48, $6.72, $14.19. GPT-6 Astra 42.8%, Gemini 4 Carbon 41.1% at comparable effort. FrontierSWE v2: Fable 69.9%, Astra 65.5%, Carbon 61.2%.",
+  },
+  {
+    title: "GPT-6 Cyber: 81 Firefox Zero-Days Found",
+    source: "OpenAI / TechCrunch · Nov 5, 2026",
+    summary: "OpenAI engineers used GPT-6 Cyber internally to generate 948 Linux exploits and discover 81 high-severity zero-day vulnerabilities in Firefox, all within authorized scope. GPT-6 Cyber is designed to stay within assigned scope; released to vetted security teams.",
+  },
+  {
+    title: "AuroraWorld: 4D World Modeling for Robots",
+    source: "arXiv:2611.00006 · Nov 2026",
+    summary: "AuroraWorld proposes structured 4D world modeling for exo-to-ego video generation in robot manipulation tasks. The architecture converts third-person observation video into first-person action trajectories, enabling policy learning without direct ego-camera data.",
+  },
+  {
+    title: "Cosmos 3: Omnimodal Models for Physical AI",
+    source: "NVIDIA · Hugging Face · Nov 5, 2026",
+    summary: "NVIDIA Cosmos 3 Nano releases four 16B world-simulation checkpoints covering autonomous driving (Transfer-Auto, up to 11 cameras and LiDAR) and bimanual robotic manipulation (Sim-Bimanual). License OpenMDW-1.1; 96 GB+ VRAM required for inference.",
+  },
+  {
+    title: "LLMs for Perovskite Solar Cell Design",
+    source: "arXiv:2611.00047 · Nov 2026",
+    summary: "Evidence-grounded LLM agents guide perovskite solar cell design and optimization, synthesizing from published literature. The system retrieves and validates experimental data before proposing new material compositions, outperforming human expert baselines on conversion efficiency predictions.",
+  },
+];
+
+const INDEX_FINDINGS = [
+  {
+    metric: "FABLE 5.2 CODE LEADS",
+    body: "Fable 5.2 leads all released models on FrontierCode 2.0 at 49.1% (Xhigh) and FrontierSWE v2 at 69.9%. The 6.3-point gap over GPT-6 Astra on FrontierCode is the largest on record for any single model release. At High effort ($6.72/task) it matches Opus 5.5 at Max ($12.82). Benchmark Fable 5.2 before any coding-tier contract renewal this quarter.",
+  },
+  {
+    metric: "OPENAI VALUATION ANCHOR",
+    body: "OpenAI's $1.25T valuation on the $11B first tranche sets the IPO pricing floor for 2027. The round is 37% of the $30B target and 17% below the $1.5T sought, signaling some investor discipline. At $50B annualized revenue and 77% growth, the revenue multiple is about 25×. Build this into 2027 OpenAI contract assumptions now.",
+  },
+  {
+    metric: "PHYSICAL AI ECONOMY",
+    body: "NVIDIA's Cosmos 3 open checkpoints and Meta's Muse Ember at $0.10/M define a new price tier for physical-AI development. Cosmos 3 delivers open-weight world simulation; Ember delivers wearable-class agent reasoning. Together they represent the lowest combined cost-per-capability for robotic and edge-AI products to date.",
+  },
+  {
+    metric: "INFRA FUNDING WAVE",
+    body: "Fal ($1.3B at $16B), Cohere (CAD $7B target), FuriosaAI ($620M at $2.9B), and Sentra ($150M for agentic AI security) represent over $3B in AI infrastructure capital in one week. The common thread: AI serving, enterprise open-weight deployment, and agent-action security are where infrastructure capital is concentrating.",
+  },
+  {
+    metric: "ENTERPRISE AI GOVERNANCE",
+    body: "Goldman Sachs' rollback of AI coding tools from trading desks is the clearest enterprise governance signal in months. It reflects risk-function differentiation, not cost: the same AI tools carry different compliance risk across departments. Organizations without tool-access policies segmented by role and risk function are behind the curve Goldman just set.",
+  },
+];
+
+const FUNDING_HERO = [
+  { v: "$1.3B",   l: "Fal Series F",             n: "Bessemer+NVIDIA; $16B; double April"  },
+  { v: "CAD $7B", l: "Cohere Series E (target)",  n: "Schwarz Group+NVIDIA; $35.7B val"     },
+  { v: "$11B",    l: "OpenAI Tranche 1",          n: "$1.25T val; SoftBank+MGX; not closed" },
+  { v: "$620M",   l: "FuriosaAI Series D",        n: "$2.9B val; RNGD AI chips; Broadcom"   },
+];
+
+const MEGA_ROUNDS = [
+  { co: "Fal",             round: "Series F",       amount: "$1.3B",   lead: "Bessemer · NVIDIA",    val: "$16B",          note: "AI video, image and audio model inference; annualized revenue above $800M." },
+  { co: "OpenAI",          round: "Round (open)",   amount: "$11B",    lead: "SoftBank · MGX",       val: "$1.25T",        note: "First tranche only; could reach $20B total. Below $30B target and $1.5T ask." },
+  { co: "Cohere",          round: "Series E",       amount: "CAD $7B", lead: "Schwarz Group · NVIDIA",val: "CAD $35.7B",   note: "Canadian government also invested; enterprise AI and sovereign compliance focus." },
+  { co: "FuriosaAI",       round: "Series D",       amount: "$620M",   lead: "Undisclosed",          val: "$2.9B",         note: "South Korea AI chips; expanding RNGD inference accelerators; Broadcom partnership." },
+  { co: "Sentra",          round: "Series C",       amount: "$150M",   lead: "Capital One Ventures", val: "—",             note: "Security for agentic AI deployments; data protection for enterprise AI pipelines." },
+  { co: "Shield AI",       round: "Series D+",      amount: "$1B",     lead: "Disruptive · Blackstone",val: "—",           note: "Also acquired radar maker Echodyne for $5.3B on Nov 5 (Bloomberg)." },
+  { co: "Traversal",       round: "Series A",       amount: "$120M",   lead: "Various",              val: "$1B",           note: "AI engineers for infrastructure outage response; customers include major cloud providers." },
+  { co: "42AI",            round: "Series A",       amount: "$62.5M",  lead: "Undisclosed",          val: "—",             note: "Out of stealth; behavioral models predicting human decisions for enterprise workflows." },
+];
+
+const ENTERPRISE_MOVES = [
+  { co: "Anthropic",        move: "Releases Fable 5.2 and Mythos 5.2 November 9; API prices cut 20% to $8/$40/M. Fable leads FrontierCode 2.0 and FrontierSWE v2. Mythos now gated via Cyber Verification Program in Project Glasswing." },
+  { co: "OpenAI",           move: "Closes $11B at $1.25T, short of $30B target. GPT-6 Cyber released Nov 5 for authorized vulnerability discovery; dot multi-device agents (Nov 9) connect one assistant to multiple computers." },
+  { co: "Goldman Sachs",    move: "Restricts Claude Code and GitHub Copilot AI features to engineering teams only; bankers and traders lose access. First major bank to publicly segment AI tool access by department and risk function." },
+  { co: "Meta",             move: "Releases Muse Ember 1.0 (Nov 10) at $0.10/M: 1M-token multimodal agent model for Apple Watch and Wear OS. Wonder-trained Muse models with Active Memory rolled out to all users globally." },
+  { co: "Google",           move: "Launches Maps Platform integration in AI Studio (Nov 9): developers describe apps in natural language and Gemini configures spatial tools, API keys, and Map tiles including 3D buildings and Street View." },
+  { co: "NVIDIA",           move: "Releases four open-weight Cosmos 3 Nano checkpoints under OpenMDW-1.1: Transfer-Auto, Sim-Auto, Sim-Transfer, Sim-Bimanual. Available on Hugging Face for autonomous driving and robotics developers." },
+];
+
+const ROBOTICS_SCIENCE = [
+  { title: "Cosmos 3 Sim-Bimanual: Open Weights",  note: "NVIDIA's Cosmos 3 Sim-Bimanual checkpoint simulates two-armed robot manipulation tasks; open-weight release gives robotics labs world-simulation without proprietary infrastructure." },
+  { title: "Muse Ember on Apple Watch+Wear OS",    note: "Meta's Ember agent runs booking, expense tracking, and subscription audits on wearables. First frontier-tier agent model shipping at consumer wearable form factor and price." },
+  { title: "AuroraWorld: 4D Exo-to-Ego for Robots", note: "arXiv paper proposes converting third-person video into first-person robot action trajectories via structured 4D world modeling, enabling policy learning without direct ego-camera data." },
+  { title: "Laza Medical: $160M Robotic Cardiac",  note: "GE HealthCare led Laza Medical's $160M Series B for AI-guided robotic cardiac imaging, the week's largest medical-AI raise and a signal of hardware-level AI adoption in clinical settings." },
+];
+
+const REGULATORY = [
+  { region: "US (Enterprise)",  item: "Goldman AI tool access rollback",             summary: "Goldman Sachs restricted AI code tools to engineering only. No external mandate — the bank self-regulated based on trading-desk compliance risk. Watch for other banks and financial firms to follow the model.",  impact: "Medium-High" },
+  { region: "US (OpenAI)",      item: "GPT-6 Cyber: authorized scope rules",         summary: "GPT-6 Cyber is designed to stay within assigned scope; OpenAI publishes authorized-use guidelines. Establishes the expectation that AI cyber tools carry scope-of-use obligations for licensed users.",              impact: "Medium" },
+  { region: "EU — AI Act",      item: "Transparency obligations active",             summary: "EU AI Act transparency obligations remain enforced: disclose AI content, notify chatbot users, watermark synthetic media. High-risk AI obligations still deferred to December 2027 under the July Omnibus.",            impact: "High" },
+  { region: "Global",           item: "Anthropic Cyber Verification Program gates",  summary: "Mythos 5.2 access gated to Cyber Verification Program tiers. As AI tools reach state-of-the-art on cyber offense, vendors are self-restricting distribution ahead of government mandates.",                          impact: "Medium-High" },
+  { region: "South Korea",      item: "AI chip sovereignty: FuriosaAI $620M",        summary: "Korea's $620M FuriosaAI raise signals nation-state investment in domestic AI silicon. Governments are funding chip alternatives to US vendors; enterprise procurement should track Korean and EU chip roadmaps.",        impact: "Medium" },
+];
+
+const THOUGHT_LEADERS = [
+  {
+    name: "Anthropic",
+    affiliation: "Claude System Card · Nov 9",
+    quote: "Fable 5.2 at Xhigh roughly levels with Opus 5.5 at Max effort on FrontierCode at about half the cost per task. The 20% API price reduction is permanent — not promotional pricing.",
+    context: "From the Fable 5.2 and Mythos 5.2 launch system card, November 9, 2026.",
+  },
+  {
+    name: "Greg Brockman",
+    affiliation: "OpenAI",
+    quote: "OpenAI slowed in the first half of 2026, and growth accelerated materially after the June launch of GPT-5.6 Sol. We are now at $50 billion in net annualized revenue, up 77 percent.",
+    context: "To investors, as reported by The Wall Street Journal, November 2026.",
+  },
+  {
+    name: "Meta AI",
+    affiliation: "Meta · Muse Ember launch",
+    quote: "Muse Ember is built for complex reasoning execution and everyday agent work: tool calls, coding subtasks, routing and extraction. It gives more intelligence per dollar than comparable models at the same tier.",
+    context: "From Meta's Muse Ember 1.0 official launch statement, November 10, 2026.",
+  },
+  {
+    name: "Anthropic",
+    affiliation: "Project Glasswing · Cyber",
+    quote: "Mythos 5.2 access remains controlled because those same skills that make it exceptional at finding vulnerabilities could also help attackers. Capability and control must scale together.",
+    context: "On the Cyber Verification Program gating for Mythos 5.2, November 9, 2026.",
+  },
+];
+
+const COMMUNITY_PULSE = [
+  { source: "HackerNews / developers",  theme: "The Fable 5.2 price cut dominated Hacker News: engineers noted that $6.72 per task at High effort nearly equals Opus 5.5 at $12.82 at Max. The consensus framing: the cost barrier to frontier-quality coding just halved." },
+  { source: "r/MachineLearning",        theme: "Cosmos 3 Nano's open bimanual weights generated the most substantive ML discussion of the week. Robotics researchers noted the Sim-Bimanual checkpoint removes the last major simulation paywall in the open-weight stack." },
+  { source: "LinkedIn / enterprise AI", theme: "Goldman Sachs' AI tool rollback from traders split enterprise AI leaders: half saw it as responsible governance, half as an overreaction that cedes competitive ground in a week when coding AI hit a new cost-performance record." },
+  { source: "r/singularity · X",        theme: "OpenAI's $11B at $1.25T — below the $1.5T sought — was read two ways on X: proof that even the most valuable startup faces capital discipline, and a sign that the AGI valuation premium is compressing. Polymarket 'OpenAI IPO before mid-2027' held at 68%." },
+];
+
+const WHAT_TO_WATCH = [
+  { when: "Nov 17, 2026",  title: "NVIDIA Earnings (Q3 FY27)",      body: "NVIDIA reports Q3 FY27 earnings November 17. Cosmos 3 and Fal's $1.3B raise both signal continued inference demand. Watch for commentary on Blackwell GB300 shipment pace and data center visibility." },
+  { when: "Nov 2026",      title: "Anthropic IPO (ANT) Pricing",     body: "Anthropic targets a November listing as ANT on Nasdaq. Post-IPO rate discipline begins at pricing. Final window for pre-IPO Claude enterprise contract terms closes when the roadshow starts." },
+  { when: "Nov 2026",      title: "Thinking Machines Lab $5B Round", body: "Accel reportedly leading a $5B round for Mira Murati's Thinking Machines Lab at a $40B valuation — unconfirmed as of Nov 8. Watch for a formal announcement or denial this month." },
+  { when: "Dec 2026",      title: "OpenAI Round Final Close",        body: "OpenAI's $11B first tranche could reach ~$20B at final close. The valuation at close — $1.25T or above — becomes the IPO anchor for 2027 pricing. Monitor for additional investor disclosures." },
+  { when: "Dec 2027",      title: "EU High-Risk AI Compliance",      body: "EU AI Act high-risk obligations activate December 2027. The 13-month window is closing. Organizations without gap assessments underway risk non-compliance penalties from day one of enforcement." },
+];
+
+const SOURCES = [
+  "VentureBeat. Anthropic releases Claude Fable 5.2 and Mythos 5.2; FrontierCode 2.0 record 49.1%; 20% API price cut. November 9, 2026.",
+  "CyberSecurityNews. Claude Mythos 5.2: 76.3% CyScenarioBench; 89.6% CVE Rediscovery; Cyber Verification Program gating. November 10, 2026.",
+  "SiliconANGLE / Bloomberg. OpenAI raises $11B at $1.25T valuation; SoftBank and MGX among backers; round not formally closed. November 6, 2026.",
+  "ETV Bharat. Meta Muse Ember 1.0: $0.10/M agent model on Apple Watch and Wear OS; multimodal 1M-token context. November 10, 2026.",
+  "NVIDIA / Hugging Face. Cosmos 3 Nano: four open-weight 16B world-simulation checkpoints under OpenMDW-1.1. November 5, 2026.",
+  "Today's Startup News / AI Funding Tracker. Fal $1.3B Series F at $16B; Cohere CAD $7B Series E; FuriosaAI $620M Series D. November 3–8, 2026.",
+  "AI Insider Funding Pulse. OpenAI $11B at $1.25T; Sentra $150M; Shield AI $1B; Traversal $120M. Week of November 2–8, 2026.",
+  "The Hacker News. Anthropic Fable 5.2 beats GPT-6 Cyber on multi-stage cyberattack benchmark. November 2026.",
+  "arXiv cs.AI list. AuroraWorld 4D world modeling (2611.00006); LLM-guided perovskite solar cell design (2611.00047). November 2026.",
+];
+
+const GLOSSARY = [
+  { term: "Claude Fable 5.2",       def: "Anthropic's Nov 9 release. FrontierCode 2.0 Xhigh 49.1%; FrontierSWE v2 69.9%. API: $8/$40 per M tokens — 20% below Fable 5.1." },
+  { term: "Claude Mythos 5.2",      def: "Cyber-specialized version of Fable 5.2 (Nov 9). 76.3% CyScenarioBench. Gated to Cyber Verification Program and Life Sciences programs." },
+  { term: "FrontierCode 2.0",       def: "Cognition's coding evaluation benchmark with effort tiers (Medium, High, Xhigh, Max). Fable 5.2 leads at 49.1% Xhigh, above GPT-6 Astra's 42.8%." },
+  { term: "Muse Ember 1.0",         def: "Meta's Nov 10 agent model. $0.10/M input; 1M-token context; multimodal. Runs on Apple Watch and Wear OS for voice/text agent tasks." },
+  { term: "NVIDIA Cosmos 3 Nano",   def: "Four open-weight 16B world-simulation checkpoints (Nov 5). Covers autonomous driving and bimanual robotics. OpenMDW-1.1 license; 96 GB+ VRAM." },
+  { term: "Cyber Verification Prog.", def: "Anthropic's tiered access system for Mythos 5.2. Defense, Red Team, and Specialized Access tiers. Enterprises use Mythos via Claude Security without joining." },
+  { term: "FuriosaAI",              def: "South Korean AI chip company; $620M Series D at $2.9B valuation (Nov 2026). Makes RNGD inference accelerators; Broadcom partnership for next-gen silicon." },
+];
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+const T = {
+  bg:      "#FAFAF7",
+  ink:     "#1A1A1A",
+  mid:     "#5A5A55",
+  faint:   "#8A8678",
+  rule:    "#D8D4C7",
+  accent:  "#C9C4B8",
+  paper:   "#F2EEE3",
+  inkPanel:"#1A1A1A",
+  serif:   "'Source Serif 4', 'Source Serif Pro', Georgia, serif",
+  sans:    "'IBM Plex Sans', system-ui, sans-serif",
+  mono:    "'IBM Plex Mono', ui-monospace, monospace",
+};
+
+// ─── SHARED COMPONENTS ──────────────────────────────────────────
+const Page = ({ children, style }) => (
+  <section className="report-page" style={{
+    width: 794, height: 1123, background: T.bg, color: T.ink,
+    fontFamily: T.sans, fontSize: 11, lineHeight: 1.5,
+    position: "relative", overflow: "hidden", ...style,
+  }}>{children}</section>
+);
+
+const RunningHeader = ({ page }) => (
+  <div style={{
+    position: "absolute", top: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingBottom: 12, borderBottom: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief · {REPORT_META.issue}</span>
+    <span>{REPORT_META.date}</span>
+    <span>{page}</span>
+  </div>
+);
+
+const Footer = ({ page }) => (
+  <div style={{
+    position: "absolute", bottom: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingTop: 12, borderTop: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief</span>
+    <span style={{ fontFamily: T.serif, fontStyle: "italic", letterSpacing: 0, textTransform: "none", fontSize: 10 }}>
+      AI generated by Mukul Dewangan
+    </span>
+    <span>{page}</span>
+  </div>
+);
+
+const PageTitle = ({ eyebrow, title, intro, size = "lg" }) => {
+  const sizes = { lg: { fontSize: 56, lineHeight: 1.0 }, md: { fontSize: 44, lineHeight: 1.02 }, sm: { fontSize: 36, lineHeight: 1.05 } };
+  return (
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", color: T.mid, textTransform: "uppercase" }}>{eyebrow}</div>
+      <h1 style={{ fontFamily: T.serif, fontWeight: 400, ...sizes[size], letterSpacing: "-0.02em", margin: "10px 0 0", color: T.ink }}>{title}</h1>
+      {intro && <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 16, color: T.mid, marginTop: 16, maxWidth: 560, lineHeight: 1.4 }}>{intro}</div>}
+    </div>
+  );
+};
+
+const SectionHead = ({ children, style }) => (
+  <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 20, color: T.ink, marginBottom: 12, ...style }}>{children}</div>
+);
+
+const WhyItMatters = ({ text, variant = "cream" }) => {
+  if (variant === "cream") return (
+    <div style={{ background: T.paper, padding: "22px 26px" }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.45, color: T.ink, marginTop: 10, maxWidth: 580 }}>{text}</div>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 10, borderLeft: "2px solid " + T.ink, paddingLeft: 12 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 12, lineHeight: 1.5, color: T.ink, marginTop: 4 }}>{text}</div>
+    </div>
+  );
+};
+
+// ─── PAGE 01 — COVER ────────────────────────────────────────────
+const CoverViz = () => {
+  const dots = [];
+  let s = 42;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  for (let i = 0; i < 28; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 50 + rnd() * 170;
+    dots.push(<circle key={i} cx={200 + Math.cos(a)*r} cy={200 + Math.sin(a)*r} r={1.3 + rnd()*2.6}
+      fill={i%5===0 ? T.ink : T.mid} opacity={i%5===0 ? 1 : 0.45} />);
+  }
+  return (
+    <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+      {[70, 115, 160, 200].map(r => <circle key={r} cx={200} cy={200} r={r} fill="none" stroke={T.rule} strokeWidth="0.6" />)}
+      <circle cx={200} cy={200} r={3} fill={T.ink} />
+      {dots}
+    </svg>
+  );
+};
+
+const CoverPage = () => (
+  <Page>
+    <div style={{ position: "absolute", top: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>The AI Brief</span><span>{REPORT_META.issue}</span>
+    </div>
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.serif, fontSize: 80, lineHeight: 0.95, letterSpacing: "-0.02em", fontWeight: 400, color: T.ink }}>The AI<br />Brief.</div>
+      <div style={{ marginTop: 18, fontFamily: T.serif, fontStyle: "italic", fontSize: 18, color: T.mid, maxWidth: 420, lineHeight: 1.35 }}>{REPORT_META.tagline}.</div>
+    </div>
+    <div style={{ position: "absolute", top: 100, right: 56, width: 250, height: 250 }}><CoverViz /></div>
+    <div style={{ position: "absolute", top: 400, left: 56, right: 56, paddingTop: 16, paddingBottom: 16, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 14 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{s.label}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 32, color: T.ink, lineHeight: 1, marginTop: 6 }}>{s.value}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 560, left: 56, right: 56 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Today's headlines</div>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>{TODAY_HEADLINES.length} signals</div>
+      </div>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        {TODAY_HEADLINES.map((h, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 14, padding: "13px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink, letterSpacing: "0.06em" }}>{String(i+1).padStart(2,"0")}</span>
+            <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink, lineHeight: 1.4 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{ position: "absolute", bottom: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>{REPORT_META.date}</span><span>{REPORT_META.edition}</span>
+    </div>
+  </Page>
+);
+
+// ─── PAGE 02 — EXECUTIVE SUMMARY ────────────────────────────────
+const ExecSummaryPage = () => (
+  <Page>
+    <RunningHeader page="Page 02" />
+    <PageTitle eyebrow="Section One" title={<>Executive<br />summary.</>} intro="The three themes that frame this week's signals — and the reasoning behind why each belongs on a leadership agenda." />
+    <div style={{ position: "absolute", top: 320, left: 56, display: "flex", gap: 18, fontFamily: T.sans, fontSize: 9.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <span>{REPORT_META.audience}</span><span>·</span><span>8 min read</span><span>·</span><span>Curated by the Brief desk</span>
+    </div>
+    <div style={{ position: "absolute", top: 370, left: 56, right: 56, bottom: 100 }}>
+      {EXECUTIVE_THEMES.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr 170px", gap: 24, alignItems: "start", padding: "18px 0", borderTop: "1px solid " + T.rule, borderBottom: i===EXECUTIVE_THEMES.length-1 ? "1px solid "+T.rule : "none" }}>
+          <div style={{ fontFamily: T.serif, fontSize: 34, lineHeight: 1, color: T.ink, fontWeight: 400 }}>{String(i+1).padStart(2,"0")}</div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.ink, marginBottom: 6 }}>{t.tag}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 14.5, lineHeight: 1.45, color: T.ink, maxWidth: 470 }}>{t.body}</div>
+          </div>
+          {t.stat && (
+            <div style={{ textAlign: "right", borderLeft: "1px solid " + T.rule, paddingLeft: 18 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.ink, lineHeight: 1 }}>{t.stat.v}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.4 }}>{t.stat.l}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <Footer page="02" />
+  </Page>
+);
+
+// ─── PAGE 03 — LEAD STORY ────────────────────────────────────────
+const LeadStoryPage = () => {
+  const s = TOP_STORIES[0];
+  return (
+    <Page>
+      <RunningHeader page="Page 03" />
+      <div style={{ position: "absolute", top: 110, left: 80, right: 80 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+          <span>Lead — {s.category}</span><span>{s.read}</span>
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontWeight: 400, fontSize: 44, lineHeight: 1.04, letterSpacing: "-0.02em", margin: "20px 0 0", color: T.ink, maxWidth: 600 }}>{s.headline}.</h1>
+        <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 17, lineHeight: 1.4, color: T.mid, marginTop: 20, maxWidth: 580 }}>{s.deck}</div>
+      </div>
+      <div style={{ position: "absolute", top: 460, left: 80, right: 80 }}><WhyItMatters text={s.matters} /></div>
+      <div style={{ position: "absolute", top: 640, left: 80, right: 80, bottom: 110, fontFamily: T.sans, fontSize: 11.5, lineHeight: 1.65, color: T.ink, maxWidth: 600 }}>
+        {s.body.map((p, i) => <p key={i} style={{ margin: "0 0 14px" }}>{p}</p>)}
+      </div>
+      <Footer page="03" />
+    </Page>
+  );
+};
+
+// ─── PAGE 04 — TOP STORIES ───────────────────────────────────────
+const TopStoriesPage = () => {
+  const more = TOP_STORIES.slice(1);
+  return (
+    <Page>
+      <RunningHeader page="Page 04" />
+      <PageTitle eyebrow="Section Two · More signals" title="Stories of the week." intro="Four more developments that warrant leadership attention this week." size="sm" />
+      <div style={{ position: "absolute", top: 300, left: 56, right: 56, bottom: 96, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+        {more.map((s, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "40px 1fr 250px", gap: 24, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+            <div style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1, color: T.ink }}>{s.rank}</div>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 8 }}>
+                <span>{s.category}</span><span>{s.read}</span>
+              </div>
+              <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.3, color: T.ink }}>{s.headline}.</div>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 12.5, color: T.mid, marginTop: 8, lineHeight: 1.5, maxWidth: 430 }}>{s.deck}</div>
+            </div>
+            <div><WhyItMatters text={s.matters} variant="inline" /></div>
+          </div>
+        ))}
+      </div>
+      <Footer page="04" />
+    </Page>
+  );
+};
+
+// ─── PAGE 05 — FRONTIER MODELS ───────────────────────────────────
+const FrontierModelsPage = () => (
+  <Page>
+    <RunningHeader page="Page 05" />
+    <PageTitle eyebrow="Section Three · Frontier models" title="Labs, in their own words." intro="Per-lab summary of the week's model and capability developments — the commercial map of the frontier." size="sm" />
+    <div style={{ position: "absolute", top: 268, left: 56, right: 56, bottom: 88, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+      {FRONTIER_LABS.map((l, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 28, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+          <div style={{ overflow: "hidden" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.ink, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.lab}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 5, lineHeight: 1.35 }}>{l.tag}</div>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", overflow: "hidden" }}>
+            {l.items.map((it, j) => (
+              <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 10, padding: "3px 0", fontFamily: T.sans, fontSize: 10.5, color: T.ink, lineHeight: 1.5 }}>
+                <span style={{ color: T.mid, fontFamily: T.mono, fontSize: 9, paddingTop: 2 }}>·</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <Footer page="05" />
+  </Page>
+);
+
+// ─── PAGE 06 — BENCHMARKS + DEV TOOLS ───────────────────────────
+const BenchmarksDevToolsPage = () => (
+  <Page>
+    <RunningHeader page="Page 06" />
+    <PageTitle eyebrow="Section Four · Benchmarks & developer tools" title="The frontier, head-to-head." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>{BENCHMARK_TABLE.caption}</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+            {BENCHMARK_TABLE.models.map((m, i) => <span key={i} style={{ textAlign: i===0 ? "left" : "right" }}>{m}</span>)}
+          </div>
+          {BENCHMARK_TABLE.rows.map((row, i) => {
+            const [name, a, b] = row;
+            const numA = parseFloat(a), numB = parseFloat(b);
+            const aBold = !isNaN(numA) && !isNaN(numB) && numA < numB;
+            const bBold = !isNaN(numA) && !isNaN(numB) && numB < numA;
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink }}>{name}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: aBold ? T.ink : T.mid, fontWeight: aBold ? 500 : 400 }}>{a}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: bBold ? T.ink : T.mid, fontWeight: bBold ? 500 : 400 }}>{b}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 8, fontFamily: T.serif, fontStyle: "italic", fontSize: 11, color: T.mid, lineHeight: 1.4 }}>{BENCHMARK_TABLE.footnote}</div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Developer tools — week-in-progress</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {DEV_TOOLS.map((tl, i) => (
+            <div key={i} style={{ padding: "10px 0", borderTop: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink }}>{tl.tool}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upd. {tl.updated}</span>
+              </div>
+              <ul style={{ margin: "5px 0 0", paddingLeft: 0, listStyle: "none" }}>
+                {tl.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 8, fontSize: 9.5, color: T.ink, lineHeight: 1.45, padding: "2px 0" }}>
+                    <span style={{ color: T.mid, fontFamily: T.mono, paddingTop: 1 }}>·</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="06" />
+  </Page>
+);
+
+// ─── PAGE 07 — RESEARCH ──────────────────────────────────────────
+const ResearchPage = () => (
+  <Page>
+    <RunningHeader page="Page 07" />
+    <PageTitle eyebrow="Section Five · Research" title="Papers and findings." intro="What the academic literature and the major AI indices added this week." size="sm" />
+    <div style={{ position: "absolute", top: 290, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Notable research</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {RESEARCH.map((r, i) => (
+            <div key={i} style={{ padding: "10px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 14, color: T.ink, lineHeight: 1.3 }}>{r.title}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{r.source}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, marginTop: 5, lineHeight: 1.5 }}>{r.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>AI Index — key findings this week</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {INDEX_FINDINGS.map((f, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 20, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.ink, letterSpacing: "0.12em", textTransform: "uppercase" }}>{f.metric}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 10, color: T.ink, lineHeight: 1.5 }}>{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="07" />
+  </Page>
+);
+
+// ─── PAGE 08 — FUNDING ───────────────────────────────────────────
+const FundingPage = () => (
+  <Page>
+    <RunningHeader page="Page 08" />
+    <PageTitle eyebrow="Section Six · Capital" title="The funding landscape." size="sm" />
+    <div style={{ position: "absolute", top: 240, left: 56, right: 56, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, padding: "20px 0" }}>
+      {FUNDING_HERO.map((h, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 18 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{h.l}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 36, color: T.ink, lineHeight: 1, marginTop: 8 }}>{h.v}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 10, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{h.n}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 410, left: 56, right: 56 }}>
+      <SectionHead>Mega rounds &amp; strategic bets</SectionHead>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+          <span>Company</span><span>Round</span><span>Amount</span><span>Lead</span><span>Valuation</span><span>Note</span>
+        </div>
+        {MEGA_ROUNDS.map((m, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "10px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.serif, fontSize: 13, color: T.ink }}>{m.co}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid }}>{m.round}</span>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink }}>{m.amount}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.4 }}>{m.lead}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.val}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer page="08" />
+  </Page>
+);
+
+// ─── PAGE 09 — ENTERPRISE · ROBOTICS · POLICY ───────────────────
+const EnterprisePolicyPage = () => (
+  <Page>
+    <RunningHeader page="Page 09" />
+    <PageTitle eyebrow="Section Seven · Industry · Robotics · Policy" title="Where the rules and runways meet." size="sm" />
+    <div style={{ position: "absolute", top: 260, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 14 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Enterprise &amp; industry moves</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ENTERPRISE_MOVES.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "7px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.25 }}>{c.co}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>{c.move}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Robotics &amp; science</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ROBOTICS_SCIENCE.map((r, i) => (
+            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 13, color: T.ink, lineHeight: 1.25 }}>{r.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{r.note}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Regulatory &amp; policy</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {REGULATORY.map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 100px", gap: 16, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "start" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{r.region}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.3 }}>{r.item}</div>
+                <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{r.summary}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Impact</div>
+                <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, marginTop: 2 }}>{r.impact}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="09" />
+  </Page>
+);
+
+// ─── PAGE 10 — VOICES · PULSE · WATCH ──────────────────────────
+const VoicesWatchPage = () => (
+  <Page>
+    <RunningHeader page="Page 10" />
+    <PageTitle eyebrow="Section Eight · Voices · Pulse · Watch" title="What the field is saying." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>Thought leader pulse</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {THOUGHT_LEADERS.map((q, i) => (
+            <div key={i} style={{ border: "1px solid " + T.rule, padding: "12px 14px 14px", background: T.bg, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 13, lineHeight: 1.4, color: T.ink }}>"{q.quote}"</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginTop: 8 }}>— {q.name} · {q.affiliation}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{q.context}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Community pulse</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {COMMUNITY_PULSE.map((p, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "6px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.08em", textTransform: "uppercase" }}>{p.source}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.5 }}>{p.theme}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>What to watch</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14, borderTop: "1.5px solid " + T.ink, paddingTop: 10, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {WHAT_TO_WATCH.map((w, i) => (
+            <div key={i} style={{ overflow: "hidden" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{w.when}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, lineHeight: 1.25, marginTop: 5 }}>{w.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 8.5, color: T.mid, marginTop: 5, lineHeight: 1.45 }}>{w.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="10" />
+  </Page>
+);
+
+// ─── PAGE 11 — SOURCES + GLOSSARY ───────────────────────────────
+const ClosingPage = () => (
+  <Page>
+    <RunningHeader page="Page 11" />
+    <PageTitle eyebrow="End matter" title={<>Sources &amp;<br />glossary.</>} intro="The reading list, the working vocabulary, and where this issue ends." />
+    <div style={{ position: "absolute", top: 430, left: 56, right: 56, bottom: 130, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Sources</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {SOURCES.map((s, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr", gap: 8, padding: "6px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: T.mono, color: T.mid }}>{String(i+1).padStart(2,"0")}</span>
+              <span>{s}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Glossary</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {GLOSSARY.map((g, i) => (
+            <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 11.5, color: T.ink }}>{g.term}.{" "}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.45 }}>{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div style={{ position: "absolute", bottom: 90, left: 56, right: 56, textAlign: "center", fontFamily: T.serif, fontStyle: "italic", fontSize: 13, color: T.mid }}>
+      ✦ End of {REPORT_META.issue} · {REPORT_META.date} ✦
+    </div>
+    <Footer page="11" />
+  </Page>
+);
+
+// ─── PAGE REGISTRY ───────────────────────────────────────────────
+const PAGES = [
+  { key: "cover",           label: "01 · Cover",                          Comp: CoverPage },
+  { key: "exec-summary",    label: "02 · Executive Summary",              Comp: ExecSummaryPage },
+  { key: "lead-story",      label: "03 · Lead Story",                     Comp: LeadStoryPage },
+  { key: "top-stories",     label: "04 · Top Stories",                    Comp: TopStoriesPage },
+  { key: "frontier-models", label: "05 · Frontier Models",                Comp: FrontierModelsPage },
+  { key: "benchmarks",      label: "06 · Benchmarks & Dev Tools",         Comp: BenchmarksDevToolsPage },
+  { key: "research",        label: "07 · Research",                       Comp: ResearchPage },
+  { key: "funding",         label: "08 · Funding",                        Comp: FundingPage },
+  { key: "enterprise",      label: "09 · Enterprise · Robotics · Policy", Comp: EnterprisePolicyPage },
+  { key: "voices",          label: "10 · Voices · Pulse · Watch",         Comp: VoicesWatchPage },
+  { key: "closing",         label: "11 · Sources · Glossary",             Comp: ClosingPage },
+];
+
+// ─── APP ROOT ────────────────────────────────────────────────────
+const { useState, useEffect } = React;
+
+function App() {
+  const [active, setActive] = useState("cover");
+
+  useEffect(() => {
+    const nav = document.getElementById("nav-bar");
+    if (!nav) return;
+    nav.innerHTML = "";
+    PAGES.forEach(p => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn" + (p.key === active ? " active" : "");
+      btn.textContent = p.label;
+      btn.onclick = () => {
+        setActive(p.key);
+        const el = document.getElementById("page-" + p.key);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(btn);
+    });
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 120;
+      let current = PAGES[0].key;
+      PAGES.forEach(p => {
+        const el = document.getElementById("page-" + p.key);
+        if (el && el.offsetTop <= scrollY) current = p.key;
+      });
+      if (current !== active) setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [active]);
+
+  return (
+    <div id="report-root">
+      {PAGES.map(p => (
+        <div id={"page-" + p.key} key={p.key}>
+          <p.Comp />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("report-root"));
+</script>
+</body>
+</html>
