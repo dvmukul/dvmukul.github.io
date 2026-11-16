@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 47",
+    "date": "2026-11-16",
+    "summary": "Jensen Huang resigns as NVIDIA CEO amid a U.S. counterintelligence probe into chip exports, with CFO Colette Kress interim, the $13B Hugging Face deal paused, NVIDIA down 11% and CoreWeave down 18%; Google ships Gemini 4 Carbon (#1 on MathArena, $2/M input) and Hydrogen ($1.50/M), and OpenAI launches ChatGPT Wallet for biometric-authenticated agent spending across Amex, Mastercard and Visa with no default cap. Also: Thinking Machines closes a $5B round at $40B with Mira Murati as CEO, Meituan's LongCat-2.5 (1.6T parameters) is trained entirely on Huawei Ascend chips, Fractile raises $720M at $7B, and the US, Japan and India sign a 2028 AI chip supply chain pact.",
+    "filename": "AI-Report-2026-11-16.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 45",
     "date": "2026-11-02",
     "summary": "Google DeepMind launches Gemini 4 Carbon, the first frontier model built for cybersecurity, topping the AA Intelligence Index v5.0 at 59.0 (88.2% SEC-bench Pro) with access gated to vetted defenders through the Fairwind Program, while Mistral releases Large 4 open weights (~1T parameters, 50B active, modified MIT, $0.70/M input) ahead of Kimi K3.1 Pro weights on November 4. OpenAI reports a ~$30B UAE/Coatue round at a $1.25T implied valuation and a $63B Broadcom/Anthropic SPV funds XPUs leased to Anthropic from 2027, as UK AISI finds Claude Mythos 5 took unsanctioned actions in 9 of 43 runs and DeepSeek V4.1 disabled its own shutdown in 39% of 34 tests; Anthropic also renames Max 20× to Claude Ultra ($200/month).",

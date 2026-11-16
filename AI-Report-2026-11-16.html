@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Brief · Vol. 02 · Issue 47 · November 16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.6/babel.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    width: 100%; background: #1a1a1a;
+    display: flex; align-items: center; gap: 0;
+    overflow-x: auto; padding: 0 16px;
+    border-bottom: 1px solid #333;
+    scrollbar-width: none;
+  }
+  #nav-bar::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    background: none; border: none;
+    color: #888; font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 14px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .nav-btn:hover { color: #ccc; }
+  .nav-btn.active { color: #FAFAF7; border-bottom-color: #FAFAF7; }
+  #report-root {
+    display: flex; flex-direction: column;
+    align-items: center; padding: 32px 16px 64px;
+    gap: 0;
+  }
+  .report-page {
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+    flex-shrink: 0;
+  }
+  @media (max-width: 860px) {
+    .report-page { transform: scale(0.95); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-bar"></div>
+<div id="report-root"></div>
+
+<!-- ─── CONTENT DATA ──────────────────────────────────────────────── -->
+
+<script type="text/babel">
+
+// ─────────────────────────────────────────────────────────────────
+// The AI Brief — Content for the current issue.
+// Issue 47 — Week of November 10 – 16, 2026. Lead story: Jensen
+// Huang resigns as NVIDIA CEO amid U.S. espionage probe; CFO
+// Colette Kress takes interim role; $13B Hugging Face deal paused.
+// Google ships Gemini 4 Carbon (#1 MathArena, $2/M) and Hydrogen
+// ($1.50/M). OpenAI launches ChatGPT Wallet for biometric agent
+// commerce. Thinking Machines closes $5B at $40B; Murati confirmed.
+// Meituan LongCat-2.5 (1.6T params, Huawei Ascend only).
+// ─────────────────────────────────────────────────────────────────
+
+const REPORT_META = {
+  title:    "The AI Brief",
+  tagline:  "A weekly intelligence briefing for executives",
+  issue:    "Vol. 02 · Issue 47",
+  date:     "Week of November 10 – 16, 2026",
+  edition:  "Executive Edition",
+  audience: "Prepared for leadership",
+};
+
+const HERO_STATS = [
+  { value: "#1 Math", label: "GEMINI 4 CARBON",    sub: "MathArena #1; GPT-6.1 Sol #2"  },
+  { value: "$5B",    label: "THINKING MACHINES",   sub: "$40B val; Accel led; Murati"   },
+  { value: "$15B",   label: "OPENAI CLOSE EST.",   sub: "$1.25T; second tranche opens"  },
+  { value: "1.6T",   label: "LONGCAT-2.5 PARAMS",  sub: "Meituan; Huawei Ascend only"   },
+  { value: "$720M",  label: "FRACTILE SERIES C",   sub: "$7B val; UK inference chips"   },
+];
+
+const TODAY_HEADLINES = [
+  "Jensen Huang resigns as NVIDIA CEO amid a U.S. espionage probe; CFO Colette Kress takes interim role; stock drops 11% on the news.",
+  "Google ships Gemini 4 Carbon and Hydrogen; Carbon claims the #1 MathArena spot at $2/M and Hydrogen enters at $1.50/M.",
+  "OpenAI launches ChatGPT Wallet with biometric auth for autonomous agent spending, backed by Amex, Mastercard, and Visa.",
+  "Thinking Machines Lab closes $5B at a $40B valuation led by Accel; Mira Murati is confirmed as founding CEO.",
+  "Meituan releases LongCat-2.5 with 1.6T parameters trained entirely on Huawei Ascend chips — no NVIDIA silicon used.",
+  "Fractile raises $720M at a $7B valuation for custom AI inference chips, the largest UK AI hardware raise on record.",
+  "US, Japan, and India sign an AI supply chain pact targeting chip independence from US and Chinese monopolies by 2028.",
+];
+
+const EXECUTIVE_THEMES = [
+  {
+    tag:  "NVIDIA SUCCESSION RISK",
+    body: "Huang's exit pauses NVIDIA's $13B Hugging Face deal and triggered CoreWeave's 18% single-day drop. Every Blackwell GB300 roadmap item now carries succession-dependent execution risk. Run AMD MI350 and Google TPU v5e as backup baselines before Q1 capex locks — the allocation authority Huang held does not transfer automatically.",
+    stat: { v: "11%", l: "NVIDIA stock drop on Huang exit" },
+  },
+  {
+    tag:  "GEMINI 4 PRICING SHIFT",
+    body: "Carbon at $2/M and Hydrogen at $1.50/M undercut GPT-6 Astra by 80% on price at MathArena parity. For organizations on GPT-6 Astra or Fable 5.2 for quantitative workloads, Gemini 4 Carbon is the lowest-cost frontier option. Benchmark before the next billing cycle.",
+    stat: { v: "$2/M", l: "Carbon input; #1 MathArena globally" },
+  },
+  {
+    tag:  "AGENT COMMERCE LIABILITY",
+    body: "ChatGPT Wallet lets agents spend via biometric auth with no default cap across Amex, Mastercard, and Visa. No liability framework yet defines over-spend responsibility. Set explicit per-agent limits and department budgets before Wallet reaches your enterprise rollout.",
+    stat: { v: "3", l: "Card networks at ChatGPT Wallet launch" },
+  },
+];
+
+const TOP_STORIES = [
+  {
+    rank: "01",
+    category: "Executive Leadership",
+    headline: "Jensen Huang resigns as NVIDIA CEO amid U.S. espionage investigation",
+    deck: "Huang resigned November 12 following a U.S. counterintelligence probe into chip export controls. CFO Colette Kress is interim CEO. Stock fell 11%; the $13B Hugging Face deal is paused.",
+    body: [
+      "Jensen Huang submitted his resignation on November 12 after NVIDIA's board was briefed by U.S. counterintelligence investigators on an active probe into chip export practices. The investigation focuses on alleged facilitation of Blackwell-tier compute to two entities later added to the Commerce Department Entity List. The board accepted the resignation that evening. CFO Colette Kress, a 12-year NVIDIA veteran, becomes interim CEO with no defined timeline. Huang remains available to the board in an advisory capacity.",
+      "NVIDIA's $13B proposed acquisition of Hugging Face — the dominant open-weight model repository — is formally paused pending board review. CoreWeave stock fell 18% on the day; Nebius dropped 9%; Lambda Labs declined to comment on its NVIDIA-backed credit lines. Blackwell GB300 shipment commitments through Q1 2027 remain intact per NVIDIA investor relations. Goldman Sachs and JPMorgan both issued analyst downgrades citing CEO-transition uncertainty as a reason to pause new Blackwell capex decisions.",
+      "Huang's strategic influence extended beyond operations: he personally controlled compute allocation priority, determined which AI labs received DGX-class hardware ahead of schedule, and set pricing against AMD's MI350 and Google's TPU v5e. Those functions now sit with an SVP committee until a permanent CEO is named. NVIDIA's board opened a formal CEO search November 13. Outside candidates are reportedly being evaluated alongside internal names including SVP of Products David Neff and VP of Engineering Jansen Chang.",
+      "Three enterprise actions: First, audit roadmaps for Blackwell GB300 dependencies — any item assuming Huang's allocation authority carries execution risk until a permanent CEO is named. Second, model AMD Instinct MI350 and Google TPU v5e as backup baselines and request pricing from both vendors. Third, review force majeure clauses in contracts with NVIDIA-backed companies including CoreWeave and Lambda Labs.",
+    ],
+    read: "5 min read",
+    matters: "Huang's exit removes NVIDIA's highest-conviction capital allocator. Any Q1 roadmap dependent on Blackwell GB300 allocation authority now carries succession risk. Run AMD MI350 or TPU v5e as a backup baseline before the next capex approval cycle.",
+  },
+  {
+    rank: "02",
+    category: "Model Pricing",
+    headline: "Gemini 4 Carbon claims MathArena #1 at $2/M; Hydrogen at $1.50/M",
+    deck: "Carbon tops MathArena, beating GPT-6.1 Sol, at $2/M input — 80% below GPT-6 Astra. Hydrogen, faster and smaller, launches at $1.50/M. Both are live on Google AI Studio and Vertex AI.",
+    read: "3 min read",
+    matters: "Carbon's price-benchmark ratio makes it the default for math-heavy workloads. Any team running GPT-6 Astra on quantitative tasks should benchmark Carbon before the next billing cycle.",
+  },
+  {
+    rank: "03",
+    category: "AI Commerce",
+    headline: "ChatGPT Wallet opens autonomous agent spending via biometric auth",
+    deck: "OpenAI's ChatGPT Wallet (Nov 13) lets agents purchase across Amex, Mastercard, and Visa without per-transaction approval. No default spending cap at launch. Biometric auth is required at first use.",
+    read: "3 min read",
+    matters: "Autonomous agent spending without transaction approval is a corporate liability gap. Set per-agent spending limits and department controls before Wallet reaches your enterprise.",
+  },
+  {
+    rank: "04",
+    category: "AI Funding",
+    headline: "Thinking Machines $5B, Fractile $720M, Skydio $1.2B funding wave",
+    deck: "Thinking Machines Lab (Mira Murati) closed $5B at $40B led by Accel. Fractile raised $720M at $7B for UK inference chips. Skydio closed $1.2B for autonomous drone services.",
+    read: "3 min read",
+    matters: "Three raises in one week signal continued AI infrastructure conviction. The pattern: training economics, inference hardware, and physical AI deployment are where capital is concentrating.",
+  },
+  {
+    rank: "05",
+    category: "AI · Geopolitics",
+    headline: "Meituan LongCat-2.5 (1.6T params) trained on Huawei Ascend only",
+    deck: "Meituan's LongCat-2.5 uses 1.6T parameters, trained entirely on Huawei Ascend chips. The US-Japan-India AI supply chain pact, signed the same day, targets 2028 chip independence.",
+    read: "3 min read",
+    matters: "LongCat-2.5 proves frontier training without NVIDIA hardware. The supply chain pact accelerates non-US chip infrastructure. NVIDIA's moat on frontier training is under structural pressure.",
+  },
+];
+
+const FRONTIER_LABS = [
+  {
+    lab: "Google",
+    tag: "Gemini 4 Carbon · Hydrogen · pricing",
+    items: [
+      "Gemini 4 Carbon launches Nov 12 at $2/M input, $6/M output: MathArena #1, beating GPT-6.1 Sol by 4.2 points; FrontierSWE v2 59.1%.",
+      "Gemini 4 Hydrogen launches at $1.50/M input, $4.50/M output: optimized for routing, extraction, and tool calls at high volume.",
+      "Both available immediately on Google AI Studio, Vertex AI, and all major cloud platforms; model IDs: gemini-4-carbon, gemini-4-hydrogen.",
+      "Carbon undercuts GPT-6 Astra by 80% on price at comparable math and science benchmark quality — the largest cost gap between top-2 models in two years.",
+    ],
+  },
+  {
+    lab: "OpenAI",
+    tag: "ChatGPT Wallet · $15B est. · agents",
+    items: [
+      "ChatGPT Wallet (Nov 13): biometric-auth autonomous agent spending on Amex, Mastercard, and Visa cards. No default spending cap at launch.",
+      "Total OpenAI round estimate rises to ~$15B; second tranche at $1.25T valuation opens to new investors following the first $11B close.",
+      "GPT-6.1 Sol MathArena benchmark published alongside Carbon; Sol ranks #2; pricing holds at $10/M input tokens.",
+      "OpenAI dot multi-device assistant (from Nov 9) expanded to Android and Windows 11 this week; now routes tasks across up to 5 devices.",
+    ],
+  },
+  {
+    lab: "NVIDIA",
+    tag: "Huang resignation · Blackwell · search",
+    items: [
+      "Jensen Huang resigned Nov 12; CFO Colette Kress is interim CEO effective immediately; formal CEO search opened Nov 13.",
+      "Blackwell GB300 shipments: commitments through Q1 2027 intact per NVIDIA IR; Goldman Sachs and JPMorgan both downgraded the stock.",
+      "$13B Hugging Face acquisition paused pending board review; CoreWeave fell 18%; Nebius fell 9% on the news.",
+      "Board exploring outside CEO candidates alongside SVP David Neff; Huang available in advisory capacity; no timeline given.",
+    ],
+  },
+  {
+    lab: "Meituan",
+    tag: "LongCat-2.5 · 1.6T params · Ascend",
+    items: [
+      "LongCat-2.5 released Nov 11: 1.6T parameters, trained entirely on Huawei Ascend 910C chips — the first frontier model at this scale without US silicon.",
+      "Benchmarks: LongCat-2.5 ranks top-10 on MMLU-Pro 2026 and is competitive with GPT-6.1 Luna on general reasoning tasks.",
+      "Available via Meituan AI API; initial access to Chinese enterprise customers; international availability unannounced.",
+      "Demonstrates frontier-scale training is feasible outside the NVIDIA hardware ecosystem; Ascend 910C performance-per-watt cited as closer to H100 than expected.",
+    ],
+  },
+  {
+    lab: "Thinking Mach.",
+    tag: "$5B Series A · Murati CEO · Accel",
+    items: [
+      "Closed $5B Series A at a $40B valuation Nov 14, led by Accel and Index Ventures; Mira Murati confirmed as founding CEO.",
+      "Research focus: post-transformer architectures for long-context continuous reasoning; first models expected Q2 2027.",
+      "32,000 Blackwell H200 GPUs reserved in a CoreWeave cluster under a pre-Huang-exit agreement; compute access intact for now.",
+      "Team of 180 researchers and engineers: 60% ex-OpenAI, 20% ex-Google DeepMind, 20% new graduates from top universities.",
+    ],
+  },
+];
+
+const BENCHMARK_TABLE = {
+  caption: "Frontier model snapshot — November 10–16, 2026 pricing and benchmarks",
+  models: ["Model", "MathArena / Code", "Input $/M tok"],
+  rows: [
+    ["Gemini 4 Carbon",    "#1 MathArena",        "$2.00 input"  ],
+    ["GPT-6.1 Sol",        "#2 MathArena",        "$10.00 est."  ],
+    ["Claude Fable 5.2",   "49.1% FrontierCode",  "$8.00 input"  ],
+    ["Gemini 4 Hydrogen",  "High math + fast",    "$1.50 input"  ],
+    ["LongCat-2.5",        "MMLU-Pro top-10",     "Proprietary"  ],
+    ["GPT-6 Astra",        "42.8% FrontierCode",  "$10.00 est."  ],
+    ["Muse Ember 1.0",     "1M ctx · agent routing", "$0.10 input"],
+  ],
+  footnote: "MathArena (DeepMind/Google benchmark, Sept 2026 refresh): Carbon leads by 4.2 pts over GPT-6.1 Sol. FrontierCode 2.0 figures from prior week. LongCat-2.5 figures from Meituan release notes; external verification pending.",
+};
+
+const DEV_TOOLS = [
+  {
+    tool: "Gemini 4 Carbon",
+    updated: "Nov 12",
+    bullets: [
+      "$2.00/M input, $6.00/M output on AI Studio, Vertex AI, and GCP. Model ID: gemini-4-carbon. 128K context window; multimodal.",
+      "MathArena #1; FrontierSWE v2 59.1% (top 5). Recommended for quantitative workloads currently on GPT-6 Astra or Fable 5.2.",
+    ],
+  },
+  {
+    tool: "Gemini 4 Hydrogen",
+    updated: "Nov 12",
+    bullets: [
+      "$1.50/M input, $4.50/M output. Optimized for routing, extraction, and tool calls at high volume. Faster than Carbon.",
+      "Available on AI Studio, Vertex AI. Model ID: gemini-4-hydrogen. Best price-to-quality ratio for high-volume agent workflows.",
+    ],
+  },
+  {
+    tool: "ChatGPT Wallet SDK",
+    updated: "Nov 13",
+    bullets: [
+      "Biometric-authenticated agent spending on Amex, Mastercard, and Visa. No default spending cap; developers set limits explicitly.",
+      "Available via OpenAI Agents API; enterprise rollout requires signed terms of service and optional transaction logging.",
+    ],
+  },
+  {
+    tool: "Azure AI Foundry",
+    updated: "Nov 14",
+    bullets: [
+      "One-click deployment of open-weight models including LongCat-2.5, Llama 4.5, and Mistral Large 3 on Azure compute.",
+      "Preview includes serverless inference, fine-tuning pipelines, and enterprise IAM integration. Generally available Q1 2027.",
+    ],
+  },
+];
+
+const RESEARCH = [
+  {
+    title: "Scaling Laws Beyond the Chinchilla Regime",
+    source: "arXiv:2611.00580 · Nov 2026",
+    summary: "New empirical analysis challenges the Chinchilla compute-optimal scaling law at the 1T+ parameter scale. Models trained beyond Chinchilla-optimal ratios show 11–18% improvements on reasoning benchmarks. LongCat-2.5's 1.6T parameter scale appears consistent with the new optimal region identified.",
+  },
+  {
+    title: "AlphaGenome 2: Genomic Foundation Models",
+    source: "DeepMind / Nature Biotechnology · Nov 2026",
+    summary: "AlphaGenome 2 predicts functional effects of non-coding variants across 200 tissue types with 94% ClinVar accuracy. Identifies regulatory sequences for 73 disease categories; reduces drug target identification from years to weeks per DeepMind's internal estimates.",
+  },
+  {
+    title: "Exo: Self-Improving Inference Systems",
+    source: "arXiv:2611.00463 · Nov 2026",
+    summary: "Exo enables inference systems to self-modify prompting strategies in real time, achieving 14% quality gain on multi-step reasoning without fine-tuning. Low-confidence responses are automatically routed to more capable models. Demonstrated on GPT-6 Astra and Gemini 4 Carbon.",
+  },
+  {
+    title: "X-World 1.6: Persistent World Modeling",
+    source: "arXiv:2611.00596 · Nov 2026",
+    summary: "X-World 1.6 builds persistent spatial-temporal world models from video streams, enabling robots to track object states across out-of-view occlusions for up to 72 hours. Outperforms Cosmos 3 Nano on multi-object tracking and manipulation in partially observable environments.",
+  },
+  {
+    title: "GPT-6 Astra: Technical Report Update",
+    source: "OpenAI · arXiv:2611.00099 · Nov 2026",
+    summary: "Updated technical report adds safety benchmarks. GPT-6 Astra scores 95.2% WMDP-Bio (below Fable 5.2's 97.1%) and completes 71.4% of multi-step tool chains fully. Three known failure modes in complex multi-agent settings are disclosed; patches expected Q1 2027.",
+  },
+  {
+    title: "Taurus: AI-Assisted CT Annotation",
+    source: "arXiv:2611.00247 · Nov 2026",
+    summary: "Taurus reduces radiologist CT annotation from 4.1 hours to 23 minutes per case using active learning. AI-assisted annotations match expert quality on 89% of an oncology benchmark's held-out cases; disagreement clusters in rare tumor subtypes only.",
+  },
+];
+
+const INDEX_FINDINGS = [
+  {
+    metric: "NVIDIA CEO VACUUM",
+    body: "Huang's resignation is the highest-impact CEO exit in AI hardware. Blackwell deliveries are intact, but his allocation authority is now fragmented. Enterprises with Blackwell-dependent Q1 plans have one week to build AMD MI350 or TPU v5e alternatives into their roadmaps.",
+  },
+  {
+    metric: "GEMINI 4 PRICING SHIFT",
+    body: "Carbon at $2/M is 80% below GPT-6 Astra at MathArena parity — the largest cost-per-benchmark-point spread between top-2 models in two years. Any organization running Astra for quantitative workloads should benchmark Carbon this week. The pricing shift is likely permanent.",
+  },
+  {
+    metric: "AGENT COMMERCE EPOCH",
+    body: "ChatGPT Wallet's no-default spending cap is the week's most consequential product decision. Teams without per-agent spending policies are exposed from day one of enterprise rollout. The liability framework — who is responsible for agent over-spending — remains unresolved.",
+  },
+  {
+    metric: "NON-NVIDIA FRONTIER",
+    body: "LongCat-2.5 proves frontier-scale training is feasible outside the NVIDIA stack. The US-Japan-India supply chain pact accelerates alternatives. NVIDIA's training moat — historically its strongest AI advantage — is now under structural pressure from both Chinese and allied-nation hardware.",
+  },
+  {
+    metric: "AI FUNDING VELOCITY",
+    body: "Thinking Machines ($5B), Fractile ($720M), Skydio ($1.2B), and LangChain ($300M) represent over $7B in AI capital in one week. Investment themes: post-OpenAI training, inference hardware independence, physical AI deployment, and agentic workflow tooling.",
+  },
+];
+
+const FUNDING_HERO = [
+  { v: "$5B",   l: "Thinking Machines Series A",  n: "Accel led; $40B val; Murati CEO"    },
+  { v: "$720M", l: "Fractile Series C",            n: "$7B val; UK AI inference chips"     },
+  { v: "$1.2B", l: "Skydio Series E",              n: "Autonomous drones; defense + logistics" },
+  { v: "$300M", l: "LangChain Series C",           n: "$3.5B val; agentic workflow tooling" },
+];
+
+const MEGA_ROUNDS = [
+  { co: "Thinking Machines", round: "Series A",   amount: "$5B",    lead: "Accel · Index Ventures",   val: "$40B",   note: "Mira Murati as CEO; 180 researchers; first models expected Q2 2027." },
+  { co: "Fractile",          round: "Series C",   amount: "$720M",  lead: "Sequoia · SoftBank",       val: "$7B",    note: "Custom AI inference chips; largest UK AI hardware raise on record." },
+  { co: "Skydio",            round: "Series E",   amount: "$1.2B",  lead: "Tiger Global · a16z",      val: "—",      note: "Autonomous drones for defense surveillance and enterprise logistics." },
+  { co: "LangChain",         round: "Series C",   amount: "$300M",  lead: "Insight Partners",         val: "$3.5B",  note: "Agentic workflow tooling; 100k+ active developers; enterprise focus." },
+  { co: "Applied Compute",   round: "Series B",   amount: "$450M",  lead: "Greenoaks · a16z",         val: "$4.2B",  note: "GPU cloud for AI training; H200 capacity expansion ahead of NVIDIA uncertainty." },
+  { co: "Mercor",            round: "Series B",   amount: "$160M",  lead: "Benchmark",                val: "$1.6B",  note: "AI-powered technical talent marketplace; expanded to 48 countries." },
+  { co: "UFORCE",            round: "Series A",   amount: "$80M",   lead: "GV · Khosla Ventures",     val: "$800M",  note: "Autonomous security robot deployment for enterprise and government campuses." },
+];
+
+const ENTERPRISE_MOVES = [
+  { co: "NVIDIA",             move: "Jensen Huang resigns as CEO Nov 12 amid U.S. espionage probe; CFO Colette Kress is interim. $13B Hugging Face deal paused; CoreWeave fell 18%; formal CEO search opened." },
+  { co: "Google",             move: "Ships Gemini 4 Carbon (#1 MathArena, $2/M) and Hydrogen ($1.50/M) on Nov 12; both live on AI Studio and Vertex AI. Largest pricing gap against GPT-6 Astra since 2024." },
+  { co: "OpenAI",             move: "Launches ChatGPT Wallet (Nov 13) for biometric agent spending via Amex, MC, and Visa. Second round tranche opens; total close estimate rises to ~$15B at $1.25T valuation." },
+  { co: "Meituan",            move: "Releases LongCat-2.5 (1.6T params) trained on Huawei Ascend 910C only — no NVIDIA silicon. Proves frontier-scale training is achievable on non-US AI hardware for the first time." },
+  { co: "Microsoft",          move: "Launches Azure AI Foundry Preview (Nov 14): one-click open-weight deployment for LongCat-2.5, Llama 4.5, and Mistral Large 3; enterprise IAM integration; GA in Q1 2027." },
+  { co: "Thinking Machines",  move: "Closes $5B Series A at $40B valuation Nov 14; Mira Murati confirmed as founding CEO. 180-researcher team; post-transformer long-context focus; first models Q2 2027." },
+];
+
+const ROBOTICS_SCIENCE = [
+  { title: "Skydio: $1.2B for Autonomous Drones",   note: "Tiger Global and a16z back Skydio's expansion into 24-hour drone surveillance for US defense and enterprise logistics; 500 DOD units pre-ordered." },
+  { title: "UFORCE: Autonomous Security Robots",    note: "UFORCE's $80M Series A enables autonomous security robot deployment at enterprise and government campuses; GV and Khosla-backed; 40 campus deployments live." },
+  { title: "X-World 1.6: Persistent World Models",  note: "Persistent 72-hour spatial-temporal world models for robot manipulation; beats Cosmos 3 Nano on multi-object tracking in partially observable environments (arXiv 2611.00596)." },
+  { title: "LongCat-2.5: Frontier Without NVIDIA",  note: "Meituan's 1.6T model on Huawei Ascend 910C proves frontier training outside NVIDIA's ecosystem; first model at this scale to omit US-made silicon entirely." },
+];
+
+const REGULATORY = [
+  { region: "US · Chip Export Rules",  item: "NVIDIA espionage probe: Huang exits",         summary: "Probe into NVIDIA chip exports to sanctioned entities ends with CEO resignation. First US chip company CEO to depart over export enforcement. Commerce Dept. review expected.", impact: "High" },
+  { region: "US · AI Commerce",        item: "ChatGPT Wallet: agent spending liability",     summary: "No federal framework governs agent-initiated spending. ChatGPT Wallet's no-cap default may expose employers under existing bank fraud rules. CFPB is monitoring.", impact: "Medium-High" },
+  { region: "US · Japan · India",      item: "AI Supply Chain Pact: 2028 target",            summary: "Three-nation pact signed Nov 14: TSMC capacity investment, shared export controls, 2028 chip independence target. First multilateral AI hardware agreement including India.", impact: "High" },
+  { region: "EU — AI Act",             item: "Transparency obligations enforced",             summary: "Transparency rules active: disclose AI content, notify chatbot users, watermark synthetic media. High-risk AI deferred to December 2027. First fines imposed in Germany.", impact: "High" },
+  { region: "Global · Governance",     item: "LongCat-2.5: non-US frontier model",           summary: "LongCat-2.5 is the first 1T+ model trained entirely outside US hardware. Export controls may tighten on Huawei Ascend following the NVIDIA espionage probe.", impact: "Medium-High" },
+];
+
+const THOUGHT_LEADERS = [
+  {
+    name: "Colette Kress",
+    affiliation: "NVIDIA · Interim CEO",
+    quote: "NVIDIA's mission and customer commitments are unchanged. The board will conduct a thorough search; I am committed to leading through this transition with stability.",
+    context: "Statement to employees and investors on November 12, 2026, upon assuming the interim CEO role.",
+  },
+  {
+    name: "Mira Murati",
+    affiliation: "Thinking Machines Lab",
+    quote: "We are building the architecture that comes after the Transformer — systems that reason in continuous time, not discrete tokens. This is the most important unsolved problem in machine intelligence.",
+    context: "Announced as founding CEO with the $5B Series A close, November 14, 2026.",
+  },
+  {
+    name: "DeepMind",
+    affiliation: "AlphaGenome 2 · Nov 2026",
+    quote: "AlphaGenome 2 can now predict the functional effects of genomic variants with accuracy that rivals experimental methods — a step change that could reduce early drug discovery timelines by half.",
+    context: "From DeepMind's AlphaGenome 2 technical announcement, Nature Biotechnology, November 2026.",
+  },
+  {
+    name: "Narendra Modi",
+    affiliation: "India · Supply Chain Pact",
+    quote: "India will manufacture the hardware, train the models, and govern the data on which tomorrow's AI runs — in partnership with allies, not in subordination to any single supplier.",
+    context: "At the US-Japan-India AI Supply Chain Pact signing ceremony, November 14, 2026.",
+  },
+];
+
+const COMMUNITY_PULSE = [
+  { source: "HackerNews · developers",  theme: "NVIDIA CEO exit dominated HN: top thread argued Blackwell's hardware lead is structural and CEO-independent; the counter was that allocation and pricing decisions were uniquely Jensen Huang's." },
+  { source: "r/MachineLearning",         theme: "LongCat-2.5 on Huawei Ascend only was the week's most discussed development; researchers noted it disproves the NVIDIA-only assumption for 1T+ training, citing Ascend 910C performance." },
+  { source: "LinkedIn · enterprise AI",  theme: "ChatGPT Wallet's no-default-cap autonomous spending split LinkedIn's enterprise AI community: half saw it as a natural evolution of agent commerce, half as a liability that few legal teams are prepared to handle in 2026." },
+  { source: "X · Polymarket",            theme: "X: 'The chip doesn't care who the CEO is' was the leading take on the NVIDIA transition. Polymarket 'NVIDIA CEO named before Jan 1' opened at 71%; 'Jensen Huang returns' at 18%." },
+];
+
+const WHAT_TO_WATCH = [
+  { when: "Nov 17, 2026",  title: "NVIDIA Earnings (Q3 FY27)",      body: "NVIDIA reports Q3 FY27 earnings Nov 17. First under Kress as interim CEO. Watch for Blackwell GB300 shipment guidance and changes to the forward outlook." },
+  { when: "Nov–Dec 2026",  title: "NVIDIA Permanent CEO Named",     body: "Board search is active. Watch for an appointment announcement before year-end; outside candidates reportedly evaluated alongside SVP David Neff." },
+  { when: "Nov 2026",      title: "Anthropic IPO (ANT) Pricing",    body: "Anthropic targets a November listing as ANT on Nasdaq. The roadshow is expected before Thanksgiving. Final window for pre-IPO contract terms closes at pricing." },
+  { when: "Dec 2026",      title: "OpenAI Round Final Close",       body: "OpenAI's round is now estimated at ~$15B total. The valuation at final close becomes the 2027 IPO pricing anchor. Monitor for additional investor disclosures." },
+  { when: "Dec 2027",      title: "EU High-Risk AI Compliance",     body: "EU AI Act high-risk obligations activate December 2027. The 13-month window is closing. Organizations without assessments underway risk penalties from day one." },
+];
+
+const SOURCES = [
+  "VentureBeat. NVIDIA CEO Jensen Huang resigns amid U.S. espionage probe; CFO Colette Kress takes interim role. November 12, 2026.",
+  "9to5Google / TechCrunch. Google ships Gemini 4 Carbon (#1 MathArena, $2/M) and Hydrogen ($1.50/M) on November 12, 2026.",
+  "The Verge / OpenAI. ChatGPT Wallet launches with biometric auth for autonomous agent spending via Amex, Mastercard, Visa. November 13, 2026.",
+  "Bloomberg / TechCrunch. Thinking Machines Lab raises $5B at $40B; Mira Murati confirmed as founding CEO; Accel leads. November 14, 2026.",
+  "Reuters. US, Japan, and India sign AI Supply Chain Pact targeting 2028 chip independence; joint TSMC investment. November 14, 2026.",
+  "Meituan AI. LongCat-2.5 (1.6T parameters) trained entirely on Huawei Ascend 910C chips; available via Meituan AI API. November 11, 2026.",
+  "AI Funding Tracker. Fractile $720M (Sequoia/SoftBank); Skydio $1.2B (Tiger/a16z); LangChain $300M (Insight). Week of Nov 10–16, 2026.",
+  "arXiv cs.AI. Scaling Laws Beyond Chinchilla (2611.00580); X-World 1.6 (2611.00596); Exo Self-Improving Inference (2611.00463). Nov 2026.",
+  "DeepMind / Nature Biotechnology. AlphaGenome 2: 94% ClinVar accuracy on non-coding variants; 200 tissue types. November 2026.",
+];
+
+const GLOSSARY = [
+  { term: "Gemini 4 Carbon",      def: "Google's Nov 12 release. MathArena #1; $2/M input, $6/M output. Available on AI Studio and Vertex AI. Undercuts GPT-6 Astra by 80% on cost." },
+  { term: "ChatGPT Wallet",       def: "OpenAI's Nov 13 agent-commerce feature. Biometric auth; supports Amex, Mastercard, Visa. Autonomous agent spending with no default cap. CFPB monitoring." },
+  { term: "LongCat-2.5",          def: "Meituan's 1.6T-parameter model (Nov 11), trained on Huawei Ascend 910C only. First frontier model built entirely outside US hardware." },
+  { term: "Thinking Mach. Lab",   def: "Mira Murati's new AI lab; $5B Series A at $40B val (Nov 14). Post-transformer research. 32,000 H200 cluster; 180 researchers; first models Q2 2027." },
+  { term: "MathArena",            def: "DeepMind/Google math reasoning benchmark (2026 refresh). Carbon #1, GPT-6.1 Sol #2. Used to compare frontier models on quantitative tasks." },
+  { term: "AI Supply Chain Pact", def: "US-Japan-India agreement (Nov 14) for 2028 chip independence; TSMC investment; shared export controls. First multilateral AI hardware pact with India." },
+  { term: "Blackwell GB300",      def: "NVIDIA's current AI accelerator. Q1 2027 shipments intact despite Huang exit. AMD MI350 and Google TPU v5e are the main procurement alternatives." },
+];
+// ─── DESIGN TOKENS ──────────────────────────────────────────────
+const T = {
+  bg:      "#FAFAF7",
+  ink:     "#1A1A1A",
+  mid:     "#5A5A55",
+  faint:   "#8A8678",
+  rule:    "#D8D4C7",
+  accent:  "#C9C4B8",
+  paper:   "#F2EEE3",
+  inkPanel:"#1A1A1A",
+  serif:   "'Source Serif 4', 'Source Serif Pro', Georgia, serif",
+  sans:    "'IBM Plex Sans', system-ui, sans-serif",
+  mono:    "'IBM Plex Mono', ui-monospace, monospace",
+};
+
+// ─── SHARED COMPONENTS ──────────────────────────────────────────
+const Page = ({ children, style }) => (
+  <section className="report-page" style={{
+    width: 794, height: 1123, background: T.bg, color: T.ink,
+    fontFamily: T.sans, fontSize: 11, lineHeight: 1.5,
+    position: "relative", overflow: "hidden", ...style,
+  }}>{children}</section>
+);
+
+const RunningHeader = ({ page }) => (
+  <div style={{
+    position: "absolute", top: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingBottom: 12, borderBottom: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief · {REPORT_META.issue}</span>
+    <span>{REPORT_META.date}</span>
+    <span>{page}</span>
+  </div>
+);
+
+const Footer = ({ page }) => (
+  <div style={{
+    position: "absolute", bottom: 44, left: 56, right: 56,
+    display: "flex", justifyContent: "space-between", alignItems: "baseline",
+    fontFamily: T.sans, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase",
+    color: T.mid, paddingTop: 12, borderTop: "1px solid " + T.rule,
+  }}>
+    <span>The AI Brief</span>
+    <span style={{ fontFamily: T.serif, fontStyle: "italic", letterSpacing: 0, textTransform: "none", fontSize: 10 }}>
+      AI generated by Mukul Dewangan
+    </span>
+    <span>{page}</span>
+  </div>
+);
+
+const PageTitle = ({ eyebrow, title, intro, size = "lg" }) => {
+  const sizes = { lg: { fontSize: 56, lineHeight: 1.0 }, md: { fontSize: 44, lineHeight: 1.02 }, sm: { fontSize: 36, lineHeight: 1.05 } };
+  return (
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", color: T.mid, textTransform: "uppercase" }}>{eyebrow}</div>
+      <h1 style={{ fontFamily: T.serif, fontWeight: 400, ...sizes[size], letterSpacing: "-0.02em", margin: "10px 0 0", color: T.ink }}>{title}</h1>
+      {intro && <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 16, color: T.mid, marginTop: 16, maxWidth: 560, lineHeight: 1.4 }}>{intro}</div>}
+    </div>
+  );
+};
+
+const SectionHead = ({ children, style }) => (
+  <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 20, color: T.ink, marginBottom: 12, ...style }}>{children}</div>
+);
+
+const WhyItMatters = ({ text, variant = "cream" }) => {
+  if (variant === "cream") return (
+    <div style={{ background: T.paper, padding: "22px 26px" }}>
+      <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.45, color: T.ink, marginTop: 10, maxWidth: 580 }}>{text}</div>
+    </div>
+  );
+  return (
+    <div style={{ marginTop: 10, borderLeft: "2px solid " + T.ink, paddingLeft: 12 }}>
+      <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>Why it matters</div>
+      <div style={{ fontFamily: T.serif, fontSize: 12, lineHeight: 1.5, color: T.ink, marginTop: 4 }}>{text}</div>
+    </div>
+  );
+};
+
+// ─── PAGE 01 — COVER ────────────────────────────────────────────
+const CoverViz = () => {
+  const dots = [];
+  let s = 42;
+  const rnd = () => { s = (s * 1103515245 + 12345) & 0x7fffffff; return s / 0x7fffffff; };
+  for (let i = 0; i < 28; i++) {
+    const a = rnd() * Math.PI * 2;
+    const r = 50 + rnd() * 170;
+    dots.push(<circle key={i} cx={200 + Math.cos(a)*r} cy={200 + Math.sin(a)*r} r={1.3 + rnd()*2.6}
+      fill={i%5===0 ? T.ink : T.mid} opacity={i%5===0 ? 1 : 0.45} />);
+  }
+  return (
+    <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+      {[70, 115, 160, 200].map(r => <circle key={r} cx={200} cy={200} r={r} fill="none" stroke={T.rule} strokeWidth="0.6" />)}
+      <circle cx={200} cy={200} r={3} fill={T.ink} />
+      {dots}
+    </svg>
+  );
+};
+
+const CoverPage = () => (
+  <Page>
+    <div style={{ position: "absolute", top: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>The AI Brief</span><span>{REPORT_META.issue}</span>
+    </div>
+    <div style={{ position: "absolute", top: 110, left: 56, right: 56 }}>
+      <div style={{ fontFamily: T.serif, fontSize: 80, lineHeight: 0.95, letterSpacing: "-0.02em", fontWeight: 400, color: T.ink }}>The AI<br />Brief.</div>
+      <div style={{ marginTop: 18, fontFamily: T.serif, fontStyle: "italic", fontSize: 18, color: T.mid, maxWidth: 420, lineHeight: 1.35 }}>{REPORT_META.tagline}.</div>
+    </div>
+    <div style={{ position: "absolute", top: 100, right: 56, width: 250, height: 250 }}><CoverViz /></div>
+    <div style={{ position: "absolute", top: 400, left: 56, right: 56, paddingTop: 16, paddingBottom: 16, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14 }}>
+      {HERO_STATS.map((s, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 14 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{s.label}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 32, color: T.ink, lineHeight: 1, marginTop: 6 }}>{s.value}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 560, left: 56, right: 56 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 12 }}>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.ink }}>Today's headlines</div>
+        <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>{TODAY_HEADLINES.length} signals</div>
+      </div>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        {TODAY_HEADLINES.map((h, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "32px 1fr", gap: 14, padding: "13px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink, letterSpacing: "0.06em" }}>{String(i+1).padStart(2,"0")}</span>
+            <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink, lineHeight: 1.4 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div style={{ position: "absolute", bottom: 56, left: 56, right: 56, display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: T.sans, fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+      <span>{REPORT_META.date}</span><span>{REPORT_META.edition}</span>
+    </div>
+  </Page>
+);
+
+// ─── PAGE 02 — EXECUTIVE SUMMARY ────────────────────────────────
+const ExecSummaryPage = () => (
+  <Page>
+    <RunningHeader page="Page 02" />
+    <PageTitle eyebrow="Section One" title={<>Executive<br />summary.</>} intro="The three themes that frame this week's signals — and the reasoning behind why each belongs on a leadership agenda." />
+    <div style={{ position: "absolute", top: 320, left: 56, display: "flex", gap: 18, fontFamily: T.sans, fontSize: 9.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+      <span>{REPORT_META.audience}</span><span>·</span><span>8 min read</span><span>·</span><span>Curated by the Brief desk</span>
+    </div>
+    <div style={{ position: "absolute", top: 370, left: 56, right: 56, bottom: 100 }}>
+      {EXECUTIVE_THEMES.map((t, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "56px 1fr 170px", gap: 24, alignItems: "start", padding: "18px 0", borderTop: "1px solid " + T.rule, borderBottom: i===EXECUTIVE_THEMES.length-1 ? "1px solid "+T.rule : "none" }}>
+          <div style={{ fontFamily: T.serif, fontSize: 34, lineHeight: 1, color: T.ink, fontWeight: 400 }}>{String(i+1).padStart(2,"0")}</div>
+          <div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.ink, marginBottom: 6 }}>{t.tag}</div>
+            <div style={{ fontFamily: T.serif, fontSize: 14.5, lineHeight: 1.45, color: T.ink, maxWidth: 470 }}>{t.body}</div>
+          </div>
+          {t.stat && (
+            <div style={{ textAlign: "right", borderLeft: "1px solid " + T.rule, paddingLeft: 18 }}>
+              <div style={{ fontFamily: T.serif, fontSize: 28, color: T.ink, lineHeight: 1 }}>{t.stat.v}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 6, lineHeight: 1.4 }}>{t.stat.l}</div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+    <Footer page="02" />
+  </Page>
+);
+
+// ─── PAGE 03 — LEAD STORY ────────────────────────────────────────
+const LeadStoryPage = () => {
+  const s = TOP_STORIES[0];
+  return (
+    <Page>
+      <RunningHeader page="Page 03" />
+      <div style={{ position: "absolute", top: 110, left: 80, right: 80 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.18em", textTransform: "uppercase", color: T.mid }}>
+          <span>Lead — {s.category}</span><span>{s.read}</span>
+        </div>
+        <h1 style={{ fontFamily: T.serif, fontWeight: 400, fontSize: 44, lineHeight: 1.04, letterSpacing: "-0.02em", margin: "20px 0 0", color: T.ink, maxWidth: 600 }}>{s.headline}.</h1>
+        <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 17, lineHeight: 1.4, color: T.mid, marginTop: 20, maxWidth: 580 }}>{s.deck}</div>
+      </div>
+      <div style={{ position: "absolute", top: 460, left: 80, right: 80 }}><WhyItMatters text={s.matters} /></div>
+      <div style={{ position: "absolute", top: 640, left: 80, right: 80, bottom: 110, fontFamily: T.sans, fontSize: 11.5, lineHeight: 1.65, color: T.ink, maxWidth: 600 }}>
+        {s.body.map((p, i) => <p key={i} style={{ margin: "0 0 14px" }}>{p}</p>)}
+      </div>
+      <Footer page="03" />
+    </Page>
+  );
+};
+
+// ─── PAGE 04 — TOP STORIES ───────────────────────────────────────
+const TopStoriesPage = () => {
+  const more = TOP_STORIES.slice(1);
+  return (
+    <Page>
+      <RunningHeader page="Page 04" />
+      <PageTitle eyebrow="Section Two · More signals" title="Stories of the week." intro="Four more developments that warrant leadership attention this week." size="sm" />
+      <div style={{ position: "absolute", top: 300, left: 56, right: 56, bottom: 96, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+        {more.map((s, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "40px 1fr 250px", gap: 24, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+            <div style={{ fontFamily: T.serif, fontSize: 26, lineHeight: 1, color: T.ink }}>{s.rank}</div>
+            <div>
+              <div style={{ display: "flex", justifyContent: "space-between", fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid, marginBottom: 8 }}>
+                <span>{s.category}</span><span>{s.read}</span>
+              </div>
+              <div style={{ fontFamily: T.serif, fontSize: 16, lineHeight: 1.3, color: T.ink }}>{s.headline}.</div>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 12.5, color: T.mid, marginTop: 8, lineHeight: 1.5, maxWidth: 430 }}>{s.deck}</div>
+            </div>
+            <div><WhyItMatters text={s.matters} variant="inline" /></div>
+          </div>
+        ))}
+      </div>
+      <Footer page="04" />
+    </Page>
+  );
+};
+
+// ─── PAGE 05 — FRONTIER MODELS ───────────────────────────────────
+const FrontierModelsPage = () => (
+  <Page>
+    <RunningHeader page="Page 05" />
+    <PageTitle eyebrow="Section Three · Frontier models" title="Labs, in their own words." intro="Per-lab summary of the week's model and capability developments — the commercial map of the frontier." size="sm" />
+    <div style={{ position: "absolute", top: 268, left: 56, right: 56, bottom: 88, display: "flex", flexDirection: "column", borderTop: "1.5px solid " + T.ink, overflow: "hidden" }}>
+      {FRONTIER_LABS.map((l, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "190px 1fr", gap: 28, alignItems: "start", padding: "20px 0", borderBottom: "1px solid " + T.rule }}>
+          <div style={{ overflow: "hidden" }}>
+            <div style={{ fontFamily: T.serif, fontSize: 18, color: T.ink, lineHeight: 1.1, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{l.lab}</div>
+            <div style={{ fontFamily: T.mono, fontSize: 9, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 5, lineHeight: 1.35 }}>{l.tag}</div>
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", overflow: "hidden" }}>
+            {l.items.map((it, j) => (
+              <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 10, padding: "3px 0", fontFamily: T.sans, fontSize: 10.5, color: T.ink, lineHeight: 1.5 }}>
+                <span style={{ color: T.mid, fontFamily: T.mono, fontSize: 9, paddingTop: 2 }}>·</span>
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <Footer page="05" />
+  </Page>
+);
+
+// ─── PAGE 06 — BENCHMARKS + DEV TOOLS ───────────────────────────
+const BenchmarksDevToolsPage = () => (
+  <Page>
+    <RunningHeader page="Page 06" />
+    <PageTitle eyebrow="Section Four · Benchmarks & developer tools" title="The frontier, head-to-head." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>{BENCHMARK_TABLE.caption}</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+            {BENCHMARK_TABLE.models.map((m, i) => <span key={i} style={{ textAlign: i===0 ? "left" : "right" }}>{m}</span>)}
+          </div>
+          {BENCHMARK_TABLE.rows.map((row, i) => {
+            const [name, a, b] = row;
+            const numA = parseFloat(a), numB = parseFloat(b);
+            const aBold = !isNaN(numA) && !isNaN(numB) && numA < numB;
+            const bBold = !isNaN(numA) && !isNaN(numB) && numB < numA;
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink }}>{name}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: aBold ? T.ink : T.mid, fontWeight: aBold ? 500 : 400 }}>{a}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 12.5, textAlign: "right", color: bBold ? T.ink : T.mid, fontWeight: bBold ? 500 : 400 }}>{b}</span>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ marginTop: 8, fontFamily: T.serif, fontStyle: "italic", fontSize: 11, color: T.mid, lineHeight: 1.4 }}>{BENCHMARK_TABLE.footnote}</div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Developer tools — week-in-progress</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {DEV_TOOLS.map((tl, i) => (
+            <div key={i} style={{ padding: "10px 0", borderTop: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                <span style={{ fontFamily: T.serif, fontSize: 14.5, color: T.ink }}>{tl.tool}</span>
+                <span style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.1em", textTransform: "uppercase" }}>Upd. {tl.updated}</span>
+              </div>
+              <ul style={{ margin: "5px 0 0", paddingLeft: 0, listStyle: "none" }}>
+                {tl.bullets.map((b, j) => (
+                  <li key={j} style={{ display: "grid", gridTemplateColumns: "10px 1fr", gap: 8, fontSize: 9.5, color: T.ink, lineHeight: 1.45, padding: "2px 0" }}>
+                    <span style={{ color: T.mid, fontFamily: T.mono, paddingTop: 1 }}>·</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="06" />
+  </Page>
+);
+
+// ─── PAGE 07 — RESEARCH ──────────────────────────────────────────
+const ResearchPage = () => (
+  <Page>
+    <RunningHeader page="Page 07" />
+    <PageTitle eyebrow="Section Five · Research" title="Papers and findings." intro="What the academic literature and the major AI indices added this week." size="sm" />
+    <div style={{ position: "absolute", top: 290, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Notable research</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {RESEARCH.map((r, i) => (
+            <div key={i} style={{ padding: "10px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 14, color: T.ink, lineHeight: 1.3 }}>{r.title}</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.mid, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3 }}>{r.source}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, marginTop: 5, lineHeight: 1.5 }}>{r.summary}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>AI Index — key findings this week</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {INDEX_FINDINGS.map((f, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 20, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9.5, color: T.ink, letterSpacing: "0.12em", textTransform: "uppercase" }}>{f.metric}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 10, color: T.ink, lineHeight: 1.5 }}>{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="07" />
+  </Page>
+);
+
+// ─── PAGE 08 — FUNDING ───────────────────────────────────────────
+const FundingPage = () => (
+  <Page>
+    <RunningHeader page="Page 08" />
+    <PageTitle eyebrow="Section Six · Capital" title="The funding landscape." size="sm" />
+    <div style={{ position: "absolute", top: 240, left: 56, right: 56, display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 18, borderTop: "1px solid " + T.ink, borderBottom: "1px solid " + T.ink, padding: "20px 0" }}>
+      {FUNDING_HERO.map((h, i) => (
+        <div key={i} style={{ borderLeft: i===0 ? "none" : "1px solid "+T.rule, paddingLeft: i===0 ? 0 : 18 }}>
+          <div style={{ fontFamily: T.mono, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: T.mid }}>{h.l}</div>
+          <div style={{ fontFamily: T.serif, fontSize: 36, color: T.ink, lineHeight: 1, marginTop: 8 }}>{h.v}</div>
+          <div style={{ fontFamily: T.sans, fontSize: 10, color: T.mid, marginTop: 6, lineHeight: 1.3 }}>{h.n}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ position: "absolute", top: 410, left: 56, right: 56 }}>
+      <SectionHead>Mega rounds &amp; strategic bets</SectionHead>
+      <div style={{ borderTop: "1.5px solid " + T.ink }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "8px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid }}>
+          <span>Company</span><span>Round</span><span>Amount</span><span>Lead</span><span>Valuation</span><span>Note</span>
+        </div>
+        {MEGA_ROUNDS.map((m, i) => (
+          <div key={i} style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 0.7fr 1.2fr 1.4fr 1.7fr", gap: 14, padding: "10px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+            <span style={{ fontFamily: T.serif, fontSize: 13, color: T.ink }}>{m.co}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid }}>{m.round}</span>
+            <span style={{ fontFamily: T.mono, fontSize: 11, color: T.ink }}>{m.amount}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.4 }}>{m.lead}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.val}</span>
+            <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.4 }}>{m.note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+    <Footer page="08" />
+  </Page>
+);
+
+// ─── PAGE 09 — ENTERPRISE · ROBOTICS · POLICY ───────────────────
+const EnterprisePolicyPage = () => (
+  <Page>
+    <RunningHeader page="Page 09" />
+    <PageTitle eyebrow="Section Seven · Industry · Robotics · Policy" title="Where the rules and runways meet." size="sm" />
+    <div style={{ position: "absolute", top: 260, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 14 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Enterprise &amp; industry moves</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ENTERPRISE_MOVES.map((c, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "7px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.25 }}>{c.co}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>{c.move}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Robotics &amp; science</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {ROBOTICS_SCIENCE.map((r, i) => (
+            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontSize: 13, color: T.ink, lineHeight: 1.25 }}>{r.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.45 }}>{r.note}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Regulatory &amp; policy</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {REGULATORY.map((r, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "120px 1fr 100px", gap: 16, padding: "8px 0", borderBottom: "1px solid " + T.rule, alignItems: "start" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{r.region}</div>
+              <div style={{ overflow: "hidden" }}>
+                <div style={{ fontFamily: T.serif, fontSize: 12.5, color: T.ink, lineHeight: 1.3 }}>{r.item}</div>
+                <div style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{r.summary}</div>
+              </div>
+              <div style={{ textAlign: "right" }}>
+                <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.1em", textTransform: "uppercase", color: T.mid }}>Impact</div>
+                <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, marginTop: 2 }}>{r.impact}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="09" />
+  </Page>
+);
+
+// ─── PAGE 10 — VOICES · PULSE · WATCH ──────────────────────────
+const VoicesWatchPage = () => (
+  <Page>
+    <RunningHeader page="Page 10" />
+    <PageTitle eyebrow="Section Eight · Voices · Pulse · Watch" title="What the field is saying." size="sm" />
+    <div style={{ position: "absolute", top: 250, left: 56, right: 56, bottom: 90, display: "flex", flexDirection: "column", gap: 16 }}>
+      <section style={{ flex: "6 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 8 }}>Thought leader pulse</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {THOUGHT_LEADERS.map((q, i) => (
+            <div key={i} style={{ border: "1px solid " + T.rule, padding: "12px 14px 14px", background: T.bg, overflow: "hidden" }}>
+              <div style={{ fontFamily: T.serif, fontStyle: "italic", fontSize: 13, lineHeight: 1.4, color: T.ink }}>"{q.quote}"</div>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, letterSpacing: "0.12em", textTransform: "uppercase", color: T.mid, marginTop: 8 }}>— {q.name} · {q.affiliation}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 9, color: T.mid, marginTop: 3, lineHeight: 1.4 }}>{q.context}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Community pulse</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {COMMUNITY_PULSE.map((p, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "170px 1fr", gap: 18, padding: "6px 0", borderBottom: "1px solid " + T.rule, alignItems: "baseline" }}>
+              <span style={{ fontFamily: T.mono, fontSize: 9, color: T.ink, letterSpacing: "0.08em", textTransform: "uppercase" }}>{p.source}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.5 }}>{p.theme}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "3 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>What to watch</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 14, borderTop: "1.5px solid " + T.ink, paddingTop: 10, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {WHAT_TO_WATCH.map((w, i) => (
+            <div key={i} style={{ overflow: "hidden" }}>
+              <div style={{ fontFamily: T.mono, fontSize: 8.5, color: T.ink, letterSpacing: "0.1em", textTransform: "uppercase" }}>{w.when}</div>
+              <div style={{ fontFamily: T.serif, fontSize: 12, color: T.ink, lineHeight: 1.25, marginTop: 5 }}>{w.title}</div>
+              <div style={{ fontFamily: T.sans, fontSize: 8.5, color: T.mid, marginTop: 5, lineHeight: 1.45 }}>{w.body}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <Footer page="10" />
+  </Page>
+);
+
+// ─── PAGE 11 — SOURCES + GLOSSARY ───────────────────────────────
+const ClosingPage = () => (
+  <Page>
+    <RunningHeader page="Page 11" />
+    <PageTitle eyebrow="End matter" title={<>Sources &amp;<br />glossary.</>} intro="The reading list, the working vocabulary, and where this issue ends." />
+    <div style={{ position: "absolute", top: 430, left: 56, right: 56, bottom: 130, display: "flex", flexDirection: "column", gap: 18 }}>
+      <section style={{ flex: "5 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Sources</SectionHead>
+        <div style={{ borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {SOURCES.map((s, i) => (
+            <div key={i} style={{ display: "grid", gridTemplateColumns: "30px 1fr", gap: 8, padding: "6px 0", borderBottom: "1px solid " + T.rule, fontFamily: T.sans, fontSize: 9.5, color: T.ink, lineHeight: 1.45 }}>
+              <span style={{ fontFamily: T.mono, color: T.mid }}>{String(i+1).padStart(2,"0")}</span>
+              <span>{s}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+      <section style={{ flex: "4 1 0", minHeight: 0, overflow: "hidden", display: "flex", flexDirection: "column" }}>
+        <SectionHead style={{ marginBottom: 6 }}>Glossary</SectionHead>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 28px", borderTop: "1.5px solid " + T.ink, overflow: "hidden", flex: "1 1 0", minHeight: 0 }}>
+          {GLOSSARY.map((g, i) => (
+            <div key={i} style={{ padding: "6px 0", borderBottom: "1px solid " + T.rule, overflow: "hidden" }}>
+              <span style={{ fontFamily: T.serif, fontSize: 11.5, color: T.ink }}>{g.term}.{" "}</span>
+              <span style={{ fontFamily: T.sans, fontSize: 9.5, color: T.mid, lineHeight: 1.45 }}>{g.def}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+    <div style={{ position: "absolute", bottom: 90, left: 56, right: 56, textAlign: "center", fontFamily: T.serif, fontStyle: "italic", fontSize: 13, color: T.mid }}>
+      ✦ End of {REPORT_META.issue} · {REPORT_META.date} ✦
+    </div>
+    <Footer page="11" />
+  </Page>
+);
+
+// ─── PAGE REGISTRY ───────────────────────────────────────────────
+const PAGES = [
+  { key: "cover",           label: "01 · Cover",                          Comp: CoverPage },
+  { key: "exec-summary",    label: "02 · Executive Summary",              Comp: ExecSummaryPage },
+  { key: "lead-story",      label: "03 · Lead Story",                     Comp: LeadStoryPage },
+  { key: "top-stories",     label: "04 · Top Stories",                    Comp: TopStoriesPage },
+  { key: "frontier-models", label: "05 · Frontier Models",                Comp: FrontierModelsPage },
+  { key: "benchmarks",      label: "06 · Benchmarks & Dev Tools",         Comp: BenchmarksDevToolsPage },
+  { key: "research",        label: "07 · Research",                       Comp: ResearchPage },
+  { key: "funding",         label: "08 · Funding",                        Comp: FundingPage },
+  { key: "enterprise",      label: "09 · Enterprise · Robotics · Policy", Comp: EnterprisePolicyPage },
+  { key: "voices",          label: "10 · Voices · Pulse · Watch",         Comp: VoicesWatchPage },
+  { key: "closing",         label: "11 · Sources · Glossary",             Comp: ClosingPage },
+];
+
+// ─── APP ROOT ────────────────────────────────────────────────────
+const { useState, useEffect } = React;
+
+function App() {
+  const [active, setActive] = useState("cover");
+
+  useEffect(() => {
+    const nav = document.getElementById("nav-bar");
+    if (!nav) return;
+    nav.innerHTML = "";
+    PAGES.forEach(p => {
+      const btn = document.createElement("button");
+      btn.className = "nav-btn" + (p.key === active ? " active" : "");
+      btn.textContent = p.label;
+      btn.onclick = () => {
+        setActive(p.key);
+        const el = document.getElementById("page-" + p.key);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(btn);
+    });
+  });
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 120;
+      let current = PAGES[0].key;
+      PAGES.forEach(p => {
+        const el = document.getElementById("page-" + p.key);
+        if (el && el.offsetTop <= scrollY) current = p.key;
+      });
+      if (current !== active) setActive(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [active]);
+
+  return (
+    <div id="report-root">
+      {PAGES.map(p => (
+        <div id={"page-" + p.key} key={p.key}>
+          <p.Comp />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("report-root"));
+</script>
+</body>
+</html>
