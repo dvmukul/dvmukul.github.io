@@ -1,5 +1,11 @@
 [
   {
+    "title": "The AI Brief — Vol. 02, Issue 48",
+    "date": "2026-11-23",
+    "summary": "Anthropic lists on Nasdaq as ANT at $83/share ($1.8T, the largest AI IPO on record), closing day 1 at $111 (+34%) before falling 9% on day 2 as the Nasdaq AI sub-index drops 5.2%; its S-1 shows $65B ARR and a 73% fall in per-token inference cost over 24 months. NVIDIA reports $115.8B Q3 revenue (+103%) with a $130B Q4 guide and the board rules out Jensen Huang's return, while Google's Gemini 4 Neon ($3/M, 1M context) and OpenAI's GPT-6.2 Astra (20% price cut to $8/M) launch the same day. Also: DeepSeek closes a $15B round from Tencent and CATL at ~$60B, Sierra raises $1.75B at $30B, and a UN CCW draft would ban autonomous lethal weapons without human control by 2028.",
+    "filename": "AI-Report-2026-11-23.html"
+  },
+  {
     "title": "The AI Brief — Vol. 02, Issue 47",
     "date": "2026-11-16",
     "summary": "Jensen Huang resigns as NVIDIA CEO amid a U.S. counterintelligence probe into chip exports, with CFO Colette Kress interim, the $13B Hugging Face deal paused, NVIDIA down 11% and CoreWeave down 18%; Google ships Gemini 4 Carbon (#1 on MathArena, $2/M input) and Hydrogen ($1.50/M), and OpenAI launches ChatGPT Wallet for biometric-authenticated agent spending across Amex, Mastercard and Visa with no default cap. Also: Thinking Machines closes a $5B round at $40B with Mira Murati as CEO, Meituan's LongCat-2.5 (1.6T parameters) is trained entirely on Huawei Ascend chips, Fractile raises $720M at $7B, and the US, Japan and India sign a 2028 AI chip supply chain pact.",
